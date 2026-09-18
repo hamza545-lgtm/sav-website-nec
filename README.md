@@ -73,6 +73,7 @@ savnec-website/
 ├── index.html          Home
 ├── clients.html         For Clients (with request form)
 ├── experts.html         For Experts (with application form)
+├── industries.html      Industries we cover
 ├── compliance.html      Compliance & Data Security
 ├── about.html            About & Contact
 ├── insights.html         Insights (placeholder)

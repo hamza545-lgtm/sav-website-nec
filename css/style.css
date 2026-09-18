@@ -59,7 +59,6 @@ h3 { font-size: 1.25rem; }
 p {
   margin: 0 0 18px 0;
   max-width: 62ch;
-  color: var(--ink);
 }
 
 .lede {
@@ -99,7 +98,7 @@ p {
 .main-nav {
   display: flex;
   align-items: center;
-  gap: 36px;
+  gap: 26px;
 }
 
 .main-nav a {
