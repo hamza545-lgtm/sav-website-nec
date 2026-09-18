@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Clients | Savnec</title>
+<meta name="description" content="Request vetted industry experts for consultations, surveys, and custom research through Savnec.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo">Sav<span>nec</span></a>
+    <nav class="main-nav" id="main-nav">
+      <a href="clients.html" class="active">Clients</a>
+      <a href="experts.html">Experts</a>
+      <a href="compliance.html">Compliance</a>
+      <a href="insights.html">Insights</a>
+      <a href="about.html">About</a>
+      <a href="#request" class="nav-cta">Request an Expert</a>
+    </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="page-intro">
+  <div class="container" style="max-width: 720px;">
+    <h1>Research support built for institutional decisions.</h1>
+    <p class="lede">One-on-one consultations, B2B surveys, and custom research &mdash; matched to your exact scope, on your timeline.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <h2>What we offer</h2>
+    </div>
+
+    <div class="offering">
+      <h3>1-on-1 Consultations</h3>
+      <p>Direct calls with screened industry experts &mdash; operators, former executives, and specialists &mdash; matched to your specific research question. Every consultation is preceded by conflict-of-interest screening and governed by our compliance protocols.</p>
+    </div>
+
+    <div class="offering">
+      <h3>B2B Surveys</h3>
+      <p>Quantitative and qualitative surveys fielded to relevant professional audiences, designed around your research objectives and delivered with clean, usable data.</p>
+    </div>
+
+    <div class="offering">
+      <h3>Custom Research</h3>
+      <p>For scopes that don't fit a single call or survey &mdash; multi-expert panels, sector deep-dives, or ongoing research retainers &mdash; our team scopes and delivers a tailored engagement.</p>
+    </div>
+  </div>
+</section>
+
+<section class="tint">
+  <div class="container">
+    <div class="quote-block">
+      <p>"Savnec understood exactly what we needed and moved fast &mdash; without ever cutting corners on compliance."</p>
+      <div class="attribution">Placeholder &mdash; Investment Analyst, U.S. Hedge Fund</div>
+    </div>
+  </div>
+</section>
+
+<section id="request">
+  <div class="container">
+    <div class="section-head">
+      <h2>Request an expert</h2>
+      <p class="lede">Tell us about your research need and our team will follow up within one business day.</p>
+    </div>
+
+    <!--
+      FORM SETUP INSTRUCTIONS:
+      1. Create a free account at https://web3forms.com
+      2. Create a new "Access Key" for this site (free, 250 submissions/month)
+      3. Replace YOUR_ACCESS_KEY below with that key
+      Submissions will be emailed to the address you set up in your Web3Forms dashboard.
+    -->
+    <form class="form-wrap" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="1d3f7d6c-1487-4e7f-8d87-0a0c35f430ce">
+      <input type="hidden" name="subject" value="New Client Request — Savnec">
+      <div class="form-row">
+        <label for="c-name">Full name</label>
+        <input type="text" id="c-name" name="name" required>
+      </div>
+      <div class="form-row">
+        <label for="c-company">Company</label>
+        <input type="text" id="c-company" name="company" required>
+      </div>
+      <div class="form-row">
+        <label for="c-email">Work email</label>
+        <input type="email" id="c-email" name="email" required>
+      </div>
+      <div class="form-row">
+        <label for="c-type">Firm type</label>
+        <select id="c-type" name="firm_type">
+          <option>Hedge Fund</option>
+          <option>Private Equity / Venture Capital</option>
+          <option>Market Research Firm</option>
+          <option>Enterprise / Corporate</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label for="c-scope">Research scope</label>
+        <textarea id="c-scope" name="scope" placeholder="Describe the industry, expertise, or question you need support with." required></textarea>
+      </div>
+      <button type="submit" class="btn btn-emerald">Submit Request</button>
+      <p class="form-note" style="margin-top: 16px;">By submitting, you agree to be contacted by Savnec regarding your request. All inquiries are treated as confidential.</p>
+    </form>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo">Sav<span>nec</span></div>
+        <p style="max-width: 32ch; font-size: 0.88rem;">A U.S.-based expert network connecting institutional clients with vetted industry experts.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="clients.html">Clients</a>
+        <a href="experts.html">Experts</a>
+        <a href="compliance.html">Compliance</a>
+        <a href="about.html">About</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="insights.html">Insights</a>
+        <a href="about.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:inquiries@savnec.com">inquiries@savnec.com</a>
+        <a href="mailto:experts@savnec.com">experts@savnec.com</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Savnec, Inc. All rights reserved.</span>
+      <span>Delaware, United States</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

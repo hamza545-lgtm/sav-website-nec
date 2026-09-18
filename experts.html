@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Experts | Savnec</title>
+<meta name="description" content="Join the Savnec expert network. Share your industry knowledge and get compensated on your terms.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo">Sav<span>nec</span></a>
+    <nav class="main-nav" id="main-nav">
+      <a href="clients.html">Clients</a>
+      <a href="experts.html" class="active">Experts</a>
+      <a href="compliance.html">Compliance</a>
+      <a href="insights.html">Insights</a>
+      <a href="about.html">About</a>
+      <a href="#apply" class="nav-cta">Apply Now</a>
+    </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="page-intro">
+  <div class="container" style="max-width: 720px;">
+    <h1>Share your expertise. On your terms.</h1>
+    <p class="lede">Join a vetted network of industry professionals and get compensated for consultations that fit your schedule.</p>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-head">
+      <h2>Why join Savnec</h2>
+    </div>
+    <div class="card-grid">
+      <div class="info-card">
+        <h3>Compensation</h3>
+        <p>Competitive, transparent rates per engagement &mdash; paid promptly after every completed consultation.</p>
+      </div>
+      <div class="info-card">
+        <h3>Flexibility</h3>
+        <p>You choose which requests to accept and when. No minimum commitment, no obligation to respond to every inquiry.</p>
+      </div>
+      <div class="info-card">
+        <h3>Compliance-first</h3>
+        <p>Every engagement is screened for conflicts before you're matched, so you're protected from inadvertent breaches of employer or NDA obligations.</p>
+      </div>
+      <div class="info-card">
+        <h3>Relevant matches</h3>
+        <p>We match based on genuine expertise, not volume &mdash; so the requests you receive are ones you're actually suited to answer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tint">
+  <div class="container">
+    <div class="section-head">
+      <h2>Requirements</h2>
+    </div>
+    <p class="lede">We look for professionals with substantive, current or recent industry experience &mdash; operators, former executives, technical specialists, and subject-matter experts across sectors. Every applicant is subject to a screening and conflict-of-interest review before being activated on the network.</p>
+  </div>
+</section>
+
+<section id="apply">
+  <div class="container">
+    <div class="section-head">
+      <h2>Apply as an expert</h2>
+      <p class="lede">Tell us about your background. Our team reviews every application individually.</p>
+    </div>
+
+    <!--
+      FORM SETUP INSTRUCTIONS:
+      1. Create a free account at https://web3forms.com
+      2. Create a new "Access Key" for this site (free, 250 submissions/month)
+      3. Replace YOUR_ACCESS_KEY below with that key
+    -->
+    <form class="form-wrap" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="1d3f7d6c-1487-4e7f-8d87-0a0c35f430ce">
+      <input type="hidden" name="subject" value="New Expert Application — Savnec">
+      <div class="form-row">
+        <label for="e-name">Full name</label>
+        <input type="text" id="e-name" name="name" required>
+      </div>
+      <div class="form-row">
+        <label for="e-email">Email</label>
+        <input type="email" id="e-email" name="email" required>
+      </div>
+      <div class="form-row">
+        <label for="e-title">Current or most recent title</label>
+        <input type="text" id="e-title" name="title" required>
+      </div>
+      <div class="form-row">
+        <label for="e-industry">Industry / area of expertise</label>
+        <input type="text" id="e-industry" name="industry" required>
+      </div>
+      <div class="form-row">
+        <label for="e-linkedin">LinkedIn profile</label>
+        <input type="url" id="e-linkedin" name="linkedin" placeholder="https://linkedin.com/in/...">
+      </div>
+      <div class="form-row">
+        <label for="e-bio">Brief background</label>
+        <textarea id="e-bio" name="background" placeholder="A short summary of your relevant experience." required></textarea>
+      </div>
+      <button type="submit" class="btn btn-emerald">Submit Application</button>
+      <p class="form-note" style="margin-top: 16px;">All applications are reviewed for eligibility and potential conflicts of interest before activation.</p>
+    </form>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="logo">Sav<span>nec</span></div>
+        <p style="max-width: 32ch; font-size: 0.88rem;">A U.S.-based expert network connecting institutional clients with vetted industry experts.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="clients.html">Clients</a>
+        <a href="experts.html">Experts</a>
+        <a href="compliance.html">Compliance</a>
+        <a href="about.html">About</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="insights.html">Insights</a>
+        <a href="about.html">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="mailto:inquiries@savnec.com">inquiries@savnec.com</a>
+        <a href="mailto:experts@savnec.com">experts@savnec.com</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Savnec, Inc. All rights reserved.</span>
+      <span>Delaware, United States</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
