@@ -7,7 +7,8 @@
 <meta name="description" content="Savnec connects market research agencies, consulting firms, corporate strategy teams, and private equity &amp; venture capital investors with vetted industry experts.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -17,22 +18,62 @@
     <a href="index.html" class="logo">Sav<span>nec</span></a>
     <nav class="main-nav" id="main-nav">
       <a href="clients.html">Clients</a>
-      <a href="experts.html">Experts</a>
-      <a href="industries.html">Industries</a>
+      <div class="nav-item-dropdown">
+        <a href="experts.html">Experts</a>
+        <div class="dropdown-menu">
+          <a href="experts.html#apply">Join the Network</a>
+        </div>
+
+      </div>
+      <div class="nav-item-dropdown">
+        <a href="industries.html">Industries</a>
+        <div class="dropdown-menu">
+        <a href="industries.html#technology">Technology & Software</a>
+        <a href="industries.html#healthcare">Healthcare & Life Sciences</a>
+        <a href="industries.html#financial">Financial Services</a>
+        <a href="industries.html#consumer">Consumer & Retail</a>
+        <a href="industries.html#industrials">Industrials & Manufacturing</a>
+        <a href="industries.html#energy">Energy & Natural Resources</a>
+        <a href="industries.html#telecom">Telecommunications & Media</a>
+        <a href="industries.html#services">Business & Professional Services</a>
+        </div>
+      </div>
       <a href="compliance.html">Compliance</a>
       <a href="insights.html">Insights</a>
       <a href="about.html">About</a>
-      <a href="clients.html#request" class="nav-cta">Request an Expert</a>
     </nav>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="header-cta">
+      <a href="clients.html#request" class="nav-cta">Request a Trial</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </header>
 
 <!-- HERO -->
-<section style="padding: 80px 0 0;">
-  <div class="container" style="max-width: 760px;">
+<section class="hero-wrap" style="padding: 80px 0 0;">
+  <svg class="network-pattern" viewBox="0 0 620 480" xmlns="http://www.w3.org/2000/svg">
+    <line class="n-line" x1="120" y1="60" x2="300" y2="150" />
+    <line class="n-line" x1="300" y1="150" x2="480" y2="90" />
+    <line class="n-line" x1="300" y1="150" x2="260" y2="290" />
+    <line class="n-line" x1="260" y1="290" x2="440" y2="330" />
+    <line class="n-line" x1="480" y1="90" x2="560" y2="220" />
+    <line class="n-line" x1="560" y1="220" x2="440" y2="330" />
+    <line class="n-line" x1="260" y1="290" x2="150" y2="380" />
+    <line class="n-line n-line-accent" x1="120" y1="60" x2="300" y2="150" />
+    <line class="n-line n-line-accent" x1="300" y1="150" x2="260" y2="290" />
+    <line class="n-line n-line-accent" x1="440" y1="330" x2="560" y2="220" />
+    <circle class="n-dot" cx="120" cy="60" r="3.5" />
+    <circle class="n-dot n-dot-accent" cx="300" cy="150" r="4" />
+    <circle class="n-dot" cx="480" cy="90" r="3.5" />
+    <circle class="n-dot n-dot-accent delay1" cx="260" cy="290" r="4" />
+    <circle class="n-dot" cx="560" cy="220" r="3.5" />
+    <circle class="n-dot n-dot-accent delay2" cx="440" cy="330" r="4" />
+    <circle class="n-dot" cx="150" cy="380" r="3.5" />
+    <circle class="n-dot n-dot-accent delay3" cx="150" cy="380" r="3.5" />
+  </svg>
+  <div class="container hero-content" style="max-width: 760px;">
     <h1>Direct access to the experts who move your work forward.</h1>
     <p class="lede">Savnec connects market research agencies, consulting firms, corporate strategy teams, and private equity &amp; venture capital investors with vetted industry experts for primary research.</p>
   </div>
@@ -63,9 +104,40 @@
 <!-- WHO WE ARE -->
 <section>
   <div class="container">
-    <div class="section-head">
-      <h2>Who we are</h2>
-      <p>Savnec is a U.S.-based expert network built for market research agencies, consulting firms, corporate strategy teams, and private equity &amp; venture capital investors who need direct access to specialized industry knowledge. We are not a marketplace &mdash; we are a rigorously screened, discretion-first network built on trust.</p>
+    <div class="feature-row" style="margin-bottom: 64px;">
+      <div>
+        <h2>Who we are</h2>
+        <p>Savnec is a U.S.-based expert network built for market research agencies, consulting firms, corporate strategy teams, and private equity &amp; venture capital investors who need direct access to specialized industry knowledge. We are not a marketplace &mdash; we are a rigorously screened, discretion-first network built on trust.</p>
+      </div>
+      <div class="consult-card-wrap">
+        <div class="consult-card-behind"></div>
+        <div class="consult-card">
+          <div class="cc-status"><span class="dot"></span>Confirmed</div>
+          <div class="cc-head">
+            <div class="cc-avatar">JR</div>
+            <div>
+              <div class="cc-name">J. Reyes</div>
+              <div class="cc-role">Former VP, Supply Chain &mdash; Industrials</div>
+            </div>
+          </div>
+          <div class="cc-detail-row">
+            <span class="label">Format</span>
+            <span class="value">1-on-1 Call</span>
+          </div>
+          <div class="cc-detail-row">
+            <span class="label">Date</span>
+            <span class="value">Tue, Oct 14</span>
+          </div>
+          <div class="cc-detail-row">
+            <span class="label">Time</span>
+            <span class="value">2:00 PM EST</span>
+          </div>
+          <div class="cc-detail-row">
+            <span class="label">Compliance</span>
+            <span class="value">Cleared</span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="stats-row">
@@ -162,7 +234,7 @@
   <div class="container">
     <h2>Tell us what you're looking for.</h2>
     <div class="btn-row">
-      <a href="clients.html#request" class="btn btn-emerald">Request an Expert</a>
+      <a href="clients.html#request" class="btn btn-emerald">Request a Trial</a>
       <a href="experts.html#apply" class="btn btn-outline-white">Apply as an Expert</a>
     </div>
   </div>
@@ -173,13 +245,13 @@
     <div class="footer-grid">
       <div>
         <div class="logo">Sav<span>nec</span></div>
-        <p style="max-width: 32ch; font-size: 0.88rem;">A U.S.-based expert network connecting research, consulting, and investment firms with vetted industry experts.</p>
+        <p style="max-width: 32ch; font-size: 0.88rem;">A global B2B partner connecting research, consulting, and investment firms with vetted industry experts.</p>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
         <a href="clients.html">Clients</a>
         <a href="experts.html">Experts</a>
-        <a href="industries.html">Industries</a>
+          <a href="industries.html">Industries</a>
         <a href="compliance.html">Compliance</a>
         <a href="about.html">About</a>
       </div>

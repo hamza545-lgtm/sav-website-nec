@@ -7,7 +7,8 @@
 <meta name="description" content="Request vetted industry experts for consultations, surveys, and custom research through Savnec.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -17,16 +18,36 @@
     <a href="index.html" class="logo">Sav<span>nec</span></a>
     <nav class="main-nav" id="main-nav">
       <a href="clients.html" class="active">Clients</a>
-      <a href="experts.html">Experts</a>
-      <a href="industries.html">Industries</a>
+      <div class="nav-item-dropdown">
+        <a href="experts.html">Experts</a>
+        <div class="dropdown-menu">
+          <a href="experts.html#apply">Join the Network</a>
+        </div>
+
+      </div>
+      <div class="nav-item-dropdown">
+        <a href="industries.html">Industries</a>
+        <div class="dropdown-menu">
+        <a href="industries.html#technology">Technology & Software</a>
+        <a href="industries.html#healthcare">Healthcare & Life Sciences</a>
+        <a href="industries.html#financial">Financial Services</a>
+        <a href="industries.html#consumer">Consumer & Retail</a>
+        <a href="industries.html#industrials">Industrials & Manufacturing</a>
+        <a href="industries.html#energy">Energy & Natural Resources</a>
+        <a href="industries.html#telecom">Telecommunications & Media</a>
+        <a href="industries.html#services">Business & Professional Services</a>
+        </div>
+      </div>
       <a href="compliance.html">Compliance</a>
       <a href="insights.html">Insights</a>
       <a href="about.html">About</a>
-      <a href="#request" class="nav-cta">Request an Expert</a>
     </nav>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="header-cta">
+      <a href="#request" class="nav-cta">Request a Trial</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -62,6 +83,37 @@
 
 <section class="tint">
   <div class="container">
+    <div class="section-head">
+      <h2>How we recruit and vet experts</h2>
+      <p class="lede">Every expert on Savnec goes through the same process before they're eligible to be matched to a client.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Sourcing</h3>
+        <p>Targeted outreach across professional networks, referrals, and direct sourcing to identify candidates with genuine, current expertise.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Credential verification</h3>
+        <p>Current or recent role, tenure, and relevant experience are confirmed before an expert is added to the network.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Conflict screening</h3>
+        <p>Every candidate is checked against existing NDAs, non-competes, and board or advisory positions before activation.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h3>Ongoing re-verification</h3>
+        <p>Activated experts are re-screened for new conflicts each time they're proposed for an engagement &mdash; not just once at sign-up.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
     <div class="quote-block">
       <p>"Savnec understood exactly what we needed and moved fast &mdash; without ever cutting corners."</p>
       <div class="attribution">Placeholder &mdash; Investment Analyst, U.S. Hedge Fund</div>
@@ -84,7 +136,7 @@
       Submissions will be emailed to the address you set up in your Web3Forms dashboard.
     -->
     <form class="form-wrap" action="https://api.web3forms.com/submit" method="POST">
-      <input type="hidden" name="access_key" value="1d3f7d6c-1487-4e7f-8d87-0a0c35f430ce">
+      <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY">
       <input type="hidden" name="subject" value="New Client Request — Savnec">
       <div class="form-row">
         <label for="c-name">Full name</label>
@@ -123,13 +175,13 @@
     <div class="footer-grid">
       <div>
         <div class="logo">Sav<span>nec</span></div>
-        <p style="max-width: 32ch; font-size: 0.88rem;">A U.S.-based expert network connecting research, consulting, and investment firms with vetted industry experts.</p>
+        <p style="max-width: 32ch; font-size: 0.88rem;">A global B2B partner connecting research, consulting, and investment firms with vetted industry experts.</p>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
         <a href="clients.html">Clients</a>
         <a href="experts.html">Experts</a>
-      <a href="industries.html">Industries</a>
+        <a href="industries.html">Industries</a>
         <a href="compliance.html">Compliance</a>
         <a href="about.html">About</a>
       </div>

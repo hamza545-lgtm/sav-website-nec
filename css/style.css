@@ -80,17 +80,25 @@ p {
 }
 
 .site-header .container {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  height: 76px;
+  gap: 24px;
+}
+
+.header-cta {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  height: 76px;
+  gap: 14px;
 }
 
 .logo {
-  font-size: 1.35rem;
-  font-weight: 700;
+  font-family: 'Montserrat', var(--font);
+  font-size: 1.5rem;
+  font-weight: 800;
   color: var(--navy);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.04em;
 }
 
 .logo span { color: var(--emerald); }
@@ -98,6 +106,7 @@ p {
 .main-nav {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 26px;
 }
 
@@ -142,6 +151,43 @@ p {
   height: 2px;
   background: var(--navy);
   margin: 5px 0;
+}
+
+/* Industries dropdown */
+
+.nav-item-dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: -18px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  min-width: 240px;
+  padding: 8px 0;
+  box-shadow: 0 12px 28px rgba(10, 25, 47, 0.1);
+  z-index: 200;
+}
+
+.nav-item-dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 10px 18px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-bottom: none;
+}
+
+.dropdown-menu a:hover {
+  background: var(--bg-tint);
+  color: var(--emerald);
 }
 
 /* ============================================
@@ -305,6 +351,7 @@ section.tint { background: var(--bg-tint); }
   border: 1px solid var(--border);
   padding: 28px 24px;
   border-radius: var(--radius);
+  scroll-margin-top: 100px;
 }
 
 .audience-card h3 { font-size: 1.05rem; margin-bottom: 8px; }
@@ -504,8 +551,183 @@ section.tint { background: var(--bg-tint); }
 }
 
 /* ============================================
-   Responsive
+   Hero network pattern (subtle, elegant)
    ============================================ */
+
+.hero-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.network-pattern {
+  position: absolute;
+  top: 0;
+  right: -80px;
+  width: 620px;
+  height: 480px;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.network-pattern .n-line {
+  stroke: #0A192F;
+  stroke-opacity: 0.14;
+  stroke-width: 1;
+}
+
+.network-pattern .n-line-accent {
+  stroke: #0F6E4C;
+  stroke-opacity: 0.35;
+  stroke-width: 1.2;
+  stroke-dasharray: 4 5;
+  animation: dash-flow 7s linear infinite;
+}
+
+.network-pattern .n-dot {
+  fill: #0A192F;
+  opacity: 0.5;
+}
+
+.network-pattern .n-dot-accent {
+  fill: #0F6E4C;
+  animation: pulse-dot 3.4s ease-in-out infinite;
+}
+
+.network-pattern .n-dot-accent.delay1 { animation-delay: 0.7s; }
+.network-pattern .n-dot-accent.delay2 { animation-delay: 1.6s; }
+.network-pattern .n-dot-accent.delay3 { animation-delay: 2.3s; }
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.55; r: 3.5; }
+  50% { opacity: 1; r: 5; }
+}
+
+@keyframes dash-flow {
+  to { stroke-dashoffset: -90; }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 860px) {
+  .network-pattern { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .network-pattern .n-line-accent,
+  .network-pattern .n-dot-accent {
+    animation: none;
+  }
+}
+
+/* ============================================
+   Floating consultation card
+   ============================================ */
+
+.consult-card-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 340px;
+}
+
+.consult-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 24px 48px rgba(10, 25, 47, 0.12);
+  width: 320px;
+  padding: 22px;
+  position: relative;
+  z-index: 2;
+}
+
+.consult-card .cc-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.consult-card .cc-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.consult-card .cc-name {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: var(--navy);
+}
+
+.consult-card .cc-role {
+  font-size: 0.78rem;
+  color: var(--slate);
+}
+
+.consult-card .cc-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--emerald);
+  background: rgba(15, 110, 76, 0.08);
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+
+.consult-card .cc-status .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--emerald);
+}
+
+.consult-card .cc-detail-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.82rem;
+  padding: 7px 0;
+  border-bottom: 1px dashed var(--border);
+}
+
+.consult-card .cc-detail-row:last-of-type { border-bottom: none; }
+
+.consult-card .cc-detail-row .label { color: var(--slate); }
+.consult-card .cc-detail-row .value { color: var(--navy); font-weight: 600; }
+
+.consult-card-behind {
+  position: absolute;
+  width: 320px;
+  height: 220px;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  top: 34px;
+  left: calc(50% - 148px);
+  z-index: 1;
+  background: var(--bg-tint);
+}
+
+@media (max-width: 860px) {
+  .consult-card-behind { display: none; }
+}
 
 @media (max-width: 860px) {
   h1 { font-size: 2rem; }
@@ -523,4 +745,13 @@ section.tint { background: var(--bg-tint); }
   .card-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .cta-band .btn-row { flex-direction: column; align-items: center; }
+
+  .dropdown-menu {
+    display: block;
+    position: static;
+    box-shadow: none;
+    border: none;
+    padding-left: 14px;
+    min-width: 0;
+  }
 }

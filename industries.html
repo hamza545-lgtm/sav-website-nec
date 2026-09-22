@@ -7,7 +7,8 @@
 <meta name="description" content="Savnec's expert network spans technology, healthcare, financial services, consumer, industrials, energy, telecom, and professional services.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -17,16 +18,36 @@
     <a href="index.html" class="logo">Sav<span>nec</span></a>
     <nav class="main-nav" id="main-nav">
       <a href="clients.html">Clients</a>
-      <a href="experts.html">Experts</a>
-      <a href="industries.html" class="active">Industries</a>
+      <div class="nav-item-dropdown">
+        <a href="experts.html">Experts</a>
+        <div class="dropdown-menu">
+          <a href="experts.html#apply">Join the Network</a>
+        </div>
+
+      </div>
+      <div class="nav-item-dropdown">
+        <a href="industries.html" class="active">Industries</a>
+        <div class="dropdown-menu">
+        <a href="industries.html#technology">Technology & Software</a>
+        <a href="industries.html#healthcare">Healthcare & Life Sciences</a>
+        <a href="industries.html#financial">Financial Services</a>
+        <a href="industries.html#consumer">Consumer & Retail</a>
+        <a href="industries.html#industrials">Industrials & Manufacturing</a>
+        <a href="industries.html#energy">Energy & Natural Resources</a>
+        <a href="industries.html#telecom">Telecommunications & Media</a>
+        <a href="industries.html#services">Business & Professional Services</a>
+        </div>
+      </div>
       <a href="compliance.html">Compliance</a>
       <a href="insights.html">Insights</a>
       <a href="about.html">About</a>
-      <a href="clients.html#request" class="nav-cta">Request an Expert</a>
     </nav>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
+    <div class="header-cta">
+      <a href="clients.html#request" class="nav-cta">Request a Trial</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -40,35 +61,35 @@
 <section>
   <div class="container">
     <div class="audience-grid" style="grid-template-columns: repeat(4, 1fr);">
-      <div class="audience-card">
+      <div class="audience-card" id="technology">
         <h3>Technology &amp; Software</h3>
         <p>From enterprise SaaS to semiconductors &mdash; operators and engineers shaping the sector.</p>
       </div>
-      <div class="audience-card">
+      <div class="audience-card" id="healthcare">
         <h3>Healthcare &amp; Life Sciences</h3>
         <p>Clinicians and former executives across pharma, biotech, and med-tech.</p>
       </div>
-      <div class="audience-card">
+      <div class="audience-card" id="financial">
         <h3>Financial Services</h3>
         <p>Banking, insurance, and fintech practitioners with direct operating experience.</p>
       </div>
-      <div class="audience-card">
+      <div class="audience-card" id="consumer">
         <h3>Consumer &amp; Retail</h3>
         <p>Brand, retail, and e-commerce leaders who understand shifting demand.</p>
       </div>
-      <div class="audience-card">
+      <div class="audience-card" id="industrials">
         <h3>Industrials &amp; Manufacturing</h3>
         <p>Supply chain, operations, and manufacturing specialists.</p>
       </div>
-      <div class="audience-card">
+      <div class="audience-card" id="energy">
         <h3>Energy &amp; Natural Resources</h3>
         <p>Practitioners across traditional and renewable energy value chains.</p>
       </div>
-      <div class="audience-card">
+      <div class="audience-card" id="telecom">
         <h3>Telecommunications &amp; Media</h3>
         <p>Operators and analysts across telecom infrastructure and media.</p>
       </div>
-      <div class="audience-card">
+      <div class="audience-card" id="services">
         <h3>Business &amp; Professional Services</h3>
         <p>Leaders from consulting, legal, and professional service firms.</p>
       </div>
@@ -81,7 +102,7 @@
     <h2>Don't see your sector?</h2>
     <p style="color: rgba(255,255,255,0.7); max-width: 46ch; margin: 0 auto 8px;">Tell us what you need &mdash; our sourcing team reaches beyond this list for the right match.</p>
     <div class="btn-row">
-      <a href="clients.html#request" class="btn btn-emerald">Request an Expert</a>
+      <a href="clients.html#request" class="btn btn-emerald">Request a Trial</a>
     </div>
   </div>
 </section>
@@ -91,13 +112,13 @@
     <div class="footer-grid">
       <div>
         <div class="logo">Sav<span>nec</span></div>
-        <p style="max-width: 32ch; font-size: 0.88rem;">A U.S.-based expert network connecting research, consulting, and investment firms with vetted industry experts.</p>
+        <p style="max-width: 32ch; font-size: 0.88rem;">A global B2B partner connecting research, consulting, and investment firms with vetted industry experts.</p>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
         <a href="clients.html">Clients</a>
         <a href="experts.html">Experts</a>
-        <a href="industries.html">Industries</a>
+          <a href="industries.html">Industries</a>
         <a href="compliance.html">Compliance</a>
         <a href="about.html">About</a>
       </div>
