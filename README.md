@@ -9,10 +9,10 @@ No build tools, no frameworks — plain HTML/CSS/JS. Free to host and deploy.
 
 Search for these and swap in your real details:
 
-- **Forms**: In `clients.html` and `experts.html`, replace `YOUR_ACCESS_KEY` in the
-  hidden `access_key` input with your real Web3Forms access key. Sign up free at
+- **Forms**: In `clients.html`, `experts.html`, and `about.html`, replace `YOUR_ACCESS_KEY` in
+  the hidden `access_key` input with your real Web3Forms access key. Sign up free at
   https://web3forms.com (250 submissions/month free, no card required), create an
-  access key, paste it in both files. Until you do this, the forms will not send
+  access key, paste it in all three files. Until you do this, the forms will not send
   anywhere.
 - **Phone number**: In `about.html`, replace `+1 (XXX) XXX-XXXX` with your real
   OpenPhone/Grasshopper US number.

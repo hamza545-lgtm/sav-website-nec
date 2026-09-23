@@ -28,7 +28,9 @@
       <div class="nav-item-dropdown">
         <a href="industries.html">Industries</a>
         <div class="dropdown-menu">
+        <a href="industries.html#technology">Market Research</a>
         <a href="industries.html#technology">Technology & Software</a>
+        <a href="industries.html#technology">Strategy Consulting</a>
         <a href="industries.html#healthcare">Healthcare & Life Sciences</a>
         <a href="industries.html#financial">Financial Services</a>
         <a href="industries.html#consumer">Consumer & Retail</a>
@@ -39,8 +41,14 @@
         </div>
       </div>
       <a href="compliance.html">Compliance</a>
-      <a href="insights.html">Insights</a>
-      <a href="about.html">About</a>
+      <div class="nav-item-dropdown">
+        <a href="about.html">About</a>
+        <div class="dropdown-menu">
+          <a href="insights.html">Insights</a>
+          <a href="about.html#faqs">FAQs</a>
+          <a href="about.html#contact">Contact Us</a>
+        </div>
+      </div>
     </nav>
     <div class="header-cta">
       <a href="#request" class="nav-cta">Request a Trial</a>
@@ -54,7 +62,7 @@
 <section class="page-intro">
   <div class="container" style="max-width: 720px;">
     <h1>Research support built for high-stakes decisions.</h1>
-    <p class="lede">One-on-one consultations, B2B surveys, and custom research &mdash; matched to your exact scope, on your timeline.</p>
+    <p class="lede">One-on-one consultations, B2B surveys, and custom research &dash; matched to your exact scope, on your timeline.</p>
   </div>
 </section>
 
@@ -66,17 +74,17 @@
 
     <div class="offering">
       <h3>1-on-1 Consultations</h3>
-      <p>Direct calls with screened industry experts &mdash; operators, former executives, and specialists &mdash; matched to your specific research question. Every consultation is preceded by conflict screening to keep the engagement clean.</p>
+      <p>Direct calls with screened industry: operators, former executives, and specialists matched to your specific research question. Every consultation is preceded by conflict screening to keep the engagement clean.</p>
     </div>
 
     <div class="offering">
       <h3>B2B Surveys</h3>
-      <p>Quantitative and qualitative surveys fielded to relevant professional audiences, designed around your research objectives and delivered with clean, usable data.</p>
+      <p>Quantitative and qualitative surveys fielded to relevant professional audiences, as per your research objectives and delivered with clean, usable data.</p>
     </div>
 
     <div class="offering">
-      <h3>Custom Research</h3>
-      <p>For scopes that don't fit a single call or survey &mdash; multi-expert panels, sector deep-dives, or ongoing research retainers &mdash; our team scopes and delivers a tailored engagement.</p>
+      <h3>Focus Group</h3>
+      <p>For scopes that don't fit a single call or survey, our team helps source the Focus Groups</p>
     </div>
   </div>
 </section>
@@ -85,7 +93,7 @@
   <div class="container">
     <div class="section-head">
       <h2>How we recruit and vet experts</h2>
-      <p class="lede">Every expert on Savnec goes through the same process before they're eligible to be matched to a client.</p>
+      <p class="lede">Every expert on Savnec goes through the same process before they're eligible to be matched to a client. We don't pull from a static database &dash; each engagement starts with fresh, targeted sourcing built around your specific need.</p>
     </div>
     <div class="steps">
       <div class="step">
@@ -106,7 +114,7 @@
       <div class="step">
         <div class="step-num">04</div>
         <h3>Ongoing re-verification</h3>
-        <p>Activated experts are re-screened for new conflicts each time they're proposed for an engagement &mdash; not just once at sign-up.</p>
+        <p>Activated experts are re-screened for new conflicts each time they're proposed for an engagement &dash; not just once at sign-up.</p>
       </div>
     </div>
   </div>
@@ -115,8 +123,8 @@
 <section>
   <div class="container">
     <div class="quote-block">
-      <p>"Savnec understood exactly what we needed and moved fast &mdash; without ever cutting corners."</p>
-      <div class="attribution">Placeholder &mdash; Investment Analyst, U.S. Hedge Fund</div>
+      <p>"Savnec understood exactly what we needed and moved fast with easy process."</p>
+      <div class="attribution">Placeholder &dash; Research Director,  MR Firm</div>
     </div>
   </div>
 </section>
@@ -136,34 +144,78 @@
       Submissions will be emailed to the address you set up in your Web3Forms dashboard.
     -->
     <form class="form-wrap" action="https://api.web3forms.com/submit" method="POST">
-      <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY">
+      <input type="hidden" name="access_key" value="1d3f7d6c-1487-4e7f-8d87-0a0c35f430ce">
       <input type="hidden" name="subject" value="New Client Request — Savnec">
+
       <div class="form-row">
-        <label for="c-name">Full name</label>
-        <input type="text" id="c-name" name="name" required>
+        <label for="c-inquiry">Inquiry type</label>
+        <select id="c-inquiry" name="inquiry_type">
+          <option>Become a Client</option>
+          <option>Book a Meeting</option>
+          <option>General Inquiries</option>
+          <option>Compliance / Legal</option>
+        </select>
       </div>
-      <div class="form-row">
-        <label for="c-company">Company</label>
-        <input type="text" id="c-company" name="company" required>
+
+      <div class="form-row-pair">
+        <div class="form-row">
+          <label for="c-first">First name</label>
+          <input type="text" id="c-first" name="first_name" required>
+        </div>
+        <div class="form-row">
+          <label for="c-last">Last name</label>
+          <input type="text" id="c-last" name="last_name" required>
+        </div>
       </div>
-      <div class="form-row">
-        <label for="c-email">Work email</label>
-        <input type="email" id="c-email" name="email" required>
+
+      <div class="form-row-pair">
+        <div class="form-row">
+          <label for="c-email">Business email</label>
+          <input type="email" id="c-email" name="email" required>
+        </div>
+        <div class="form-row">
+          <label for="c-phone">Phone <span style="font-weight:400; color: var(--slate);">(optional)</span></label>
+          <input type="tel" id="c-phone" name="phone">
+        </div>
       </div>
+
+      <div class="form-row-pair">
+        <div class="form-row">
+          <label for="c-company">Company</label>
+          <input type="text" id="c-company" name="company" required>
+        </div>
+        <div class="form-row">
+          <label for="c-company-type">Company type</label>
+          <select id="c-company-type" name="company_type">
+            <option>Market Research</option>
+            <option>Consulting</option>
+            <option>Private Equity</option>
+            <option>Venture Capital</option>
+            <option>Technology, Media &amp; Telecom</option>
+            <option>Healthcare &amp; Life Sciences</option>
+            <option>Consumer &amp; Commercial Brands</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+
       <div class="form-row">
-        <label for="c-type">Firm type</label>
-        <select id="c-type" name="firm_type">
-          <option>Hedge Fund</option>
-          <option>Private Equity / Venture Capital</option>
-          <option>Market Research Firm</option>
-          <option>Enterprise / Corporate</option>
+        <label for="c-region">Region</label>
+        <select id="c-region" name="region">
+          <option>North America (US &amp; Canada)</option>
+          <option>Europe</option>
+          <option>Middle East &amp; Africa</option>
+          <option>Asia &amp; Pacific</option>
+          <option>Latin America</option>
           <option>Other</option>
         </select>
       </div>
+
       <div class="form-row">
-        <label for="c-scope">Research scope</label>
-        <textarea id="c-scope" name="scope" placeholder="Describe the industry, expertise, or question you need support with." required></textarea>
+        <label for="c-message">Message</label>
+        <textarea id="c-message" name="message" placeholder="Tell us what you're looking for." required></textarea>
       </div>
+
       <button type="submit" class="btn btn-emerald">Submit Request</button>
       <p class="form-note" style="margin-top: 16px;">By submitting, you agree to be contacted by Savnec regarding your request. All inquiries are treated as confidential.</p>
     </form>
@@ -197,8 +249,8 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <span>&copy; 2026 Savnec, Inc. All rights reserved.</span>
-      <span>Delaware, United States</span>
+      <span>&copy; 2026 Savnec LLC. All rights reserved.</span>
+      <span>United States</span>
     </div>
   </div>
 </footer>

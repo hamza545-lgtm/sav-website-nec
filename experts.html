@@ -39,8 +39,14 @@
         </div>
       </div>
       <a href="compliance.html">Compliance</a>
-      <a href="insights.html">Insights</a>
-      <a href="about.html">About</a>
+      <div class="nav-item-dropdown">
+        <a href="about.html">About</a>
+        <div class="dropdown-menu">
+          <a href="insights.html">Insights</a>
+          <a href="about.html#faqs">FAQs</a>
+          <a href="about.html#contact">Contact Us</a>
+        </div>
+      </div>
     </nav>
     <div class="header-cta">
       <a href="#apply" class="nav-cta">Apply Now</a>
@@ -95,47 +101,62 @@
 
 <section id="apply">
   <div class="container">
-    <div class="section-head">
-      <h2>Apply as an expert</h2>
-      <p class="lede">Tell us about your background. Our team reviews every application individually.</p>
-    </div>
+    <div class="feature-row" style="align-items: flex-start;">
+      <div>
+        <h2>Apply as an expert</h2>
+        <p>The Savnec team works on a custom, project-by-project basis, conducting fresh, targeted recruitment to precisely match vetted industry experts with evolving client needs.</p>
+        <p>As a global B2B partner connecting leading research, consulting, and investment firms with specialized knowledge, we do not operate as a passive, static sign-up database. Instead, our dedicated team actively performs custom sourcing through professional networks like <a href="https://www.linkedin.com/" target="_blank" rel="noopener" style="color: var(--emerald); font-weight: 600;">LinkedIn</a> to find the exact expertise required for our clients' live projects.</p>
+        <p>If you are an industry professional who would like to be considered for active or future project opportunities, you can securely share your details with us here. Your information will be processed in strict accordance with our Privacy Policy, and we will reach out directly using the details you provide as soon as a project matches your unique background.</p>
+      </div>
 
-    <!--
-      FORM SETUP INSTRUCTIONS:
-      1. Create a free account at https://web3forms.com
-      2. Create a new "Access Key" for this site (free, 250 submissions/month)
-      3. Replace YOUR_ACCESS_KEY below with that key
-    -->
-    <form class="form-wrap" action="https://api.web3forms.com/submit" method="POST">
-      <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY">
-      <input type="hidden" name="subject" value="New Expert Application — Savnec">
-      <div class="form-row">
-        <label for="e-name">Full name</label>
-        <input type="text" id="e-name" name="name" required>
+      <div>
+        <!--
+          FORM SETUP INSTRUCTIONS:
+          1. Create a free account at https://web3forms.com
+          2. Create a new "Access Key" for this site (free, 250 submissions/month)
+          3. Replace YOUR_ACCESS_KEY below with that key
+        -->
+        <form class="form-wrap" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="dbac5f22-f132-4ea2-b806-a7839a2c8e4d">
+          <input type="hidden" name="subject" value="New Expert Application — Savnec">
+
+          <div class="form-row-pair">
+            <div class="form-row">
+              <label for="e-first">First name</label>
+              <input type="text" id="e-first" name="first_name" required>
+            </div>
+            <div class="form-row">
+              <label for="e-last">Last name</label>
+              <input type="text" id="e-last" name="last_name" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="e-industry">Industry / area of expertise</label>
+            <input type="text" id="e-industry" name="industry" required>
+          </div>
+
+          <div class="form-row">
+            <label for="e-linkedin">LinkedIn profile</label>
+            <input type="url" id="e-linkedin" name="linkedin" placeholder="https://linkedin.com/in/...">
+          </div>
+
+          <div class="form-row-pair">
+            <div class="form-row">
+              <label for="e-phone">Phone</label>
+              <input type="tel" id="e-phone" name="phone">
+            </div>
+            <div class="form-row">
+              <label for="e-email">Email</label>
+              <input type="email" id="e-email" name="email" required>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-emerald">Submit Application</button>
+          <p class="form-note" style="margin-top: 16px;">All applications are reviewed for eligibility and potential conflicts of interest before activation.</p>
+        </form>
       </div>
-      <div class="form-row">
-        <label for="e-email">Email</label>
-        <input type="email" id="e-email" name="email" required>
-      </div>
-      <div class="form-row">
-        <label for="e-title">Current or most recent title</label>
-        <input type="text" id="e-title" name="title" required>
-      </div>
-      <div class="form-row">
-        <label for="e-industry">Industry / area of expertise</label>
-        <input type="text" id="e-industry" name="industry" required>
-      </div>
-      <div class="form-row">
-        <label for="e-linkedin">LinkedIn profile</label>
-        <input type="url" id="e-linkedin" name="linkedin" placeholder="https://linkedin.com/in/...">
-      </div>
-      <div class="form-row">
-        <label for="e-bio">Brief background</label>
-        <textarea id="e-bio" name="background" placeholder="A short summary of your relevant experience." required></textarea>
-      </div>
-      <button type="submit" class="btn btn-emerald">Submit Application</button>
-      <p class="form-note" style="margin-top: 16px;">All applications are reviewed for eligibility and potential conflicts of interest before activation.</p>
-    </form>
+    </div>
   </div>
 </section>
 
