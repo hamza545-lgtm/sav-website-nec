@@ -1,29 +1,34 @@
 # Savnec Website — Deployment Guide
 
-A 6-page static site: Home, Clients, Experts, Compliance, Insights (placeholder), About/Contact.
-No build tools, no frameworks — plain HTML/CSS/JS. Free to host and deploy.
+An 11-page static site: Home, Clients, Experts, Industries, Compliance, About/Contact
+(with FAQs), Insights (2 published articles), Privacy & Cookie Policy, and Terms &
+Conditions. No build tools, no frameworks — plain HTML/CSS/JS. Free to host and deploy.
 
 ---
 
-## 1. Before you deploy — things to replace
+## 1. Before you deploy — things still worth checking
 
-Search for these and swap in your real details:
-
-- **Forms**: In `clients.html`, `experts.html`, and `about.html`, replace `YOUR_ACCESS_KEY` in
-  the hidden `access_key` input with your real Web3Forms access key. Sign up free at
-  https://web3forms.com (250 submissions/month free, no card required), create an
-  access key, paste it in all three files. Until you do this, the forms will not send
-  anywhere.
+- **Forms**: Your real Web3Forms access keys are already wired into `clients.html`,
+  `experts.html`, and `about.html`. If you ever regenerate a key or add a new form,
+  just paste the new key into the hidden `access_key` input.
 - **Phone number**: In `about.html`, replace `+1 (XXX) XXX-XXXX` with your real
   OpenPhone/Grasshopper US number.
-- **Registered address**: In `about.html`, replace the placeholder Delaware address
-  with your actual registered agent / business address.
-- **Logo**: Currently a text wordmark ("Sav" + "nec" in emerald) styled in `css/style.css`
-  under `.logo`. If you finish a logo image in Canva, export it as a transparent PNG or
-  SVG, drop it in the `images/` folder, and swap the `<a class="logo">Sav<span>nec</span></a>`
-  lines in every page for `<img src="images/logo.svg" alt="Savnec">`.
+- **Registered address**: In `about.html`, confirm the Delaware address matches your
+  actual registered agent / business address.
+- **Logo**: Currently a text wordmark ("Sav" + "nec" in Montserrat, navy/emerald)
+  styled in `css/style.css` under `.logo`. Once your Canva logo is ready, export it as
+  a transparent PNG or SVG, drop it in `images/`, and swap the
+  `<a class="logo">Sav<span>nec</span></a>` lines in every page for
+  `<img src="images/logo.svg" alt="Savnec">`. Also update `images/favicon.svg` with
+  your real mark when ready.
+- **Social links**: LinkedIn and Instagram links in every footer currently point to
+  `linkedin.com/company/savnec` and `instagram.com/savnec` — update these once your
+  real profiles exist, or remove the ones you don't plan to use.
 - **Testimonial**: The quote on `clients.html` is a labeled placeholder — replace once
   you have a real client quote, or remove the block.
+- **Legal pages**: `privacy-policy.html` and `terms.html` are a solid, professional
+  starting point but are not a substitute for review by a lawyer, especially before
+  handling EU/UK client or expert data at scale (GDPR) or California residents (CCPA).
 
 ## 2. Deploy — GitHub + Vercel (free, with your own domain)
 
@@ -57,29 +62,32 @@ Any time you want to change text, prices, or add content:
 3. Vercel automatically redeploys within about a minute of any change to the
    repository. No separate "publish" step needed.
 
-## 4. Adding a real blog later
+## 4. Adding a new blog post
 
-`insights.html` is currently a placeholder page so the URL and nav link never have
-to change. When you're ready for real articles, the simplest low-effort path is to
-duplicate the page (e.g. `insights-post-1.html`) using the same header/footer, drop
-your article content into a `<section>` in the body, and link to it from
-`insights.html`. No CMS needed for a handful of posts; if you outgrow that later,
-migrating a handful of static articles into a proper blog platform is a small job.
+Duplicate `insights-what-is-an-expert-network.html` or `insights-industry-trends.html`
+as a starting template (same header/footer, same `.article-body` styling), write your
+new article inside the `.article-body` div, save it as a new file (e.g.
+`insights-your-topic.html`), then add a new `.blog-card` linking to it inside the
+`.blog-grid` on `insights.html`. No CMS needed for a handful of posts.
 
 ## File structure
 
 ```
 savnec-website/
-├── index.html          Home
-├── clients.html         For Clients (with request form)
-├── experts.html         For Experts (with application form)
-├── industries.html      Industries we cover
-├── compliance.html      Compliance & Data Security
-├── about.html            About & Contact
-├── insights.html         Insights (placeholder)
-├── css/style.css        All styling — brand colors as CSS variables at the top
-├── js/main.js            Mobile nav toggle
-└── images/               Drop your logo file here when ready
+├── index.html                              Home
+├── clients.html                             For Clients (with request form)
+├── experts.html                              For Experts (with application form)
+├── industries.html                          Industries we cover
+├── compliance.html                          Compliance & Data Privacy
+├── about.html                                About, FAQs & Contact (with general inquiry form)
+├── insights.html                             Insights (blog index)
+├── insights-what-is-an-expert-network.html   Article 1
+├── insights-industry-trends.html            Article 2
+├── privacy-policy.html                       Privacy & Cookie Policy
+├── terms.html                                Terms & Conditions
+├── css/style.css                            All styling — brand colors as CSS variables at the top
+├── js/main.js                                Mobile nav toggle + scroll-reveal animation
+└── images/                                   Drop your logo/favicon files here when ready
 ```
 
 ## Brand tokens (already wired into css/style.css)
@@ -90,3 +98,16 @@ savnec-website/
 --slate:   #8892A0
 --emerald: #0F6E4C
 ```
+
+## Design system notes
+
+- **Typography**: Inter (body), Montserrat (logo wordmark only). Headings and lede
+  paragraphs use a deliberate size scale — `.hero-content h1` is the largest statement
+  on the site, `.page-intro h1` is a step down for subpages, `.lede` is for primary
+  intro copy, `.lede-sm` for secondary/supporting lines.
+- **Motion**: Buttons, nav links, and cards have hover states (lift, shadow, color).
+  Content fades up into view on scroll via `.reveal-el` (handled automatically in
+  `js/main.js` — no per-page setup needed for new sections built from the same
+  classes: `.section-head`, `.feature-row`, `.audience-card`, `.info-card`, etc.).
+  The homepage stats ticker scrolls continuously and pauses on hover.
+- All motion respects `prefers-reduced-motion`.
