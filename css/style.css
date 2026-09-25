@@ -29,7 +29,7 @@ body {
   margin: 0;
   font-family: var(--font);
   color: var(--ink);
-  background: var(--white);
+  background: linear-gradient(180deg, #FFFFFF 0%, #F7FAF9 100%);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
@@ -377,7 +377,7 @@ p {
    ============================================ */
 
 .page-intro {
-  background: var(--navy);
+  background: linear-gradient(150deg, #0A192F 0%, #16283F 60%, #10233A 100%);
   color: var(--white);
   padding: 90px 0 64px;
 }
@@ -392,9 +392,12 @@ p {
 section {
   padding: 88px 0;
   scroll-margin-top: 90px;
+  background: linear-gradient(165deg, #FFFFFF 0%, #F7F9FA 55%, #F1F6F3 100%);
 }
 
-section.tint { background: var(--bg-tint); }
+section.tint {
+  background: linear-gradient(160deg, #F2F6F7 0%, #E7EFEA 100%);
+}
 
 .section-head {
   max-width: 640px;
@@ -529,10 +532,12 @@ section.tint .step .step-num {
 }
 
 .audience-card {
+  background: linear-gradient(160deg, #FFFFFF 0%, #FAFCFB 100%);
   border: 1px solid var(--border);
   padding: 28px 24px;
-  border-radius: var(--radius);
+  border-radius: 10px;
   scroll-margin-top: 100px;
+  box-shadow: 0 12px 28px rgba(10, 25, 47, 0.05);
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
@@ -549,7 +554,7 @@ section.tint .step .step-num {
   width: 38px;
   height: 38px;
   border-radius: 8px;
-  background: rgba(15, 110, 76, 0.09);
+  background: linear-gradient(160deg, rgba(15, 110, 76, 0.14) 0%, rgba(15, 110, 76, 0.06) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -576,7 +581,7 @@ section.tint .step .step-num {
 /* Compliance banner */
 
 .compliance-banner {
-  background: var(--navy);
+  background: linear-gradient(135deg, #0A192F 0%, #123045 100%);
   color: var(--white);
   padding: 64px 0;
 }
@@ -605,11 +610,11 @@ section.tint .step .step-num {
 }
 
 .offer-tile {
-  background: var(--white);
+  background: linear-gradient(155deg, #FFFFFF 0%, #F7FAF9 100%);
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: 32px 28px;
-  box-shadow: 0 16px 36px rgba(10, 25, 47, 0.06);
+  box-shadow: 0 16px 36px rgba(10, 25, 47, 0.08);
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
@@ -653,9 +658,11 @@ section.tint .step .step-num {
 }
 
 .info-card {
+  background: linear-gradient(160deg, #FFFFFF 0%, #FAFCFB 100%);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
+  border-radius: 10px;
   padding: 28px;
+  box-shadow: 0 12px 28px rgba(10, 25, 47, 0.05);
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
@@ -837,11 +844,11 @@ section.tint .step .step-num {
 }
 
 .testimonial-card {
-  background: var(--white);
+  background: linear-gradient(155deg, #FFFFFF 0%, #F7FAF9 100%);
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: 28px;
-  box-shadow: 0 16px 36px rgba(10, 25, 47, 0.06);
+  box-shadow: 0 16px 36px rgba(10, 25, 47, 0.08);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
@@ -913,7 +920,7 @@ section.tint .step .step-num {
    ============================================ */
 
 .cta-band {
-  background: var(--navy);
+  background: linear-gradient(160deg, #0A192F 0%, #14243B 100%);
   color: var(--white);
   padding: 72px 0;
   text-align: center;
@@ -927,7 +934,7 @@ section.tint .step .step-num {
    ============================================ */
 
 .site-footer {
-  background: var(--navy);
+  background: linear-gradient(180deg, #0A192F 0%, #081522 100%);
   color: rgba(255,255,255,0.65);
   padding: 56px 0 28px;
   font-size: 0.9rem;
@@ -1231,9 +1238,11 @@ section.tint .step .step-num {
 }
 
 .blog-card {
+  background: linear-gradient(160deg, #FFFFFF 0%, #FAFCFB 100%);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 32px;
+  box-shadow: 0 12px 28px rgba(10, 25, 47, 0.05);
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   display: flex;
   flex-direction: column;
@@ -1508,13 +1517,13 @@ section.tint .step .step-num {
    ============================================ */
 
 .quiz-widget {
-  background: var(--white);
+  background: linear-gradient(160deg, #FFFFFF 0%, #F7FAF9 100%);
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: 48px;
   max-width: 640px;
   margin: 0 auto;
-  box-shadow: 0 30px 60px rgba(10, 25, 47, 0.1);
+  box-shadow: 0 30px 60px rgba(10, 25, 47, 0.14);
   text-align: left;
 }
 
@@ -1696,10 +1705,10 @@ section.tint .step .step-num {
 }
 
 .consult-card {
-  background: var(--white);
+  background: linear-gradient(160deg, #FFFFFF 0%, #F7FAF9 100%);
   border: 1px solid var(--border);
   border-radius: 10px;
-  box-shadow: 0 24px 48px rgba(10, 25, 47, 0.12);
+  box-shadow: 0 24px 48px rgba(10, 25, 47, 0.14);
   width: 320px;
   padding: 22px;
   position: relative;
@@ -1816,7 +1825,4 @@ section.tint .step .step-num {
     padding-left: 14px;
     min-width: 0;
   }
-}
-   .t-quote {
-  font-style: italic;
 }
