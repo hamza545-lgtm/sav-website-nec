@@ -1817,3 +1817,6 @@ section.tint .step .step-num {
     min-width: 0;
   }
 }
+   .t-quote {
+  font-style: italic;
+}
