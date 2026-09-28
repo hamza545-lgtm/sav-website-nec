@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Scroll-reveal: fade content up as it enters the viewport.
   try {
     var revealTargets = document.querySelectorAll(
-      '.section-head, .feature-row, .audience-card, .info-card, .blog-card, ' +
+      '.section-head, .feature-row, .audience-card, .info-card, .blog-card, .ind-card, ' +
       '.step, .offering, .compliance-block, .split-panel, .consult-card-wrap, ' +
       '.quote-block, .article-cta'
     );

@@ -794,6 +794,10 @@ section.tint .step .step-num {
   margin: 0;
 }
 
+.offer-grid .glass-tile {
+  padding: 32px 28px;
+}
+
 @media (max-width: 860px) {
   .offer-grid { grid-template-columns: 1fr; }
 }
@@ -1989,4 +1993,201 @@ section.tint .step .step-num {
     padding-left: 14px;
     min-width: 0;
   }
+}
+
+/* ============================================
+   Industries page (media header + sub-industry tags)
+   ============================================ */
+
+.ind-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+}
+
+.ind-card {
+  background: linear-gradient(160deg, #FFFFFF 0%, #FAFCFB 100%);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 14px 32px rgba(10, 25, 47, 0.07);
+  display: flex;
+  flex-direction: column;
+  scroll-margin-top: 100px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.ind-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 24px 48px rgba(10, 25, 47, 0.13);
+  border-color: rgba(15, 110, 76, 0.3);
+}
+
+.ind-media {
+  position: relative;
+  height: 150px;
+  background: linear-gradient(135deg, var(--c1, #0A192F), var(--c2, #0F6E4C));
+  overflow: hidden;
+}
+
+.ind-media::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.18) 1px, transparent 1.5px);
+  background-size: 18px 18px;
+  opacity: 0.7;
+}
+
+.ind-media::after {
+  content: '';
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  right: -70px;
+  top: -100px;
+  background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+}
+
+.ind-glyph {
+  position: absolute;
+  right: 22px;
+  bottom: 18px;
+  width: 62px;
+  height: 62px;
+  fill: none;
+  stroke: rgba(255,255,255,0.94);
+  stroke-width: 1.5;
+  z-index: 1;
+  transition: transform 0.35s ease;
+}
+
+.ind-glyph-bg {
+  width: 190px;
+  height: 190px;
+  right: -26px;
+  bottom: -46px;
+  stroke-width: 0.8;
+  opacity: 0.16;
+  z-index: 0;
+}
+
+.ind-card:hover .ind-glyph:not(.ind-glyph-bg) {
+  transform: scale(1.08) translateY(-3px);
+}
+
+/* Optional: to use a real photo, add class "has-photo" and an inline
+   background-image to .ind-media, e.g. style="background-image:url('images/tech.jpg')" */
+.ind-media.has-photo {
+  background-size: cover;
+  background-position: center;
+}
+.ind-media.has-photo::before {
+  background-image: linear-gradient(180deg, rgba(10,25,47,0.1), rgba(10,25,47,0.6));
+  background-size: auto;
+  opacity: 1;
+}
+.ind-media.has-photo .ind-glyph { display: none; }
+
+.ind-body {
+  padding: 24px 24px 28px;
+}
+
+.ind-body h3 {
+  font-size: 1.12rem;
+  margin-bottom: 16px;
+}
+
+.ind-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ind-tags a {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--bg-tint);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 6px 12px;
+  line-height: 1.3;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+
+.ind-tags a:hover {
+  border-color: var(--emerald);
+  color: var(--emerald);
+  background: var(--white);
+}
+
+.ind-cta {
+  grid-column: span 2;
+  background: linear-gradient(150deg, #0A192F 0%, #123045 100%);
+  border-radius: 14px;
+  padding: 44px 44px;
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 44px rgba(10, 25, 47, 0.2);
+}
+
+.ind-cta::before {
+  content: '';
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  right: -90px;
+  bottom: -140px;
+  background: radial-gradient(circle, rgba(15,110,76,0.4) 0%, transparent 70%);
+}
+
+.ind-cta h3 { color: var(--white); font-size: 1.5rem; position: relative; }
+.ind-cta p { color: rgba(255,255,255,0.7); position: relative; margin-bottom: 24px; }
+.ind-cta .btn { position: relative; }
+
+@media (max-width: 1000px) {
+  .ind-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 680px) {
+  .ind-grid { grid-template-columns: 1fr; }
+  .ind-cta { grid-column: span 1; padding: 34px 26px; }
+}
+
+/* ============================================
+   Isometric 3D visual (Clients recruit section)
+   ============================================ */
+
+.iso-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.iso-wrap svg {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  overflow: visible;
+}
+
+.iso-pillar {
+  animation: iso-bob 5.5s ease-in-out infinite;
+}
+
+@keyframes iso-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .iso-pillar { animation: none; }
 }

@@ -77,7 +77,7 @@ savnec-website/
 ├── index.html                              Home
 ├── clients.html                             For Clients (with request form)
 ├── experts.html                              For Experts (with application form)
-├── industries.html                          Industries we cover
+├── industries.html                          Industries (10 groups, 30+ specializations)
 ├── compliance.html                          Compliance & Data Privacy
 ├── about.html                                About, FAQs & Contact (with general inquiry form)
 ├── insights.html                             Insights (blog index)
@@ -111,3 +111,11 @@ savnec-website/
   classes: `.section-head`, `.feature-row`, `.audience-card`, `.info-card`, etc.).
   The homepage stats ticker scrolls continuously and pauses on hover.
 - All motion respects `prefers-reduced-motion`.
+
+## Adding real photos to the Industries cards
+
+Each card on `industries.html` has a branded illustrated header. To swap in a real photo:
+1. Download a photo that says "Free to use under the Unsplash License" (avoid anything marked
+   Unsplash+ or Getty, which are paid). Save it in `images/`, e.g. `images/tech.jpg`.
+2. On that card's `<div class="ind-media" ...>`, add `has-photo` to the class and an inline
+   background image: `class="ind-media has-photo" style="background-image:url('images/tech.jpg')"`.
