@@ -355,6 +355,48 @@ p {
   border: 1px solid var(--border);
 }
 
+.split-checks {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.split-checks li {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.split-checks svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.split-panel.clients .split-checks svg { fill: #4FBE93; }
+.split-panel.clients .split-checks li { color: rgba(255,255,255,0.88); }
+.split-panel.experts .split-checks svg { fill: var(--emerald); }
+.split-panel.experts .split-checks li { color: var(--ink); }
+
+.ticker-item .t-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.ticker-item .t-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: var(--emerald);
+  stroke-width: 1.8;
+}
+
 .split-panel .eyebrow {
   font-size: 0.85rem;
   font-weight: 600;
@@ -392,7 +434,123 @@ p {
 section {
   padding: 88px 0;
   scroll-margin-top: 90px;
-  background: linear-gradient(165deg, #FFFFFF 0%, #F7F9FA 55%, #F1F6F3 100%);
+}
+
+/* ============================================
+   Zone grouping (multiple sections read as one
+   rounded unit — corners only at the outer edges)
+   ============================================ */
+
+.zone-group {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.zone-group-inner {
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 30px 70px rgba(10, 25, 47, 0.08);
+  background: var(--white);
+}
+
+.zone-band {
+  padding: 76px 0;
+}
+
+.zone-band.zone-tint {
+  background: linear-gradient(160deg, #F2F6F7 0%, #E7EFEA 100%);
+}
+
+.zone-band .container {
+  max-width: none;
+  padding: 0 56px;
+}
+
+@media (max-width: 720px) {
+  .zone-group { padding: 0 16px; }
+  .zone-band { padding: 52px 0; }
+  .zone-band .container { padding: 0 28px; }
+}
+
+/* ============================================
+   Dark navy zone (glassmorphic tiles)
+   ============================================ */
+
+.navy-zone {
+  background: linear-gradient(170deg, #0A192F 0%, #0E2038 45%, #0A1A2E 100%);
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.navy-zone::before {
+  content: '';
+  position: absolute;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(15,110,76,0.16) 0%, transparent 70%);
+  top: -180px;
+  right: -140px;
+  pointer-events: none;
+}
+
+.navy-zone::after {
+  content: '';
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(15,110,76,0.1) 0%, transparent 70%);
+  bottom: -160px;
+  left: -100px;
+  pointer-events: none;
+}
+
+.navy-zone .zone-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.glass-tile {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 14px;
+  padding: 28px 24px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.glass-tile:hover {
+  transform: translateY(-4px);
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(15,110,76,0.5);
+}
+
+.glass-tile h3 {
+  color: var(--white);
+  font-size: 1.05rem;
+  margin-bottom: 8px;
+}
+
+.glass-tile p {
+  color: rgba(255,255,255,0.62);
+  font-size: 0.92rem;
+  margin: 0;
+}
+
+.glass-tile .card-icon {
+  background: linear-gradient(160deg, rgba(15,110,76,0.35) 0%, rgba(15,110,76,0.15) 100%);
+}
+
+.glass-tile .card-icon svg {
+  stroke: #4FBE93;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navy-zone::before, .navy-zone::after { display: none; }
 }
 
 section.tint {
@@ -434,7 +592,7 @@ section.tint {
 
 .ticker-item {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 10px;
   white-space: nowrap;
   flex-shrink: 0;
@@ -920,9 +1078,9 @@ section.tint .step .step-num {
    ============================================ */
 
 .cta-band {
-  background: linear-gradient(160deg, #0A192F 0%, #14243B 100%);
+  background: linear-gradient(180deg, #0A192F 0%, #0D2036 100%);
   color: var(--white);
-  padding: 72px 0;
+  padding: 72px 0 88px;
   text-align: center;
 }
 
@@ -934,9 +1092,9 @@ section.tint .step .step-num {
    ============================================ */
 
 .site-footer {
-  background: linear-gradient(180deg, #0A192F 0%, #081522 100%);
+  background: linear-gradient(180deg, #0D2036 0%, #081522 100%);
   color: rgba(255,255,255,0.65);
-  padding: 56px 0 28px;
+  padding: 40px 0 28px;
   font-size: 0.9rem;
 }
 
@@ -944,8 +1102,13 @@ section.tint .step .step-num {
   display: grid;
   grid-template-columns: 1.3fr 1fr 1fr 1fr 1fr;
   gap: 28px;
-  padding-bottom: 40px;
-  border-bottom: 1px solid rgba(255,255,255,0.12);
+  padding: 36px 32px;
+  margin-bottom: 32px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .footer-grid .logo { color: var(--white); margin-bottom: 12px; }
@@ -1814,7 +1977,7 @@ section.tint .step .step-num {
   .feature-row { grid-template-columns: 1fr; gap: 32px; }
   .offering { grid-template-columns: 1fr; gap: 12px; }
   .card-grid { grid-template-columns: 1fr; }
-  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; padding: 28px 20px; }
   .cta-band .btn-row { flex-direction: column; align-items: center; }
 
   .dropdown-menu {
