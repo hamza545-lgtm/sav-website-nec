@@ -478,6 +478,7 @@ section {
    ============================================ */
 
 .navy-zone {
+  padding: 0;
   background: linear-gradient(170deg, #0A192F 0%, #0E2038 45%, #0A1A2E 100%);
   color: var(--white);
   position: relative;
@@ -1612,9 +1613,9 @@ section.tint .step .step-num {
 
 .photo-band-stats {
   display: flex;
-  gap: 56px;
-  margin-top: 52px;
-  flex-wrap: wrap;
+  gap: 40px;
+  margin-top: 44px;
+  flex-wrap: nowrap;
 }
 
 .photo-band-stat .count-num {
@@ -1630,13 +1631,13 @@ section.tint .step .step-num {
   font-size: 0.88rem;
   margin-top: 8px;
   display: block;
-  max-width: 18ch;
+  max-width: 16ch;
 }
 
 @media (max-width: 640px) {
   .photo-band { padding: 72px 0; }
   .photo-band h2 { font-size: 1.8rem; }
-  .photo-band-stats { gap: 32px; }
+  .photo-band-stats { gap: 28px; flex-wrap: wrap; }
   .photo-band-stat .count-num { font-size: 2.1rem; }
 }
 
