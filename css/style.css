@@ -2055,8 +2055,6 @@ section.tint .step .step-num {
    
   }
 
-  .dropdown-menu a {
-    padding: 10px 0;
   }
 
   .header-cta { position: relative; z-index: 160; }
@@ -2065,10 +2063,10 @@ section.tint .step .step-num {
   .split-hero { grid-template-columns: 1fr; }
   .ticker-item .num { font-size: 1.3rem; }
   .ticker-item .sep { margin-left: 40px; }
-  .ticker-track { gap: 48px; }
+  .ticker-track { gap: 24px; }
   .steps { grid-template-columns: 1fr; }
   .audience-grid { grid-template-columns: repeat(2, 1fr); }
-  .feature-row { grid-template-columns: 1fr; gap: 32px; }
+  .feature-row { grid-template-columns: 1fr; gap: 16px; }
   .offering { grid-template-columns: 1fr; gap: 12px; }
   .card-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; padding: 28px 20px; }
