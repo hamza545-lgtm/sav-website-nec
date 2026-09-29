@@ -1971,7 +1971,96 @@ section.tint .step .step-num {
   h2 { font-size: 1.6rem; }
 
   .main-nav { display: none; }
+  .main-nav.is-open {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    position: absolute;
+    top: 76px;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    padding: 8px 24px 24px;
+    border-bottom: 1px solid var(--border);
+    gap: 2px;
+    max-height: calc(100vh - 76px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    box-shadow: 0 16px 28px rgba(10, 25, 47, 0.1);
+    z-index: 150;
+  }
   .nav-toggle { display: block; }
+
+  .main-nav.is-open > a {
+    width: 100%;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .main-nav.is-open .nav-item-dropdown {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .main-nav.is-open .nav-item-dropdown > a {
+    flex: 1;
+    width: auto;
+    border-bottom: none;
+    padding: 13px 0;
+  }
+
+  .nav-item-dropdown > a::after { display: none; }
+
+  .dropdown-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .dropdown-toggle svg {
+    width: 13px;
+    height: 13px;
+    stroke: var(--ink);
+    stroke-width: 2;
+    fill: none;
+    transition: transform 0.2s ease;
+  }
+
+  .nav-item-dropdown.is-open .dropdown-toggle svg {
+    transform: rotate(180deg);
+  }
+
+  .dropdown-menu {
+    display: none;
+    flex-basis: 100%;
+    width: 100%;
+    position: static;
+    box-shadow: none;
+    border: none;
+    padding: 0 0 12px 14px;
+    min-width: 0;
+  }
+
+  .nav-item-dropdown.is-open .dropdown-menu {
+    display: block;
+  }
+
+  .dropdown-menu a {
+    padding: 10px 0;
+  }
+
+  .header-cta { position: relative; z-index: 160; }
+
 
   .split-hero { grid-template-columns: 1fr; }
   .ticker-item .num { font-size: 1.3rem; }
@@ -1984,15 +2073,6 @@ section.tint .step .step-num {
   .card-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; padding: 28px 20px; }
   .cta-band .btn-row { flex-direction: column; align-items: center; }
-
-  .dropdown-menu {
-    display: block;
-    position: static;
-    box-shadow: none;
-    border: none;
-    padding-left: 14px;
-    min-width: 0;
-  }
 }
 
 /* ============================================

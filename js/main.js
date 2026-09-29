@@ -4,19 +4,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (toggle && nav) {
     toggle.addEventListener('click', function () {
-      var isOpen = nav.style.display === 'flex';
-      nav.style.display = isOpen ? 'none' : 'flex';
-      nav.style.flexDirection = 'column';
-      nav.style.position = 'absolute';
-      nav.style.top = '76px';
-      nav.style.left = '0';
-      nav.style.right = '0';
-      nav.style.background = '#FFFFFF';
-      nav.style.padding = '20px 32px';
-      nav.style.borderBottom = '1px solid #E3E7EC';
-      nav.style.gap = '18px';
+      var isOpen = nav.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
   }
+
+  // Mobile submenu accordions (Experts / Industries / About)
+  document.querySelectorAll('.dropdown-toggle').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var parent = btn.closest('.nav-item-dropdown');
+      if (!parent) return;
+      var isOpen = parent.classList.toggle('is-open');
+      btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  });
 
   // Scroll-reveal: fade content up as it enters the viewport.
   try {
