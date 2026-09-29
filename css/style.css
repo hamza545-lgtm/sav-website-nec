@@ -2052,9 +2052,11 @@ section.tint .step .step-num {
   }
 
   .nav-item-dropdown.is-open .dropdown-menu {
-   
+    display: block;
   }
 
+  .dropdown-menu a {
+    padding: 10px 0;
   }
 
   .header-cta { position: relative; z-index: 160; }
@@ -2063,7 +2065,7 @@ section.tint .step .step-num {
   .split-hero { grid-template-columns: 1fr; }
   .ticker-item .num { font-size: 1.3rem; }
   .ticker-item .sep { margin-left: 40px; }
-  .ticker-track { gap: 60px; }
+  .ticker-track { gap: 48px; }
   .steps { grid-template-columns: 1fr; }
   .audience-grid { grid-template-columns: repeat(2, 1fr); }
   .feature-row { grid-template-columns: 1fr; gap: 32px; }
