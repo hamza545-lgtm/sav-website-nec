@@ -2066,7 +2066,7 @@ section.tint .step .step-num {
   .ticker-track { gap: 60px; }
   .steps { grid-template-columns: 1fr; }
   .audience-grid { grid-template-columns: repeat(2, 1fr); }
-  .feature-row { grid-template-columns: 1fr; gap: 16px; }
+  .feature-row { grid-template-columns: 1fr; gap: 32px; }
   .offering { grid-template-columns: 1fr; gap: 12px; }
   .card-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr 1fr; padding: 28px 20px; }
