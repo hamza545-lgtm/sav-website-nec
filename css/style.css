@@ -1492,21 +1492,21 @@ section.tint .step .step-num {
 
 .network-pattern .n-line {
   stroke: #0A192F;
-  stroke-opacity: 0.14;
-  stroke-width: 1;
+  stroke-opacity: 0.26;
+  stroke-width: 1.4;
 }
 
 .network-pattern .n-line-accent {
   stroke: #0F6E4C;
-  stroke-opacity: 0.35;
-  stroke-width: 1.2;
+  stroke-opacity: 0.6;
+  stroke-width: 1.8;
   stroke-dasharray: 4 5;
   animation: dash-flow 7s linear infinite;
 }
 
 .network-pattern .n-dot {
   fill: #0A192F;
-  opacity: 0.5;
+  opacity: 0.65;
 }
 
 .network-pattern .n-dot-accent {
@@ -1519,7 +1519,7 @@ section.tint .step .step-num {
 .network-pattern .n-dot-accent.delay3 { animation-delay: 2.3s; }
 
 @keyframes pulse-dot {
-  0%, 100% { opacity: 0.55; r: 3.5; }
+  0%, 100% { opacity: 0.7; r: 4; }
   50% { opacity: 1; r: 5; }
 }
 
@@ -2190,4 +2190,32 @@ section.tint .step .step-num {
 
 @media (prefers-reduced-motion: reduce) {
   .iso-pillar { animation: none; }
+}
+
+/* ============================================
+   Responsive background photos (serve a small
+   image to phones, a larger one to desktop)
+   ============================================ */
+
+.photo-band-img {
+  background-image: url('https://images.unsplash.com/photo-1771450092348-5f33e2cc2963?w=800&q=70&auto=format&fit=crop');
+}
+@media (min-width: 640px) {
+  .photo-band-img {
+    background-image: url('https://images.unsplash.com/photo-1771450092348-5f33e2cc2963?w=1200&q=72&auto=format&fit=crop');
+  }
+}
+@media (min-width: 1100px) {
+  .photo-band-img {
+    background-image: url('https://images.unsplash.com/photo-1771450092348-5f33e2cc2963?w=1800&q=75&auto=format&fit=crop');
+  }
+}
+
+.about-photo-panel-img {
+  background-image: url('https://images.unsplash.com/photo-1770297345709-edb3b0522634?w=700&q=70&auto=format&fit=crop');
+}
+@media (min-width: 860px) {
+  .about-photo-panel-img {
+    background-image: url('https://images.unsplash.com/photo-1770297345709-edb3b0522634?w=1400&q=75&auto=format&fit=crop');
+  }
 }
