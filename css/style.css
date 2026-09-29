@@ -185,6 +185,10 @@ p {
   position: relative;
 }
 
+.dropdown-toggle {
+  display: none;
+}
+
 .nav-item-dropdown > a::after {
   content: '';
   display: inline-block;
