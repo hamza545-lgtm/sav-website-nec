@@ -2031,7 +2031,7 @@ section.tint .step .step-num {
     width: 13px;
     height: 13px;
     stroke: var(--ink);
-    stroke-width: 4;
+    stroke-width: 2;
     fill: none;
     transition: transform 0.2s ease;
   }
@@ -2052,7 +2052,7 @@ section.tint .step .step-num {
   }
 
   .nav-item-dropdown.is-open .dropdown-menu {
-    display: block;
+   
   }
 
   .dropdown-menu a {
