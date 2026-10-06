@@ -1,0 +1,336 @@
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Check, Loader2, ShieldCheck, Search, Filter, CalendarCheck, FileText } from 'lucide-react'
+import { Button, Reveal, Eyebrow } from './ui.jsx'
+import { LogoMark } from './Logo.jsx'
+
+/* ─────────────── Network map (hero) ─────────────── */
+
+const hub = { x: 300, y: 260 }
+const nodes = [
+  { x: 120, y: 96, label: 'Former CFO', sub: 'Payments' },
+  { x: 470, y: 82, label: 'VP Procurement', sub: 'Industrials' },
+  { x: 515, y: 270, label: 'Head of IT', sub: 'Health system' },
+  { x: 455, y: 452, label: 'Category Director', sub: 'Grocery retail' },
+  { x: 135, y: 430, label: 'Ex-GM', sub: 'Enterprise SaaS' },
+  { x: 88, y: 262, label: 'Media Buyer', sub: 'Agency' },
+]
+const dots = [
+  [210, 60], [380, 40], [590, 150], [600, 380], [330, 500], [210, 500], [20, 360], [30, 160],
+  [170, 190], [420, 180], [430, 350], [190, 340], [300, 120], [300, 410],
+]
+
+function curve(a, b) {
+  const mx = (a.x + b.x) / 2
+  const my = (a.y + b.y) / 2
+  const dx = b.x - a.x
+  const dy = b.y - a.y
+  return `M${a.x},${a.y} Q${mx - dy * 0.18},${my + dx * 0.18} ${b.x},${b.y}`
+}
+
+// A glowing packet travelling from Savnec to the active expert.
+function Pulse({ d }) {
+  const ref = useRef(null)
+  useLayoutEffect(() => {
+    try {
+      ref.current?.beginElement()
+    } catch (e) {
+      /* older browsers: the static line still shows */
+    }
+  }, [])
+  return (
+    <circle r="3.2" fill="#6BE3B5" style={{ filter: 'drop-shadow(0 0 6px #2BC48A)' }}>
+      <animateMotion ref={ref} dur="1.4s" begin="indefinite" fill="freeze" path={d} />
+    </circle>
+  )
+}
+
+export function NetworkMap() {
+  const [active, setActive] = useState(0)
+  useEffect(() => {
+    const t = setInterval(() => setActive((a) => (a + 1) % nodes.length), 2200)
+    return () => clearInterval(t)
+  }, [])
+
+  return (
+    <div className="relative mx-auto aspect-[600/520] w-full max-w-[600px]">
+      <svg viewBox="0 0 600 520" className="absolute inset-0 h-full w-full" fill="none">
+        <defs>
+          <radialGradient id="hubGlow">
+            <stop offset="0" stopColor="#2BC48A" stopOpacity="0.55" />
+            <stop offset="1" stopColor="#2BC48A" stopOpacity="0" />
+          </radialGradient>
+          <linearGradient id="lineGrad" x1="0" x2="1">
+            <stop offset="0" stopColor="#6BE3B5" stopOpacity="0.1" />
+            <stop offset="0.5" stopColor="#6BE3B5" stopOpacity="0.9" />
+            <stop offset="1" stopColor="#6BE3B5" stopOpacity="0.1" />
+          </linearGradient>
+        </defs>
+
+        {[90, 160, 230].map((r, i) => (
+          <circle key={r} cx={hub.x} cy={hub.y} r={r} stroke="#8892A0" strokeOpacity={0.12 - i * 0.03} strokeDasharray="2 6" />
+        ))}
+
+        {dots.map(([x, y], i) => (
+          <motion.circle
+            key={i}
+            cx={x}
+            cy={y}
+            r="1.6"
+            fill="#8892A0"
+            initial={{ opacity: 0.15 }}
+            animate={{ opacity: [0.15, 0.6, 0.15] }}
+            transition={{ duration: 3 + (i % 4), repeat: Infinity, delay: i * 0.3 }}
+          />
+        ))}
+
+        {nodes.map((n, i) => (
+          <g key={i}>
+            <path d={curve(hub, n)} stroke="#8892A0" strokeOpacity="0.18" strokeWidth="1" />
+            <motion.path
+              d={curve(hub, n)}
+              stroke="url(#lineGrad)"
+              strokeWidth="1.6"
+              strokeLinecap="round"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={
+                active === i
+                  ? { pathLength: 1, opacity: 1 }
+                  : { pathLength: 1, opacity: 0.25 }
+              }
+              transition={{ pathLength: { duration: 1.2, delay: 0.3 + i * 0.12, ease: 'easeInOut' }, opacity: { duration: 0.6 } }}
+            />
+            {active === i && <Pulse key={`pulse-${i}`} d={curve(hub, n)} />}
+          </g>
+        ))}
+
+        <circle cx={hub.x} cy={hub.y} r="90" fill="url(#hubGlow)" />
+      </svg>
+
+      {/* Hub */}
+      <div
+        className="absolute -translate-x-1/2 -translate-y-1/2"
+        style={{ left: `${(hub.x / 600) * 100}%`, top: `${(hub.y / 520) * 100}%` }}
+      >
+        <span className="absolute inset-0 m-auto h-14 w-14 animate-pulseRing rounded-2xl border border-emerald-300/50" />
+        <div className="relative rounded-2xl p-1.5 glass shadow-[0_0_60px_-10px_rgba(43,196,138,0.8)]">
+          <LogoMark size={44} />
+        </div>
+      </div>
+
+      {/* Expert chips */}
+      {nodes.map((n, i) => (
+        <motion.div
+          key={n.label}
+          className="absolute"
+          style={{ left: `${(n.x / 600) * 100}%`, top: `${(n.y / 520) * 100}%`, x: '-50%', y: '-50%' }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: active === i ? 1.06 : 1 }}
+          transition={{ delay: 0.6 + i * 0.1, duration: 0.5 }}
+        >
+          <div
+            className={`flex items-center gap-2 whitespace-nowrap rounded-full px-3 py-1.5 text-[11.5px] transition-all duration-500 glass ${
+              active === i ? '!border-emerald-400/60 shadow-[0_0_30px_-6px_rgba(43,196,138,0.7)]' : ''
+            }`}
+          >
+            <span className={`h-1.5 w-1.5 rounded-full ${active === i ? 'bg-emerald-300' : 'bg-steel/60'}`} />
+            <span className="text-white">{n.label}</span>
+            <span className="hidden text-steel sm:inline">· {n.sub}</span>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+  )
+}
+
+/* ─────────────── Engagement console ─────────────── */
+
+const stages = [
+  { icon: FileText, label: 'Brief scoped', meta: 'Mid-market payments · US & UK' },
+  { icon: Search, label: 'Sourcing', meta: '42 candidates contacted' },
+  { icon: Filter, label: 'Screening', meta: '9 passed screener questions' },
+  { icon: ShieldCheck, label: 'Compliance cleared', meta: 'Conflicts & restricted list checked' },
+  { icon: CalendarCheck, label: 'Calls scheduled', meta: '3 calls confirmed this week' },
+]
+
+const profiles = [
+  { initials: 'MR', role: 'Former VP, Merchant Acquiring', org: 'Tier-1 processor', yrs: '14 yrs' },
+  { initials: 'AK', role: 'Head of Payments Ops', org: 'Regional bank', yrs: '9 yrs' },
+  { initials: 'SL', role: 'Ex-Director, Partnerships', org: 'Fintech scale-up', yrs: '11 yrs' },
+]
+
+export function EngagementConsole() {
+  const [step, setStep] = useState(0)
+  useEffect(() => {
+    const t = setInterval(() => setStep((s) => (s >= stages.length + 2 ? 0 : s + 1)), 1500)
+    return () => clearInterval(t)
+  }, [])
+  const done = step >= stages.length
+
+  return (
+    <div className="relative rounded-3xl p-[1px]">
+      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-emerald-400/40 via-white/5 to-transparent" />
+      <div className="relative overflow-hidden rounded-3xl bg-navy-900/90 backdrop-blur-xl">
+        <div className="flex items-center justify-between border-b border-white/[0.06] px-6 py-4">
+          <div className="flex items-center gap-2">
+            <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
+            <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
+            <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
+          </div>
+          <span className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-steel">Sample engagement</span>
+        </div>
+
+        <div className="grid gap-0 md:grid-cols-[1.05fr_1fr]">
+          <div className="border-b border-white/[0.06] p-6 md:border-b-0 md:border-r">
+            <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-steel">Project status</p>
+            <ul className="mt-5 space-y-4">
+              {stages.map((s, i) => {
+                const state = i < step ? 'done' : i === step ? 'active' : 'idle'
+                const Icon = s.icon
+                return (
+                  <li key={s.label} className="flex items-start gap-3">
+                    <span
+                      className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border transition-all duration-500 ${
+                        state === 'done'
+                          ? 'border-emerald-400/50 bg-emerald-500/15 text-emerald-300'
+                          : state === 'active'
+                          ? 'border-white/20 bg-white/5 text-white'
+                          : 'border-white/[0.06] text-steel/50'
+                      }`}
+                    >
+                      {state === 'done' ? (
+                        <Check size={14} />
+                      ) : state === 'active' ? (
+                        <Loader2 size={14} className="animate-spin" />
+                      ) : (
+                        <Icon size={14} />
+                      )}
+                    </span>
+                    <span>
+                      <span className={`block text-[14px] transition-colors ${state === 'idle' ? 'text-steel/60' : 'text-white'}`}>
+                        {s.label}
+                      </span>
+                      <span className={`block text-[12.5px] transition-colors ${state === 'idle' ? 'text-steel/40' : 'text-steel'}`}>
+                        {s.meta}
+                      </span>
+                    </span>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+
+          <div className="p-6">
+            <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-steel">Shortlist</p>
+            <div className="mt-5 space-y-3">
+              <AnimatePresence>
+                {profiles.map(
+                  (p, i) =>
+                    step >= 2 + i && (
+                      <motion.div
+                        key={p.initials}
+                        initial={{ opacity: 0, y: 12 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.45 }}
+                        className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-3.5"
+                      >
+                        <div className="flex items-center gap-3">
+                          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-navy-700 to-navy-800 font-mono text-[11px] text-white">
+                            {p.initials}
+                          </span>
+                          <div className="min-w-0 flex-1">
+                            <p className="truncate text-[13px] text-white">{p.role}</p>
+                            <p className="truncate text-[12px] text-steel">
+                              {p.org} · {p.yrs}
+                            </p>
+                          </div>
+                          {done && (
+                            <motion.span
+                              initial={{ opacity: 0, scale: 0.6 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-300"
+                            >
+                              <ShieldCheck size={13} />
+                            </motion.span>
+                          )}
+                        </div>
+                      </motion.div>
+                    )
+                )}
+              </AnimatePresence>
+              {step < 2 && (
+                <div className="space-y-3">
+                  {[0, 1, 2].map((k) => (
+                    <div key={k} className="h-[62px] animate-pulse rounded-xl border border-white/[0.04] bg-white/[0.015]" />
+                  ))}
+                </div>
+              )}
+            </div>
+            <p className="mt-5 text-[11.5px] leading-relaxed text-steel/70">
+              Illustrative example. Profiles are anonymized and shared with clients only after screening.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+/* ─────────────── Marquee ─────────────── */
+
+export function Marquee({ items }) {
+  const row = [...items, ...items]
+  return (
+    <div className="relative overflow-hidden py-6 [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]">
+      <div className="flex w-max animate-marquee gap-12">
+        {row.map((t, i) => (
+          <span key={i} className="flex items-center gap-12 whitespace-nowrap text-[15px] text-steel">
+            {t}
+            <span className="h-1 w-1 rotate-45 bg-emerald-400/70" />
+          </span>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+/* ─────────────── CTA band ─────────────── */
+
+export function CtaBand({
+  eyebrow = 'Start with one project',
+  title = (
+    <>
+      Bring us the question
+      <br className="hidden sm:block" /> <span className="serif-accent text-emerald-300">you can’t answer from a desk.</span>
+    </>
+  ),
+  body = 'Tell us what you need to learn. We will come back with screened experts, usually within a day.',
+}) {
+  return (
+    <section className="relative py-24 sm:py-32">
+      <div className="container-site">
+        <Reveal>
+          <div className="noise relative overflow-hidden rounded-[32px] border border-white/10 px-8 py-16 sm:px-16 sm:py-20">
+            <div className="absolute inset-0 bg-gradient-to-br from-emerald-700/50 via-navy-900 to-navy-950" />
+            <div className="grid-bg absolute inset-0 opacity-60" />
+            <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-emerald-400/25 blur-[100px]" />
+            <div className="relative grid items-end gap-10 lg:grid-cols-[1.6fr_1fr]">
+              <div>
+                <Eyebrow>{eyebrow}</Eyebrow>
+                <h2 className="mt-5 text-[34px] font-semibold leading-[1.06] sm:text-[52px]">{title}</h2>
+                <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-ink/80">{body}</p>
+              </div>
+              <div className="flex flex-col gap-3 sm:flex-row lg:flex-col lg:items-end">
+                <Button to="/request-trial">Request a Trial</Button>
+                <Button to="/join" variant="ghost">
+                  Join as an Expert
+                </Button>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  )
+}
