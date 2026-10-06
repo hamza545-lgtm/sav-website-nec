@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion'
 import Navbar from './components/Navbar.jsx'
 import Footer from './components/Footer.jsx'
@@ -10,6 +10,7 @@ import Industries from './pages/Industries.jsx'
 import Compliance from './pages/Compliance.jsx'
 import About from './pages/About.jsx'
 import Insights from './pages/Insights.jsx'
+import InsightArticle from './pages/InsightArticle.jsx'
 import Faqs from './pages/Faqs.jsx'
 import Careers from './pages/Careers.jsx'
 import Contact from './pages/Contact.jsx'
@@ -71,12 +72,15 @@ export default function App() {
             <Route path="/compliance" element={<Compliance />} />
             <Route path="/about" element={<About />} />
             <Route path="/insights" element={<Insights />} />
+            <Route path="/insights/:slug" element={<InsightArticle />} />
             <Route path="/faqs" element={<Faqs />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/request-trial" element={<RequestTrial />} />
             <Route path="/join" element={<JoinNetwork />} />
-            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/privacy-policy" element={<Privacy />} />
+            <Route path="/privacy" element={<Navigate to="/privacy-policy" replace />} />
+            <Route path="/cookie-policy" element={<Navigate to="/privacy-policy#5-cookies-and-similar-technologies" replace />} />
             <Route path="/terms" element={<Terms />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

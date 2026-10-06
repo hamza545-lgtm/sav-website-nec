@@ -3,7 +3,7 @@ import { Check } from 'lucide-react'
 import { GlowBackdrop, Eyebrow, ease, useSeo } from '../components/ui.jsx'
 import Web3Form from '../components/Form.jsx'
 import { site } from '../config/site.js'
-import { industries } from '../data/content.js'
+import { industries, formats } from '../data/content.js'
 
 export function FormPage({ eyebrow, title, intro, nextTitle, next, children }) {
   return (
@@ -77,8 +77,8 @@ export default function RequestTrial() {
           { name: 'email', label: 'Work email', type: 'email', required: true },
           { name: 'company', label: 'Company', required: true },
           { name: 'title', label: 'Job title', required: true },
-          { name: 'firm_type', label: 'Firm type', type: 'select', required: true, options: ['Private equity', 'Venture capital', 'Hedge fund / public markets', 'Management consulting', 'Corporate strategy', 'Market research agency', 'AI / data company', 'Other'] },
-          { name: 'format', label: 'Format', type: 'select', required: true, options: ['1:1 expert calls', 'Expert survey', 'Focus groups / IDIs', 'Custom B2B recruitment', 'AI domain experts', 'Not sure yet'] },
+          { name: 'firm_type', label: 'Firm type', type: 'select', required: true, options: ['Market research agency', 'Private equity', 'Venture capital', 'Hedge fund / public markets', 'Corporate strategy', 'Management consulting', 'AI / data company', 'Other'] },
+          { name: 'format', label: 'Format', type: 'select', required: true, options: [...formats.map((f) => f.title), 'Not sure yet'] },
           { name: 'industry', label: 'Industry', type: 'select', options: [...industries.map((i) => i.name), 'Other'] },
           { name: 'timeline', label: 'Timeline', type: 'select', options: ['This week', 'Within 2 weeks', 'This month', 'Exploring'] },
           { name: 'brief', label: 'The brief', type: 'textarea', full: true, required: true, placeholder: 'What do you need to learn, and from whom? Include target roles, geographies and any companies to include or exclude.' },

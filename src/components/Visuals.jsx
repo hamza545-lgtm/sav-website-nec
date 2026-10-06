@@ -1,8 +1,8 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Check, Loader2, ShieldCheck, Search, Filter, CalendarCheck, FileText } from 'lucide-react'
+import { Check, LoaderCircle, ShieldCheck, Search, Filter, CalendarCheck, FileText } from 'lucide-react'
 import { Button, Reveal, Eyebrow } from './ui.jsx'
-import { LogoMark } from './Logo.jsx'
+import { Monogram } from './Logo.jsx'
 
 /* ─────────────── Network map (hero) ─────────────── */
 
@@ -114,7 +114,7 @@ export function NetworkMap() {
       >
         <span className="absolute inset-0 m-auto h-14 w-14 animate-pulseRing rounded-2xl border border-emerald-300/50" />
         <div className="relative rounded-2xl p-1.5 glass shadow-[0_0_60px_-10px_rgba(43,196,138,0.8)]">
-          <LogoMark size={44} />
+          <Monogram size={52} />
         </div>
       </div>
 
@@ -201,7 +201,7 @@ export function EngagementConsole() {
                       {state === 'done' ? (
                         <Check size={14} />
                       ) : state === 'active' ? (
-                        <Loader2 size={14} className="animate-spin" />
+                        <LoaderCircle size={14} className="animate-spin" />
                       ) : (
                         <Icon size={14} />
                       )}
@@ -280,14 +280,22 @@ export function EngagementConsole() {
 /* ─────────────── Marquee ─────────────── */
 
 export function Marquee({ items }) {
+  // Two identical halves; each item carries its own trailing space so -50% loops seamlessly.
   const row = [...items, ...items]
   return (
-    <div className="relative overflow-hidden py-6 [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]">
-      <div className="flex w-max animate-marquee gap-12">
+    <div className="group relative overflow-hidden py-6 [mask-image:linear-gradient(90deg,transparent,#000_10%,#000_90%,transparent)]">
+      <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused]">
         {row.map((t, i) => (
-          <span key={i} className="flex items-center gap-12 whitespace-nowrap text-[15px] text-steel">
-            {t}
-            <span className="h-1 w-1 rotate-45 bg-emerald-400/70" />
+          <span key={i} className="flex items-center whitespace-nowrap pr-12 text-[15px] text-steel" aria-hidden={i >= items.length}>
+            {typeof t === 'string' ? (
+              t
+            ) : (
+              <span className="flex items-baseline gap-2.5">
+                <span className="font-semibold tracking-tight text-emerald-300">{t.k}</span>
+                <span className="text-ink">{t.v}</span>
+              </span>
+            )}
+            <span className="ml-12 h-1 w-1 rotate-45 bg-emerald-400/70" />
           </span>
         ))}
       </div>
@@ -305,7 +313,7 @@ export function CtaBand({
       <br className="hidden sm:block" /> <span className="serif-accent text-emerald-300">you can’t answer from a desk.</span>
     </>
   ),
-  body = 'Tell us what you need to learn. We will come back with screened experts, usually within a day.',
+  body = 'Tell us what you need to learn. We will come back with screened experts, usually within 48 hours.',
 }) {
   return (
     <section className="relative py-24 sm:py-32">

@@ -1,26 +1,21 @@
-import { useEffect, useState } from 'react'
+import { useMemo, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowUpRight, X } from 'lucide-react'
+import { ArrowUpRight, ArrowRight } from 'lucide-react'
 import { PageHero, Section, Reveal, useSeo } from '../components/ui.jsx'
 import { CtaBand } from '../components/Visuals.jsx'
-import { insights } from '../data/content.js'
-
-const accents = ['from-emerald-500/30', 'from-[#1F4E8C]/40', 'from-emerald-700/40']
+import { insights, formatDate } from '../data/insights.js'
 
 export default function Insights() {
-  useSeo('Insights', 'Practical notes from Savnec on expert research method, commercial diligence and compliance.')
-  const [open, setOpen] = useState(null)
-  const article = insights.find((a) => a.slug === open)
-
-  useEffect(() => {
-    const onKey = (e) => e.key === 'Escape' && setOpen(null)
-    window.addEventListener('keydown', onKey)
-    document.body.style.overflow = open ? 'hidden' : ''
-    return () => {
-      window.removeEventListener('keydown', onKey)
-      document.body.style.overflow = ''
-    }
-  }, [open])
+  useSeo(
+    'Insights',
+    'Guides from Savnec on expert networks, primary research method, commercial due diligence and compliance.'
+  )
+  const featured = insights.find((a) => a.featured)
+  const rest = insights.filter((a) => a !== featured)
+  const categories = useMemo(() => ['All', ...new Set(rest.map((a) => a.category))], [rest])
+  const [cat, setCat] = useState('All')
+  const shown = cat === 'All' ? rest : rest.filter((a) => a.category === cat)
 
   return (
     <>
@@ -31,69 +26,104 @@ export default function Insights() {
             Notes from the <span className="serif-accent text-emerald-300">work.</span>
           </>
         }
-        intro="Short, practical pieces on getting more out of expert research. Written by the people who run the projects."
+        intro="Practical guides on expert research, written by the people who run the projects."
       />
 
       <Section className="!pt-0">
-        <div className="grid gap-5 lg:grid-cols-3">
-          {insights.map((a, i) => (
-            <Reveal key={a.slug} delay={i * 0.08}>
-              <motion.button
-                layoutId={`card-${a.slug}`}
-                onClick={() => setOpen(a.slug)}
-                className="group relative flex h-full min-h-[360px] w-full flex-col overflow-hidden rounded-3xl text-left glass"
-              >
-                <div className={`absolute inset-x-0 top-0 h-40 bg-gradient-to-b ${accents[i]} to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-100`} />
-                <div className="grid-bg absolute inset-0 opacity-40" />
-                <div className="relative flex h-full flex-col p-8">
-                  <div className="flex items-center justify-between">
-                    <span className="rounded-full border border-white/15 bg-navy-950/50 px-3 py-1 font-mono text-[10.5px] uppercase tracking-[0.18em] text-emerald-200">
-                      {a.tag}
-                    </span>
-                    <ArrowUpRight size={18} className="text-steel transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-emerald-300" />
-                  </div>
-                  <h3 className="mt-auto text-[24px] font-semibold leading-snug">{a.title}</h3>
-                  <p className="mt-4 text-[13px] text-steel">{a.read}</p>
-                </div>
-              </motion.button>
-            </Reveal>
-          ))}
-        </div>
-      </Section>
-
-      <AnimatePresence>
-        {article && (
-          <motion.div
-            className="fixed inset-0 z-[60] flex items-start justify-center overflow-y-auto bg-navy-950/80 p-4 pt-24 backdrop-blur-md sm:p-8 sm:pt-28"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setOpen(null)}
-          >
-            <motion.article
-              layoutId={`card-${article.slug}`}
-              onClick={(e) => e.stopPropagation()}
-              className="relative w-full max-w-2xl rounded-3xl bg-navy-900 p-8 shadow-2xl ring-1 ring-white/10 sm:p-12"
+        {featured && (
+          <Reveal>
+            <Link
+              to={`/insights/${featured.slug}`}
+              className="group relative grid overflow-hidden rounded-[28px] border border-white/10 lg:grid-cols-[1.2fr_1fr]"
             >
-              <button
-                onClick={() => setOpen(null)}
-                className="absolute right-5 top-5 flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-steel hover:text-white"
-                aria-label="Close article"
-              >
-                <X size={16} />
-              </button>
-              <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-emerald-300">{article.tag}</span>
-              <h2 className="mt-4 text-[30px] font-semibold leading-tight">{article.title}</h2>
-              <p className="mt-2 text-[13px] text-steel">{article.read}</p>
-              <div className="mt-8 space-y-5 text-[16.5px] leading-relaxed text-ink">
-                {article.body.map((p, i) => (
-                  <p key={i}>{p}</p>
-                ))}
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-700/40 via-navy-900 to-navy-950" />
+              <div className="grid-bg absolute inset-0 opacity-50" />
+              <div className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-emerald-400/20 blur-[100px] transition-opacity duration-700 group-hover:opacity-100 lg:opacity-60" />
+              <div className="relative p-8 sm:p-12">
+                <div className="flex items-center gap-3">
+                  <span className="rounded-full border border-emerald-400/40 bg-emerald-500/10 px-3 py-1 font-mono text-[10.5px] uppercase tracking-[0.18em] text-emerald-200">
+                    Featured {featured.category.toLowerCase()}
+                  </span>
+                  <span className="text-[13px] text-steel">{featured.readMinutes} min read</span>
+                </div>
+                <h2 className="mt-7 text-[32px] font-semibold leading-[1.08] sm:text-[44px]">{featured.title}</h2>
+                <p className="mt-5 max-w-xl text-[16.5px] leading-relaxed text-ink/85">{featured.description}</p>
+                <span className="mt-9 inline-flex items-center gap-2 text-[14.5px] font-medium text-white">
+                  Read the guide
+                  <ArrowRight size={16} className="text-emerald-300 transition-transform duration-300 group-hover:translate-x-1" />
+                </span>
               </div>
-            </motion.article>
-          </motion.div>
+              <div className="relative hidden border-l border-white/[0.07] p-12 lg:block">
+                <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-steel">Inside</p>
+                <ul className="mt-6 space-y-3.5">
+                  {featured.blocks
+                    .filter((b) => b.t === 'h2')
+                    .slice(0, 7)
+                    .map((b, i) => (
+                      <li key={b.c} className="flex gap-3 text-[14.5px] text-ink">
+                        <span className="font-mono text-[11px] leading-6 text-emerald-300">{String(i + 1).padStart(2, '0')}</span>
+                        {b.c}
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            </Link>
+          </Reveal>
         )}
-      </AnimatePresence>
+
+        <div className="mt-16 flex flex-wrap items-center justify-between gap-4">
+          <h2 className="text-[26px] font-semibold">Latest</h2>
+          <div className="flex flex-wrap gap-2">
+            {categories.map((c) => (
+              <button
+                key={c}
+                onClick={() => setCat(c)}
+                className={`relative rounded-full px-4 py-2 text-[13.5px] transition-colors ${cat === c ? 'text-white' : 'text-steel hover:text-white'}`}
+              >
+                {cat === c && (
+                  <motion.span layoutId="insight-cat" className="absolute inset-0 rounded-full border border-emerald-400/40 bg-emerald-500/10" />
+                )}
+                <span className="relative">{c}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <motion.div layout className="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          <AnimatePresence mode="popLayout">
+            {shown.map((a) => (
+              <motion.div
+                key={a.slug}
+                layout
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.97 }}
+                transition={{ duration: 0.35 }}
+              >
+                <Link
+                  to={`/insights/${a.slug}`}
+                  className="group relative flex h-full min-h-[320px] flex-col overflow-hidden rounded-3xl p-8 glass transition-colors duration-500 hover:border-emerald-400/30"
+                >
+                  <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-emerald-500/15 to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-100" />
+                  <div className="relative flex items-center justify-between">
+                    <span className="rounded-full border border-white/15 bg-navy-950/50 px-3 py-1 font-mono text-[10.5px] uppercase tracking-[0.18em] text-emerald-200">
+                      {a.category}
+                    </span>
+                    <ArrowUpRight
+                      size={18}
+                      className="text-steel transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-emerald-300"
+                    />
+                  </div>
+                  <h3 className="relative mt-auto pt-10 text-[22px] font-semibold leading-snug">{a.title}</h3>
+                  <p className="relative mt-4 text-[13px] text-steel">
+                    {formatDate(a.date)} · {a.readMinutes} min read
+                  </p>
+                </Link>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
+      </Section>
 
       <CtaBand />
     </>

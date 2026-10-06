@@ -9,7 +9,7 @@ import {
   Phone,
   ListChecks,
   Users,
-  PenLine,
+  NotebookPen,
   Network,
   Brain,
   Lock,
@@ -21,7 +21,7 @@ import { Button, Eyebrow, Reveal, SectionHeading, SpotlightCard, GlowBackdrop, C
 import { NetworkMap, EngagementConsole, Marquee, CtaBand } from '../components/Visuals.jsx'
 import { industries, segments, formats } from '../data/content.js'
 
-const formatIcons = [Phone, ListChecks, Users, Network, PenLine, Brain]
+const formatIcons = [Phone, ListChecks, Users, Network, NotebookPen, Brain]
 
 const steps = [
   {
@@ -70,9 +70,9 @@ function Hero() {
             transition={{ duration: 1, delay: 0.2, ease }}
             className="mt-8 max-w-xl text-[18px] leading-relaxed text-steel"
           >
-            Savnec connects investors, consultants and research teams with the operators, buyers and
-            specialists who already know the answer. Recruited for your question, screened before you
-            see them, scheduled around your deadline.
+            Savnec connects market research, investment and corporate strategy teams with the operators,
+            buyers and specialists who already know the answer. Recruited for your question, screened
+            before you see them, scheduled around your deadline.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -92,8 +92,8 @@ function Hero() {
             className="mt-12 grid max-w-xl grid-cols-1 gap-4 border-t border-white/[0.07] pt-8 sm:grid-cols-3"
           >
             {[
-              [Clock, 'First profiles in about 24 hours'],
-              [Crosshair, 'Recruited for each project'],
+              [Clock, 'First profiles within 48 hours'],
+              [Crosshair, 'Custom sourcing for each project'],
               [ShieldCheck, 'Conflict-checked every time'],
             ].map(([Icon, t]) => (
               <li key={t} className="flex items-start gap-2.5 text-[13.5px] leading-snug text-ink">
@@ -265,19 +265,24 @@ function Formats() {
       <SectionHeading
         eyebrow="Formats"
         title="However you need to hear it."
-        intro="One call to test a hypothesis or a hundred survey responses to size a market. Same recruiting, same screening, same standards."
+        intro="One call to test a hypothesis, or a full program of interviews, surveys and groups to build the picture. Same recruiting, same screening, same standards."
       />
       <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {formats.map((f, i) => {
           const Icon = formatIcons[i]
           return (
             <Reveal key={f.title} delay={(i % 3) * 0.06}>
-              <SpotlightCard className="h-full p-7">
-                <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-emerald-400/25 bg-emerald-500/10 text-emerald-300">
-                  <Icon size={19} />
-                </span>
-                <h3 className="mt-6 text-[19px] font-semibold">{f.title}</h3>
-                <p className="mt-2 text-[14.5px] leading-relaxed text-steel">{f.body}</p>
+              <SpotlightCard className="h-full">
+                <Link to={`/clients#${f.id}`} className="flex h-full flex-col p-7">
+                  <div className="flex items-center justify-between">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-emerald-400/25 bg-emerald-500/10 text-emerald-300">
+                      <Icon size={19} />
+                    </span>
+                    <span className="font-mono text-[11px] text-steel">0{i + 1}</span>
+                  </div>
+                  <h3 className="mt-6 text-[19px] font-semibold">{f.title}</h3>
+                  <p className="mt-2 text-[14.5px] leading-relaxed text-steel">{f.body}</p>
+                </Link>
               </SpotlightCard>
             </Reveal>
           )
@@ -398,22 +403,24 @@ function ComplianceBand() {
 }
 
 export default function Home() {
-  useSeo(null, 'Savnec connects research agencies, consulting firms, corporate strategy teams and investors with vetted industry experts for calls, surveys and custom research.')
+  useSeo(null, 'Savnec is an expert network connecting market research agencies, investors, corporate strategy and consulting teams with vetted industry experts for expert calls, IDIs, B2B surveys, focus groups and custom recruitment.')
   return (
     <>
       <Hero />
       <div className="border-y border-white/[0.06] bg-navy-950/60">
         <Marquee
           items={[
+            { k: 'ESOMAR', v: 'Aligned research standards' },
+            'Expert calls & IDIs',
+            { k: '<24h', v: 'Typical response time' },
+            'B2B surveys',
+            { k: 'Custom', v: 'Sourcing per project' },
+            'Focus groups',
+            { k: '100%', v: 'NDA-governed engagements' },
             'Commercial due diligence',
-            'Customer reference calls',
             'B2B niche recruitment',
-            'Expert surveys',
-            'Competitor deep-dives',
-            'Market sizing',
+            'Diary studies & ethnography',
             'AI domain experts',
-            'Focus groups & IDIs',
-            'Channel checks',
           ]}
         />
       </div>

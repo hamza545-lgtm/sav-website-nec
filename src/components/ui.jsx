@@ -2,22 +2,54 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useInView, animate } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
+import { site } from '../config/site.js'
 
 export const ease = [0.22, 1, 0.36, 1]
 
-export function useSeo(title, description) {
+function setMeta(attr, key, content) {
+  let tag = document.head.querySelector(`meta[${attr}="${key}"]`)
+  if (!tag) {
+    tag = document.createElement('meta')
+    tag.setAttribute(attr, key)
+    document.head.appendChild(tag)
+  }
+  tag.setAttribute('content', content)
+}
+
+// Per-page title, description, canonical URL, social tags and optional JSON-LD.
+export function useSeo(title, description, { jsonLd, type = 'website' } = {}) {
   useEffect(() => {
-    document.title = title ? `${title} | Savnec` : 'Savnec | Expert Network'
+    const fullTitle = title ? `${title} | Savnec` : 'Savnec | Expert Network for Market Research, Investment & Strategy Teams'
+    const url = `${site.url}${window.location.pathname === '/' ? '' : window.location.pathname}`
+    document.title = fullTitle
     if (description) {
-      let tag = document.querySelector('meta[name="description"]')
-      if (!tag) {
-        tag = document.createElement('meta')
-        tag.setAttribute('name', 'description')
-        document.head.appendChild(tag)
-      }
-      tag.setAttribute('content', description)
+      setMeta('name', 'description', description)
+      setMeta('property', 'og:description', description)
+      setMeta('name', 'twitter:description', description)
     }
-  }, [title, description])
+    setMeta('property', 'og:title', fullTitle)
+    setMeta('name', 'twitter:title', fullTitle)
+    setMeta('property', 'og:url', url)
+    setMeta('property', 'og:type', type)
+
+    let canonical = document.head.querySelector('link[rel="canonical"]')
+    if (!canonical) {
+      canonical = document.createElement('link')
+      canonical.setAttribute('rel', 'canonical')
+      document.head.appendChild(canonical)
+    }
+    canonical.setAttribute('href', url)
+
+    const existing = document.getElementById('page-jsonld')
+    if (existing) existing.remove()
+    if (jsonLd) {
+      const script = document.createElement('script')
+      script.type = 'application/ld+json'
+      script.id = 'page-jsonld'
+      script.textContent = JSON.stringify(jsonLd)
+      document.head.appendChild(script)
+    }
+  }, [title, description, type, jsonLd])
 }
 
 export function Reveal({ children, delay = 0, y = 22, className = '', as = 'div' }) {
@@ -201,7 +233,7 @@ export function Counter({ to, suffix = '', prefix = '', duration = 1.6 }) {
 
 export function Section({ children, className = '', id }) {
   return (
-    <section id={id} className={`relative py-24 sm:py-32 ${className}`}>
+    <section id={id} className={`relative py-20 sm:py-28 ${className}`}>
       <div className="container-site relative">{children}</div>
     </section>
   )

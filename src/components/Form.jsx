@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowRight, Check, Loader2, AlertCircle, ChevronDown, Plus } from 'lucide-react'
+import { ArrowRight, Check, LoaderCircle, CircleAlert, ChevronDown, Plus } from 'lucide-react'
 
 const inputCls =
   'w-full rounded-xl border border-white/10 bg-navy-950/60 px-4 py-3 text-[15px] text-white placeholder:text-steel/60 transition-colors focus:border-emerald-400/60 focus:bg-navy-950 focus:outline-none'
@@ -113,7 +113,7 @@ export default function Web3Form({ accessKey, subject, fields, submitLabel = 'Su
             ))}
             {status === 'error' && (
               <p className="flex items-start gap-2 rounded-xl border border-red-400/30 bg-red-500/10 px-4 py-3 text-[13.5px] text-red-200 sm:col-span-2">
-                <AlertCircle size={16} className="mt-0.5 shrink-0" /> {error}
+                <CircleAlert size={16} className="mt-0.5 shrink-0" /> {error}
               </p>
             )}
             <div className="flex flex-col gap-4 pt-2 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
@@ -123,7 +123,7 @@ export default function Web3Form({ accessKey, subject, fields, submitLabel = 'Su
                 disabled={status === 'sending'}
                 className="group inline-flex items-center justify-center gap-2 rounded-full bg-emerald-600 px-7 py-3.5 text-[14px] font-medium text-white shadow-[0_0_0_1px_rgba(107,227,181,0.35),0_10px_40px_-10px_rgba(43,196,138,0.65)] transition-all hover:bg-emerald-500 disabled:opacity-60"
               >
-                {status === 'sending' ? <Loader2 size={16} className="animate-spin" /> : null}
+                {status === 'sending' ? <LoaderCircle size={16} className="animate-spin" /> : null}
                 {status === 'sending' ? 'Sending' : submitLabel}
                 {status !== 'sending' && <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />}
               </button>

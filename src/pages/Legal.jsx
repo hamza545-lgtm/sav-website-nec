@@ -1,18 +1,64 @@
+import { useEffect, useMemo, useState } from 'react'
+import { motion } from 'framer-motion'
 import { PageHero, useSeo } from '../components/ui.jsx'
+import { ArticleBody } from '../components/RichText.jsx'
+import { privacyBlocks, termsBlocks, legalDates } from '../data/legal.js'
+import { slugify } from '../data/insights.js'
 import { site } from '../config/site.js'
 
-// NOTE: These are starter texts. Have them reviewed by a qualified
-// lawyer before you rely on them.
+function LegalPage({ eyebrow, title, blocks }) {
+  const toc = useMemo(() => blocks.filter((b) => b.t === 'h2').map((b) => ({ id: slugify(b.c), label: b.c })), [blocks])
+  const [active, setActive] = useState(toc[0]?.id)
 
-const updated = 'October 2026'
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
+      { rootMargin: '-20% 0px -70% 0px' }
+    )
+    toc.forEach(({ id }) => {
+      const el = document.getElementById(id)
+      if (el) obs.observe(el)
+    })
+    return () => obs.disconnect()
+  }, [toc])
 
-function LegalShell({ eyebrow, title, children }) {
+  const jump = (id) => {
+    const el = document.getElementById(id)
+    if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' })
+  }
+
   return (
     <>
-      <PageHero eyebrow={eyebrow} title={title} intro={`Last updated ${updated}.`} />
+      <PageHero
+        eyebrow={eyebrow}
+        title={title}
+        intro={`Effective ${legalDates.effective}. Last updated ${legalDates.updated}.`}
+      />
       <section className="pb-28">
-        <div className="container-site">
-          <div className="prose-legal max-w-3xl">{children}</div>
+        <div className="container-site grid gap-14 lg:grid-cols-[minmax(0,1fr)_260px]">
+          <div className="max-w-[760px] [&_p]:text-[16px] [&_li]:text-[16px]">
+            <ArticleBody blocks={blocks} />
+          </div>
+          <aside className="hidden lg:block">
+            <nav aria-label="Sections" className="sticky top-28">
+              <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-steel">Sections</p>
+              <ul className="mt-4 max-h-[70vh] space-y-0.5 overflow-y-auto border-l border-white/[0.08]">
+                {toc.map((t) => (
+                  <li key={t.id}>
+                    <button
+                      onClick={() => jump(t.id)}
+                      className={`relative block w-full py-1.5 pl-4 text-left text-[13px] leading-snug transition-colors ${
+                        active === t.id ? 'text-white' : 'text-steel hover:text-ink'
+                      }`}
+                    >
+                      {active === t.id && <motion.span layoutId="legal-rail" className="absolute -left-px top-0 h-full w-[2px] bg-emerald-300" />}
+                      {t.label}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </aside>
         </div>
       </section>
     </>
@@ -20,76 +66,13 @@ function LegalShell({ eyebrow, title, children }) {
 }
 
 export function Privacy() {
-  useSeo('Privacy Policy', 'How Savnec collects, uses and protects personal information.')
-  return (
-    <LegalShell eyebrow="Legal" title="Privacy Policy">
-      <p>
-        This policy explains how {site.legalName} (“Savnec”, “we”, “us”) collects, uses and protects personal
-        information when you visit {site.domain}, apply to join our expert network or engage our services.
-      </p>
-      <h2>Information we collect</h2>
-      <ul>
-        <li>Details you submit through our forms, such as your name, email, company, job title and professional background.</li>
-        <li>Information you share during screening or engagements, such as employment history and areas of expertise.</li>
-        <li>Basic technical data from your browser, such as device type and pages visited, used to keep the site working.</li>
-      </ul>
-      <h2>How we use it</h2>
-      <ul>
-        <li>To respond to inquiries and deliver the services you request.</li>
-        <li>To match experts with relevant projects and run conflict and compliance checks.</li>
-        <li>To meet legal, regulatory and record-keeping obligations.</li>
-      </ul>
-      <p>We do not sell personal information.</p>
-      <h2>Sharing</h2>
-      <p>
-        Expert profiles are shared with clients in anonymized form until an expert agrees to an engagement. We use
-        trusted service providers, such as form processing and email providers, who handle data on our behalf and
-        under appropriate safeguards.
-      </p>
-      <h2>Retention</h2>
-      <p>We keep personal information only as long as needed for the purposes above or as required by law.</p>
-      <h2>Your rights</h2>
-      <p>
-        Depending on where you live, including under the GDPR and CCPA, you may have the right to access, correct,
-        delete or restrict use of your personal information. To make a request, contact us through the Contact page.
-      </p>
-      <h2>Contact</h2>
-      <p>
-        {site.legalName}, {site.address || site.hq}.
-      </p>
-    </LegalShell>
-  )
+  useSeo('Privacy & Cookie Policy', 'How Savnec collects, uses, shares and protects personal information, and how our website uses cookies.')
+  const blocks = useMemo(() => privacyBlocks(site.emails.compliance), [])
+  return <LegalPage eyebrow="Legal" title="Privacy & Cookie Policy" blocks={blocks} />
 }
 
 export function Terms() {
-  useSeo('Terms & Conditions', 'Terms governing the use of the Savnec website.')
-  return (
-    <LegalShell eyebrow="Legal" title="Terms & Conditions">
-      <p>
-        These terms govern your use of {site.domain}. By using the site you agree to them. Separate written
-        agreements govern client engagements and expert participation.
-      </p>
-      <h2>Use of the site</h2>
-      <p>
-        You may use this site for lawful purposes only. You agree not to misuse it, attempt to access it without
-        authorization or submit false information through its forms.
-      </p>
-      <h2>No advice</h2>
-      <p>
-        Content on this site is general information. It is not investment, legal or professional advice.
-      </p>
-      <h2>Intellectual property</h2>
-      <p>
-        The Savnec name, logo and site content belong to {site.legalName}. You may not reproduce them without
-        permission.
-      </p>
-      <h2>Liability</h2>
-      <p>
-        The site is provided “as is”. To the extent permitted by law, Savnec is not liable for losses arising from
-        its use.
-      </p>
-      <h2>Governing law</h2>
-      <p>These terms are governed by the laws of the State of Delaware, United States.</p>
-    </LegalShell>
-  )
+  useSeo('Terms & Conditions', 'The terms that govern use of the Savnec website and participation in the Savnec expert network.')
+  const blocks = useMemo(() => termsBlocks(site.emails.compliance), [])
+  return <LegalPage eyebrow="Legal" title="Terms & Conditions" blocks={blocks} />
 }

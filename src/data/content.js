@@ -7,11 +7,11 @@ import {
   Megaphone,
   TrendingUp,
   Compass,
-  BarChart3,
+  ChartColumn,
   Database,
 } from 'lucide-react'
 
-export const industries = [
+const allIndustries = [
   {
     id: 'tech',
     name: 'Technology, Media & Telecom',
@@ -128,10 +128,10 @@ export const industries = [
     id: 'market-research',
     name: 'Market Research Suppliers',
     short: 'Research',
-    icon: BarChart3,
+    icon: ChartColumn,
     summary:
-      'B2B recruitment for agencies running qualitative and quantitative studies on hard-to-reach professional audiences.',
-    focus: ['B2B niche recruitment', 'IDIs & focus groups', 'Quant survey samples', 'Panel augmentation', 'Hard-to-reach decision makers'],
+      'B2B recruitment for agencies running qualitative studies with hard-to-reach professional audiences.',
+    focus: ['B2B niche recruitment', 'IDIs & focus groups', 'B2B surveys', 'Diary studies & ethnography', 'Hard-to-reach decision makers'],
     questions: [
       'Can you fill 30 IT decision makers at 1,000+ employee firms?',
       'We need procurement leads across three regions by Friday.',
@@ -154,57 +154,127 @@ export const industries = [
   },
 ]
 
+// Display order: the sectors Savnec works in most, then the rest.
+const industryOrder = [
+  'tech',
+  'advertising',
+  'market-research',
+  'healthcare',
+  'investors',
+  'consumer',
+  'financial',
+  'industrial',
+  'consulting',
+  'ai-data',
+]
+export const industries = industryOrder.map((id) => allIndustries.find((x) => x.id === id))
+
 export const segments = [
+  {
+    title: 'Market Research Firms & Agencies',
+    body: 'Senior and niche B2B respondents for qualitative studies, recruited to your screener and verified before fieldwork.',
+  },
   {
     title: 'Private Equity & Venture Capital',
     body: 'Customer calls, competitor views and operator checks across the deal cycle, delivered at deal speed.',
-  },
-  {
-    title: 'Consulting Firms',
-    body: 'Sector depth for case teams who need to sound like insiders by Thursday.',
   },
   {
     title: 'Corporate Strategy Teams',
     body: 'An outside-in read on markets, competitors and customers before capital is committed.',
   },
   {
-    title: 'Market Research Agencies',
-    body: 'Hard-to-reach B2B respondents for qual and quant studies, recruited and verified.',
+    title: 'Consulting Firms',
+    body: 'Sector depth for case teams who need to sound like insiders by Thursday.',
   },
 ]
 
+// Formats, in order of how often clients ask for them.
 export const formats = [
   {
-    title: '1:1 Expert Calls',
-    body: 'Hour-long conversations with operators, customers and former competitors. Scheduled around you.',
+    id: 'expert-calls',
+    title: 'Expert Calls & IDIs',
+    body: 'One-to-one calls and in-depth interviews with operators, customers and former competitors. Scheduled around you.',
   },
   {
-    title: 'Expert Surveys',
-    body: 'Structured input from dozens of verified professionals when you need a number, not an anecdote.',
+    id: 'b2b-surveys',
+    title: 'B2B Surveys',
+    body: 'Structured questionnaires answered by verified professionals, so you can compare views across a defined audience.',
   },
   {
-    title: 'Focus Groups & IDIs',
-    body: 'Qualitative sessions with professional audiences, recruited to your screener and quota.',
+    id: 'focus-groups',
+    title: 'Focus Groups',
+    body: 'Moderated discussions with small groups of professionals, recruited to your screener and quota.',
   },
   {
+    id: 'custom-recruitment',
     title: 'Custom Recruitment',
-    body: 'Niche B2B profiles sourced from scratch for studies, advisory boards and panels.',
+    body: 'Niche B2B profiles sourced from scratch for your own studies, advisory boards and panels.',
   },
   {
-    title: 'Written Insights',
-    body: 'Short written responses to targeted questions when a call is more than you need.',
+    id: 'ethnography',
+    title: 'Diary Studies & Ethnography',
+    body: 'Professionals record or show their real working day over time, so you see behavior as it happens.',
   },
   {
+    id: 'ai-experts',
     title: 'AI Domain Experts',
     body: 'Credentialed specialists for evaluation, annotation and reasoning work on AI models.',
   },
 ]
 
+export const useCases = {
+  'Market Research': {
+    lead: 'B2B respondents your panel can’t reach.',
+    items: [
+      'Recruitment of senior and niche professional audiences',
+      'IDIs and focus groups filled to your screener and quota',
+      'B2B surveys with verified decision makers',
+      'Diary studies and multi-country fieldwork support',
+    ],
+  },
+  'Private Equity': {
+    lead: 'From first screen to investment committee.',
+    items: [
+      'Customer calls to test retention, pricing power and switching risk',
+      'Former employees on operations, culture and management quality',
+      'Competitor and channel checks to validate market share claims',
+      'Operator advisors for post-close value creation plans',
+    ],
+  },
+  'Corporate Strategy': {
+    lead: 'An outside view before capital moves.',
+    items: [
+      'Adjacent-market scans ahead of build, buy or partner decisions',
+      'Voice-of-customer research on unmet needs',
+      'Competitive intelligence from former insiders, within the rules',
+      'Target screening and integration lessons for corporate development',
+    ],
+  },
+  Consulting: {
+    lead: 'Insider depth on a case-team timeline.',
+    items: [
+      'Rapid hypothesis testing in week one of an engagement',
+      'Benchmarks on cost, process and organization design',
+      'Buyer interviews for market entry and growth strategy',
+      'B2B surveys to segment customers and test propositions',
+    ],
+  },
+  'AI Data': {
+    lead: 'Specialists who can judge what a model gets wrong.',
+    items: [
+      'Licensed and credentialed professionals for evaluation tasks',
+      'Domain experts for rubric writing and reasoning data',
+      'Specialist review for annotation quality control',
+      'Cohorts recruited by discipline and seniority',
+    ],
+  },
+}
+
 export const faqs = {
   Clients: [
     {
       q: 'How quickly will I see expert profiles?',
-      a: 'For most projects, the first profiles arrive within 24 hours of a scoped brief. Highly specialized or multi-region requests can take longer, and we will tell you upfront when that is the case.',
+      a: 'For most projects, the first profiles arrive within 48 hours of a scoped brief. Highly specialized or multi-region requests can take longer, and we will tell you upfront when that is the case.',
     },
     {
       q: 'Do you have a fixed database of experts?',
@@ -257,38 +327,3 @@ export const faqs = {
   ],
 }
 
-export const insights = [
-  {
-    slug: 'screening-questions',
-    tag: 'Method',
-    title: 'Write screening questions that filter for real experience',
-    read: '4 min read',
-    body: [
-      'The most common reason an expert call disappoints is not the expert. It is the screener. Questions like “Are you familiar with the market?” invite everyone to say yes.',
-      'Better screeners ask for evidence. Instead of familiarity, ask what the person was responsible for: “In your last role, which vendors did you personally evaluate, and what budget did you control?” A real buyer answers in specifics. Everyone else drifts into generalities.',
-      'Keep it to three or four questions, ask at least one that requires a number, and include one that tests recency. Experience from 2016 is history, not insight.',
-    ],
-  },
-  {
-    slug: 'diligence-call',
-    tag: 'Private Equity',
-    title: 'Five questions to ask on every commercial diligence call',
-    read: '5 min read',
-    body: [
-      'Diligence calls are short and the clock is expensive. These five questions earn their place on almost every one.',
-      'What would make you switch away from this provider? Who else did you evaluate, and why did you not choose them? How has your spend with them changed over three years? What would a 10% price increase do? If you were running the company, what would you fix first?',
-      'The answers rarely agree. That is the point. The pattern across eight calls tells you more than any single conversation.',
-    ],
-  },
-  {
-    slug: 'mnpi-line',
-    tag: 'Compliance',
-    title: 'MNPI in expert calls: where the line sits',
-    read: '6 min read',
-    body: [
-      'Material non-public information is information a reasonable investor would consider important and that has not been made public. Expert networks exist to share experience and judgment, never MNPI.',
-      'In practice the risk is highest with current employees, recent leavers and anyone close to a pending transaction, earnings release or regulatory decision. That is why we screen for employment status and cool-off periods before a call is booked.',
-      'Clients play a part too. Phrase questions around industry dynamics and historical experience rather than a named company’s unreleased numbers, and end the call if an expert starts to cross the line.',
-    ],
-  },
-]

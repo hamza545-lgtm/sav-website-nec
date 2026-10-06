@@ -1,14 +1,60 @@
 {
   "redirects": [
-    { "source": "/index.html", "destination": "/", "permanent": true },
-    { "source": "/clients.html", "destination": "/clients", "permanent": true },
-    { "source": "/experts.html", "destination": "/experts", "permanent": true },
-    { "source": "/industries.html", "destination": "/industries", "permanent": true },
-    { "source": "/compliance.html", "destination": "/compliance", "permanent": true },
-    { "source": "/about.html", "destination": "/about", "permanent": true },
-    { "source": "/insights.html", "destination": "/insights", "permanent": true },
-    { "source": "/privacy-policy.html", "destination": "/privacy", "permanent": true },
-    { "source": "/terms.html", "destination": "/terms", "permanent": true }
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/clients.html",
+      "destination": "/clients",
+      "permanent": true
+    },
+    {
+      "source": "/experts.html",
+      "destination": "/experts",
+      "permanent": true
+    },
+    {
+      "source": "/industries.html",
+      "destination": "/industries",
+      "permanent": true
+    },
+    {
+      "source": "/compliance.html",
+      "destination": "/compliance",
+      "permanent": true
+    },
+    {
+      "source": "/about.html",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/insights.html",
+      "destination": "/insights",
+      "permanent": true
+    },
+    {
+      "source": "/privacy-policy.html",
+      "destination": "/privacy-policy",
+      "permanent": true
+    },
+    {
+      "source": "/terms.html",
+      "destination": "/terms",
+      "permanent": true
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy-policy",
+      "permanent": true
+    }
   ],
-  "rewrites": [{ "source": "/((?!assets/|brand/|.*\\..*).*)", "destination": "/index.html" }]
+  "rewrites": [
+    {
+      "source": "/((?!assets/|brand/|.*\\..*).*)",
+      "destination": "/index.html"
+    }
+  ]
 }

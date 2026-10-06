@@ -1,62 +1,25 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Check, Clock, MessageSquareText, ShieldCheck, Target, Repeat, Phone, ListChecks, Users, Network, PenLine, Brain } from 'lucide-react'
+import { Check, Clock, MessageSquareText, ShieldCheck, Target, Repeat, Phone, ListChecks, Users, Network, NotebookPen, Brain } from 'lucide-react'
 import { PageHero, Button, Section, SectionHeading, Reveal, SpotlightCard, Eyebrow, useSeo } from '../components/ui.jsx'
 import { CtaBand } from '../components/Visuals.jsx'
-import { formats } from '../data/content.js'
+import { formats, useCases } from '../data/content.js'
+import { ucSlug } from '../components/Navbar.jsx'
 
-const formatIcons = [Phone, ListChecks, Users, Network, PenLine, Brain]
+const formatIcons = { 'expert-calls': Phone, 'b2b-surveys': ListChecks, 'focus-groups': Users, 'custom-recruitment': Network, ethnography: NotebookPen, 'ai-experts': Brain }
 
-const useCases = {
-  'Private Equity': {
-    lead: 'From first screen to investment committee.',
-    items: [
-      'Customer calls to test retention, pricing power and switching risk',
-      'Former employees on operations, culture and management quality',
-      'Competitor and channel checks to validate market share claims',
-      'Operator advisors for post-close value creation plans',
-    ],
-  },
-  Consulting: {
-    lead: 'Insider depth on a case-team timeline.',
-    items: [
-      'Rapid hypothesis testing in week one of an engagement',
-      'Benchmarks on cost, process and organization design',
-      'Buyer interviews for market entry and growth strategy',
-      'Survey programs to size markets and segment customers',
-    ],
-  },
-  'Corporate Strategy': {
-    lead: 'An outside view before capital moves.',
-    items: [
-      'Adjacent-market scans ahead of build, buy or partner decisions',
-      'Voice-of-customer research on unmet needs',
-      'Competitive intelligence from former insiders, within the rules',
-      'Target screening and integration lessons for corporate development',
-    ],
-  },
-  'Market Research': {
-    lead: 'B2B respondents your panel can’t reach.',
-    items: [
-      'Recruitment of senior and niche professional audiences',
-      'IDIs and focus groups to your screener and quota',
-      'Quant sample top-ups for hard-to-fill cells',
-      'Multi-country fieldwork support',
-    ],
-  },
-  'AI Data': {
-    lead: 'Specialists who can judge what a model gets wrong.',
-    items: [
-      'Licensed and credentialed professionals for evaluation tasks',
-      'Domain experts for rubric writing and reasoning data',
-      'Specialist review for annotation quality control',
-      'Scaled cohorts recruited by discipline and seniority',
-    ],
-  },
+const formatDetail = {
+  'expert-calls': { best: 'Depth, nuance, testing a hypothesis', length: '30 to 60 minutes, phone or video' },
+  'b2b-surveys': { best: 'Comparing views across a defined audience', length: 'Short online questionnaire' },
+  'focus-groups': { best: 'Reactions to concepts, messaging or products', length: '60 to 90 minute moderated session' },
+  'custom-recruitment': { best: 'Agencies running their own fieldwork', length: 'Profiles to your screener and quota' },
+  ethnography: { best: 'Seeing real workflows as they happen', length: 'Several days to a few weeks' },
+  'ai-experts': { best: 'Evaluation and reasoning data in specialist fields', length: 'Task-based or ongoing cohorts' },
 }
 
 const commitments = [
-  [Clock, 'Speed you can plan around', 'First profiles typically within 24 hours of a scoped brief. If a request needs longer, you hear that on day one.'],
+  [Clock, 'Speed you can plan around', 'First profiles typically within 48 hours of a scoped brief. If a request needs longer, you hear that on day one.'],
   [Target, 'Relevance over volume', 'We send fewer, better profiles. Each one comes with screener answers so you can decide in minutes.'],
   [ShieldCheck, 'Compliance by default', 'Conflict checks, confidentiality terms and your restricted list apply to every engagement automatically.'],
   [Repeat, 'One team, start to finish', 'The person who scopes your project is the person who delivers it. No hand-offs, no ticket queue.'],
@@ -114,9 +77,14 @@ function ProfileCard() {
 }
 
 export default function Clients() {
-  useSeo('For Clients', 'Expert calls, surveys and custom recruitment for private equity, consulting, corporate strategy, market research and AI data teams.')
+  useSeo('For Clients', 'Expert calls and IDIs, B2B surveys, focus groups, custom recruitment and diary studies for market research agencies, investors, corporate strategy and consulting teams.')
   const tabs = Object.keys(useCases)
   const [tab, setTab] = useState(tabs[0])
+  const { hash } = useLocation()
+  useEffect(() => {
+    const match = tabs.find((t) => `#${ucSlug(t)}` === hash)
+    if (match) setTab(match)
+  }, [hash])
   return (
     <>
       <PageHero
@@ -135,6 +103,55 @@ export default function Clients() {
           </Button>
         </div>
       </PageHero>
+
+      <Section id="formats">
+        <SectionHeading
+          eyebrow="Formats"
+          title="Pick the format. We handle the rest."
+          intro="Every format runs on the same recruiting, screening and compliance. Switch between them as your project moves from depth to breadth."
+        />
+        <div className="mt-14 grid gap-4 md:grid-cols-6">
+          {formats.map((f, i) => {
+            const Icon = formatIcons[f.id]
+            const d = formatDetail[f.id]
+            const lead = i === 0
+            return (
+              <Reveal key={f.id} delay={(i % 3) * 0.06} className={lead ? 'md:col-span-6' : i < 3 ? 'md:col-span-3' : 'md:col-span-2'}>
+                <div id={f.id} className="h-full scroll-mt-28">
+                  <SpotlightCard className={`h-full ${lead ? 'p-8 sm:p-10' : 'p-7'}`}>
+                    <div className={lead ? 'grid gap-8 md:grid-cols-[1.2fr_1fr] md:items-center' : ''}>
+                      <div>
+                        <div className="flex items-center gap-3">
+                          <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-emerald-400/25 bg-emerald-500/10 text-emerald-300">
+                            <Icon size={19} />
+                          </span>
+                          {lead && (
+                            <span className="rounded-full border border-emerald-400/30 px-3 py-1 font-mono text-[10.5px] uppercase tracking-[0.18em] text-emerald-200">
+                              Most requested
+                            </span>
+                          )}
+                        </div>
+                        <h3 className={`mt-6 font-semibold ${lead ? 'text-[28px] sm:text-[32px]' : 'text-[20px]'}`}>{f.title}</h3>
+                        <p className={`mt-2 leading-relaxed text-steel ${lead ? 'text-[16px]' : 'text-[14.5px]'}`}>{f.body}</p>
+                      </div>
+                      <dl className={`grid gap-3 text-[13.5px] ${lead ? '' : 'mt-6 border-t border-white/[0.07] pt-5'}`}>
+                        <div className="flex gap-3">
+                          <dt className="w-[72px] shrink-0 whitespace-nowrap pt-0.5 font-mono text-[10.5px] uppercase tracking-[0.14em] text-steel">Best for</dt>
+                          <dd className="text-ink">{d.best}</dd>
+                        </div>
+                        <div className="flex gap-3">
+                          <dt className="w-[72px] shrink-0 whitespace-nowrap pt-0.5 font-mono text-[10.5px] uppercase tracking-[0.14em] text-steel">Format</dt>
+                          <dd className="text-ink">{d.length}</dd>
+                        </div>
+                      </dl>
+                    </div>
+                  </SpotlightCard>
+                </div>
+              </Reveal>
+            )
+          })}
+        </div>
+      </Section>
 
       <Section>
         <div className="grid items-center gap-16 lg:grid-cols-2">
@@ -163,8 +180,11 @@ export default function Clients() {
         </div>
       </Section>
 
-      <Section>
-        <SectionHeading eyebrow="Use cases" title="Where clients put us to work." />
+      <Section id="use-cases">
+        {tabs.map((t) => (
+          <span key={t} id={ucSlug(t)} className="absolute top-0" aria-hidden="true" />
+        ))}
+        <SectionHeading eyebrow="Who we serve" title="Where clients put us to work." />
         <Reveal delay={0.1}>
           <div className="mt-10 flex flex-wrap gap-2">
             {tabs.map((t) => (
@@ -214,24 +234,6 @@ export default function Clients() {
               </ul>
             </motion.div>
           </AnimatePresence>
-        </div>
-      </Section>
-
-      <Section>
-        <SectionHeading eyebrow="Formats" title="Pick the format. We handle the rest." />
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {formats.map((f, i) => {
-            const Icon = formatIcons[i]
-            return (
-              <Reveal key={f.title} delay={(i % 3) * 0.06}>
-                <SpotlightCard className="h-full p-7">
-                  <Icon size={20} className="text-emerald-300" />
-                  <h3 className="mt-5 text-[19px] font-semibold">{f.title}</h3>
-                  <p className="mt-2 text-[14.5px] leading-relaxed text-steel">{f.body}</p>
-                </SpotlightCard>
-              </Reveal>
-            )
-          })}
         </div>
       </Section>
 

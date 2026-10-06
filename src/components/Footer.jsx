@@ -1,17 +1,27 @@
 import { Link } from 'react-router-dom'
 import { ArrowUpRight, MapPin } from 'lucide-react'
-import Logo from './Logo.jsx'
+import { Wordmark } from './Logo.jsx'
 import { site } from '../config/site.js'
 
 const cols = [
   {
+    title: 'Clients',
+    links: [
+      ['How we work', '/clients'],
+      ['Expert Calls & IDIs', '/clients#expert-calls'],
+      ['B2B Surveys', '/clients#b2b-surveys'],
+      ['Focus Groups', '/clients#focus-groups'],
+      ['Request a Trial', '/request-trial'],
+    ],
+  },
+  {
     title: 'Company',
     links: [
-      ['Clients', '/clients'],
       ['Experts', '/experts'],
       ['Industries', '/industries'],
       ['Compliance', '/compliance'],
       ['About', '/about'],
+      ['Careers', '/careers'],
     ],
   },
   {
@@ -19,33 +29,30 @@ const cols = [
     links: [
       ['Insights', '/insights'],
       ['FAQs', '/faqs'],
-      ['Careers', '/careers'],
       ['Contact Us', '/contact'],
-    ],
-  },
-  {
-    title: 'Get started',
-    links: [
-      ['Request a Trial', '/request-trial'],
       ['Join as an Expert', '/join'],
-      ['General Inquiry', '/contact'],
     ],
   },
 ]
 
 export default function Footer() {
-  const socials = Object.entries(site.social).filter(([, url]) => url)
+  const socials = [
+    ['LinkedIn', site.social.linkedin],
+    ['Instagram', site.social.instagram],
+  ].filter(([, url]) => url)
+
   return (
-    <footer className="relative mt-10 border-t border-white/[0.06] bg-navy-950">
+    <footer className="relative mt-10 overflow-hidden border-t border-white/[0.06] bg-navy-950">
       <div className="glow-line absolute inset-x-0 top-0 opacity-70" />
-      <div className="container-site grid gap-14 py-20 lg:grid-cols-[1.4fr_2fr]">
+      <div className="container-site grid gap-14 pb-16 pt-20 lg:grid-cols-[1.3fr_2fr]">
         <div>
-          <Logo />
-          <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-steel">
-            The expert network for research, consulting and investment teams who need the right
-            conversation, not the nearest one.
+          <Link to="/" aria-label="Savnec home">
+            <Wordmark height={26} />
+          </Link>
+          <p className="mt-7 max-w-sm text-[22px] font-medium leading-snug tracking-tight text-white">
+            {site.tagline}
           </p>
-          <p className="mt-6 flex items-start gap-2 text-[14px] text-steel">
+          <p className="mt-7 flex items-start gap-2 text-[14px] text-steel">
             <MapPin size={16} className="mt-0.5 shrink-0 text-emerald-300" />
             <span>
               Headquartered in {site.hq}
@@ -67,6 +74,22 @@ export default function Footer() {
               </a>
             </div>
           )}
+          {socials.length > 0 && (
+            <div className="mt-7 flex gap-3">
+              {socials.map(([name, url]) => (
+                <a
+                  key={name}
+                  href={url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-white/10 px-4 py-2 text-[13px] text-ink transition-colors hover:border-emerald-400/50 hover:text-white"
+                >
+                  {name}
+                  <ArrowUpRight size={13} />
+                </a>
+              ))}
+            </div>
+          )}
         </div>
         <div className="grid grid-cols-2 gap-10 sm:grid-cols-3">
           {cols.map((c) => (
@@ -85,20 +108,29 @@ export default function Footer() {
           ))}
         </div>
       </div>
-      <div className="border-t border-white/[0.06]">
+
+      {/* Oversized wordmark watermark */}
+      <div className="pointer-events-none select-none px-5 sm:px-8" aria-hidden="true">
+        <div className="mx-auto max-w-site opacity-[0.07] [mask-image:linear-gradient(to_bottom,#000_30%,transparent)]">
+          <Wordmark height={220} className="h-auto w-full" />
+        </div>
+      </div>
+
+      <div className="relative border-t border-white/[0.06]">
         <div className="container-site flex flex-col gap-4 py-6 text-[13px] text-steel sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} {site.legalName}. All rights reserved.
           </p>
           <div className="flex flex-wrap items-center gap-6">
-            <Link to="/privacy" className="hover:text-white">Privacy Policy</Link>
-            <Link to="/terms" className="hover:text-white">Terms</Link>
-            {socials.map(([name, url]) => (
-              <a key={name} href={url} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 capitalize hover:text-white">
-                {name === 'linkedin' ? 'LinkedIn' : name}
-                <ArrowUpRight size={13} />
-              </a>
-            ))}
+            <Link to="/privacy-policy" className="hover:text-white">
+              Privacy & Cookie Policy
+            </Link>
+            <Link to="/terms" className="hover:text-white">
+              Terms & Conditions
+            </Link>
+            <Link to="/compliance" className="hover:text-white">
+              Compliance
+            </Link>
           </div>
         </div>
       </div>

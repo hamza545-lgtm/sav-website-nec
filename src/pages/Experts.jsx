@@ -10,9 +10,9 @@ const reasons = [
 ]
 
 const work = [
-  [Phone, 'Phone or video consultations', 'Usually 30 to 60 minutes with a single client.'],
-  [ListChecks, 'Surveys', 'Structured questions you complete online in your own time.'],
-  [Users, 'Interviews & panels', 'Small-group discussions or in-depth one-to-one research interviews.'],
+  [Phone, 'Expert calls & IDIs', 'One-to-one calls or in-depth interviews, usually 30 to 60 minutes.'],
+  [ListChecks, 'B2B surveys', 'Structured questions you complete online in your own time.'],
+  [Users, 'Focus groups & diary studies', 'Small-group discussions, or short entries about your working day over time.'],
   [Brain, 'AI evaluation projects', 'Reviewing and grading model outputs in your field of expertise.'],
 ]
 

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowUpRight, BookOpen, HelpCircle, Briefcase, Mail } from 'lucide-react'
+import { ArrowUpRight, BookOpen, CircleHelp, Briefcase, Mail } from 'lucide-react'
 import { PageHero, Section, SectionHeading, Reveal, SpotlightCard, Eyebrow, useSeo } from '../components/ui.jsx'
 import { CtaBand } from '../components/Visuals.jsx'
 import { site } from '../config/site.js'
@@ -22,7 +22,7 @@ const regions = [
 
 const more = [
   ['/insights', 'Insights', 'Notes on method, diligence and compliance.', BookOpen],
-  ['/faqs', 'FAQs', 'Straight answers for clients and experts.', HelpCircle],
+  ['/faqs', 'FAQs', 'Straight answers for clients and experts.', CircleHelp],
   ['/careers', 'Careers', 'Help us build the network.', Briefcase],
   ['/contact', 'Contact Us', 'Reach the right team directly.', Mail],
 ]

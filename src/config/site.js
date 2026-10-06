@@ -8,6 +8,8 @@ export const site = {
   name: 'Savnec',
   legalName: 'Savnec LLC',
   domain: 'savnec.com',
+  url: 'https://www.savnec.com',
+  tagline: 'Verified human expertise for research that has to be right.',
   hq: 'Delaware, United States',
   // Add your full registered address when you want it shown in the footer.
   address: '',
@@ -28,11 +30,12 @@ export const site = {
     experts: 'experts@savnec.com',
     general: 'hello@savnec.com',
     careers: 'careers@savnec.com',
+    compliance: 'compliance@savnec.com',
   },
 
-  // Leave a link empty ('') to hide it.
+  // Leave a link empty ('') to hide it. Update LinkedIn once the page exists.
   social: {
-    linkedin: '',
+    linkedin: 'https://www.linkedin.com/company/savnec',
     instagram: 'https://www.instagram.com/savnec',
   },
 }
