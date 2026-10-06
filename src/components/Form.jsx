@@ -3,16 +3,16 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight, Check, LoaderCircle, CircleAlert, ChevronDown, Plus } from 'lucide-react'
 
 const inputCls =
-  'w-full rounded-xl border border-white/10 bg-navy-950/60 px-4 py-3 text-[15px] text-white placeholder:text-steel/60 transition-colors focus:border-emerald-400/60 focus:bg-navy-950 focus:outline-none'
+  'w-full rounded-xl border border-line/[0.12] bg-page/60 px-4 py-3 text-[15px] text-fg placeholder:text-muted/60 transition-colors focus:border-emerald-400/60 focus:bg-card focus:outline-none'
 
 function Field({ f }) {
   const id = `f-${f.name}`
   return (
     <div className={f.full ? 'sm:col-span-2' : ''}>
       {f.type !== 'checkbox' && (
-        <label htmlFor={id} className="mb-2 block text-[13px] text-ink">
+        <label htmlFor={id} className="mb-2 block text-[13px] text-body">
           {f.label}
-          {f.required && <span className="text-emerald-300"> *</span>}
+          {f.required && <span className="text-accent"> *</span>}
         </label>
       )}
       {f.type === 'select' ? (
@@ -22,17 +22,17 @@ function Field({ f }) {
               Select
             </option>
             {f.options.map((o) => (
-              <option key={o} value={o} className="bg-navy-900">
+              <option key={o} value={o} className="bg-card">
                 {o}
               </option>
             ))}
           </select>
-          <ChevronDown size={16} className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-steel" />
+          <ChevronDown size={16} className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-muted" />
         </div>
       ) : f.type === 'textarea' ? (
         <textarea id={id} name={f.name} rows={f.rows || 5} required={f.required} placeholder={f.placeholder} className={`${inputCls} resize-y`} />
       ) : f.type === 'checkbox' ? (
-        <label htmlFor={id} className="flex cursor-pointer items-start gap-3 text-[13.5px] leading-relaxed text-steel">
+        <label htmlFor={id} className="flex cursor-pointer items-start gap-3 text-[13.5px] leading-relaxed text-muted">
           <input id={id} type="checkbox" name={f.name} value="Yes" required={f.required} className="mt-1 h-4 w-4 shrink-0 accent-emerald-500" />
           <span>{f.label}</span>
         </label>
@@ -96,12 +96,12 @@ export default function Web3Form({ accessKey, subject, fields, submitLabel = 'Su
             animate={{ opacity: 1, y: 0 }}
             className="flex min-h-[420px] flex-col items-center justify-center text-center"
           >
-            <span className="flex h-14 w-14 items-center justify-center rounded-full border border-emerald-400/50 bg-emerald-500/15 text-emerald-300 shadow-[0_0_40px_-6px_rgba(43,196,138,0.8)]">
+            <span className="flex h-14 w-14 items-center justify-center rounded-full border border-emerald-400/50 bg-emerald-500/15 text-accent shadow-[0_0_40px_-6px_rgba(43,196,138,0.8)]">
               <Check size={24} />
             </span>
             <h3 className="mt-6 text-[26px] font-semibold">{successTitle}</h3>
-            <p className="mt-3 max-w-sm text-[15px] leading-relaxed text-steel">{successBody}</p>
-            <button onClick={() => setStatus('idle')} className="mt-8 text-[14px] text-emerald-300 hover:text-emerald-200">
+            <p className="mt-3 max-w-sm text-[15px] leading-relaxed text-muted">{successBody}</p>
+            <button onClick={() => setStatus('idle')} className="mt-8 text-[14px] text-accent hover:text-accent">
               Send another
             </button>
           </motion.div>
@@ -112,16 +112,16 @@ export default function Web3Form({ accessKey, subject, fields, submitLabel = 'Su
               <Field key={f.name} f={f} />
             ))}
             {status === 'error' && (
-              <p className="flex items-start gap-2 rounded-xl border border-red-400/30 bg-red-500/10 px-4 py-3 text-[13.5px] text-red-200 sm:col-span-2">
+              <p className="flex items-start gap-2 rounded-xl border border-red-400/30 bg-red-500/10 px-4 py-3 text-[13.5px] text-red-700 sm:col-span-2">
                 <CircleAlert size={16} className="mt-0.5 shrink-0" /> {error}
               </p>
             )}
             <div className="flex flex-col gap-4 pt-2 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-[12.5px] text-steel">We reply within one business day. Your details stay with Savnec.</p>
+              <p className="text-[12.5px] text-muted">We reply within one business day. Your details stay with Savnec.</p>
               <button
                 type="submit"
                 disabled={status === 'sending'}
-                className="group inline-flex items-center justify-center gap-2 rounded-full bg-emerald-600 px-7 py-3.5 text-[14px] font-medium text-white shadow-[0_0_0_1px_rgba(107,227,181,0.35),0_10px_40px_-10px_rgba(43,196,138,0.65)] transition-all hover:bg-emerald-500 disabled:opacity-60"
+                className="group inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-emerald-600 px-7 py-3.5 text-[14px] font-medium text-white shadow-[0_10px_28px_-14px_rgba(15,110,76,0.75)] transition-all hover:bg-emerald-700 disabled:opacity-60"
               >
                 {status === 'sending' ? <LoaderCircle size={16} className="animate-spin" /> : null}
                 {status === 'sending' ? 'Sending' : submitLabel}
@@ -138,7 +138,7 @@ export default function Web3Form({ accessKey, subject, fields, submitLabel = 'Su
 export function Accordion({ items }) {
   const [open, setOpen] = useState(0)
   return (
-    <div className="divide-y divide-white/[0.07] border-y border-white/[0.07]">
+    <div className="divide-y divide-line/[0.1] border-y border-line/[0.1]">
       {items.map((it, i) => (
         <div key={it.q}>
           <button
@@ -146,10 +146,10 @@ export function Accordion({ items }) {
             className="flex w-full items-center justify-between gap-6 py-6 text-left"
             aria-expanded={open === i}
           >
-            <span className={`text-[17px] transition-colors ${open === i ? 'text-white' : 'text-ink'}`}>{it.q}</span>
+            <span className={`text-[17px] transition-colors ${open === i ? 'text-fg' : 'text-body'}`}>{it.q}</span>
             <span
               className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${
-                open === i ? 'rotate-45 border-emerald-400/50 text-emerald-300' : 'border-white/15 text-steel'
+                open === i ? 'rotate-45 border-emerald-400/50 text-accent' : 'border-line/15 text-muted'
               }`}
             >
               <Plus size={15} />
@@ -164,7 +164,7 @@ export function Accordion({ items }) {
                 transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                 className="overflow-hidden"
               >
-                <p className="max-w-3xl pb-6 text-[15.5px] leading-relaxed text-steel">{it.a}</p>
+                <p className="max-w-3xl pb-6 text-[15.5px] leading-relaxed text-muted">{it.a}</p>
               </motion.div>
             )}
           </AnimatePresence>

@@ -34,7 +34,7 @@ export default function Experts() {
         eyebrow="For experts"
         title={
           <>
-            Your experience has a <span className="serif-accent text-emerald-300">market rate.</span>
+            Your experience has a <span className="serif-accent text-accent">market rate.</span>
           </>
         }
         intro="Senior operators, specialists and former executives use Savnec to share what they know with the people making decisions about their industry. Paid, confidential, and entirely on your terms."
@@ -53,9 +53,9 @@ export default function Experts() {
           {reasons.map(([Icon, t, b], i) => (
             <Reveal key={t} delay={i * 0.06}>
               <SpotlightCard className="h-full p-8">
-                <Icon size={22} className="text-emerald-300" />
+                <Icon size={22} className="text-accent" />
                 <h3 className="mt-6 text-[21px] font-semibold">{t}</h3>
-                <p className="mt-2 text-[15px] leading-relaxed text-steel">{b}</p>
+                <p className="mt-2 text-[15px] leading-relaxed text-muted">{b}</p>
               </SpotlightCard>
             </Reveal>
           ))}
@@ -72,11 +72,11 @@ export default function Experts() {
           <ol className="space-y-4">
             {steps.map(([t, b], i) => (
               <Reveal key={t} delay={i * 0.06}>
-                <li className="flex gap-6 rounded-2xl border border-white/[0.07] bg-navy-900/40 p-6 transition-colors hover:border-emerald-400/30">
-                  <span className="font-serif text-[40px] italic leading-none text-emerald-300/80">{i + 1}</span>
+                <li className="flex gap-6 rounded-2xl border border-line/[0.1] bg-card/40 p-6 transition-colors hover:border-emerald-400/30">
+                  <span className="font-serif text-[40px] italic leading-none text-accent/80">{i + 1}</span>
                   <div>
                     <h3 className="text-[19px] font-semibold">{t}</h3>
-                    <p className="mt-1.5 text-[15px] leading-relaxed text-steel">{b}</p>
+                    <p className="mt-1.5 text-[15px] leading-relaxed text-muted">{b}</p>
                   </div>
                 </li>
               </Reveal>
@@ -91,9 +91,9 @@ export default function Experts() {
           {work.map(([Icon, t, b], i) => (
             <Reveal key={t} delay={i * 0.06}>
               <SpotlightCard className="h-full p-7">
-                <Icon size={20} className="text-emerald-300" />
+                <Icon size={20} className="text-accent" />
                 <h3 className="mt-5 text-[17px] font-semibold">{t}</h3>
-                <p className="mt-2 text-[14px] leading-relaxed text-steel">{b}</p>
+                <p className="mt-2 text-[14px] leading-relaxed text-muted">{b}</p>
               </SpotlightCard>
             </Reveal>
           ))}
@@ -112,8 +112,8 @@ export default function Experts() {
               <h3 className="text-[18px] font-semibold">You can share</h3>
               <ul className="mt-6 space-y-4">
                 {dos.map((d) => (
-                  <li key={d} className="flex items-start gap-3 text-[15px] text-ink">
-                    <Check size={17} className="mt-0.5 shrink-0 text-emerald-300" />
+                  <li key={d} className="flex items-start gap-3 text-[15px] text-body">
+                    <Check size={17} className="mt-0.5 shrink-0 text-accent" />
                     {d}
                   </li>
                 ))}
@@ -121,12 +121,12 @@ export default function Experts() {
             </div>
           </Reveal>
           <Reveal delay={0.08}>
-            <div className="h-full rounded-3xl border border-white/[0.08] bg-white/[0.02] p-8">
+            <div className="h-full rounded-3xl border border-line/[0.11] bg-fg/[0.02] p-8">
               <h3 className="text-[18px] font-semibold">You must never share</h3>
               <ul className="mt-6 space-y-4">
                 {donts.map((d) => (
-                  <li key={d} className="flex items-start gap-3 text-[15px] text-ink">
-                    <X size={17} className="mt-0.5 shrink-0 text-red-300/80" />
+                  <li key={d} className="flex items-start gap-3 text-[15px] text-body">
+                    <X size={17} className="mt-0.5 shrink-0 text-red-500" />
                     {d}
                   </li>
                 ))}
@@ -140,7 +140,7 @@ export default function Experts() {
         eyebrow="Join the network"
         title={
           <>
-            Five minutes to apply. <span className="serif-accent text-emerald-300">No obligation after.</span>
+            Five minutes to apply. <span className="serif-accent text-accent">No obligation after.</span>
           </>
         }
         body="Tell us where you have worked and what you know. We will reach out when a project matches your background."

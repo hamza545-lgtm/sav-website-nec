@@ -36,7 +36,7 @@ export default function Compliance() {
         eyebrow="Compliance"
         title={
           <>
-            Built so your compliance team <span className="serif-accent text-emerald-300">says yes.</span>
+            Built so your compliance team <span className="serif-accent text-accent">says yes.</span>
           </>
         }
         intro="Expert research only works if everyone can trust the conversation. Our framework is designed around the controls investment firms, consultancies and their counsel expect to see."
@@ -53,11 +53,11 @@ export default function Compliance() {
             <Reveal key={t} delay={(i % 3) * 0.06}>
               <SpotlightCard className="h-full p-7">
                 <div className="flex items-center justify-between">
-                  <Icon size={21} className="text-emerald-300" />
-                  <span className="font-mono text-[11px] text-steel">0{i + 1}</span>
+                  <Icon size={21} className="text-accent" />
+                  <span className="font-mono text-[11px] text-muted">0{i + 1}</span>
                 </div>
                 <h3 className="mt-6 text-[19px] font-semibold">{t}</h3>
-                <p className="mt-2 text-[14.5px] leading-relaxed text-steel">{b}</p>
+                <p className="mt-2 text-[14.5px] leading-relaxed text-muted">{b}</p>
               </SpotlightCard>
             </Reveal>
           ))}
@@ -67,23 +67,23 @@ export default function Compliance() {
       <Section>
         <SectionHeading eyebrow="Lifecycle" title="Compliance is a process, not a checkbox." align="center" />
         <div className="relative mt-16">
-          <div className="absolute left-0 right-0 top-[22px] hidden h-px bg-white/10 lg:block" />
+          <div className="absolute left-0 right-0 top-[22px] hidden h-px bg-fg/10 lg:block" />
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute left-0 right-0 top-[22px] hidden h-px origin-left bg-gradient-to-r from-emerald-600 via-emerald-300 to-emerald-600 shadow-[0_0_10px_#2BC48A] lg:block"
+            className="absolute left-0 right-0 top-[22px] hidden h-px origin-left bg-gradient-to-r from-emerald-600 via-emerald-300 to-emerald-600 lg:block"
           />
           <div className="grid gap-8 lg:grid-cols-5">
             {lifecycle.map(([t, b], i) => (
               <Reveal key={t} delay={0.15 * i}>
                 <div className="relative">
-                  <span className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full border border-emerald-400/50 bg-navy-950 font-mono text-[12px] text-emerald-300">
+                  <span className="relative z-10 flex h-11 w-11 items-center justify-center rounded-full border border-emerald-400/50 bg-page font-mono text-[12px] text-accent">
                     {i + 1}
                   </span>
                   <h3 className="mt-6 text-[18px] font-semibold">{t}</h3>
-                  <p className="mt-2 text-[14.5px] leading-relaxed text-steel">{b}</p>
+                  <p className="mt-2 text-[14.5px] leading-relaxed text-muted">{b}</p>
                 </div>
               </Reveal>
             ))}
@@ -100,14 +100,14 @@ export default function Compliance() {
               intro="Share your expert network policy once. We configure every future project around it."
             />
           </div>
-          <div className="divide-y divide-white/[0.07] rounded-3xl glass">
+          <div className="divide-y divide-line/[0.1] rounded-3xl glass">
             {controls.map(([Icon, t, b], i) => (
               <Reveal key={t} delay={i * 0.05}>
                 <div className="flex gap-5 p-6 sm:p-7">
-                  <Icon size={20} className="mt-1 shrink-0 text-emerald-300" />
+                  <Icon size={20} className="mt-1 shrink-0 text-accent" />
                   <div>
                     <h3 className="text-[17px] font-semibold">{t}</h3>
-                    <p className="mt-1 text-[14.5px] leading-relaxed text-steel">{b}</p>
+                    <p className="mt-1 text-[14.5px] leading-relaxed text-muted">{b}</p>
                   </div>
                 </div>
               </Reveal>
@@ -118,12 +118,12 @@ export default function Compliance() {
 
       <Section>
         <Reveal>
-          <div className="rounded-3xl border border-white/[0.08] p-8 sm:p-12">
+          <div className="rounded-3xl border border-line/[0.11] p-8 sm:p-12">
             <Eyebrow>Standards</Eyebrow>
-            <p className="mt-6 max-w-4xl text-[22px] leading-relaxed text-ink sm:text-[26px]">
+            <p className="mt-6 max-w-4xl text-[22px] leading-relaxed text-body sm:text-[26px]">
               Our research practices are aligned with the{' '}
-              <span className="text-white">ESOMAR/ICC International Code</span> on market, opinion and social research, and our
-              data handling is designed around <span className="text-white">GDPR</span> and <span className="text-white">CCPA</span> principles.
+              <span className="text-fg">ESOMAR/ICC International Code</span> on market, opinion and social research, and our
+              data handling is designed around <span className="text-fg">GDPR</span> and <span className="text-fg">CCPA</span> principles.
             </p>
           </div>
         </Reveal>
@@ -133,7 +133,7 @@ export default function Compliance() {
         eyebrow="Due diligence on us"
         title={
           <>
-            Send us your <span className="serif-accent text-emerald-300">vendor questionnaire.</span>
+            Send us your <span className="serif-accent text-accent">vendor questionnaire.</span>
           </>
         }
         body="We are happy to complete your onboarding documentation and walk your compliance team through our process."

@@ -48,7 +48,7 @@ export const insights = [
         t: 'ol',
         c: [
           '**The brief.** The client describes the question, the profile they want to speak with (role, seniority, company type, geography, recency) and any restrictions, such as companies to exclude.',
-          '**Sourcing.** Recruiters identify candidates who match. Some networks search an existing database first. Others, Savnec included, recruit for each brief through direct outreach so the shortlist fits the question rather than the database.',
+          '**Sourcing.** Recruiters identify candidates who match, from the network and through direct outreach to the companies and roles that hold the answer.',
           '**Screening.** Candidates answer short screening questions written for the project. Good screeners ask for evidence, such as budgets owned or vendors evaluated, rather than self-assessed familiarity.',
           '**Compliance checks.** The network confirms employment history, checks for conflicts of interest, applies the client’s restricted list and has the expert reconfirm their confidentiality obligations.',
           '**Profiles and selection.** The client receives anonymized profiles with screener answers and chooses whom to speak with.',

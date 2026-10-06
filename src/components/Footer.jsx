@@ -42,18 +42,18 @@ export default function Footer() {
   ].filter(([, url]) => url)
 
   return (
-    <footer className="relative mt-10 overflow-hidden border-t border-white/[0.06] bg-navy-950">
+    <footer className="theme-dark relative overflow-hidden bg-page">
       <div className="glow-line absolute inset-x-0 top-0 opacity-70" />
       <div className="container-site grid gap-14 pb-16 pt-20 lg:grid-cols-[1.3fr_2fr]">
         <div>
           <Link to="/" aria-label="Savnec home">
             <Wordmark height={26} />
           </Link>
-          <p className="mt-7 max-w-sm text-[22px] font-medium leading-snug tracking-tight text-white">
+          <p className="mt-7 max-w-sm text-[22px] font-medium leading-snug tracking-tight text-fg">
             {site.tagline}
           </p>
-          <p className="mt-7 flex items-start gap-2 text-[14px] text-steel">
-            <MapPin size={16} className="mt-0.5 shrink-0 text-emerald-300" />
+          <p className="mt-7 flex items-start gap-2 text-[14px] text-muted">
+            <MapPin size={16} className="mt-0.5 shrink-0 text-accent" />
             <span>
               Headquartered in {site.hq}
               {site.address && (
@@ -66,10 +66,10 @@ export default function Footer() {
           </p>
           {site.showEmails && (
             <div className="mt-4 space-y-1 text-[14px]">
-              <a className="block text-ink hover:text-white" href={`mailto:${site.emails.clients}`}>
+              <a className="block text-body hover:text-fg" href={`mailto:${site.emails.clients}`}>
                 {site.emails.clients}
               </a>
-              <a className="block text-ink hover:text-white" href={`mailto:${site.emails.experts}`}>
+              <a className="block text-body hover:text-fg" href={`mailto:${site.emails.experts}`}>
                 {site.emails.experts}
               </a>
             </div>
@@ -82,7 +82,7 @@ export default function Footer() {
                   href={url}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-full border border-white/10 px-4 py-2 text-[13px] text-ink transition-colors hover:border-emerald-400/50 hover:text-white"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-line/[0.12] px-4 py-2 text-[13px] text-body transition-colors hover:border-emerald-400/50 hover:text-fg"
                 >
                   {name}
                   <ArrowUpRight size={13} />
@@ -94,11 +94,11 @@ export default function Footer() {
         <div className="grid grid-cols-2 gap-10 sm:grid-cols-3">
           {cols.map((c) => (
             <div key={c.title}>
-              <h4 className="font-mono text-[11px] uppercase tracking-[0.2em] text-steel">{c.title}</h4>
+              <h4 className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted">{c.title}</h4>
               <ul className="mt-5 space-y-3">
                 {c.links.map(([label, to]) => (
                   <li key={label}>
-                    <Link to={to} className="text-[14.5px] text-ink transition-colors hover:text-white">
+                    <Link to={to} className="text-[14.5px] text-body transition-colors hover:text-fg">
                       {label}
                     </Link>
                   </li>
@@ -116,19 +116,19 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="relative border-t border-white/[0.06]">
-        <div className="container-site flex flex-col gap-4 py-6 text-[13px] text-steel sm:flex-row sm:items-center sm:justify-between">
+      <div className="relative border-t border-line/[0.1]">
+        <div className="container-site flex flex-col gap-4 py-6 text-[13px] text-muted sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} {site.legalName}. All rights reserved.
           </p>
           <div className="flex flex-wrap items-center gap-6">
-            <Link to="/privacy-policy" className="hover:text-white">
+            <Link to="/privacy-policy" className="hover:text-fg">
               Privacy & Cookie Policy
             </Link>
-            <Link to="/terms" className="hover:text-white">
+            <Link to="/terms" className="hover:text-fg">
               Terms & Conditions
             </Link>
-            <Link to="/compliance" className="hover:text-white">
+            <Link to="/compliance" className="hover:text-fg">
               Compliance
             </Link>
           </div>

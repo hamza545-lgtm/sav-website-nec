@@ -7,7 +7,7 @@ export default function NotFound() {
       eyebrow="404"
       title={
         <>
-          This page <span className="serif-accent text-emerald-300">doesn’t exist.</span>
+          This page <span className="serif-accent text-accent">doesn’t exist.</span>
         </>
       }
       intro="The link may be out of date. Everything you need is one click away."

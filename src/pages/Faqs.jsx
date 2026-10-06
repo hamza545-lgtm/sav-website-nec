@@ -14,7 +14,7 @@ export default function Faqs() {
         eyebrow="FAQs"
         title={
           <>
-            Straight <span className="serif-accent text-emerald-300">answers.</span>
+            Straight <span className="serif-accent text-accent">answers.</span>
           </>
         }
         intro="The questions we hear most from clients and experts. If yours is not here, ask us directly."
@@ -27,7 +27,7 @@ export default function Faqs() {
                 <button
                   key={t}
                   onClick={() => setTab(t)}
-                  className={`relative rounded-xl px-5 py-3 text-left text-[15px] transition-colors ${tab === t ? 'text-white' : 'text-steel hover:text-white'}`}
+                  className={`relative rounded-xl px-5 py-3 text-left text-[15px] transition-colors ${tab === t ? 'text-fg' : 'text-muted hover:text-fg'}`}
                 >
                   {tab === t && (
                     <motion.span layoutId="faq-tab" className="absolute inset-0 rounded-xl border border-emerald-400/30 bg-emerald-500/10" />
@@ -47,7 +47,7 @@ export default function Faqs() {
           <div className="mt-20 flex flex-col items-start justify-between gap-6 rounded-3xl p-8 glass sm:flex-row sm:items-center sm:p-10">
             <div>
               <h3 className="text-[22px] font-semibold">Still have a question?</h3>
-              <p className="mt-1 text-[15px] text-steel">We reply within one business day.</p>
+              <p className="mt-1 text-[15px] text-muted">We reply within one business day.</p>
             </div>
             <Button to="/contact">Contact us</Button>
           </div>

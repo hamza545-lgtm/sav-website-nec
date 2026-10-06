@@ -13,9 +13,9 @@ export function FormPage({ eyebrow, title, intro, nextTitle, next, children }) {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease }}>
           <Eyebrow>{eyebrow}</Eyebrow>
           <h1 className="mt-6 text-[42px] font-semibold leading-[1.02] tracking-tightest sm:text-[58px]">{title}</h1>
-          <p className="mt-6 max-w-md text-[17px] leading-relaxed text-steel">{intro}</p>
-          <div className="mt-12 border-t border-white/[0.07] pt-8">
-            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-steel">{nextTitle}</p>
+          <p className="mt-6 max-w-md text-[17px] leading-relaxed text-muted">{intro}</p>
+          <div className="mt-12 border-t border-line/[0.1] pt-8">
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted">{nextTitle}</p>
             <ol className="mt-6 space-y-5">
               {next.map((n, i) => (
                 <motion.li
@@ -23,9 +23,9 @@ export function FormPage({ eyebrow, title, intro, nextTitle, next, children }) {
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3 + i * 0.1 }}
-                  className="flex gap-4 text-[15px] leading-relaxed text-ink"
+                  className="flex gap-4 text-[15px] leading-relaxed text-body"
                 >
-                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-emerald-400/40 bg-emerald-500/10 text-emerald-300">
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-emerald-400/40 bg-emerald-500/10 text-accent">
                     <Check size={12} />
                   </span>
                   {n}
@@ -40,8 +40,8 @@ export function FormPage({ eyebrow, title, intro, nextTitle, next, children }) {
           transition={{ duration: 1, delay: 0.15, ease }}
           className="relative"
         >
-          <div className="absolute -inset-px rounded-[28px] bg-gradient-to-br from-emerald-400/40 via-white/5 to-transparent" />
-          <div className="relative rounded-[28px] bg-navy-900/90 p-7 backdrop-blur-xl sm:p-10">{children}</div>
+          <div className="absolute -inset-px rounded-[28px] bg-gradient-to-br from-emerald-400/40 via-line/5 to-transparent" />
+          <div className="relative rounded-[28px] bg-card/90 p-7 backdrop-blur-xl sm:p-10">{children}</div>
         </motion.div>
       </div>
     </section>
@@ -55,7 +55,7 @@ export default function RequestTrial() {
       eyebrow="Request a trial"
       title={
         <>
-          Send one live brief. <span className="serif-accent text-emerald-300">See the difference.</span>
+          Send one live brief. <span className="serif-accent text-accent">See the difference.</span>
         </>
       }
       intro="Tell us what you are working on. We will scope it with you, recruit for it and share a screened shortlist, so you can judge our work on a real project."

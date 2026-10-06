@@ -18,7 +18,7 @@ export default function Contact() {
         eyebrow="Contact"
         title={
           <>
-            Reach the <span className="serif-accent text-emerald-300">right team</span> first time.
+            Reach the <span className="serif-accent text-accent">right team</span> first time.
           </>
         }
         intro="Choose the route that fits. Every message is read by a person and answered within one business day."
@@ -29,11 +29,11 @@ export default function Contact() {
           {routes.map(({ to, icon: Icon, title, body, cta }, i) => {
             const inner = (
               <div className="flex h-full flex-col p-8">
-                <Icon size={22} className="text-emerald-300" />
+                <Icon size={22} className="text-accent" />
                 <h3 className="mt-6 text-[21px] font-semibold">{title}</h3>
-                <p className="mt-2 text-[15px] leading-relaxed text-steel">{body}</p>
-                <span className="mt-8 inline-flex items-center gap-2 text-[14px] text-white">
-                  {cta} <ArrowUpRight size={15} className="text-emerald-300" />
+                <p className="mt-2 text-[15px] leading-relaxed text-muted">{body}</p>
+                <span className="mt-8 inline-flex items-center gap-2 text-[14px] text-fg">
+                  {cta} <ArrowUpRight size={15} className="text-accent" />
                 </span>
               </div>
             )
@@ -52,12 +52,12 @@ export default function Contact() {
         <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr]">
           <div>
             <h2 className="text-[34px] font-semibold leading-tight sm:text-[42px]">General inquiries</h2>
-            <p className="mt-4 text-[16px] leading-relaxed text-steel">
+            <p className="mt-4 text-[16px] leading-relaxed text-muted">
               For anything that is not a research project or an expert application.
             </p>
-            <div className="mt-10 space-y-5 text-[15px] text-ink">
+            <div className="mt-10 space-y-5 text-[15px] text-body">
               <p className="flex items-start gap-3">
-                <MapPin size={18} className="mt-0.5 shrink-0 text-emerald-300" />
+                <MapPin size={18} className="mt-0.5 shrink-0 text-accent" />
                 <span>
                   {site.legalName}
                   <br />
@@ -65,12 +65,12 @@ export default function Contact() {
                 </span>
               </p>
               <p className="flex items-start gap-3">
-                <Clock size={18} className="mt-0.5 shrink-0 text-emerald-300" />
+                <Clock size={18} className="mt-0.5 shrink-0 text-accent" />
                 Replies within one business day
               </p>
               {site.showEmails && (
                 <p className="pl-8">
-                  <a href={`mailto:${site.emails.general}`} className="text-white hover:text-emerald-200">
+                  <a href={`mailto:${site.emails.general}`} className="text-fg hover:text-accent">
                     {site.emails.general}
                   </a>
                 </p>

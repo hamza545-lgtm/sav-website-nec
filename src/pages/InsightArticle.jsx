@@ -98,13 +98,13 @@ function Article({ article }) {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease }}
-            className="flex items-center gap-2 text-[13px] text-steel"
+            className="flex items-center gap-2 text-[13px] text-muted"
           >
-            <Link to="/insights" className="inline-flex items-center gap-1.5 transition-colors hover:text-white">
+            <Link to="/insights" className="inline-flex items-center gap-1.5 transition-colors hover:text-fg">
               <ArrowLeft size={14} /> Insights
             </Link>
             <span className="text-white/20">/</span>
-            <span className="text-emerald-300">{article.category}</span>
+            <span className="text-accent">{article.category}</span>
           </motion.nav>
           <motion.h1
             initial={{ opacity: 0, y: 24 }}
@@ -118,7 +118,7 @@ function Article({ article }) {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.14, ease }}
-            className="mt-6 max-w-2xl text-[18px] leading-relaxed text-steel"
+            className="mt-6 max-w-2xl text-[18px] leading-relaxed text-muted"
           >
             {article.description}
           </motion.p>
@@ -126,9 +126,9 @@ function Article({ article }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.9, delay: 0.25 }}
-            className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-white/[0.07] pt-6 text-[13.5px] text-steel"
+            className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-line/[0.1] pt-6 text-[13.5px] text-muted"
           >
-            <span className="text-ink">By the Savnec research team</span>
+            <span className="text-body">By the Savnec research team</span>
             <span className="inline-flex items-center gap-1.5">
               <CalendarDays size={14} /> <time dateTime={article.date}>{formatDate(article.date)}</time>
             </span>
@@ -152,8 +152,8 @@ function Article({ article }) {
 
           <div className="mt-16 flex flex-col items-start justify-between gap-6 rounded-3xl p-8 glass sm:flex-row sm:items-center">
             <div>
-              <p className="text-[20px] font-semibold text-white">Have a project in mind?</p>
-              <p className="mt-1 text-[15px] text-steel">Send one live brief and see a screened shortlist within 48 hours.</p>
+              <p className="text-[20px] font-semibold text-fg">Have a project in mind?</p>
+              <p className="mt-1 text-[15px] text-muted">Send one live brief and see a screened shortlist within 48 hours.</p>
             </div>
             <Button to="/request-trial">Request a Trial</Button>
           </div>
@@ -162,18 +162,18 @@ function Article({ article }) {
         {toc.length > 2 && (
           <aside className="hidden lg:block">
             <nav aria-label="On this page" className="sticky top-28">
-              <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-steel">On this page</p>
-              <ul className="mt-4 space-y-1 border-l border-white/[0.08]">
+              <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-muted">On this page</p>
+              <ul className="mt-4 space-y-1 border-l border-line/[0.11]">
                 {[...toc, ...(article.faqs ? [{ id: 'faqs', label: 'FAQs' }] : [])].map((t) => (
                   <li key={t.id}>
                     <button
                       onClick={() => jump(t.id)}
                       className={`relative block w-full py-1.5 pl-4 text-left text-[13.5px] leading-snug transition-colors ${
-                        active === t.id ? 'text-white' : 'text-steel hover:text-ink'
+                        active === t.id ? 'text-fg' : 'text-muted hover:text-body'
                       }`}
                     >
                       {active === t.id && (
-                        <motion.span layoutId="toc-rail" className="absolute -left-px top-0 h-full w-[2px] bg-emerald-300 shadow-[0_0_10px_#2BC48A]" />
+                        <motion.span layoutId="toc-rail" className="absolute -left-px top-0 h-full w-[2px] bg-tick" />
                       )}
                       {t.label}
                     </button>
@@ -193,9 +193,9 @@ function Article({ article }) {
               <Reveal key={a.slug} delay={i * 0.06}>
                 <SpotlightCard className="h-full">
                   <Link to={`/insights/${a.slug}`} className="flex h-full flex-col p-7">
-                    <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-emerald-300">{a.category}</span>
+                    <span className="font-mono text-[10.5px] uppercase tracking-[0.18em] text-accent">{a.category}</span>
                     <h3 className="mt-4 text-[18px] font-semibold leading-snug">{a.title}</h3>
-                    <span className="mt-auto inline-flex items-center gap-1.5 pt-6 text-[13px] text-steel group-hover:text-white">
+                    <span className="mt-auto inline-flex items-center gap-1.5 pt-6 text-[13px] text-muted group-hover:text-fg">
                       {a.readMinutes} min read <ArrowUpRight size={14} />
                     </span>
                   </Link>

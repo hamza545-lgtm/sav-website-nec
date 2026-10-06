@@ -38,4 +38,21 @@ export const site = {
     linkedin: 'https://www.linkedin.com/company/savnec',
     instagram: 'https://www.instagram.com/savnec',
   },
+
+  // ── Proof ────────────────────────────────────────────────
+  // Numbers shown in the "Savnec standard" section on the home page.
+  // Use real figures only. Swap these for your own track record as it grows,
+  // e.g. { value: '120+', label: 'Projects delivered' }.
+  stats: [
+    { value: '10', label: 'Industry verticals covered' },
+    { value: '5', label: 'Regions recruited across' },
+    { value: '6', label: 'Research formats' },
+    { value: '48h', label: 'Typical time to first profiles' },
+  ],
+
+  // Client and expert quotes. The section stays hidden until you add one.
+  // Only publish quotes people actually gave you, with their permission.
+  // Anonymized attribution is normal in this industry, for example:
+  // { quote: 'Their exact words go here.', name: 'Research Director', org: 'B2B research agency, London' },
+  testimonials: [],
 }

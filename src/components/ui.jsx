@@ -70,7 +70,7 @@ export function Reveal({ children, delay = 0, y = 22, className = '', as = 'div'
 export function Eyebrow({ children, className = '' }) {
   return (
     <span className={`eyebrow ${className}`}>
-      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 shadow-[0_0_12px_#2BC48A]" />
+      <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
       {children}
     </span>
   )
@@ -81,9 +81,9 @@ export function Button({ to, href, children, variant = 'primary', className = ''
     'group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-6 py-3 text-[14px] font-medium transition-all duration-300'
   const styles = {
     primary:
-      'bg-emerald-600 text-white shadow-[0_0_0_1px_rgba(107,227,181,0.35),0_10px_40px_-10px_rgba(43,196,138,0.65)] hover:bg-emerald-500 hover:shadow-[0_0_0_1px_rgba(107,227,181,0.6),0_14px_50px_-8px_rgba(43,196,138,0.8)]',
+      'bg-emerald-600 text-white shadow-[0_10px_28px_-14px_rgba(15,110,76,0.75)] hover:bg-emerald-700 hover:shadow-[0_14px_32px_-14px_rgba(15,110,76,0.85)]',
     ghost:
-      'border border-white/15 bg-white/[0.03] text-white backdrop-blur hover:border-emerald-400/50 hover:bg-white/[0.06]',
+      'border border-line/15 bg-card/60 text-fg backdrop-blur hover:border-emerald-500/50 hover:bg-card',
     light: 'bg-white text-navy-900 hover:bg-ink',
   }
   const inner = (
@@ -120,7 +120,7 @@ export function SectionHeading({ eyebrow, title, intro, align = 'left', classNam
       </Reveal>
       {intro && (
         <Reveal delay={0.1}>
-          <p className={`mt-5 text-[17px] leading-relaxed text-steel ${center ? 'mx-auto' : ''} max-w-2xl`}>
+          <p className={`mt-5 text-[17px] leading-relaxed text-muted ${center ? 'mx-auto' : ''} max-w-2xl`}>
             {intro}
           </p>
         </Reveal>
@@ -146,7 +146,7 @@ export function SpotlightCard({ children, className = '' }) {
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
         style={{
           background:
-            'radial-gradient(420px circle at var(--x, 50%) var(--y, 50%), rgba(43,196,138,0.13), transparent 45%)',
+            'radial-gradient(420px circle at var(--x, 50%) var(--y, 50%), rgba(43,196,138,0.08), transparent 45%)',
         }}
       />
       <div className="relative">{children}</div>
@@ -156,10 +156,10 @@ export function SpotlightCard({ children, className = '' }) {
 
 export function GlowBackdrop({ className = '' }) {
   return (
-    <div className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`} aria-hidden="true">
+    <div className={`pointer-events-none absolute inset-0 overflow-hidden [mask-image:linear-gradient(to_bottom,#000_55%,transparent)] ${className}`} aria-hidden="true">
       <div className="grid-bg absolute inset-0" />
-      <div className="absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 animate-drift rounded-full bg-emerald-500/20 blur-[140px]" />
-      <div className="absolute -right-40 top-40 h-[380px] w-[380px] animate-drift rounded-full bg-[#1F4E8C]/30 blur-[120px] [animation-delay:-6s]" />
+      <div className="absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 animate-drift rounded-full bg-emerald-400/[0.13] blur-[140px]" />
+      <div className="absolute -right-40 top-40 h-[380px] w-[380px] animate-drift rounded-full bg-[#1F4E8C]/[0.08] blur-[120px] [animation-delay:-6s]" />
     </div>
   )
 }
@@ -189,7 +189,7 @@ export function PageHero({ eyebrow, title, intro, children }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 0.18, ease }}
-            className="mt-7 max-w-2xl text-[18px] leading-relaxed text-steel"
+            className="mt-7 max-w-2xl text-[18px] leading-relaxed text-muted"
           >
             {intro}
           </motion.p>

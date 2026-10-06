@@ -35,27 +35,28 @@ export default function About() {
         eyebrow="About Savnec"
         title={
           <>
-            A smaller network, <span className="serif-accent text-emerald-300">on purpose.</span>
+            Built around <span className="serif-accent text-accent">the right conversation.</span>
           </>
         }
-        intro="Savnec was founded on a simple observation: the best expert calls come from recruiting for the question, not searching a database. So that is the only way we work."
+        intro="Savnec exists to put research, investment and strategy teams in conversation with the people who know the answer, and to make every one of those conversations safe and worth the time."
       />
 
       <Section>
         <div className="grid gap-16 lg:grid-cols-2">
           <Reveal>
-            <div className="space-y-6 text-[18px] leading-relaxed text-ink">
+            <div className="space-y-6 text-[18px] leading-relaxed text-body">
               <p>
-                Large expert networks are built for scale. That serves some projects well. It also means the expert
-                you speak with is often whoever was already in the system, not the person best placed to answer.
+                Good decisions rest on good evidence, and some of the best evidence sits in people’s heads: the buyer
+                who ran the tender, the operator who built the plant, the clinician who chooses the therapy.
               </p>
               <p>
-                We took the opposite approach. Every Savnec project starts with a blank page and a specialist recruiter
-                who knows the sector. They identify the companies and roles that hold the answer, approach the right
-                people directly, and screen them against your questions before you see a single name.
+                Every Savnec project starts with your question and a recruiter who knows the sector. They identify the
+                companies and roles that hold the answer, approach the right people directly, and screen them against
+                your questions before you see a single name.
               </p>
-              <p className="text-white">
-                The result is fewer profiles, a higher hit rate and calls that move the work forward.
+              <p className="text-fg">
+                Profiles you can trust, conversations that move the work forward, and a team that treats your
+                deadline as its own.
               </p>
             </div>
           </Reveal>
@@ -76,13 +77,13 @@ export default function About() {
                   >
                     <span className="relative flex h-3 w-3">
                       <span className="absolute inline-flex h-full w-full animate-pulseRing rounded-full bg-emerald-400" style={{ animationDelay: `${i * 0.4}s` }} />
-                      <span className="relative inline-flex h-3 w-3 rounded-full bg-emerald-300 shadow-[0_0_12px_#2BC48A]" />
+                      <span className="relative inline-flex h-3 w-3 rounded-full bg-tick" />
                     </span>
-                    <span className="absolute left-1/2 top-5 -translate-x-1/2 whitespace-nowrap text-[12px] text-ink">{name}</span>
+                    <span className="absolute left-1/2 top-5 -translate-x-1/2 whitespace-nowrap text-[12px] text-body">{name}</span>
                   </motion.div>
                 ))}
               </div>
-              <p className="mt-6 border-t border-white/[0.07] pt-6 text-[14.5px] text-steel">
+              <p className="mt-6 border-t border-line/[0.1] pt-6 text-[14.5px] text-muted">
                 Headquartered in {site.hq}. Serving clients and recruiting experts globally.
               </p>
             </div>
@@ -96,9 +97,9 @@ export default function About() {
           {principles.map(([t, b], i) => (
             <Reveal key={t} delay={i * 0.06}>
               <SpotlightCard className="h-full p-8">
-                <span className="font-serif text-[22px] italic text-emerald-300">0{i + 1}</span>
+                <span className="font-serif text-[22px] italic text-accent">0{i + 1}</span>
                 <h3 className="mt-4 text-[22px] font-semibold">{t}</h3>
-                <p className="mt-2 text-[15.5px] leading-relaxed text-steel">{b}</p>
+                <p className="mt-2 text-[15.5px] leading-relaxed text-muted">{b}</p>
               </SpotlightCard>
             </Reveal>
           ))}
@@ -112,11 +113,11 @@ export default function About() {
               <SpotlightCard className="h-full">
                 <Link to={to} className="flex h-full flex-col p-7">
                   <div className="flex items-center justify-between">
-                    <Icon size={20} className="text-emerald-300" />
-                    <ArrowUpRight size={16} className="text-steel transition-colors group-hover:text-emerald-300" />
+                    <Icon size={20} className="text-accent" />
+                    <ArrowUpRight size={16} className="text-muted transition-colors group-hover:text-accent" />
                   </div>
                   <h3 className="mt-8 text-[19px] font-semibold">{t}</h3>
-                  <p className="mt-1.5 text-[14px] text-steel">{b}</p>
+                  <p className="mt-1.5 text-[14px] text-muted">{b}</p>
                 </Link>
               </SpotlightCard>
             </Reveal>

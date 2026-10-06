@@ -41,17 +41,17 @@ function LegalPage({ eyebrow, title, blocks }) {
           </div>
           <aside className="hidden lg:block">
             <nav aria-label="Sections" className="sticky top-28">
-              <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-steel">Sections</p>
-              <ul className="mt-4 max-h-[70vh] space-y-0.5 overflow-y-auto border-l border-white/[0.08]">
+              <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-muted">Sections</p>
+              <ul className="mt-4 max-h-[70vh] space-y-0.5 overflow-y-auto border-l border-line/[0.11]">
                 {toc.map((t) => (
                   <li key={t.id}>
                     <button
                       onClick={() => jump(t.id)}
                       className={`relative block w-full py-1.5 pl-4 text-left text-[13px] leading-snug transition-colors ${
-                        active === t.id ? 'text-white' : 'text-steel hover:text-ink'
+                        active === t.id ? 'text-fg' : 'text-muted hover:text-body'
                       }`}
                     >
-                      {active === t.id && <motion.span layoutId="legal-rail" className="absolute -left-px top-0 h-full w-[2px] bg-emerald-300" />}
+                      {active === t.id && <motion.span layoutId="legal-rail" className="absolute -left-px top-0 h-full w-[2px] bg-tick" />}
                       {t.label}
                     </button>
                   </li>

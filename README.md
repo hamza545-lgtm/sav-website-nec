@@ -41,8 +41,16 @@ Framework preset: **Vite** · Build command: `npm run build` · Output directory
 ## Brand files
 `public/brand/` holds the brand in SVG and PNG:
 - `savnec-wordmark-white` (for dark backgrounds) and `savnec-wordmark-navy` (for white backgrounds)
-- `savnec-icon` / `savnec-icon-512.png` (split-S monogram, also the favicon)
+- `savnec-icon` / `savnec-icon-512.png` (the tick mark, also the favicon)
 - `savnec-social-avatar.png` (LinkedIn / Instagram profile picture)
 - `savnec-linkedin-banner.png` (1584 × 396)
 
-The wordmark is outlined from Inter Display SemiBold: "Sav" in white or navy, "nec" in emerald.
+The wordmark is lowercase "savnec" outlined from Inter Display SemiBold, with the v drawn as a rising emerald tick.
+
+## Theme
+The site is light by default. Colors are tokens in `src/index.css` (`--page`, `--fg`, `--accent` and so on).
+Add the class `theme-dark` to any section to make it navy; everything inside adapts automatically.
+
+## Proof
+Home-page stats and testimonials live in `src/config/site.js` (`stats`, `testimonials`).
+The testimonials section stays hidden until you add a real quote.

@@ -2,7 +2,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Check, LoaderCircle, ShieldCheck, Search, Filter, CalendarCheck, FileText } from 'lucide-react'
 import { Button, Reveal, Eyebrow } from './ui.jsx'
-import { Monogram } from './Logo.jsx'
+import { Mark } from './Logo.jsx'
 
 /* ─────────────── Network map (hero) ─────────────── */
 
@@ -39,7 +39,7 @@ function Pulse({ d }) {
     }
   }, [])
   return (
-    <circle r="3.2" fill="#6BE3B5" style={{ filter: 'drop-shadow(0 0 6px #2BC48A)' }}>
+    <circle r="3.4" fill="#16916A" style={{ filter: 'drop-shadow(0 0 5px rgba(22,145,106,0.6))' }}>
       <animateMotion ref={ref} dur="1.4s" begin="indefinite" fill="freeze" path={d} />
     </circle>
   )
@@ -57,13 +57,13 @@ export function NetworkMap() {
       <svg viewBox="0 0 600 520" className="absolute inset-0 h-full w-full" fill="none">
         <defs>
           <radialGradient id="hubGlow">
-            <stop offset="0" stopColor="#2BC48A" stopOpacity="0.55" />
+            <stop offset="0" stopColor="#2BC48A" stopOpacity="0.3" />
             <stop offset="1" stopColor="#2BC48A" stopOpacity="0" />
           </radialGradient>
           <linearGradient id="lineGrad" x1="0" x2="1">
-            <stop offset="0" stopColor="#6BE3B5" stopOpacity="0.1" />
-            <stop offset="0.5" stopColor="#6BE3B5" stopOpacity="0.9" />
-            <stop offset="1" stopColor="#6BE3B5" stopOpacity="0.1" />
+            <stop offset="0" stopColor="#16916A" stopOpacity="0.15" />
+            <stop offset="0.5" stopColor="#16916A" stopOpacity="0.95" />
+            <stop offset="1" stopColor="#16916A" stopOpacity="0.15" />
           </linearGradient>
         </defs>
 
@@ -86,7 +86,7 @@ export function NetworkMap() {
 
         {nodes.map((n, i) => (
           <g key={i}>
-            <path d={curve(hub, n)} stroke="#8892A0" strokeOpacity="0.18" strokeWidth="1" />
+            <path d={curve(hub, n)} stroke="#0A192F" strokeOpacity="0.1" strokeWidth="1" />
             <motion.path
               d={curve(hub, n)}
               stroke="url(#lineGrad)"
@@ -112,9 +112,9 @@ export function NetworkMap() {
         className="absolute -translate-x-1/2 -translate-y-1/2"
         style={{ left: `${(hub.x / 600) * 100}%`, top: `${(hub.y / 520) * 100}%` }}
       >
-        <span className="absolute inset-0 m-auto h-14 w-14 animate-pulseRing rounded-2xl border border-emerald-300/50" />
-        <div className="relative rounded-2xl p-1.5 glass shadow-[0_0_60px_-10px_rgba(43,196,138,0.8)]">
-          <Monogram size={52} />
+        <span className="absolute inset-0 m-auto h-14 w-14 animate-pulseRing rounded-2xl border border-emerald-500/40" />
+        <div className="relative rounded-2xl p-1.5 glass shadow-[0_0_50px_-12px_rgba(22,145,106,0.45)]">
+          <Mark size={52} />
         </div>
       </div>
 
@@ -133,9 +133,9 @@ export function NetworkMap() {
               active === i ? '!border-emerald-400/60 shadow-[0_0_30px_-6px_rgba(43,196,138,0.7)]' : ''
             }`}
           >
-            <span className={`h-1.5 w-1.5 rounded-full ${active === i ? 'bg-emerald-300' : 'bg-steel/60'}`} />
-            <span className="text-white">{n.label}</span>
-            <span className="hidden text-steel sm:inline">· {n.sub}</span>
+            <span className={`h-1.5 w-1.5 rounded-full ${active === i ? 'bg-tick' : 'bg-muted/60'}`} />
+            <span className="text-fg">{n.label}</span>
+            <span className="hidden text-muted sm:inline">· {n.sub}</span>
           </div>
         </motion.div>
       ))}
@@ -169,20 +169,20 @@ export function EngagementConsole() {
 
   return (
     <div className="relative rounded-3xl p-[1px]">
-      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-emerald-400/40 via-white/5 to-transparent" />
-      <div className="relative overflow-hidden rounded-3xl bg-navy-900/90 backdrop-blur-xl">
-        <div className="flex items-center justify-between border-b border-white/[0.06] px-6 py-4">
+      <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-emerald-400/40 via-line/5 to-transparent" />
+      <div className="relative overflow-hidden rounded-3xl bg-card/90 backdrop-blur-xl">
+        <div className="flex items-center justify-between border-b border-line/[0.1] px-6 py-4">
           <div className="flex items-center gap-2">
-            <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
-            <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
-            <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
+            <span className="h-2.5 w-2.5 rounded-full bg-fg/10" />
+            <span className="h-2.5 w-2.5 rounded-full bg-fg/10" />
+            <span className="h-2.5 w-2.5 rounded-full bg-fg/10" />
           </div>
-          <span className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-steel">Sample engagement</span>
+          <span className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-muted">Sample engagement</span>
         </div>
 
         <div className="grid gap-0 md:grid-cols-[1.05fr_1fr]">
-          <div className="border-b border-white/[0.06] p-6 md:border-b-0 md:border-r">
-            <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-steel">Project status</p>
+          <div className="border-b border-line/[0.1] p-6 md:border-b-0 md:border-r">
+            <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-muted">Project status</p>
             <ul className="mt-5 space-y-4">
               {stages.map((s, i) => {
                 const state = i < step ? 'done' : i === step ? 'active' : 'idle'
@@ -192,10 +192,10 @@ export function EngagementConsole() {
                     <span
                       className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border transition-all duration-500 ${
                         state === 'done'
-                          ? 'border-emerald-400/50 bg-emerald-500/15 text-emerald-300'
+                          ? 'border-emerald-400/50 bg-emerald-500/15 text-accent'
                           : state === 'active'
-                          ? 'border-white/20 bg-white/5 text-white'
-                          : 'border-white/[0.06] text-steel/50'
+                          ? 'border-line/20 bg-fg/5 text-fg'
+                          : 'border-line/[0.1] text-muted/50'
                       }`}
                     >
                       {state === 'done' ? (
@@ -207,10 +207,10 @@ export function EngagementConsole() {
                       )}
                     </span>
                     <span>
-                      <span className={`block text-[14px] transition-colors ${state === 'idle' ? 'text-steel/60' : 'text-white'}`}>
+                      <span className={`block text-[14px] transition-colors ${state === 'idle' ? 'text-muted/60' : 'text-fg'}`}>
                         {s.label}
                       </span>
-                      <span className={`block text-[12.5px] transition-colors ${state === 'idle' ? 'text-steel/40' : 'text-steel'}`}>
+                      <span className={`block text-[12.5px] transition-colors ${state === 'idle' ? 'text-muted/40' : 'text-muted'}`}>
                         {s.meta}
                       </span>
                     </span>
@@ -221,7 +221,7 @@ export function EngagementConsole() {
           </div>
 
           <div className="p-6">
-            <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-steel">Shortlist</p>
+            <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-muted">Shortlist</p>
             <div className="mt-5 space-y-3">
               <AnimatePresence>
                 {profiles.map(
@@ -233,15 +233,15 @@ export function EngagementConsole() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.45 }}
-                        className="rounded-xl border border-white/[0.07] bg-white/[0.02] p-3.5"
+                        className="rounded-xl border border-line/[0.1] bg-fg/[0.02] p-3.5"
                       >
                         <div className="flex items-center gap-3">
-                          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-navy-700 to-navy-800 font-mono text-[11px] text-white">
+                          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-sunk font-mono text-[11px] text-fg">
                             {p.initials}
                           </span>
                           <div className="min-w-0 flex-1">
-                            <p className="truncate text-[13px] text-white">{p.role}</p>
-                            <p className="truncate text-[12px] text-steel">
+                            <p className="truncate text-[13px] text-fg">{p.role}</p>
+                            <p className="truncate text-[12px] text-muted">
                               {p.org} · {p.yrs}
                             </p>
                           </div>
@@ -249,7 +249,7 @@ export function EngagementConsole() {
                             <motion.span
                               initial={{ opacity: 0, scale: 0.6 }}
                               animate={{ opacity: 1, scale: 1 }}
-                              className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500/20 text-emerald-300"
+                              className="flex h-6 w-6 items-center justify-center rounded-full bg-emerald-500/20 text-accent"
                             >
                               <ShieldCheck size={13} />
                             </motion.span>
@@ -262,12 +262,12 @@ export function EngagementConsole() {
               {step < 2 && (
                 <div className="space-y-3">
                   {[0, 1, 2].map((k) => (
-                    <div key={k} className="h-[62px] animate-pulse rounded-xl border border-white/[0.04] bg-white/[0.015]" />
+                    <div key={k} className="h-[62px] animate-pulse rounded-xl border border-line/[0.08] bg-fg/[0.015]" />
                   ))}
                 </div>
               )}
             </div>
-            <p className="mt-5 text-[11.5px] leading-relaxed text-steel/70">
+            <p className="mt-5 text-[11.5px] leading-relaxed text-muted/70">
               Illustrative example. Profiles are anonymized and shared with clients only after screening.
             </p>
           </div>
@@ -286,13 +286,13 @@ export function Marquee({ items }) {
     <div className="group relative overflow-hidden py-6 [mask-image:linear-gradient(90deg,transparent,#000_10%,#000_90%,transparent)]">
       <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused]">
         {row.map((t, i) => (
-          <span key={i} className="flex items-center whitespace-nowrap pr-12 text-[15px] text-steel" aria-hidden={i >= items.length}>
+          <span key={i} className="flex items-center whitespace-nowrap pr-12 text-[15px] text-muted" aria-hidden={i >= items.length}>
             {typeof t === 'string' ? (
               t
             ) : (
               <span className="flex items-baseline gap-2.5">
-                <span className="font-semibold tracking-tight text-emerald-300">{t.k}</span>
-                <span className="text-ink">{t.v}</span>
+                <span className="font-semibold tracking-tight text-accent">{t.k}</span>
+                <span className="text-body">{t.v}</span>
               </span>
             )}
             <span className="ml-12 h-1 w-1 rotate-45 bg-emerald-400/70" />
@@ -310,7 +310,7 @@ export function CtaBand({
   title = (
     <>
       Bring us the question
-      <br className="hidden sm:block" /> <span className="serif-accent text-emerald-300">you can’t answer from a desk.</span>
+      <br className="hidden sm:block" /> <span className="serif-accent text-accent">you can’t answer from a desk.</span>
     </>
   ),
   body = 'Tell us what you need to learn. We will come back with screened experts, usually within 48 hours.',
@@ -319,7 +319,7 @@ export function CtaBand({
     <section className="relative py-24 sm:py-32">
       <div className="container-site">
         <Reveal>
-          <div className="noise relative overflow-hidden rounded-[32px] border border-white/10 px-8 py-16 sm:px-16 sm:py-20">
+          <div className="theme-dark noise relative overflow-hidden rounded-[32px] border border-line/[0.12] bg-page px-8 py-16 sm:px-16 sm:py-20">
             <div className="absolute inset-0 bg-gradient-to-br from-emerald-700/50 via-navy-900 to-navy-950" />
             <div className="grid-bg absolute inset-0 opacity-60" />
             <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-emerald-400/25 blur-[100px]" />
@@ -327,7 +327,7 @@ export function CtaBand({
               <div>
                 <Eyebrow>{eyebrow}</Eyebrow>
                 <h2 className="mt-5 text-[34px] font-semibold leading-[1.06] sm:text-[52px]">{title}</h2>
-                <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-ink/80">{body}</p>
+                <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-body">{body}</p>
               </div>
               <div className="flex flex-col gap-3 sm:flex-row lg:flex-col lg:items-end">
                 <Button to="/request-trial">Request a Trial</Button>

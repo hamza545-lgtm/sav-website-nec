@@ -11,7 +11,7 @@ export default function JoinNetwork() {
       eyebrow="Join the network"
       title={
         <>
-          Put your experience <span className="serif-accent text-emerald-300">to work.</span>
+          Put your experience <span className="serif-accent text-accent">to work.</span>
         </>
       }
       intro="Free to join, no minimum commitment. We contact you only when a project genuinely matches your background."

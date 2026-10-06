@@ -17,17 +17,17 @@ const values = [
 ]
 
 export default function Careers() {
-  useSeo('Careers', 'Join Savnec. We are building an expert network that recruits for the question, not the database.')
+  useSeo('Careers', 'Careers at Savnec. Help research, investment and strategy teams reach the people who know the answer.')
   return (
     <>
       <PageHero
         eyebrow="Careers"
         title={
           <>
-            Do the work <span className="serif-accent text-emerald-300">the big networks skip.</span>
+            Find the person <span className="serif-accent text-accent">who knows.</span>
           </>
         }
-        intro="We hire deliberately and only when we need to. If you would be good at this, tell us now and we will be in touch when the right seat opens."
+        intro="Our work is finding the right expert for every question, and doing it properly. If that sounds like you, tell us now and we will be in touch when the right seat opens."
       />
 
       <Section className="!pt-0">
@@ -36,9 +36,9 @@ export default function Careers() {
           {tracks.map(([Icon, t, b], i) => (
             <Reveal key={t} delay={i * 0.06}>
               <SpotlightCard className="h-full p-8">
-                <Icon size={22} className="text-emerald-300" />
+                <Icon size={22} className="text-accent" />
                 <h3 className="mt-6 text-[20px] font-semibold">{t}</h3>
-                <p className="mt-2 text-[15px] leading-relaxed text-steel">{b}</p>
+                <p className="mt-2 text-[15px] leading-relaxed text-muted">{b}</p>
               </SpotlightCard>
             </Reveal>
           ))}
@@ -52,8 +52,8 @@ export default function Careers() {
             <ul className="mt-10 space-y-5">
               {values.map((v) => (
                 <Reveal key={v}>
-                  <li className="flex gap-4 text-[16px] leading-relaxed text-ink">
-                    <Sprout size={18} className="mt-1 shrink-0 text-emerald-300" />
+                  <li className="flex gap-4 text-[16px] leading-relaxed text-body">
+                    <Sprout size={18} className="mt-1 shrink-0 text-accent" />
                     {v}
                   </li>
                 </Reveal>
@@ -63,7 +63,7 @@ export default function Careers() {
           <Reveal delay={0.1}>
             <div className="rounded-3xl p-7 glass sm:p-10">
               <h3 className="text-[22px] font-semibold">Open application</h3>
-              <p className="mb-8 mt-2 text-[14.5px] text-steel">Tell us who you are and which track interests you.</p>
+              <p className="mb-8 mt-2 text-[14.5px] text-muted">Tell us who you are and which track interests you.</p>
               <Web3Form
                 accessKey={site.web3forms.general}
                 subject="Careers: open application"
