@@ -90,14 +90,11 @@ export function Button({ to, href, children, variant = 'primary', className = ''
     primary:
       'bg-emerald-600 text-white shadow-[0_10px_28px_-14px_rgba(15,110,76,0.75)] hover:bg-emerald-700 hover:shadow-[0_14px_32px_-14px_rgba(15,110,76,0.85)]',
     ghost:
-      'border border-line/15 bg-card/60 text-fg backdrop-blur hover:border-emerald-500/50 hover:bg-card',
+      'border border-line/15 bg-card text-fg hover:border-emerald-500/50',
     light: 'bg-white text-navy-900 hover:bg-ink',
   }
   const inner = (
     <>
-      {variant === 'primary' && (
-        <span className="btn-shine pointer-events-none absolute inset-0 animate-shimmer opacity-60" />
-      )}
       <span className="relative">{children}</span>
       {icon && (
         <ArrowRight
@@ -165,28 +162,27 @@ export function GlowBackdrop({ className = '' }) {
   return (
     <div className={`pointer-events-none absolute inset-0 overflow-hidden [mask-image:linear-gradient(to_bottom,#000_55%,transparent)] ${className}`} aria-hidden="true">
       <div className="grid-bg absolute inset-0" />
-      <div className="absolute -top-40 left-1/2 h-[560px] w-[900px] -translate-x-1/2 animate-drift rounded-full bg-emerald-400/[0.13] blur-[140px]" />
-      <div className="absolute -right-40 top-40 h-[380px] w-[380px] animate-drift rounded-full bg-[#1F4E8C]/[0.08] blur-[120px] [animation-delay:-6s]" />
+      <div className="soft-glow absolute inset-0" />
     </div>
   )
 }
 
 export function PageHero({ eyebrow, title, intro, children }) {
   return (
-    <section className="noise relative overflow-hidden pb-20 pt-40 sm:pb-28 sm:pt-48">
+    <section className="relative overflow-hidden pb-20 pt-40 sm:pb-28 sm:pt-48">
       <GlowBackdrop />
       <div className="container-site relative">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease }}
+          transition={{ duration: 0.6, ease }}
         >
           <Eyebrow>{eyebrow}</Eyebrow>
         </motion.div>
         <motion.h1
           initial={{ opacity: 0, y: 26 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.08, ease }}
+          transition={{ duration: 0.6, delay: 0.04, ease }}
           className="mt-6 max-w-4xl text-[44px] font-semibold leading-[1.02] tracking-tightest sm:text-[68px]"
         >
           {title}
@@ -195,7 +191,7 @@ export function PageHero({ eyebrow, title, intro, children }) {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.18, ease }}
+            transition={{ duration: 0.6, delay: 0.09, ease }}
             className="mt-7 max-w-2xl text-[18px] leading-relaxed text-muted"
           >
             {intro}
@@ -205,7 +201,7 @@ export function PageHero({ eyebrow, title, intro, children }) {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, delay: 0.28, ease }}
+            transition={{ duration: 0.6, delay: 0.14, ease }}
             className="mt-10"
           >
             {children}

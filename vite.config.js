@@ -21,4 +21,17 @@ function prerenderPages() {
 
 export default defineConfig({
   plugins: [react(), prerenderPages()],
+  build: {
+    target: 'es2020',
+    cssCodeSplit: true,
+    rollupOptions: {
+      output: {
+        // Long-lived vendor chunks: they rarely change, so returning visitors keep them cached.
+        manualChunks: {
+          react: ['react', 'react-dom', 'react-router-dom'],
+          motion: ['framer-motion'],
+        },
+      },
+    },
+  },
 })

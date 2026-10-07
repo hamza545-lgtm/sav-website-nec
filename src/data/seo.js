@@ -37,7 +37,7 @@ export const pageMeta = {
   '/about': {
     title: 'About',
     description:
-      'Savnec is an expert network headquartered in Delaware, connecting research, investment and strategy teams worldwide with the people who know the answer.',
+      'Savnec is an expert network based in Dover, Delaware, connecting research, investment and strategy teams worldwide with the people who know the answer.',
   },
   '/insights': {
     title: 'Insights',

@@ -6,6 +6,7 @@ import { PageHero, Button, Section, SectionHeading, Reveal, SpotlightCard, Eyebr
 import { CtaBand } from '../components/Visuals.jsx'
 import { formats, useCases } from '../data/content.js'
 import { ucSlug } from '../components/Navbar.jsx'
+import { EmailLine } from '../components/ContactInfo.jsx'
 
 const formatIcons = { 'expert-calls': Phone, 'b2b-surveys': ListChecks, 'focus-groups': Users, 'custom-recruitment': Network, ethnography: NotebookPen, 'ai-experts': Brain }
 
@@ -28,7 +29,7 @@ const commitments = [
 function ProfileCard() {
   return (
     <div className="relative">
-      <div className="absolute -inset-6 rounded-[40px] bg-emerald-500/10 blur-3xl" />
+      <div className="glow-blob absolute -inset-16 opacity-50" />
       <div className="relative rounded-3xl p-7 glass">
         <div className="flex items-center justify-between">
           <span className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-muted">Expert profile</span>
@@ -101,6 +102,7 @@ export default function Clients() {
             Our compliance framework
           </Button>
         </div>
+        <EmailLine who="clients" label="Prefer email? Write to" className="mt-6" />
       </PageHero>
 
       <Section id="formats">

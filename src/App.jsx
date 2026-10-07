@@ -1,37 +1,73 @@
-import { useEffect } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion'
 import Navbar from './components/Navbar.jsx'
 import Footer from './components/Footer.jsx'
 import Home from './pages/Home.jsx'
-import Clients from './pages/Clients.jsx'
-import Experts from './pages/Experts.jsx'
-import Industries from './pages/Industries.jsx'
-import Compliance from './pages/Compliance.jsx'
-import About from './pages/About.jsx'
-import Insights from './pages/Insights.jsx'
-import InsightArticle from './pages/InsightArticle.jsx'
-import Faqs from './pages/Faqs.jsx'
-import Careers from './pages/Careers.jsx'
-import Contact from './pages/Contact.jsx'
-import RequestTrial from './pages/RequestTrial.jsx'
-import JoinNetwork from './pages/JoinNetwork.jsx'
-import { Privacy, Terms } from './pages/Legal.jsx'
-import NotFound from './pages/NotFound.jsx'
+
+// Home ships with the first load; every other page loads on demand and is
+// prefetched quietly once the browser is idle, so navigation stays instant.
+const pages = {
+  clients: () => import('./pages/Clients.jsx'),
+  experts: () => import('./pages/Experts.jsx'),
+  industries: () => import('./pages/Industries.jsx'),
+  compliance: () => import('./pages/Compliance.jsx'),
+  about: () => import('./pages/About.jsx'),
+  insights: () => import('./pages/Insights.jsx'),
+  article: () => import('./pages/InsightArticle.jsx'),
+  faqs: () => import('./pages/Faqs.jsx'),
+  careers: () => import('./pages/Careers.jsx'),
+  contact: () => import('./pages/Contact.jsx'),
+  trial: () => import('./pages/RequestTrial.jsx'),
+  join: () => import('./pages/JoinNetwork.jsx'),
+  legal: () => import('./pages/Legal.jsx'),
+  notFound: () => import('./pages/NotFound.jsx'),
+}
+const Clients = lazy(pages.clients)
+const Experts = lazy(pages.experts)
+const Industries = lazy(pages.industries)
+const Compliance = lazy(pages.compliance)
+const About = lazy(pages.about)
+const Insights = lazy(pages.insights)
+const InsightArticle = lazy(pages.article)
+const Faqs = lazy(pages.faqs)
+const Careers = lazy(pages.careers)
+const Contact = lazy(pages.contact)
+const RequestTrial = lazy(pages.trial)
+const JoinNetwork = lazy(pages.join)
+const Privacy = lazy(() => pages.legal().then((m) => ({ default: m.Privacy })))
+const Terms = lazy(() => pages.legal().then((m) => ({ default: m.Terms })))
+const NotFound = lazy(pages.notFound)
+
+function usePrefetchPages() {
+  useEffect(() => {
+    if (navigator.connection?.saveData) return
+    const run = () => Object.values(pages).forEach((load) => load().catch(() => {}))
+    const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1500))
+    const start = () => idle(run, { timeout: 4000 })
+    if (document.readyState === 'complete') start()
+    else window.addEventListener('load', start, { once: true })
+  }, [])
+}
 
 function ScrollManager() {
   const { pathname, hash } = useLocation()
   useEffect(() => {
     if (hash) {
-      const id = hash.slice(1)
-      const t = setTimeout(() => {
+      // Wait for the page (which may still be loading) to render the target, then scroll to it.
+      const id = decodeURIComponent(hash.slice(1))
+      let tries = 0
+      const t = setInterval(() => {
         const el = document.getElementById(id)
-        if (el) {
-          const y = el.getBoundingClientRect().top + window.scrollY - 96
-          window.scrollTo({ top: y, behavior: 'smooth' })
+        if (el || ++tries > 30) {
+          clearInterval(t)
+          if (el) {
+            const y = el.getBoundingClientRect().top + window.scrollY - 96
+            window.scrollTo({ top: y, behavior: 'smooth' })
+          }
         }
-      }, 650)
-      return () => clearTimeout(t)
+      }, 120)
+      return () => clearInterval(t)
     }
     window.scrollTo({ top: 0, behavior: 'instant' })
   }, [pathname, hash])
@@ -51,12 +87,13 @@ function ScrollProgress() {
 
 export default function App() {
   const location = useLocation()
+  usePrefetchPages()
   return (
     <div className="relative min-h-screen overflow-x-clip">
       <ScrollManager />
       <ScrollProgress />
       <Navbar />
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="wait" initial={false}>
         <motion.main
           key={location.pathname}
           initial={{ opacity: 0, y: 14 }}
@@ -64,6 +101,7 @@ export default function App() {
           exit={{ opacity: 0, y: -10 }}
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
         >
+          <Suspense fallback={<div className="min-h-screen" />}>
           <Routes location={location}>
             <Route path="/" element={<Home />} />
             <Route path="/clients" element={<Clients />} />
@@ -84,6 +122,7 @@ export default function App() {
             <Route path="/terms" element={<Terms />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
+          </Suspense>
         </motion.main>
       </AnimatePresence>
       <Footer />

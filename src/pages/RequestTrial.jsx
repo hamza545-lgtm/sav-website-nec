@@ -3,17 +3,19 @@ import { Check } from 'lucide-react'
 import { GlowBackdrop, Eyebrow, ease, usePageSeo } from '../components/ui.jsx'
 import Web3Form from '../components/Form.jsx'
 import { site } from '../config/site.js'
+import { EmailLine } from '../components/ContactInfo.jsx'
 import { industries, formats } from '../data/content.js'
 
-export function FormPage({ eyebrow, title, intro, nextTitle, next, children }) {
+export function FormPage({ eyebrow, title, intro, nextTitle, next, emailWho, children }) {
   return (
-    <section className="noise relative overflow-hidden pb-28 pt-36 sm:pt-44">
+    <section className="relative overflow-hidden pb-28 pt-36 sm:pt-44">
       <GlowBackdrop />
       <div className="container-site relative grid gap-14 lg:grid-cols-[0.85fr_1.15fr]">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease }}>
           <Eyebrow>{eyebrow}</Eyebrow>
           <h1 className="mt-6 text-[42px] font-semibold leading-[1.02] tracking-tightest sm:text-[58px]">{title}</h1>
           <p className="mt-6 max-w-md text-[17px] leading-relaxed text-muted">{intro}</p>
+          {emailWho && <EmailLine who={emailWho} className="mt-4" />}
           <div className="mt-12 border-t border-line/[0.1] pt-8">
             <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted">{nextTitle}</p>
             <ol className="mt-6 space-y-5">
@@ -41,7 +43,7 @@ export function FormPage({ eyebrow, title, intro, nextTitle, next, children }) {
           className="relative"
         >
           <div className="absolute -inset-px rounded-[28px] bg-gradient-to-br from-emerald-400/40 via-line/5 to-transparent" />
-          <div className="relative rounded-[28px] bg-card/90 p-7 backdrop-blur-xl sm:p-10">{children}</div>
+          <div className="relative rounded-[28px] bg-card p-7 sm:p-10">{children}</div>
         </motion.div>
       </div>
     </section>
@@ -59,6 +61,7 @@ export default function RequestTrial() {
         </>
       }
       intro="Tell us what you are working on. We will scope it with you, recruit for it and share a screened shortlist, so you can judge our work on a real project."
+      emailWho="clients"
       nextTitle="What happens next"
       next={[
         'We reply within one business day to confirm scope and any compliance requirements.',

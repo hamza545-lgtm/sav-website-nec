@@ -45,7 +45,7 @@ const nav = [
 
 const mobileLinks = {
   clients: [
-    { to: '/clients', label: 'How we work' },
+    { to: '/clients#use-cases', label: 'Who we serve' },
     ...formats.map((f) => ({ to: `/clients#${f.id}`, label: f.title })),
     { to: '/request-trial', label: 'Request a Trial' },
   ],
@@ -152,7 +152,7 @@ function Dropdown({ type, onClose }) {
       style={{ x: type === 'clients' ? 0 : '-50%' }}
       className={`absolute top-full z-50 pt-4 ${type === 'clients' ? '-left-3' : 'left-1/2'}`}
     >
-      <div className="rounded-2xl border border-line/[0.12] bg-card/95 p-2 shadow-[0_30px_80px_-20px_rgba(10,25,47,0.18)] backdrop-blur-xl">
+      <div className="rounded-2xl border border-line/[0.12] bg-card p-2 shadow-[0_30px_80px_-20px_rgba(10,25,47,0.18)]">
         <Panel onClose={onClose} />
       </div>
     </motion.div>
@@ -193,7 +193,7 @@ export default function Navbar() {
       <div
         className={`transition-all duration-500 ${
           scrolled
-            ? 'border-b border-line/[0.1] bg-page/70 backdrop-blur-xl'
+            ? 'border-b border-line/[0.1] bg-page/[0.96]'
             : 'border-b border-transparent bg-transparent'
         }`}
       >
@@ -264,7 +264,7 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 top-[72px] z-40 overflow-y-auto bg-page/95 backdrop-blur-xl lg:hidden"
+            className="fixed inset-0 top-[72px] z-40 overflow-y-auto bg-page lg:hidden"
           >
             <div className="container-site py-6">
               {nav.map((item, i) => (

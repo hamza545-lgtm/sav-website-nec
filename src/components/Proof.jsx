@@ -70,7 +70,7 @@ export function Testimonials() {
         {quotes.map((q, i) => (
           <Reveal key={i} delay={i * 0.07}>
             <figure className="flex h-full flex-col rounded-3xl border border-line/[0.08] bg-card p-8">
-              <span className="font-serif text-[56px] leading-none text-accent" aria-hidden="true">
+              <span className="font-serif text-[56px] italic leading-none text-accent" aria-hidden="true">
                 &ldquo;
               </span>
               <blockquote className="mt-2 flex-1 text-[17px] leading-relaxed text-fg">{q.quote}</blockquote>

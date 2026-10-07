@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
-import { ArrowUpRight, Building, UserPlus, MessageCircle, MapPin, Clock } from 'lucide-react'
+import { ArrowUpRight, Building, UserPlus, MessageCircle, Clock } from 'lucide-react'
 import { PageHero, Section, Reveal, SpotlightCard, usePageSeo } from '../components/ui.jsx'
 import Web3Form from '../components/Form.jsx'
 import { site } from '../config/site.js'
+import { Address, EmailCards, EmailLine } from '../components/ContactInfo.jsx'
 
 const routes = [
   { to: '/request-trial', icon: Building, title: 'I need experts', body: 'Start a trial project or discuss an upcoming brief.', cta: 'Request a Trial' },
@@ -46,6 +47,14 @@ export default function Contact() {
             )
           })}
         </div>
+        {site.showEmails && (
+          <Reveal delay={0.1}>
+            <div className="mt-12">
+              <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.2em] text-muted">Or email the right team directly</p>
+              <EmailCards />
+            </div>
+          </Reveal>
+        )}
       </Section>
 
       <Section id="general">
@@ -55,26 +64,13 @@ export default function Contact() {
             <p className="mt-4 text-[16px] leading-relaxed text-muted">
               For anything that is not a research project or an expert application.
             </p>
-            <div className="mt-10 space-y-5 text-[15px] text-body">
-              <p className="flex items-start gap-3">
-                <MapPin size={18} className="mt-0.5 shrink-0 text-accent" />
-                <span>
-                  {site.legalName}
-                  <br />
-                  {site.address || site.hq}
-                </span>
-              </p>
-              <p className="flex items-start gap-3">
-                <Clock size={18} className="mt-0.5 shrink-0 text-accent" />
+            <div className="mt-10 space-y-6">
+              <Address className="text-[15px]" />
+              <EmailLine who="general" label="Email" />
+              <p className="flex items-center gap-2.5 text-[14px] text-muted">
+                <Clock size={16} className="shrink-0 text-accent" />
                 Replies within one business day
               </p>
-              {site.showEmails && (
-                <p className="pl-8">
-                  <a href={`mailto:${site.emails.general}`} className="text-fg hover:text-accent">
-                    {site.emails.general}
-                  </a>
-                </p>
-              )}
             </div>
           </div>
           <Reveal>

@@ -15,7 +15,7 @@ export const privacyBlocks = (email) => [
   { t: 'h2', c: '1. Who we are' },
   {
     t: 'p',
-    c: 'Savnec LLC (“Savnec”, “we”, “us”) is an expert network headquartered in Delaware, United States. We connect organizations (“clients”) with industry professionals (“experts”) for research engagements. Savnec is the controller of the personal information described in this Policy.',
+    c: 'Savnec LLC (“Savnec”, “we”, “us”) is an expert network with its principal address at 8 The Green, Dover, DE 19901, United States. We connect organizations (“clients”) with industry professionals (“experts”) for research engagements. Savnec is the controller of the personal information described in this Policy.',
   },
   {
     t: 'p',
@@ -191,7 +191,7 @@ export const privacyBlocks = (email) => [
   { t: 'h2', c: '14. Contact us' },
   {
     t: 'p',
-    c: `Savnec LLC, Delaware, United States. Email **${email}** or use our [contact form](/contact).`,
+    c: `Savnec LLC, 8 The Green, Dover, DE 19901, United States. Email **${email}** or use our [contact form](/contact).`,
   },
 ]
 

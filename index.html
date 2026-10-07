@@ -22,7 +22,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Instrument+Serif:ital@1&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -32,13 +32,29 @@
         "url": "https://www.savnec.com",
         "logo": "https://www.savnec.com/brand/savnec-icon-512.png",
         "description": "Expert network connecting market research, investment and corporate strategy teams with vetted industry experts.",
-        "address": { "@type": "PostalAddress", "addressRegion": "DE", "addressCountry": "US" },
+        "email": "hello@savnec.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "8 The Green",
+          "addressLocality": "Dover",
+          "addressRegion": "DE",
+          "postalCode": "19901",
+          "addressCountry": "US"
+        },
         "sameAs": ["https://www.linkedin.com/company/savnec", "https://www.instagram.com/savnec"]
       }
     </script>
+    <style>
+      html, body { margin: 0; background: #f8f7f3; }
+      .boot { max-width: 1240px; margin: 0 auto; padding: 0 20px; height: 72px; display: flex; align-items: center; }
+      @media (min-width: 640px) { .boot { padding: 0 32px; } }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <!-- Shown for a moment while the app loads; React replaces it. -->
+      <div class="boot"><svg height="25" viewBox="-3.10 16.60 321.28 59.20" role="img" aria-label="Savnec"><path fill="#0A192F" d="M23.1 71.8Q18.8 71.8 14.65 70.7Q10.5 69.6 6.95 67.55Q3.4 65.5 0.9 62.8L9.6 54Q12 56.6 15.3 58.05Q18.6 59.5 22.5 59.5Q25.2 59.5 26.65 58.7Q28.1 57.9 28.1 56.5Q28.1 54.7 26.35 53.75Q24.6 52.8 21.9 52.05Q19.2 51.3 16.2 50.4Q13.2 49.5 10.5 47.9Q7.8 46.3 6.1 43.45Q4.4 40.6 4.4 36.2Q4.4 31.5 6.8 28.05Q9.2 24.6 13.6 22.6Q18 20.6 23.9 20.6Q30.1 20.6 35.35 22.75Q40.6 24.9 43.9 29.1L35.2 37.9Q32.9 35.2 30.05 34.1Q27.2 33 24.5 33Q21.9 33 20.6 33.75Q19.3 34.5 19.3 35.9Q19.3 37.4 21 38.3Q22.7 39.2 25.4 39.9Q28.1 40.6 31.1 41.6Q34.1 42.6 36.8 44.3Q39.5 46 41.2 48.85Q42.9 51.7 42.9 56.3Q42.9 63.4 37.55 67.6Q32.2 71.8 23.1 71.8Z M70.5 71.6Q63.8 71.6 58.55 68.3Q53.3 65 50.25 59.3Q47.2 53.6 47.2 46.3Q47.2 39 50.25 33.3Q53.3 27.6 58.55 24.3Q63.8 21 70.5 21Q75.4 21 79.35 22.9Q83.3 24.8 85.8 28.15Q88.3 31.5 88.6 35.8V56.8Q88.3 61.1 85.85 64.45Q83.4 67.8 79.4 69.7Q75.4 71.6 70.5 71.6ZM73.6 57.8Q78.5 57.8 81.5 54.55Q84.5 51.3 84.5 46.3Q84.5 42.9 83.15 40.3Q81.8 37.7 79.35 36.25Q76.9 34.8 73.7 34.8Q70.5 34.8 68.05 36.25Q65.6 37.7 64.15 40.3Q62.7 42.9 62.7 46.3Q62.7 49.6 64.1 52.2Q65.5 54.8 68 56.3Q70.5 57.8 73.6 57.8ZM83.9 70.6V57.5L86.2 45.7L83.9 33.9V22H98.9V70.6Z M193.48 70.6V42.9Q193.48 39.1 191.13 36.75Q188.78 34.4 185.18 34.4Q182.68 34.4 180.78 35.45Q178.88 36.5 177.78 38.45Q176.68 40.4 176.68 42.9L170.78 40Q170.78 34.3 173.28 30Q175.78 25.7 180.23 23.35Q184.68 21 190.28 21Q195.68 21 199.83 23.55Q203.98 26.1 206.38 30.3Q208.78 34.5 208.78 39.5V70.6ZM161.38 70.6V22H176.68V70.6Z M241.59 71.7Q233.69 71.7 227.54 68.45Q221.39 65.2 217.89 59.4Q214.39 53.6 214.39 46.3Q214.39 39 217.84 33.25Q221.29 27.5 227.19 24.2Q233.09 20.9 240.49 20.9Q247.69 20.9 253.19 24Q258.69 27.1 261.84 32.6Q264.99 38.1 264.99 45.2Q264.99 46.5 264.84 47.95Q264.69 49.4 264.29 51.3L222.39 51.4V40.9L257.79 40.8L251.19 45.2Q251.09 41 249.89 38.25Q248.69 35.5 246.34 34.05Q243.99 32.6 240.59 32.6Q236.99 32.6 234.34 34.25Q231.69 35.9 230.24 38.9Q228.79 41.9 228.79 46.2Q228.79 50.5 230.34 53.55Q231.89 56.6 234.74 58.25Q237.59 59.9 241.49 59.9Q245.09 59.9 247.99 58.65Q250.89 57.4 253.09 54.9L261.49 63.3Q257.89 67.5 252.79 69.6Q247.69 71.7 241.59 71.7Z M294.88 71.7Q287.38 71.7 281.28 68.4Q275.18 65.1 271.68 59.3Q268.18 53.5 268.18 46.3Q268.18 39 271.73 33.25Q275.28 27.5 281.38 24.2Q287.48 20.9 295.08 20.9Q300.78 20.9 305.53 22.85Q310.28 24.8 313.98 28.7L304.18 38.5Q302.48 36.6 300.23 35.7Q297.98 34.8 295.08 34.8Q291.78 34.8 289.23 36.25Q286.68 37.7 285.23 40.25Q283.78 42.8 283.78 46.2Q283.78 49.6 285.23 52.2Q286.68 54.8 289.28 56.3Q291.88 57.8 295.08 57.8Q298.08 57.8 300.43 56.75Q302.78 55.7 304.48 53.8L314.18 63.6Q310.38 67.6 305.58 69.65Q300.78 71.7 294.88 71.7Z M103.4 22H119.9L129.95 51.07A12.02 12.02 0 0 0 118.96 58.71Z M156.9 22H140.7L130.65 51.08A12.02 12.02 0 0 1 141.34 58.71Z"/><path fill="#0F6E4C" d="M122.64 63.09a7.51 7.51 0 1 0 15.02 0a7.51 7.51 0 1 0 -15.02 0Z"/></svg></div>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

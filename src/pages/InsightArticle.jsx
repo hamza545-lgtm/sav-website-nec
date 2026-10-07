@@ -51,7 +51,7 @@ function Article({ article }) {
 
   return (
     <>
-      <header className="noise relative overflow-hidden pb-16 pt-36 sm:pt-44">
+      <header className="relative overflow-hidden pb-16 pt-36 sm:pt-44">
         <GlowBackdrop />
         <div className="container-site relative">
           <motion.nav

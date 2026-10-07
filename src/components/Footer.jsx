@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
-import { ArrowUpRight, MapPin } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import { Wordmark } from './Logo.jsx'
+import { Address, EmailList } from './ContactInfo.jsx'
 import { site } from '../config/site.js'
 
 const cols = [
@@ -52,28 +53,8 @@ export default function Footer() {
           <p className="mt-7 max-w-sm text-[22px] font-medium leading-snug tracking-tight text-fg">
             {site.tagline}
           </p>
-          <p className="mt-7 flex items-start gap-2 text-[14px] text-muted">
-            <MapPin size={16} className="mt-0.5 shrink-0 text-accent" />
-            <span>
-              Headquartered in {site.hq}
-              {site.address && (
-                <>
-                  <br />
-                  {site.address}
-                </>
-              )}
-            </span>
-          </p>
-          {site.showEmails && (
-            <div className="mt-4 space-y-1 text-[14px]">
-              <a className="block text-body hover:text-fg" href={`mailto:${site.emails.clients}`}>
-                {site.emails.clients}
-              </a>
-              <a className="block text-body hover:text-fg" href={`mailto:${site.emails.experts}`}>
-                {site.emails.experts}
-              </a>
-            </div>
-          )}
+          <Address className="mt-7" />
+          <EmailList className="mt-6" />
           {socials.length > 0 && (
             <div className="mt-7 flex gap-3">
               {socials.map(([name, url]) => (

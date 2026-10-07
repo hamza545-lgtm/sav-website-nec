@@ -2,6 +2,7 @@ import { Search, Handshake, ShieldCheck, Sprout } from 'lucide-react'
 import { PageHero, Section, SectionHeading, Reveal, SpotlightCard, usePageSeo } from '../components/ui.jsx'
 import Web3Form from '../components/Form.jsx'
 import { site } from '../config/site.js'
+import { EmailLine } from '../components/ContactInfo.jsx'
 
 const tracks = [
   [Search, 'Expert Recruitment', 'You find the one person who can answer a hard question, and you enjoy the hunt.'],
@@ -63,7 +64,8 @@ export default function Careers() {
           <Reveal delay={0.1}>
             <div className="rounded-3xl p-7 glass sm:p-10">
               <h3 className="text-[22px] font-semibold">Open application</h3>
-              <p className="mb-8 mt-2 text-[14.5px] text-muted">Tell us who you are and which track interests you.</p>
+              <p className="mt-2 text-[14.5px] text-muted">Tell us who you are and which track interests you.</p>
+              <EmailLine who="careers" label="Or email" className="mb-8 mt-1" />
               <Web3Form
                 accessKey={site.web3forms.general}
                 subject="Careers: open application"

@@ -35,7 +35,7 @@ export default function Insights() {
             >
               <div className="absolute inset-0 bg-gradient-to-br from-emerald-700/40 via-navy-900 to-navy-950" />
               <div className="grid-bg absolute inset-0 opacity-50" />
-              <div className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-emerald-400/20 blur-[100px] transition-opacity duration-700 group-hover:opacity-100 lg:opacity-60" />
+              <div className="glow-blob absolute -right-40 -top-40 h-[520px] w-[520px] transition-opacity duration-700 group-hover:opacity-100 lg:opacity-60" />
               <div className="relative p-8 sm:p-12">
                 <div className="flex items-center gap-3">
                   <span className="rounded-full border border-emerald-400/40 bg-emerald-500/10 px-3 py-1 font-mono text-[10.5px] uppercase tracking-[0.18em] text-accent">

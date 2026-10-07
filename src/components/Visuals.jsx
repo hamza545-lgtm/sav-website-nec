@@ -1,5 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useInView } from 'framer-motion'
 import { Check, LoaderCircle, ShieldCheck, Search, Filter, CalendarCheck, FileText } from 'lucide-react'
 import { Button, Reveal, Eyebrow } from './ui.jsx'
 import { Mark } from './Logo.jsx'
@@ -47,13 +47,17 @@ function Pulse({ d }) {
 
 export function NetworkMap() {
   const [active, setActive] = useState(0)
+  const ref = useRef(null)
+  const visible = useInView(ref)
+  // Only cycle while the map is on screen, so it costs nothing once you scroll past.
   useEffect(() => {
+    if (!visible) return
     const t = setInterval(() => setActive((a) => (a + 1) % nodes.length), 2200)
     return () => clearInterval(t)
-  }, [])
+  }, [visible])
 
   return (
-    <div className="relative mx-auto aspect-[600/520] w-full max-w-[600px]">
+    <div ref={ref} className="relative mx-auto aspect-[600/520] w-full max-w-[600px]">
       <svg viewBox="0 0 600 520" className="absolute inset-0 h-full w-full" fill="none">
         <defs>
           <radialGradient id="hubGlow">
@@ -72,15 +76,14 @@ export function NetworkMap() {
         ))}
 
         {dots.map(([x, y], i) => (
-          <motion.circle
+          <circle
             key={i}
             cx={x}
             cy={y}
             r="1.6"
             fill="#8892A0"
-            initial={{ opacity: 0.15 }}
-            animate={{ opacity: [0.15, 0.6, 0.15] }}
-            transition={{ duration: 3 + (i % 4), repeat: Infinity, delay: i * 0.3 }}
+            className="twinkle"
+            style={{ animationDuration: `${3 + (i % 4)}s`, animationDelay: `${i * 0.3}s` }}
           />
         ))}
 
@@ -161,16 +164,19 @@ const profiles = [
 
 export function EngagementConsole() {
   const [step, setStep] = useState(0)
+  const ref = useRef(null)
+  const visible = useInView(ref)
   useEffect(() => {
+    if (!visible) return
     const t = setInterval(() => setStep((s) => (s >= stages.length + 2 ? 0 : s + 1)), 1500)
     return () => clearInterval(t)
-  }, [])
+  }, [visible])
   const done = step >= stages.length
 
   return (
-    <div className="relative rounded-3xl p-[1px]">
+    <div ref={ref} className="relative rounded-3xl p-[1px]">
       <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-emerald-400/40 via-line/5 to-transparent" />
-      <div className="relative overflow-hidden rounded-3xl bg-card/90 backdrop-blur-xl">
+      <div className="relative overflow-hidden rounded-3xl bg-card">
         <div className="flex items-center justify-between border-b border-line/[0.1] px-6 py-4">
           <div className="flex items-center gap-2">
             <span className="h-2.5 w-2.5 rounded-full bg-fg/10" />
@@ -315,10 +321,10 @@ export function CtaBand({
     <section className="relative py-24 sm:py-32">
       <div className="container-site">
         <Reveal>
-          <div className="theme-dark noise relative overflow-hidden rounded-[32px] border border-line/[0.12] bg-page px-8 py-16 sm:px-16 sm:py-20">
+          <div className="theme-dark relative overflow-hidden rounded-[32px] border border-line/[0.12] bg-page px-8 py-16 sm:px-16 sm:py-20">
             <div className="absolute inset-0 bg-gradient-to-br from-emerald-700/50 via-navy-900 to-navy-950" />
             <div className="grid-bg absolute inset-0 opacity-60" />
-            <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-emerald-400/25 blur-[100px]" />
+            <div className="glow-blob absolute -right-40 -top-40 h-[520px] w-[520px]" />
             <div className="relative grid items-end gap-10 lg:grid-cols-[1.6fr_1fr]">
               <div>
                 <Eyebrow>{eyebrow}</Eyebrow>

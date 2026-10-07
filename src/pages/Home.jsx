@@ -50,17 +50,17 @@ const steps = [
 
 function Hero() {
   return (
-    <section className="noise relative overflow-hidden pb-16 pt-36 sm:pt-44">
+    <section className="relative overflow-hidden pb-16 pt-36 sm:pt-44">
       <GlowBackdrop />
       <div className="container-site relative grid items-center gap-14 lg:grid-cols-[1.05fr_1fr]">
         <div>
-          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease }}>
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease }}>
             <Eyebrow>Expert network · Primary research</Eyebrow>
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.08, ease }}
+            transition={{ duration: 0.6, delay: 0.04, ease }}
             className="mt-7 text-[46px] font-semibold leading-[0.98] tracking-tightest sm:text-[76px]"
           >
             Primary research at the{' '}
@@ -69,7 +69,7 @@ function Hero() {
           <motion.p
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2, ease }}
+            transition={{ duration: 0.6, delay: 0.1, ease }}
             className="mt-8 max-w-xl text-[18px] leading-relaxed text-muted"
           >
             Savnec connects market research, investment and corporate strategy teams with the operators,
@@ -79,7 +79,7 @@ function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3, ease }}
+            transition={{ duration: 0.6, delay: 0.15, ease }}
             className="mt-10 flex flex-col gap-3 sm:flex-row"
           >
             <Button to="/request-trial">Request a Trial</Button>
@@ -90,7 +90,7 @@ function Hero() {
           <motion.ul
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
+            transition={{ duration: 0.6, delay: 0.25 }}
             className="mt-12 grid max-w-xl grid-cols-1 gap-4 border-t border-line/[0.1] pt-8 sm:grid-cols-3"
           >
             {[
@@ -108,7 +108,7 @@ function Hero() {
         <motion.div
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, delay: 0.2, ease }}
+          transition={{ duration: 0.7, delay: 0.1, ease }}
         >
           <NetworkMap />
         </motion.div>
@@ -358,7 +358,7 @@ function ComplianceBand() {
   return (
     <Section>
       <div className="theme-dark relative overflow-hidden rounded-[28px] border border-line/[0.11] bg-page p-8 sm:p-14">
-        <div className="absolute -left-32 -top-32 h-80 w-80 rounded-full bg-emerald-500/15 blur-[100px]" />
+        <div className="glow-blob absolute -left-48 -top-48 h-[520px] w-[520px] opacity-70" />
         <div className="relative grid items-center gap-12 lg:grid-cols-[1fr_1.1fr]">
           <div>
             <Eyebrow>Compliance</Eyebrow>

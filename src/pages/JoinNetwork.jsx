@@ -15,6 +15,7 @@ export default function JoinNetwork() {
         </>
       }
       intro="Free to join, no minimum commitment. We contact you only when a project genuinely matches your background."
+      emailWho="experts"
       nextTitle="After you apply"
       next={[
         'We review your background and add you to our expert network.',

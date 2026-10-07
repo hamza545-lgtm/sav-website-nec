@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { ArrowUpRight, BookOpen, CircleHelp, Briefcase, Mail } from 'lucide-react'
 import { PageHero, Section, SectionHeading, Reveal, SpotlightCard, Eyebrow, usePageSeo } from '../components/ui.jsx'
 import { CtaBand } from '../components/Visuals.jsx'
-import { site } from '../config/site.js'
+import { Address, EmailCards } from '../components/ContactInfo.jsx'
 
 const principles = [
   ['Fit beats volume', 'Ten profiles that almost match waste a client’s afternoon. Three that fit exactly save their week.'],
@@ -83,9 +83,10 @@ export default function About() {
                   </motion.div>
                 ))}
               </div>
-              <p className="mt-6 border-t border-line/[0.1] pt-6 text-[14.5px] text-muted">
-                Headquartered in {site.hq}. Serving clients and recruiting experts globally.
-              </p>
+              <div className="mt-6 flex flex-col gap-4 border-t border-line/[0.1] pt-6 sm:flex-row sm:items-end sm:justify-between">
+                <Address />
+                <p className="text-[13.5px] text-muted sm:text-right">Serving clients and recruiting experts globally.</p>
+              </div>
             </div>
           </Reveal>
         </div>
@@ -103,6 +104,20 @@ export default function About() {
               </SpotlightCard>
             </Reveal>
           ))}
+        </div>
+      </Section>
+
+      <Section id="contact">
+        <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+          <div>
+            <SectionHeading eyebrow="Get in touch" title="Talk to the right person." />
+            <Reveal delay={0.1}>
+              <Address className="mt-8 text-[15px]" />
+            </Reveal>
+          </div>
+          <Reveal delay={0.1}>
+            <EmailCards />
+          </Reveal>
         </div>
       </Section>
 

@@ -10,28 +10,27 @@ export const site = {
   domain: 'savnec.com',
   url: 'https://www.savnec.com',
   tagline: 'Verified human expertise for research that has to be right.',
-  hq: 'Delaware, United States',
-  // Add your full registered address when you want it shown in the footer.
-  address: '',
+  // Shown as "Savnec" with this line underneath (footer, About, Contact).
+  address: '8 The Green, Dover, DE 19901, United States',
 
   // Web3Forms access keys (free at https://web3forms.com).
   // Create one key per inbox. Until you have company email, you can
   // create all three on your personal Gmail and swap them later.
   web3forms: {
-    clients: '1d3f7d6c-1487-4e7f-8d87-0a0c35f430ce',
+    clients: 'YOUR_CLIENT_FORM_ACCESS_KEY',
     experts: 'YOUR_EXPERT_FORM_ACCESS_KEY',
-    general: '1d3f7d6c-1487-4e7f-8d87-0a0c35f430ce',
+    general: 'YOUR_GENERAL_FORM_ACCESS_KEY',
   },
 
-  // Flip showEmails to true once these inboxes exist.
+  // Set to false to hide the addresses in the footer, About, Contact and Clients pages.
   showEmails: true,
   emails: {
-    info: 'info@savnec.com', // shown in the fraud notice under every form
-    clients: 'inquiries@savnec.com',
-    experts: 'experts@savnec.com',
-    general: 'hello@savnec.com',
+    clients: 'hello@savnec.com', // clients and prospective clients
+    experts: 'experts@savnec.com', // experts and applicants
+    info: 'info@savnec.com', // general inquiries and the fraud notice under every form
+    general: 'info@savnec.com',
+    compliance: 'info@savnec.com', // privacy and compliance requests
     careers: 'careers@savnec.com',
-    compliance: 'compliance@savnec.com',
   },
 
   // Leave a link empty ('') to hide it. Update LinkedIn once the page exists.
