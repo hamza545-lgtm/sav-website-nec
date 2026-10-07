@@ -1,53 +1,20 @@
 {
+  "cleanUrls": true,
+  "trailingSlash": false,
   "redirects": [
-    {
-      "source": "/index.html",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/clients.html",
-      "destination": "/clients",
-      "permanent": true
-    },
-    {
-      "source": "/experts.html",
-      "destination": "/experts",
-      "permanent": true
-    },
-    {
-      "source": "/industries.html",
-      "destination": "/industries",
-      "permanent": true
-    },
-    {
-      "source": "/compliance.html",
-      "destination": "/compliance",
-      "permanent": true
-    },
-    {
-      "source": "/about.html",
-      "destination": "/about",
-      "permanent": true
-    },
-    {
-      "source": "/insights.html",
-      "destination": "/insights",
-      "permanent": true
-    },
     {
       "source": "/privacy-policy.html",
       "destination": "/privacy-policy",
       "permanent": true
     },
     {
-      "source": "/terms.html",
-      "destination": "/terms",
+      "source": "/privacy",
+      "destination": "/privacy-policy",
       "permanent": true
     },
     {
-      "source": "/privacy",
-      "destination": "/privacy-policy",
+      "source": "/cookie-policy",
+      "destination": "/privacy-policy#5-cookies-and-similar-technologies",
       "permanent": true
     }
   ],
@@ -55,6 +22,38 @@
     {
       "source": "/((?!assets/|brand/|.*\\..*).*)",
       "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
     }
   ]
 }

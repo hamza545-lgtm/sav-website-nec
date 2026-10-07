@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { UserCheck, Scale, FileKey, Ban, EyeOff, Database, ClipboardCheck, Headphones, Hourglass, ListX, Mic } from 'lucide-react'
-import { PageHero, Section, SectionHeading, Reveal, SpotlightCard, Eyebrow, Button, useSeo } from '../components/ui.jsx'
+import { PageHero, Section, SectionHeading, Reveal, SpotlightCard, Eyebrow, Button, usePageSeo } from '../components/ui.jsx'
 import { CtaBand } from '../components/Visuals.jsx'
 
 const pillars = [
@@ -29,7 +29,7 @@ const controls = [
 ]
 
 export default function Compliance() {
-  useSeo('Compliance', 'How Savnec screens experts, prevents conflicts and protects confidential and material non-public information.')
+  usePageSeo('/compliance')
   return (
     <>
       <PageHero
@@ -71,7 +71,7 @@ export default function Compliance() {
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
-            viewport={{ once: true, margin: '-100px' }}
+            viewport={{ once: true, margin: '0px 0px -100px 0px' }}
             transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
             className="absolute left-0 right-0 top-[22px] hidden h-px origin-left bg-gradient-to-r from-emerald-600 via-emerald-300 to-emerald-600 lg:block"
           />

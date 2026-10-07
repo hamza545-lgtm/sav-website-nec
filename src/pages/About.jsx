@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowUpRight, BookOpen, CircleHelp, Briefcase, Mail } from 'lucide-react'
-import { PageHero, Section, SectionHeading, Reveal, SpotlightCard, Eyebrow, useSeo } from '../components/ui.jsx'
+import { PageHero, Section, SectionHeading, Reveal, SpotlightCard, Eyebrow, usePageSeo } from '../components/ui.jsx'
 import { CtaBand } from '../components/Visuals.jsx'
 import { site } from '../config/site.js'
 
@@ -28,7 +28,7 @@ const more = [
 ]
 
 export default function About() {
-  useSeo('About', 'Savnec is an expert network headquartered in Delaware, serving research, consulting and investment teams worldwide.')
+  usePageSeo('/about')
   return (
     <>
       <PageHero

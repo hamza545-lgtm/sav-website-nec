@@ -1,11 +1,11 @@
-import { useSeo } from '../components/ui.jsx'
+import { usePageSeo } from '../components/ui.jsx'
 import Web3Form from '../components/Form.jsx'
 import { FormPage } from './RequestTrial.jsx'
 import { site } from '../config/site.js'
 import { industries } from '../data/content.js'
 
 export default function JoinNetwork() {
-  useSeo('Join as an Expert', 'Apply to join the Savnec expert network. Paid consultations, flexible scheduling and no minimum commitment.')
+  usePageSeo('/join')
   return (
     <FormPage
       eyebrow="Join the network"
@@ -39,7 +39,7 @@ export default function JoinNetwork() {
           { name: 'status', label: 'Employment status', type: 'select', required: true, options: ['Currently employed', 'Independent consultant', 'Board / advisory roles', 'Retired', 'Between roles'] },
           { name: 'country', label: 'Country', required: true },
           { name: 'expertise', label: 'Areas of expertise', type: 'textarea', rows: 4, full: true, required: true, placeholder: 'Markets, products, functions and companies you can speak to with authority.' },
-          { name: 'consent', label: 'I confirm I will not share confidential or material non-public information in any engagement, and I agree to Savnec processing my details under its Privacy Policy.', type: 'checkbox', required: true, full: true },
+          { name: 'mnpi_attestation', label: 'I will not share confidential or material non-public information from any current or former employer in any engagement.', type: 'checkbox', required: true, full: true },
         ]}
       />
     </FormPage>

@@ -17,7 +17,7 @@ import {
   FileKey,
   Ban,
 } from 'lucide-react'
-import { Button, Eyebrow, Reveal, SectionHeading, SpotlightCard, GlowBackdrop, Counter, Section, ease, useSeo } from '../components/ui.jsx'
+import { Button, Eyebrow, Reveal, SectionHeading, SpotlightCard, GlowBackdrop, Counter, Section, ease, usePageSeo } from '../components/ui.jsx'
 import { NetworkMap, EngagementConsole, Marquee, CtaBand } from '../components/Visuals.jsx'
 import { industries, segments, formats } from '../data/content.js'
 import { site } from '../config/site.js'
@@ -392,7 +392,7 @@ function ComplianceBand() {
 }
 
 export default function Home() {
-  useSeo(null, 'Savnec is an expert network connecting market research agencies, investors, corporate strategy and consulting teams with vetted industry experts for expert calls, IDIs, B2B surveys, focus groups and custom recruitment.')
+  usePageSeo('/')
   return (
     <>
       <Hero />

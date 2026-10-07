@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { site } from '../config/site.js'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight, Check, LoaderCircle, CircleAlert, ChevronDown, Plus } from 'lucide-react'
 
@@ -43,6 +45,31 @@ function Field({ f }) {
   )
 }
 
+// Small print under every form: data use and how to spot impersonation.
+function FormNotice() {
+  return (
+    <div className="border-t border-line/[0.08] pt-4 text-[11.5px] leading-[1.6] text-muted/90 sm:col-span-2">
+      <p>
+        By submitting, you agree that Savnec may store and process your details to respond and, where relevant, to
+        deliver the services you request, as described in our{' '}
+        <Link to="/privacy-policy" className="underline decoration-line/25 underline-offset-2 hover:text-fg">
+          Privacy Policy
+        </Link>
+        .
+      </p>
+      <p className="mt-1.5">
+        We only contact you from an @{site.domain} email address, our official LinkedIn page, or our official phone and
+        WhatsApp numbers. Treat messages from any other email domain or platform (such as Gmail, Facebook, Instagram or
+        Telegram) as fraudulent, and if in doubt, check with{' '}
+        <a href={`mailto:${site.emails.info}`} className="underline decoration-line/25 underline-offset-2 hover:text-fg">
+          {site.emails.info}
+        </a>
+        .
+      </p>
+    </div>
+  )
+}
+
 export default function Web3Form({ accessKey, subject, fields, submitLabel = 'Submit', successTitle, successBody }) {
   const [status, setStatus] = useState('idle')
   const [error, setError] = useState('')
@@ -55,8 +82,9 @@ export default function Web3Form({ accessKey, subject, fields, submitLabel = 'Su
     delete data.botcheck
 
     if (!accessKey || accessKey.startsWith('YOUR_')) {
+      console.warn('Savnec: add the Web3Forms access keys in src/config/site.js')
       setStatus('error')
-      setError('This form is not connected yet. Add your Web3Forms key in src/config/site.js.')
+      setError(`This form is temporarily unavailable. Please email ${site.emails.info} and we will reply within one business day.`)
       return
     }
 
@@ -96,12 +124,12 @@ export default function Web3Form({ accessKey, subject, fields, submitLabel = 'Su
             animate={{ opacity: 1, y: 0 }}
             className="flex min-h-[420px] flex-col items-center justify-center text-center"
           >
-            <span className="flex h-14 w-14 items-center justify-center rounded-full border border-emerald-400/50 bg-emerald-500/15 text-accent shadow-[0_0_40px_-6px_rgba(43,196,138,0.8)]">
+            <span className="flex h-14 w-14 items-center justify-center rounded-full border border-emerald-400/50 bg-emerald-500/15 text-accent shadow-[0_12px_30px_-14px_rgba(15,110,76,0.6)]">
               <Check size={24} />
             </span>
             <h3 className="mt-6 text-[26px] font-semibold">{successTitle}</h3>
             <p className="mt-3 max-w-sm text-[15px] leading-relaxed text-muted">{successBody}</p>
-            <button onClick={() => setStatus('idle')} className="mt-8 text-[14px] text-accent hover:text-accent">
+            <button onClick={() => setStatus('idle')} className="mt-8 text-[14px] text-accent underline-offset-4 hover:underline">
               Send another
             </button>
           </motion.div>
@@ -117,7 +145,7 @@ export default function Web3Form({ accessKey, subject, fields, submitLabel = 'Su
               </p>
             )}
             <div className="flex flex-col gap-4 pt-2 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-[12.5px] text-muted">We reply within one business day. Your details stay with Savnec.</p>
+              <p className="text-[13px] text-muted">We reply within one business day.</p>
               <button
                 type="submit"
                 disabled={status === 'sending'}
@@ -128,6 +156,7 @@ export default function Web3Form({ accessKey, subject, fields, submitLabel = 'Su
                 {status !== 'sending' && <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />}
               </button>
             </div>
+            <FormNotice />
           </motion.form>
         )}
       </AnimatePresence>

@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { PageHero, Section, Reveal, Button, useSeo } from '../components/ui.jsx'
+import { PageHero, Section, Reveal, Button, usePageSeo } from '../components/ui.jsx'
 import { Accordion } from '../components/Form.jsx'
 import { faqs } from '../data/content.js'
 
 export default function Faqs() {
-  useSeo('FAQs', 'Answers to common questions from Savnec clients and experts about timelines, pricing, payment and compliance.')
+  usePageSeo('/faqs')
   const tabs = Object.keys(faqs)
   const [tab, setTab] = useState(tabs[0])
   return (

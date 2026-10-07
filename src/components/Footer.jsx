@@ -47,7 +47,7 @@ export default function Footer() {
       <div className="container-site grid gap-14 pb-16 pt-20 lg:grid-cols-[1.3fr_2fr]">
         <div>
           <Link to="/" aria-label="Savnec home">
-            <Wordmark height={26} />
+            <Wordmark height={24} />
           </Link>
           <p className="mt-7 max-w-sm text-[22px] font-medium leading-snug tracking-tight text-fg">
             {site.tagline}

@@ -5,6 +5,7 @@ React + Vite + Tailwind CSS + Framer Motion + Lucide icons. Multi-page, deployed
 ## Edit the basics
 Everything you will routinely change lives in **`src/config/site.js`**:
 - Web3Forms access keys (clients, experts, general)
+- `info@` address used in the fraud notice under every form
 - Emails (set `showEmails: true` once the inboxes exist)
 - Registered address, LinkedIn and Instagram links
 
@@ -40,12 +41,19 @@ Framework preset: **Vite** · Build command: `npm run build` · Output directory
 
 ## Brand files
 `public/brand/` holds the brand in SVG and PNG:
-- `savnec-wordmark-white` (for dark backgrounds) and `savnec-wordmark-navy` (for white backgrounds)
-- `savnec-icon` / `savnec-icon-512.png` (the tick mark, also the favicon)
+- `savnec-wordmark-navy` (light backgrounds) and `savnec-wordmark-white` (dark backgrounds)
+- `savnec-icon` / `savnec-icon-512.png` (the converging-v mark, also the favicon)
 - `savnec-social-avatar.png` (LinkedIn / Instagram profile picture)
 - `savnec-linkedin-banner.png` (1584 × 396)
 
-The wordmark is lowercase "savnec" outlined from Inter Display SemiBold, with the v drawn as a rising emerald tick.
+The wordmark is lowercase "savnec" outlined from Outfit Bold, all navy, with the two strokes of
+the v converging on a single emerald node.
+
+## SEO and link previews
+Page titles and descriptions live in `src/data/seo.js`. On every `npm run build`,
+`scripts/prerender.mjs` writes one HTML file per page (and per article) with its own title,
+description and preview tags, so Google, LinkedIn and WhatsApp show the right summary.
+When you publish a new article, also add its URL to `public/sitemap.xml`.
 
 ## Theme
 The site is light by default. Colors are tokens in `src/index.css` (`--page`, `--fg`, `--accent` and so on).

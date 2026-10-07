@@ -329,3 +329,47 @@ export const slugify = (s) =>
     .replace(/[^a-z0-9\s-]/g, '')
     .trim()
     .replace(/\s+/g, '-')
+
+const stripInline = (s) => s.replace(/\*\*/g, '').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+
+// Structured data for an article page (Article + breadcrumbs + FAQ), used in the browser
+// and baked into the static HTML at build time.
+export function articleJsonLd(article, siteUrl) {
+  const url = `${siteUrl}/insights/${article.slug}`
+  const graph = [
+    {
+      '@type': 'Article',
+      headline: article.title,
+      description: article.description,
+      datePublished: article.date,
+      dateModified: article.date,
+      mainEntityOfPage: url,
+      image: `${siteUrl}/og-image.png`,
+      author: { '@type': 'Organization', name: 'Savnec', url: siteUrl },
+      publisher: {
+        '@type': 'Organization',
+        name: 'Savnec',
+        logo: { '@type': 'ImageObject', url: `${siteUrl}/brand/savnec-icon-512.png` },
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+        { '@type': 'ListItem', position: 2, name: 'Insights', item: `${siteUrl}/insights` },
+        { '@type': 'ListItem', position: 3, name: article.title, item: url },
+      ],
+    },
+  ]
+  if (article.faqs) {
+    graph.push({
+      '@type': 'FAQPage',
+      mainEntity: article.faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: stripInline(f.a) },
+      })),
+    })
+  }
+  return { '@context': 'https://schema.org', '@graph': graph }
+}

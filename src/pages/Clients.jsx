@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Check, Clock, MessageSquareText, ShieldCheck, Target, Repeat, Phone, ListChecks, Users, Network, NotebookPen, Brain } from 'lucide-react'
-import { PageHero, Button, Section, SectionHeading, Reveal, SpotlightCard, Eyebrow, useSeo } from '../components/ui.jsx'
+import { PageHero, Button, Section, SectionHeading, Reveal, SpotlightCard, Eyebrow, usePageSeo } from '../components/ui.jsx'
 import { CtaBand } from '../components/Visuals.jsx'
 import { formats, useCases } from '../data/content.js'
 import { ucSlug } from '../components/Navbar.jsx'
@@ -70,14 +70,13 @@ function ProfileCard() {
             </span>
           ))}
         </div>
-        <p className="mt-6 text-[11.5px] text-muted/70">Illustrative profile.</p>
       </div>
     </div>
   )
 }
 
 export default function Clients() {
-  useSeo('For Clients', 'Expert calls and IDIs, B2B surveys, focus groups, custom recruitment and diary studies for market research agencies, investors, corporate strategy and consulting teams.')
+  usePageSeo('/clients')
   const tabs = Object.keys(useCases)
   const [tab, setTab] = useState(tabs[0])
   const { hash } = useLocation()

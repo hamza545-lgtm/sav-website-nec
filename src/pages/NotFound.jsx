@@ -1,7 +1,7 @@
 import { PageHero, Button, useSeo } from '../components/ui.jsx'
 
 export default function NotFound() {
-  useSeo('Page not found')
+  useSeo('Page not found', 'This page could not be found.', { noindex: true })
   return (
     <PageHero
       eyebrow="404"

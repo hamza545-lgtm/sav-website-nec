@@ -1,5 +1,5 @@
 import { Search, Handshake, ShieldCheck, Sprout } from 'lucide-react'
-import { PageHero, Section, SectionHeading, Reveal, SpotlightCard, useSeo } from '../components/ui.jsx'
+import { PageHero, Section, SectionHeading, Reveal, SpotlightCard, usePageSeo } from '../components/ui.jsx'
 import Web3Form from '../components/Form.jsx'
 import { site } from '../config/site.js'
 
@@ -17,7 +17,7 @@ const values = [
 ]
 
 export default function Careers() {
-  useSeo('Careers', 'Careers at Savnec. Help research, investment and strategy teams reach the people who know the answer.')
+  usePageSeo('/careers')
   return (
     <>
       <PageHero

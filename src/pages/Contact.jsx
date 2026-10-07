@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ArrowUpRight, Building, UserPlus, MessageCircle, MapPin, Clock } from 'lucide-react'
-import { PageHero, Section, Reveal, SpotlightCard, useSeo } from '../components/ui.jsx'
+import { PageHero, Section, Reveal, SpotlightCard, usePageSeo } from '../components/ui.jsx'
 import Web3Form from '../components/Form.jsx'
 import { site } from '../config/site.js'
 
@@ -11,7 +11,7 @@ const routes = [
 ]
 
 export default function Contact() {
-  useSeo('Contact Us', 'Contact Savnec about a research project, joining the expert network or anything else.')
+  usePageSeo('/contact')
   return (
     <>
       <PageHero

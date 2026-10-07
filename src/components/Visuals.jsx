@@ -177,7 +177,6 @@ export function EngagementConsole() {
             <span className="h-2.5 w-2.5 rounded-full bg-fg/10" />
             <span className="h-2.5 w-2.5 rounded-full bg-fg/10" />
           </div>
-          <span className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-muted">Sample engagement</span>
         </div>
 
         <div className="grid gap-0 md:grid-cols-[1.05fr_1fr]">
@@ -267,9 +266,6 @@ export function EngagementConsole() {
                 </div>
               )}
             </div>
-            <p className="mt-5 text-[11.5px] leading-relaxed text-muted/70">
-              Illustrative example. Profiles are anonymized and shared with clients only after screening.
-            </p>
           </div>
         </div>
       </div>

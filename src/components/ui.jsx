@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { motion, useInView, animate } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { site } from '../config/site.js'
+import { pageMeta, fullTitle } from '../data/seo.js'
 
 export const ease = [0.22, 1, 0.36, 1]
 
@@ -17,20 +18,21 @@ function setMeta(attr, key, content) {
 }
 
 // Per-page title, description, canonical URL, social tags and optional JSON-LD.
-export function useSeo(title, description, { jsonLd, type = 'website' } = {}) {
+export function useSeo(title, description, { jsonLd, type = 'website', noindex = false } = {}) {
   useEffect(() => {
-    const fullTitle = title ? `${title} | Savnec` : 'Savnec | Expert Network for Market Research, Investment & Strategy Teams'
+    const pageTitle = fullTitle(title)
     const url = `${site.url}${window.location.pathname === '/' ? '' : window.location.pathname}`
-    document.title = fullTitle
+    document.title = pageTitle
     if (description) {
       setMeta('name', 'description', description)
       setMeta('property', 'og:description', description)
       setMeta('name', 'twitter:description', description)
     }
-    setMeta('property', 'og:title', fullTitle)
-    setMeta('name', 'twitter:title', fullTitle)
+    setMeta('property', 'og:title', pageTitle)
+    setMeta('name', 'twitter:title', pageTitle)
     setMeta('property', 'og:url', url)
     setMeta('property', 'og:type', type)
+    setMeta('name', 'robots', noindex ? 'noindex' : 'index, follow')
 
     let canonical = document.head.querySelector('link[rel="canonical"]')
     if (!canonical) {
@@ -49,7 +51,12 @@ export function useSeo(title, description, { jsonLd, type = 'website' } = {}) {
       script.textContent = JSON.stringify(jsonLd)
       document.head.appendChild(script)
     }
-  }, [title, description, type, jsonLd])
+  }, [title, description, type, jsonLd, noindex])
+}
+
+export function usePageSeo(path) {
+  const meta = pageMeta[path] || {}
+  useSeo(meta.title, meta.description)
 }
 
 export function Reveal({ children, delay = 0, y = 22, className = '', as = 'div' }) {
@@ -59,7 +66,7 @@ export function Reveal({ children, delay = 0, y = 22, className = '', as = 'div'
       className={className}
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
+      viewport={{ once: true, margin: '0px 0px -80px 0px' }}
       transition={{ duration: 0.75, delay, ease }}
     >
       {children}
@@ -211,7 +218,7 @@ export function PageHero({ eyebrow, title, intro, children }) {
 
 export function Counter({ to, suffix = '', prefix = '', duration = 1.6 }) {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
+  const inView = useInView(ref, { once: true, margin: '0px 0px -40px 0px' })
   const [val, setVal] = useState(0)
   useEffect(() => {
     if (!inView) return
@@ -223,7 +230,7 @@ export function Counter({ to, suffix = '', prefix = '', duration = 1.6 }) {
     return () => controls.stop()
   }, [inView, to, duration])
   return (
-    <span ref={ref}>
+    <span ref={ref} className="inline-block tabular-nums">
       {prefix}
       {val}
       {suffix}

@@ -2,15 +2,12 @@ import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowUpRight, ArrowRight } from 'lucide-react'
-import { PageHero, Section, Reveal, useSeo } from '../components/ui.jsx'
+import { PageHero, Section, Reveal, usePageSeo } from '../components/ui.jsx'
 import { CtaBand } from '../components/Visuals.jsx'
 import { insights, formatDate } from '../data/insights.js'
 
 export default function Insights() {
-  useSeo(
-    'Insights',
-    'Guides from Savnec on expert networks, primary research method, commercial due diligence and compliance.'
-  )
+  usePageSeo('/insights')
   const featured = insights.find((a) => a.featured)
   const rest = insights.filter((a) => a !== featured)
   const categories = useMemo(() => ['All', ...new Set(rest.map((a) => a.category))], [rest])

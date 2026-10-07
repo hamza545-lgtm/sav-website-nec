@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Quote } from 'lucide-react'
-import { PageHero, Reveal, useSeo, Button } from '../components/ui.jsx'
+import { PageHero, Reveal, usePageSeo, Button } from '../components/ui.jsx'
 import { CtaBand } from '../components/Visuals.jsx'
 import { industries } from '../data/content.js'
 
 export default function Industries() {
-  useSeo('Industries', 'Expert coverage across technology, consumer, financial services, industrials, healthcare, advertising, investors, consulting, market research and AI data.')
+  usePageSeo('/industries')
   const [active, setActive] = useState(industries[0].id)
 
   useEffect(() => {
@@ -67,10 +67,10 @@ export default function Industries() {
           </aside>
 
           <div className="space-y-8">
-            {industries.map(({ id, name, icon: Icon, summary, focus, questions }, idx) => (
+            {industries.map(({ id, name, icon: Icon, summary, focus, experts, questions }, idx) => (
               <Reveal key={id}>
                 <article id={id} className="scroll-mt-28 overflow-hidden rounded-3xl glass">
-                  <div className="grid gap-0 md:grid-cols-[1.15fr_1fr]">
+                  <div className="grid gap-0 md:grid-cols-[1.2fr_1fr]">
                     <div className="p-8 sm:p-10">
                       <div className="flex items-center gap-4">
                         <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-emerald-400/25 bg-emerald-500/10 text-accent">
@@ -82,20 +82,30 @@ export default function Industries() {
                       </div>
                       <h2 className="mt-7 text-[28px] font-semibold leading-tight sm:text-[34px]">{name}</h2>
                       <p className="mt-4 text-[16px] leading-relaxed text-muted">{summary}</p>
-                      <div className="mt-7 flex flex-wrap gap-2">
+                      <p className="mt-7 font-mono text-[10.5px] uppercase tracking-[0.2em] text-muted">Coverage</p>
+                      <div className="mt-3 flex flex-wrap gap-2">
                         {focus.map((f) => (
-                          <span key={f} className="rounded-full border border-line/[0.12] bg-fg/[0.02] px-3.5 py-1.5 text-[13px] text-body">
+                          <span key={f} className="rounded-full border border-line/[0.12] bg-card px-3.5 py-1.5 text-[13px] text-body">
                             {f}
                           </span>
                         ))}
                       </div>
+                      <p className="mt-6 font-mono text-[10.5px] uppercase tracking-[0.2em] text-muted">Experts we recruit</p>
+                      <ul className="mt-3 grid gap-x-6 gap-y-2 sm:grid-cols-2">
+                        {experts.map((e) => (
+                          <li key={e} className="flex items-center gap-2.5 text-[14px] text-body">
+                            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-tick" />
+                            {e}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                     <div className="border-t border-line/[0.1] bg-sunk/70 p-8 sm:p-10 md:border-l md:border-t-0">
-                      <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">Questions we recruit for</p>
-                      <ul className="mt-6 space-y-5">
+                      <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">What clients ask us</p>
+                      <ul className="mt-6 space-y-6">
                         {questions.map((q) => (
-                          <li key={q} className="flex gap-3 text-[15px] leading-relaxed text-body">
-                            <Quote size={14} className="mt-1.5 shrink-0 text-muted" />
+                          <li key={q} className="flex gap-3.5 text-[16px] font-medium leading-snug text-fg">
+                            <Quote size={15} className="mt-1 shrink-0 text-accent" />
                             {q}
                           </li>
                         ))}

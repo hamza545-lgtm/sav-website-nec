@@ -199,7 +199,7 @@ export default function Navbar() {
       >
         <div className="container-site flex h-[72px] items-center justify-between">
           <Link to="/" aria-label="Savnec home">
-            <Logo height={30} />
+            <Logo height={25} />
           </Link>
 
           <nav className="hidden items-center gap-1 lg:flex" onMouseLeave={() => setOpen(null)}>

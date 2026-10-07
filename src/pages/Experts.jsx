@@ -1,5 +1,5 @@
 import { Wallet, CalendarClock, Lock, Globe, Phone, ListChecks, Users, Brain, X, Check } from 'lucide-react'
-import { PageHero, Button, Section, SectionHeading, Reveal, SpotlightCard, useSeo } from '../components/ui.jsx'
+import { PageHero, Button, Section, SectionHeading, Reveal, SpotlightCard, usePageSeo } from '../components/ui.jsx'
 import { CtaBand } from '../components/Visuals.jsx'
 
 const reasons = [
@@ -27,7 +27,7 @@ const dos = ['Your own experience and judgment', 'How an industry or role works 
 const donts = ['Confidential information from any employer', 'Material non-public information (MNPI)', 'Trade secrets or internal financials', 'Anything that breaches an agreement you have signed']
 
 export default function Experts() {
-  useSeo('For Experts', 'Join the Savnec expert network. Paid consultations on your schedule with investors, consultants and research teams.')
+  usePageSeo('/experts')
   return (
     <>
       <PageHero

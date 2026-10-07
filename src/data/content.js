@@ -18,12 +18,13 @@ const allIndustries = [
     short: 'TMT',
     icon: Cpu,
     summary:
-      'Software buyers, cloud architects, network operators and the people who price, sell and churn the products you are looking at.',
-    focus: ['Enterprise SaaS & infrastructure', 'Semiconductors & hardware', 'Telecom & connectivity', 'Media, streaming & gaming', 'Cybersecurity'],
+      'The buyers, builders and operators behind the stack: the people who choose vendors, run networks and decide what gets renewed.',
+    focus: ['Enterprise software & cloud', 'Semiconductors & hardware', 'Telecom & connectivity', 'Media & streaming', 'Cybersecurity'],
+    experts: ['CIOs & CTOs', 'IT procurement leads', 'Cloud & data architects', 'Network planning heads', 'Channel partners & resellers', 'Streaming & content executives'],
     questions: [
-      'How sticky is this vendor once it is embedded in the stack?',
-      'What would trigger a switch at renewal?',
-      'Where is wallet share moving over the next 24 months?',
+      'Is AI spend growing the IT budget, or quietly eating the rest of it?',
+      'What would make a CIO replace this vendor at renewal, and who would they switch to?',
+      'Where are operators actually earning a return on 5G, and where is it still a cost line?',
     ],
   },
   {
@@ -32,12 +33,13 @@ const allIndustries = [
     short: 'Consumer',
     icon: ShoppingBag,
     summary:
-      'Category buyers, brand leaders, distributors and store operators who see demand before it shows up in the numbers.',
+      'Category buyers, brand leaders and distributors who see demand shift months before it shows up in the numbers.',
     focus: ['Food & beverage', 'Beauty & personal care', 'E-commerce & marketplaces', 'Apparel & luxury', 'Restaurants & hospitality'],
+    experts: ['Retail category buyers', 'Brand & marketing directors', 'Distributors & wholesalers', 'E-commerce leads', 'Store & franchise operators'],
     questions: [
-      'How are retailers allocating shelf space in this category?',
-      'Which private-label threats are real?',
-      'What does a reorder cycle look like from the distributor side?',
+      'Is private label winning on price or on quality now, and which categories are next?',
+      'How do retail buyers decide which brands lose shelf space at the next reset?',
+      'Is direct-to-consumer still profitable once returns and paid acquisition are counted?',
     ],
   },
   {
@@ -46,12 +48,13 @@ const allIndustries = [
     short: 'FS',
     icon: Landmark,
     summary:
-      'Bankers, insurers, payments operators and fintech product leaders who know how money and risk actually move.',
-    focus: ['Banking & lending', 'Payments & fintech', 'Insurance & insurtech', 'Asset & wealth management', 'Capital markets infrastructure'],
+      'Bankers, insurers and payments operators who know how money, risk and regulation move in practice, not just on paper.',
+    focus: ['Banking & lending', 'Payments & fintech', 'Insurance & insurtech', 'Asset & wealth management', 'Market infrastructure'],
+    experts: ['Bank COOs & CIOs', 'Payments product heads', 'Underwriting & claims leaders', 'Fintech partnership managers', 'Risk & compliance officers'],
     questions: [
-      'How do mid-market banks evaluate a core-system replacement?',
-      'What are payment processors really earning per transaction?',
-      'Where is underwriting being automated, and where is it stalling?',
+      'What would it really take for a mid-size bank to replace its core system?',
+      'Where is embedded finance making money, and where is it just distribution?',
+      'How far has AI actually reached into claims and underwriting, beyond the press release?',
     ],
   },
   {
@@ -62,10 +65,11 @@ const allIndustries = [
     summary:
       'Plant managers, procurement heads and supply chain leaders who can speak to capacity, cost and lead times from the floor.',
     focus: ['Automation & robotics', 'Aerospace & defense', 'Building products', 'Chemicals & materials', 'Logistics & transportation'],
+    experts: ['Plant & operations managers', 'Procurement & sourcing heads', 'Supply chain directors', 'Distributors', 'Automation & process engineers'],
     questions: [
-      'How are input costs being passed through to customers?',
-      'Which suppliers are gaining share on reliability?',
-      'What is the real payback period on this equipment?',
+      'Are customers genuinely reshoring, or just talking about it?',
+      'Which suppliers are winning on lead time and reliability rather than price?',
+      'What is the real payback on automation for a mid-size plant, from someone who signed it off?',
     ],
   },
   {
@@ -74,12 +78,13 @@ const allIndustries = [
     short: 'Healthcare',
     icon: HeartPulse,
     summary:
-      'Clinicians, payers, hospital administrators and pharma commercial teams, screened carefully for role and recency.',
+      'Clinicians, payers, hospital decision makers and pharma commercial teams, screened carefully for role, specialty and recency.',
     focus: ['Pharma & biotech', 'Medical devices', 'Providers & health systems', 'Payers & PBMs', 'Healthcare IT'],
+    experts: ['Physicians & specialists', 'Hospital procurement & value analysis', 'Payer & PBM pharmacy directors', 'Market access leads', 'Med-device sales leaders'],
     questions: [
-      'How do physicians choose between these two therapies today?',
-      'What does the formulary process look like at a regional payer?',
-      'Which capital purchases are hospitals deferring?',
+      'How do specialists choose between two approved therapies with similar trial data?',
+      'What actually gets a new device through a hospital value analysis committee?',
+      'Which budgets are health systems cutting first when margins tighten?',
     ],
   },
   {
@@ -88,12 +93,13 @@ const allIndustries = [
     short: 'AdTech',
     icon: Megaphone,
     summary:
-      'Media buyers, agency leads and CMOs who control budgets and know where performance is real.',
-    focus: ['Ad tech & programmatic', 'Agencies & holding companies', 'Retail media', 'Martech & CRM', 'Creator & influencer economy'],
+      'The people who hold the budgets and the data: media buyers, agency leaders and CMOs who know where performance is real.',
+    focus: ['Ad tech & programmatic', 'Agencies & holding companies', 'Retail media', 'Martech & CRM', 'Creator economy'],
+    experts: ['CMOs & marketing directors', 'Media directors & buyers', 'Programmatic traders', 'Agency leaders', 'Retail media leads', 'Ad tech product heads'],
     questions: [
-      'How are budgets shifting between channels this year?',
-      'What makes an agency switch measurement partners?',
-      'Is retail media incremental or cannibalizing search?',
+      'How much retail media spend is truly incremental, and how much is search budget in disguise?',
+      'Which measurement partners do brands trust now, and which are they quietly dropping?',
+      'Where are CMOs moving budget this year, and what would make them pull it back?',
     ],
   },
   {
@@ -103,11 +109,12 @@ const allIndustries = [
     icon: TrendingUp,
     summary:
       'Fast, precise access for commercial diligence, portfolio work and thesis building, from first screen to final IC.',
-    focus: ['Commercial due diligence', 'Customer referencing', 'Competitor deep-dives', 'Portfolio value creation', 'Thesis development'],
+    focus: ['Commercial due diligence', 'Customer referencing', 'Competitor deep-dives', 'Value creation', 'Thesis development'],
+    experts: ['Customers of the target', 'Former employees', 'Competitor sales & product leads', 'Channel partners', 'Operating executives'],
     questions: [
-      'Would customers renew at a higher price point?',
-      'How does management’s story compare with the market’s view?',
-      'What are the top three risks a former competitor would flag?',
+      'Would customers still renew if prices went up 10%?',
+      'What does the target\u2019s strongest competitor really think of it?',
+      'Is the growth in the management plan broad-based, or resting on one or two accounts?',
     ],
   },
   {
@@ -118,10 +125,11 @@ const allIndustries = [
     summary:
       'Operator perspective on short timelines, so case teams can pressure-test hypotheses before the steering committee does.',
     focus: ['Market entry & sizing', 'Operations & cost', 'Pricing strategy', 'Digital transformation', 'M&A integration'],
+    experts: ['Functional heads (finance, ops, HR, IT)', 'Senior operators', 'Former strategy leads', 'Transformation & integration leads'],
     questions: [
       'What does best-in-class cost-to-serve look like in this segment?',
-      'How long does a typical ERP rollout actually take?',
-      'Which adjacencies have operators tried and abandoned?',
+      'Which adjacencies have operators tried and quietly abandoned, and why?',
+      'How long does an ERP migration really take, according to someone who ran one?',
     ],
   },
   {
@@ -130,12 +138,13 @@ const allIndustries = [
     short: 'Research',
     icon: ChartColumn,
     summary:
-      'B2B recruitment for agencies running qualitative studies with hard-to-reach professional audiences.',
+      'B2B recruitment for agencies running qualitative studies with professional audiences that panels struggle to reach.',
     focus: ['B2B niche recruitment', 'IDIs & focus groups', 'B2B surveys', 'Diary studies & ethnography', 'Hard-to-reach decision makers'],
+    experts: ['C-suite & senior decision makers', 'IT & technical buyers', 'Physicians & clinicians', 'Procurement heads', 'Niche B2B specialists'],
     questions: [
-      'Can you fill 30 IT decision makers at 1,000+ employee firms?',
-      'We need procurement leads across three regions by Friday.',
-      'Our panel is thin on C-suite in healthcare. Can you top it up?',
+      'We need 30 IT decision makers at 1,000+ employee companies, interviewed by Friday.',
+      'Our oncologist quota in Germany is stuck at 40%. Can you close it?',
+      'We need hospital procurement heads for 60-minute IDIs, not a ten-minute survey.',
     ],
   },
   {
@@ -144,12 +153,13 @@ const allIndustries = [
     short: 'AI Data',
     icon: Database,
     summary:
-      'Credentialed domain specialists for model evaluation, data annotation and reasoning tasks that generalists get wrong.',
-    focus: ['Domain-expert annotation', 'Model evaluation & red teaming', 'Reasoning & rubric writing', 'Specialist QA review', 'Multilingual expertise'],
+      'Credentialed specialists for model evaluation, data annotation and reasoning tasks that generalists get wrong.',
+    focus: ['Expert annotation', 'Model evaluation & red teaming', 'Reasoning & rubric writing', 'Specialist QA review', 'Multilingual expertise'],
+    experts: ['Physicians & clinicians', 'Lawyers & paralegals', 'Accountants & tax specialists', 'Software engineers', 'PhDs & researchers'],
     questions: [
-      'We need licensed clinicians to grade medical answers.',
-      'Can you source CPAs to write and review tax scenarios?',
-      'We need engineers who can evaluate code in niche languages.',
+      'We need licensed clinicians to grade medical answers, not generalists.',
+      'Find CPAs who can write the tax edge cases our model gets wrong.',
+      'We need engineers who still read COBOL to evaluate legacy code.',
     ],
   },
 ]
@@ -308,7 +318,11 @@ export const faqs = {
     },
     {
       q: 'Does joining cost anything?',
-      a: 'No. Joining the Savnec network is free, and there is no minimum level of participation.',
+      a: 'No. Joining the Savnec network is free, and there is no minimum level of participation. We will never ask you to pay a fee, buy anything or share bank details by message to take part.',
+    },
+    {
+      q: 'How do I know a message really comes from Savnec?',
+      a: 'We only contact experts from an @savnec.com email address, our official LinkedIn page, or our official phone and WhatsApp numbers. Messages from Gmail, Hotmail or similar addresses, or through Facebook, Instagram or Telegram, are not from us. If you are unsure, forward the message to info@savnec.com and we will confirm.',
     },
   ],
   Compliance: [

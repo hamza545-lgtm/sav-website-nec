@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { Check } from 'lucide-react'
-import { GlowBackdrop, Eyebrow, ease, useSeo } from '../components/ui.jsx'
+import { GlowBackdrop, Eyebrow, ease, usePageSeo } from '../components/ui.jsx'
 import Web3Form from '../components/Form.jsx'
 import { site } from '../config/site.js'
 import { industries, formats } from '../data/content.js'
@@ -49,7 +49,7 @@ export function FormPage({ eyebrow, title, intro, nextTitle, next, children }) {
 }
 
 export default function RequestTrial() {
-  useSeo('Request a Trial', 'Start a trial project with Savnec. Send a live brief and see a screened shortlist of experts.')
+  usePageSeo('/request-trial')
   return (
     <FormPage
       eyebrow="Request a trial"
@@ -82,7 +82,6 @@ export default function RequestTrial() {
           { name: 'industry', label: 'Industry', type: 'select', options: [...industries.map((i) => i.name), 'Other'] },
           { name: 'timeline', label: 'Timeline', type: 'select', options: ['This week', 'Within 2 weeks', 'This month', 'Exploring'] },
           { name: 'brief', label: 'The brief', type: 'textarea', full: true, required: true, placeholder: 'What do you need to learn, and from whom? Include target roles, geographies and any companies to include or exclude.' },
-          { name: 'consent', label: 'I agree to Savnec contacting me about this request and processing my details under its Privacy Policy.', type: 'checkbox', required: true, full: true },
         ]}
       />
     </FormPage>

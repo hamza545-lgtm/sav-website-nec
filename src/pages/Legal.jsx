@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
-import { PageHero, useSeo } from '../components/ui.jsx'
+import { PageHero, usePageSeo } from '../components/ui.jsx'
 import { ArticleBody } from '../components/RichText.jsx'
 import { privacyBlocks, termsBlocks, legalDates } from '../data/legal.js'
 import { slugify } from '../data/insights.js'
@@ -66,13 +66,13 @@ function LegalPage({ eyebrow, title, blocks }) {
 }
 
 export function Privacy() {
-  useSeo('Privacy & Cookie Policy', 'How Savnec collects, uses, shares and protects personal information, and how our website uses cookies.')
+  usePageSeo('/privacy-policy')
   const blocks = useMemo(() => privacyBlocks(site.emails.compliance), [])
   return <LegalPage eyebrow="Legal" title="Privacy & Cookie Policy" blocks={blocks} />
 }
 
 export function Terms() {
-  useSeo('Terms & Conditions', 'The terms that govern use of the Savnec website and participation in the Savnec expert network.')
+  usePageSeo('/terms')
   const blocks = useMemo(() => termsBlocks(site.emails.compliance), [])
   return <LegalPage eyebrow="Legal" title="Terms & Conditions" blocks={blocks} />
 }

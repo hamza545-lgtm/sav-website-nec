@@ -6,11 +6,9 @@ import { GlowBackdrop, Button, Reveal, SpotlightCard, ease, useSeo } from '../co
 import { ArticleBody } from '../components/RichText.jsx'
 import { Accordion } from '../components/Form.jsx'
 import { CtaBand } from '../components/Visuals.jsx'
-import { insights, getInsight, formatDate, slugify } from '../data/insights.js'
+import { insights, getInsight, formatDate, slugify, articleJsonLd } from '../data/insights.js'
 import { site } from '../config/site.js'
 import NotFound from './NotFound.jsx'
-
-const stripInline = (s) => s.replace(/\*\*/g, '').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
 
 function useActiveHeading(ids) {
   const [active, setActive] = useState(ids[0])
@@ -42,44 +40,7 @@ function Article({ article }) {
   const related = insights.filter((a) => a.slug !== article.slug).slice(0, 3)
   const url = `${site.url}/insights/${article.slug}`
 
-  const jsonLd = useMemo(() => {
-    const graph = [
-      {
-        '@type': 'Article',
-        headline: article.title,
-        description: article.description,
-        datePublished: article.date,
-        dateModified: article.date,
-        mainEntityOfPage: url,
-        image: `${site.url}/og-image.png`,
-        author: { '@type': 'Organization', name: site.name, url: site.url },
-        publisher: {
-          '@type': 'Organization',
-          name: site.name,
-          logo: { '@type': 'ImageObject', url: `${site.url}/brand/savnec-icon-512.png` },
-        },
-      },
-      {
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Home', item: site.url },
-          { '@type': 'ListItem', position: 2, name: 'Insights', item: `${site.url}/insights` },
-          { '@type': 'ListItem', position: 3, name: article.title, item: url },
-        ],
-      },
-    ]
-    if (article.faqs) {
-      graph.push({
-        '@type': 'FAQPage',
-        mainEntity: article.faqs.map((f) => ({
-          '@type': 'Question',
-          name: f.q,
-          acceptedAnswer: { '@type': 'Answer', text: stripInline(f.a) },
-        })),
-      })
-    }
-    return { '@context': 'https://schema.org', '@graph': graph }
-  }, [article, url])
+  const jsonLd = useMemo(() => articleJsonLd(article, site.url), [article])
 
   useSeo(article.title, article.description, { jsonLd, type: 'article' })
 
