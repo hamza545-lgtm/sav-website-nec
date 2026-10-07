@@ -24,7 +24,7 @@ export const site = {
   },
 
   // Flip showEmails to true once these inboxes exist.
-  showEmails: false,
+  showEmails: true,
   emails: {
     info: 'info@savnec.com', // shown in the fraud notice under every form
     clients: 'inquiries@savnec.com',
