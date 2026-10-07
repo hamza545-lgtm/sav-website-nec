@@ -18,9 +18,9 @@ export const site = {
   // Create one key per inbox. Until you have company email, you can
   // create all three on your personal Gmail and swap them later.
   web3forms: {
-    clients: 'YOUR_CLIENT_FORM_ACCESS_KEY',
+    clients: '1d3f7d6c-1487-4e7f-8d87-0a0c35f430ce',
     experts: 'YOUR_EXPERT_FORM_ACCESS_KEY',
-    general: 'YOUR_GENERAL_FORM_ACCESS_KEY',
+    general: '1d3f7d6c-1487-4e7f-8d87-0a0c35f430ce',
   },
 
   // Flip showEmails to true once these inboxes exist.
