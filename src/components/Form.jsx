@@ -81,20 +81,13 @@ export default function Web3Form({ accessKey, subject, fields, submitLabel = 'Su
     if (data.botcheck) return
     delete data.botcheck
 
-    if (!accessKey || accessKey.startsWith('YOUR_')) {
-      console.warn('Savnec: add the Web3Forms access keys in src/config/site.js')
-      setStatus('error')
-      setError(`This form is temporarily unavailable. Please email ${fallbackEmail} and we will reply within one business day.`)
-      return
-    }
-
     setStatus('sending')
     try {
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
-          access_key: accessKey,
+          access_key: String(accessKey || '').trim(),
           subject,
           from_name: 'Savnec Website',
           replyto: data.email,
@@ -109,6 +102,8 @@ export default function Web3Form({ accessKey, subject, fields, submitLabel = 'Su
         throw new Error(json.message || 'Something went wrong.')
       }
     } catch (err) {
+      // Web3Forms explains what went wrong here (for example an invalid access key).
+      console.error('Form not sent:', err.message)
       setStatus('error')
       setError(`We could not send that just now. Please try again in a moment, or email ${fallbackEmail}.`)
     }

@@ -12,6 +12,14 @@ Page copy lives in `src/pages/*.jsx`. Industries, formats, use cases and FAQs li
 Blog articles live in `src/data/insights.js` (add a new object to publish a new article; its page, preview tags and sitemap entry are created on build).
 Privacy & Cookie Policy and Terms live in `src/data/legal.js`.
 
+## Forms
+The three Web3Forms keys go in `src/config/site.js`, each between the quotes, for example
+`clients: 'a1b2c3d4-0000-1111-2222-333344445555',`. After you commit, wait until the new
+deployment shows **Ready** in Vercel before testing (if it shows **Error**, a quote or comma is
+missing in `site.js` and the previous version stays live).
+If a form says "We could not send that just now", open the browser console: Web3Forms explains
+why there (most often an invalid key).
+
 ## Pages
 | Route | Page |
 |---|---|

@@ -176,7 +176,7 @@ export default function Navbar() {
   useEffect(() => {
     setOpen(null)
     setMobile(false)
-  }, [location.pathname, location.hash])
+  }, [location.pathname, location.hash, location.key])
 
   useEffect(() => {
     document.body.style.overflow = mobile ? 'hidden' : ''

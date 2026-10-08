@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect } from 'react'
+import { lazy, Suspense, useEffect, useRef } from 'react'
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion'
 import Navbar from './components/Navbar.jsx'
@@ -51,8 +51,13 @@ function usePrefetchPages() {
 }
 
 function ScrollManager() {
-  const { pathname, hash } = useLocation()
+  const { pathname, hash, key } = useLocation()
+  const previous = useRef(null)
   useEffect(() => {
+    // Every click on a link creates a new location key, even when it points to the page you are
+    // already on (the logo on the home page, say). That case glides back to the top.
+    const samePage = previous.current === pathname
+    previous.current = pathname
     if (hash) {
       const id = decodeURIComponent(hash.slice(1))
       const go = (behavior) => {
@@ -70,8 +75,8 @@ function ScrollManager() {
       }, 120)
       return () => clearInterval(t)
     }
-    window.scrollTo({ top: 0, behavior: 'instant' })
-  }, [pathname, hash])
+    window.scrollTo({ top: 0, behavior: samePage ? 'smooth' : 'instant' })
+  }, [pathname, hash, key])
   return null
 }
 
