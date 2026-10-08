@@ -1,6 +1,6 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { motion } from 'framer-motion'
-import { PageHero, usePageSeo } from '../components/ui.jsx'
+import { PageHero, usePageSeo, useActiveSection } from '../components/ui.jsx'
 import { ArticleBody } from '../components/RichText.jsx'
 import { privacyBlocks, termsBlocks, legalDates } from '../data/legal.js'
 import { slugify } from '../data/insights.js'
@@ -8,19 +8,8 @@ import { site } from '../config/site.js'
 
 function LegalPage({ eyebrow, title, blocks }) {
   const toc = useMemo(() => blocks.filter((b) => b.t === 'h2').map((b) => ({ id: slugify(b.c), label: b.c })), [blocks])
-  const [active, setActive] = useState(toc[0]?.id)
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
-      { rootMargin: '-20% 0px -70% 0px' }
-    )
-    toc.forEach(({ id }) => {
-      const el = document.getElementById(id)
-      if (el) obs.observe(el)
-    })
-    return () => obs.disconnect()
-  }, [toc])
+  const ids = useMemo(() => toc.map((t) => t.id), [toc])
+  const active = useActiveSection(ids)
 
   const jump = (id) => {
     const el = document.getElementById(id)
@@ -39,8 +28,8 @@ function LegalPage({ eyebrow, title, blocks }) {
           <div className="max-w-[760px] [&_p]:text-[16px] [&_li]:text-[16px]">
             <ArticleBody blocks={blocks} />
           </div>
-          <aside className="hidden lg:block">
-            <nav aria-label="Sections" className="sticky top-28">
+          <aside className="hidden lg:z-10 lg:block">
+            <nav aria-label="Sections" className="sticky top-28 bg-page">
               <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-muted">Sections</p>
               <ul className="mt-4 max-h-[70vh] space-y-0.5 overflow-y-auto border-l border-line/[0.11]">
                 {toc.map((t) => (

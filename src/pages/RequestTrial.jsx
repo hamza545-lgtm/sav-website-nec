@@ -8,7 +8,7 @@ import { industries, formats } from '../data/content.js'
 
 export function FormPage({ eyebrow, title, intro, nextTitle, next, emailWho, children }) {
   return (
-    <section className="relative overflow-hidden pb-28 pt-36 sm:pt-44">
+    <section className="noise relative overflow-hidden pb-28 pt-36 sm:pt-44">
       <GlowBackdrop />
       <div className="container-site relative grid gap-14 lg:grid-cols-[0.85fr_1.15fr]">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, ease }}>
@@ -43,7 +43,7 @@ export function FormPage({ eyebrow, title, intro, nextTitle, next, emailWho, chi
           className="relative"
         >
           <div className="absolute -inset-px rounded-[28px] bg-gradient-to-br from-emerald-400/40 via-line/5 to-transparent" />
-          <div className="relative rounded-[28px] bg-card p-7 sm:p-10">{children}</div>
+          <div className="relative rounded-[28px] bg-card/90 p-7 sm:p-10">{children}</div>
         </motion.div>
       </div>
     </section>
@@ -71,6 +71,7 @@ export default function RequestTrial() {
     >
       <Web3Form
         accessKey={site.web3forms.clients}
+        fallbackEmail={site.emails.clients}
         subject="New trial request from savnec.com"
         submitLabel="Request a Trial"
         successTitle="Brief received."

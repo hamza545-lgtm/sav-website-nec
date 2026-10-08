@@ -50,17 +50,17 @@ const steps = [
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden pb-16 pt-36 sm:pt-44">
+    <section className="noise relative overflow-hidden pb-16 pt-36 sm:pt-44">
       <GlowBackdrop />
       <div className="container-site relative grid items-center gap-14 lg:grid-cols-[1.05fr_1fr]">
         <div>
-          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease }}>
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease }}>
             <Eyebrow>Expert network · Primary research</Eyebrow>
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.04, ease }}
+            transition={{ duration: 1, delay: 0.08, ease }}
             className="mt-7 text-[46px] font-semibold leading-[0.98] tracking-tightest sm:text-[76px]"
           >
             Primary research at the{' '}
@@ -69,7 +69,7 @@ function Hero() {
           <motion.p
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1, ease }}
+            transition={{ duration: 1, delay: 0.2, ease }}
             className="mt-8 max-w-xl text-[18px] leading-relaxed text-muted"
           >
             Savnec connects market research, investment and corporate strategy teams with the operators,
@@ -79,7 +79,7 @@ function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15, ease }}
+            transition={{ duration: 1, delay: 0.3, ease }}
             className="mt-10 flex flex-col gap-3 sm:flex-row"
           >
             <Button to="/request-trial">Request a Trial</Button>
@@ -90,7 +90,7 @@ function Hero() {
           <motion.ul
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.25 }}
+            transition={{ duration: 1, delay: 0.5 }}
             className="mt-12 grid max-w-xl grid-cols-1 gap-4 border-t border-line/[0.1] pt-8 sm:grid-cols-3"
           >
             {[
@@ -108,7 +108,7 @@ function Hero() {
         <motion.div
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.1, ease }}
+          transition={{ duration: 1.2, delay: 0.2, ease }}
         >
           <NetworkMap />
         </motion.div>
@@ -142,7 +142,7 @@ function TwoSides() {
             <SpotlightCard className="h-full">
               <Link to={c.to} className="flex h-full flex-col p-8 sm:p-10">
                 <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-accent">{c.kicker}</span>
-                <h3 className="mt-5 text-[30px] font-semibold leading-tight sm:text-[36px]">{c.title}</h3>
+                <h2 className="mt-5 text-[30px] font-semibold leading-tight sm:text-[36px]">{c.title}</h2>
                 <ul className="mt-8 grid gap-3 sm:grid-cols-2">
                   {c.points.map((p) => (
                     <li key={p} className="flex items-start gap-2.5 text-[14.5px] text-body">
@@ -209,7 +209,7 @@ function Process() {
   return (
     <Section>
       <div className="grid gap-16 lg:grid-cols-[0.8fr_1.2fr]">
-        <div className="lg:sticky lg:top-32 lg:self-start">
+        <div className="lg:sticky lg:top-32 lg:z-10 lg:self-start lg:bg-page">
           <SectionHeading
             eyebrow="How it works"
             title="Four steps. One accountable team."
@@ -358,7 +358,7 @@ function ComplianceBand() {
   return (
     <Section>
       <div className="theme-dark relative overflow-hidden rounded-[28px] border border-line/[0.11] bg-page p-8 sm:p-14">
-        <div className="glow-blob absolute -left-48 -top-48 h-[520px] w-[520px] opacity-70" />
+        <div className="blob-band" />
         <div className="relative grid items-center gap-12 lg:grid-cols-[1fr_1.1fr]">
           <div>
             <Eyebrow>Compliance</Eyebrow>

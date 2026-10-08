@@ -26,6 +26,7 @@ export default function Contact() {
       />
 
       <Section className="!pt-0">
+        <h2 className="sr-only">Ways to reach Savnec</h2>
         <div className="grid gap-4 md:grid-cols-3">
           {routes.map(({ to, icon: Icon, title, body, cta }, i) => {
             const inner = (
@@ -77,6 +78,7 @@ export default function Contact() {
             <div className="rounded-3xl p-7 glass sm:p-10">
               <Web3Form
                 accessKey={site.web3forms.general}
+                fallbackEmail={site.emails.general}
                 subject="General inquiry from savnec.com"
                 submitLabel="Send message"
                 successTitle="Message received."

@@ -6,10 +6,10 @@ React + Vite + Tailwind CSS + Framer Motion + Lucide icons. Multi-page, deployed
 Everything you will routinely change lives in **`src/config/site.js`**:
 - Web3Forms access keys (clients, experts, general)
 - Emails: clients `hello@`, experts `experts@`, general and compliance `info@`, careers `careers@`
-- Address (shown as "Savnec" with the address underneath), LinkedIn and Instagram links
+- Address (under "Savnec" on About and Contact, on its own in the footer), LinkedIn and Instagram links
 
 Page copy lives in `src/pages/*.jsx`. Industries, formats, use cases and FAQs live in `src/data/content.js`.
-Blog articles live in `src/data/insights.js` (add a new object to publish a new article, then add its URL to `public/sitemap.xml`).
+Blog articles live in `src/data/insights.js` (add a new object to publish a new article; its page, preview tags and sitemap entry are created on build).
 Privacy & Cookie Policy and Terms live in `src/data/legal.js`.
 
 ## Pages
@@ -52,12 +52,29 @@ the v converging on a single emerald node.
 Page titles and descriptions live in `src/data/seo.js`. On every `npm run build`,
 `scripts/prerender.mjs` writes one HTML file per page (and per article) with its own title,
 description and preview tags, so Google, LinkedIn and WhatsApp show the right summary.
-When you publish a new article, also add its URL to `public/sitemap.xml`.
+The sitemap (`/sitemap.xml`) is generated on every build from the same list, so new articles
+appear in it automatically. If you add a brand-new page, give it an entry in `src/data/seo.js`.
 
-## Performance
+## Performance and sharp text
 Home loads first; every other page is split into its own small file and prefetched while the
-browser is idle. Decorative glows are painted once (no blur filters or endless animations), so
-scrolling stays smooth on phones.
+browser is idle.
+
+The effects (frosted navigation and menus, drifting glows, grain, button shimmer) are built so
+they cost little and never soften the text:
+- The soft glows are tiny pre-rendered images (a few KB, inlined in the CSS) instead of live blur
+  filters. The two hero glows drift on an 18-second cycle by moving slightly once a second, which
+  looks continuous because they are so soft, and keeps them part of the page.
+- Text renders on Chrome's sharpest (subpixel) path across the site. To keep it that way:
+  - backdrop filters use blur only (a colour filter such as `saturate()` turns sharp text off for
+    the whole page behind it);
+  - `Reveal` fades on the compositor but rises on the main thread;
+  - hover fades on cards use the `.fade-hover` class (a registered custom property) instead of
+    opacity transitions;
+  - sticky side panels have an opaque `bg-page` background and `z-10`;
+  - `.container-site` centres on a whole pixel.
+- Loops (shimmer, pulses, glow drift) pause while the page scrolls, the hero animations stop when
+  they are off screen, and everything stops
+  entirely for visitors who prefer reduced motion.
 
 ## Theme
 The site is light by default. Colors are tokens in `src/index.css` (`--page`, `--fg`, `--accent` and so on).

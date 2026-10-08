@@ -57,7 +57,8 @@ export function NetworkMap() {
   }, [visible])
 
   return (
-    <div ref={ref} className="relative mx-auto aspect-[600/520] w-full max-w-[600px]">
+    // Kept on its own layer: the map is drawn once, rather than again each time the glows behind it move.
+    <div ref={ref} className="relative mx-auto aspect-[600/520] w-full max-w-[600px] [will-change:transform]">
       <svg viewBox="0 0 600 520" className="absolute inset-0 h-full w-full" fill="none">
         <defs>
           <radialGradient id="hubGlow">
@@ -73,18 +74,6 @@ export function NetworkMap() {
 
         {[90, 160, 230].map((r, i) => (
           <circle key={r} cx={hub.x} cy={hub.y} r={r} stroke="#8892A0" strokeOpacity={0.12 - i * 0.03} strokeDasharray="2 6" />
-        ))}
-
-        {dots.map(([x, y], i) => (
-          <circle
-            key={i}
-            cx={x}
-            cy={y}
-            r="1.6"
-            fill="#8892A0"
-            className="twinkle"
-            style={{ animationDuration: `${3 + (i % 4)}s`, animationDelay: `${i * 0.3}s` }}
-          />
         ))}
 
         {nodes.map((n, i) => (
@@ -110,13 +99,31 @@ export function NetworkMap() {
         <circle cx={hub.x} cy={hub.y} r="90" fill="url(#hubGlow)" />
       </svg>
 
+      {/* Twinkling background dots */}
+      {dots.map(([x, y], i) => (
+        <span
+          key={i}
+          aria-hidden="true"
+          className="twinkle absolute h-[3px] w-[3px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-steel"
+          style={{
+            left: `${(x / 600) * 100}%`,
+            top: `${(y / 520) * 100}%`,
+            animationDuration: `${3 + (i % 4)}s`,
+            animationDelay: `${i * 0.3}s`,
+          }}
+        />
+      ))}
+
       {/* Hub */}
       <div
         className="absolute -translate-x-1/2 -translate-y-1/2"
         style={{ left: `${(hub.x / 600) * 100}%`, top: `${(hub.y / 520) * 100}%` }}
       >
-        <span className="absolute inset-0 m-auto h-14 w-14 animate-pulseRing rounded-2xl border border-emerald-500/40" />
-        <div className="relative rounded-2xl p-1.5 glass shadow-[0_0_50px_-12px_rgba(22,145,106,0.45)]">
+        {/* The ring pulses inside its own clipped box, so its animation never reaches the content around it. */}
+        <span aria-hidden="true" className="pointer-events-none absolute left-1/2 top-1/2 h-[136px] w-[136px] -translate-x-1/2 -translate-y-1/2 overflow-hidden">
+          <span className="absolute inset-0 m-auto h-14 w-14 animate-pulseRing rounded-2xl border border-emerald-500/40" />
+        </span>
+        <div className="relative rounded-2xl p-1.5 glass-blur shadow-[0_0_50px_-12px_rgba(22,145,106,0.45)]">
           <Mark size={52} />
         </div>
       </div>
@@ -132,7 +139,7 @@ export function NetworkMap() {
           transition={{ delay: 0.6 + i * 0.1, duration: 0.5 }}
         >
           <div
-            className={`flex items-center gap-2 whitespace-nowrap rounded-full px-3 py-1.5 text-[11.5px] transition-all duration-500 glass ${
+            className={`flex items-center gap-2 whitespace-nowrap rounded-full px-3 py-1.5 text-[11.5px] transition-all duration-500 glass-blur ${
               active === i ? '!border-emerald-400/60 shadow-[0_0_30px_-6px_rgba(43,196,138,0.7)]' : ''
             }`}
           >
@@ -176,7 +183,7 @@ export function EngagementConsole() {
   return (
     <div ref={ref} className="relative rounded-3xl p-[1px]">
       <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-emerald-400/40 via-line/5 to-transparent" />
-      <div className="relative overflow-hidden rounded-3xl bg-card">
+      <div className="relative overflow-hidden rounded-3xl bg-card/90">
         <div className="flex items-center justify-between border-b border-line/[0.1] px-6 py-4">
           <div className="flex items-center gap-2">
             <span className="h-2.5 w-2.5 rounded-full bg-fg/10" />
@@ -206,7 +213,9 @@ export function EngagementConsole() {
                       {state === 'done' ? (
                         <Check size={14} />
                       ) : state === 'active' ? (
-                        <LoaderCircle size={14} className="animate-spin" />
+                        <span className="flex overflow-hidden">
+                          <LoaderCircle size={14} className="animate-spin" />
+                        </span>
                       ) : (
                         <Icon size={14} />
                       )}
@@ -321,10 +330,10 @@ export function CtaBand({
     <section className="relative py-24 sm:py-32">
       <div className="container-site">
         <Reveal>
-          <div className="theme-dark relative overflow-hidden rounded-[32px] border border-line/[0.12] bg-page px-8 py-16 sm:px-16 sm:py-20">
+          <div className="theme-dark noise relative overflow-hidden rounded-[32px] border border-line/[0.12] bg-page px-8 py-16 sm:px-16 sm:py-20">
             <div className="absolute inset-0 bg-gradient-to-br from-emerald-700/50 via-navy-900 to-navy-950" />
             <div className="grid-bg absolute inset-0 opacity-60" />
-            <div className="glow-blob absolute -right-40 -top-40 h-[520px] w-[520px]" />
+            <div className="blob-cta" />
             <div className="relative grid items-end gap-10 lg:grid-cols-[1.6fr_1fr]">
               <div>
                 <Eyebrow>{eyebrow}</Eyebrow>

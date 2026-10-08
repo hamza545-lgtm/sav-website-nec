@@ -25,6 +25,7 @@ export default function JoinNetwork() {
     >
       <Web3Form
         accessKey={site.web3forms.experts}
+        fallbackEmail={site.emails.experts}
         subject="New expert application from savnec.com"
         submitLabel="Submit application"
         successTitle="Application received."

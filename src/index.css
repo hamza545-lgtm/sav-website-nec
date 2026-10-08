@@ -55,24 +55,28 @@
 }
 
 @layer components {
-  .soft-glow {
-    background:
-      radial-gradient(60% 55% at 50% 0%, rgba(43, 196, 138, 0.16), transparent 70%),
-      radial-gradient(35% 40% at 92% 30%, rgba(31, 78, 140, 0.07), transparent 70%);
-  }
-  .glow-blob {
-    background: radial-gradient(closest-side, rgba(43, 196, 138, 0.28), transparent);
-  }
   .container-site {
     @apply mx-auto w-full max-w-site px-5 sm:px-8;
   }
-  .glass {
-    background: #ffffff;
+  /* Frosted glass. Cards sit on the plain page colour, where a live blur has nothing to blur,
+     so they use the frosted finish alone; that keeps the text inside them on the crisp
+     text-rendering path. .glass-blur adds a real backdrop blur for surfaces that float over
+     detail (the hero map's hub and chips); the navigation and its menus carry their own blur. */
+  .glass,
+  .glass-blur {
+    background: rgba(255, 255, 255, 0.82);
     border: 1px solid rgb(var(--line) / 0.08);
     box-shadow: 0 1px 2px rgba(10, 25, 47, 0.04), 0 12px 32px -18px rgba(10, 25, 47, 0.18);
   }
+  .glass-blur {
+    /* Blur only: a colour-shifting backdrop filter (such as saturate) makes Chrome drop subpixel
+       text rendering for the whole page behind it. */
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+  }
   .theme-dark .glass,
-  .glass.theme-dark {
+  .glass.theme-dark,
+  .theme-dark .glass-blur {
     background: linear-gradient(180deg, rgba(17, 38, 69, 0.6), rgba(10, 25, 47, 0.4));
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: none;
@@ -98,9 +102,88 @@
     mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 30%, transparent 75%);
     -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, #000 30%, transparent 75%);
   }
+  /* The same grid for heroes, which sit on the plain page colour: the edges fade under a
+     page-coloured vignette instead of a mask, which is identical on screen and far cheaper to
+     redraw while the glows drift. */
+  .grid-bg-page {
+    background-image:
+      radial-gradient(ellipse 80% 60% at 50% 30%, rgb(var(--page) / 0) 30%, rgb(var(--page)) 75%),
+      linear-gradient(rgb(var(--line) / 0.055) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--line) / 0.055) 1px, transparent 1px);
+    background-size: 100% 100%, 64px 64px, 64px 64px;
+  }
+  /* Grain: sits above the background glows and below the text, so headings stay sharp. */
+  .noise::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  .noise > .relative {
+    z-index: 1;
+  }
+
+  /* Shimmer: a soft light band sweeping across primary buttons. It moves with transform only,
+     so it never repaints the button or the navigation bar. */
+  .btn-shine {
+    background-image: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.28) 50%, transparent 65%);
+    background-size: 50% 100%;
+    background-repeat: repeat-x;
+    will-change: transform;
+  }
+
+  /* Soft glows. Each one is the original blurred shape, rendered once into a tiny image that the
+     browser simply stretches, so painting a glow costs almost nothing. The two hero glows drift
+     (see GlowBackdrop); they stay part of the page itself, which keeps all the text on the
+     sharpest rendering path. */
+  .blob-hero-a,
+  .blob-hero-b,
+  .blob-cta,
+  .blob-insight,
+  .blob-band {
+    position: absolute;
+    pointer-events: none;
+    background-position: center;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+  .blob-hero-a {
+    left: calc(50% - 420px); top: -580px; width: 1740px; height: 1400px;
+    background-image: url("data:image/webp;base64,UklGRmQEAABXRUJQVlA4TFcEAAAvrcAiEIAcSW4cyX+/2rKdPgACwnOjK1VkGABg0VizbQfBkdSIEQNiPGBH2nsTnAfg+6cTAI9wzd7jtgKM4qPKkQLAGnxaAWziq0LtvKf4GCn0DuErpK8ANdAX9rN03jO0hNXR7QW26LZ6/wLzH5oH8KXtpMbqe0ECGltLZGE0FJAHMEKHrFMDK/WCFlFqZbJSbLLyR6f5KE2yKAos1cCa0FJByL4rohL3gpdhttqSI5vcqSmMUjgPIqJwnBGiuMJTZGZrEAGQhPThsiVPKr4gnBqZ7YVswrZ6Uuwaj6AKE8XuhWpBtqogRMSCbwirMhPF90KXIa1GYCLiHi+FZ6LYvTBl8FZT8qTqo7kQykTxe2FL0K1aMiS6T2uCVGWshPPgCtDjtGQIiXu8Ek4lZhR/HnwB/jgRiDix5qNNNkQVJko4DyHAHKclJSR6jz1DuRh0jjKtIQgQA/RRTImIHFNwa6tCmCrxo4Nk4B5FW3n7j/R90ui0FIHxB6cFKhmSXA7LNpt9CFNFe5FboFYjKNnjrYCyQYrWUFr4lYxgHUq8Jo1ppXDMK6hlGMGT7JU0m13VqqS4XrQqTCsJTnTF4VTMIQJzvegluJInwSUNW9b0NBfK/F6MAL+ViToX6XGSNGCVrE0miKlSOA/zD+FRnMDEO0kpTVnMhSCmCmYDllRcEz+CtcfrmE2TCVaDglVCEEg0Tj3ipeVEJgMDY40DXsKx3ItNyK1KjMPDO4nLwCENdktmDRFRIzDsBixxjoj4kzQVmwe7f1m1EFHBiYiCdZUoDTYDxDUorymr5sIxnBaUWBeJUn0J8NZSN2XRUFBMZIYbEIh3FJSfxMk3T1lcu6yaCWwN3AbMl6I6SzbxwVoYNbOGgaG6ZuVe6QqGctIyDAwtd5jbTadwvR54RYQG41S2Sy44e+UA3vxuXnNWzQdeC0qd9EuyzJunLFd0LXVuIhPWJi5xmZdcWGZc4d1mzVqB47eIm8RlSZu5MG/VTtktuRD4iwhFl36bpVBoXGGwYije5DSOMlz6lsF1DX8DFcNwjXBwvHGJyVmyM3Ty2kXXC4Z6u127uLzl2oPO+630qd/4uNt+41/+19S1f6ne+F/Atf9hnf3f67XPDBz7rMu1z2gd+2zhtc/E3vks97WvIBz26kzOQAe/8vWRVxXRtr2qeO0rtse+Gn7QpAFUbzBi6RQHwtspDoSXUxz7JmRgCxMyhUcZnZBZOX3k5qQQ1k0fXTvZtXxqDq4/NQf3emru2onE5dOe0C+mPaHfTnsun6SFXjdJ+40pZegG3k8p754Ah3g3AQ7xbAL82On6z91c0A/N3M2FPW6ICpXLK/FSyMCtkBtv3AAuvCBkyebbTJ+8KcYfmZmbYsfewlt+wxF45oYjcOOG4+bbo0Abb49uv5kLtO1m7kdvPaePzcNbz8feKL/3tv5OUi4Nv3fDre8yces7eNz77ihnkpPf1ee+1kPfjep/TuADAA==");
+  }
+  .blob-hero-b {
+    right: -520px; top: -200px; width: 1100px; height: 1100px;
+    background-image: url("data:image/webp;base64,UklGRrABAABXRUJQVlA4TKMBAAAvbUAbEHDcto0gdej+65mzncwk3t8B/SijwrZtUDhmYOS2bSQviCedmePW/ADw10tgg/vXIpaA19yXcgLwGbcmkHBlKM9tcJdanevGFoMuuUO9BC7YC3sMbnKLLhJEeBE2uFwrl0qNu+xAD8vGtArbBC3IoaN5Fx3YYdEYV22TYAUp9DTsKsGJNrS0wbQmdEttDcDaJ4TQBCeLBXYd35iX7XlrQgopeGlrBoVNQhaUYOUwbkkow1+40gicbUIfmuA0ClPpCjF1iNoQwWAwLQZj1VgT5pCCqlvGqlzBCWPIQS5olffV9NiasIcUSKbVKG8htWGs0MqWVZBkwzSAfqVtHLEps8AahtppJ4qKM/RlI5zxeNUS6Jn2mCsnPJ4DFXPIJy4CtgOsB2wl8MIPQOJB2ikZN0p7qnzDEzPtbRDwpkt+i6d9oYR9faV9WWZ8Ncf+EaT97cT8yWX+pab9gX/V7gIAWLZe7Jw0esCwXaGwHa+03bywncq0XdiwHeaw3fOwyUDY1CNsohM2rcqaxIVNGbMmqFnT4azJd+BUP6QB+OMlAAA=");
+  }
+  .blob-cta {
+    right: -380px; top: -380px; width: 920px; height: 920px;
+    background-image: url("data:image/webp;base64,UklGRsoCAABXRUJQVlA4TL4CAAAvW8AWEAkGbSM5Um5m/9rwJ/ydQUT/J4AfpZMNSEpy2IY2p5Lee4fWcm4XVZVUXa2e6MruIEmA3Ttcfa2Q3EaSJEmjv1yj2WR4RHnUvI7dNMesjOL+M3DbtlHXJV3njrg3fvC5++PrPyDcB1/WduZ5U9m0aF96qZBHd2FZyPPqvKZCpmXsDyWnMJBQELJ2UUInLbeMys/AIYSsdny4jg+qY7WHKs1cFbLbS2Rml4tfpilVqU50qrlhpRZnWgROIGJr7RaIcDmU3DpCewaDjHCEHl+m7GYvyrEJG4EDi72MqeCcaEwIaSKZ6GiUjkEr/pM5CAvjqKenx05tA1OMZ1K52JgrZ+8FQb58aa96Er1y3VZwDkKOrtC7Xv5qw25CL/WixpJakNqnJiAq+7sEPScSyL066pu41Mh1VCv/8AHPESMr6l4ZIK6MqS7E0DwTCpG7BlUvzfEkQLsJE6gJsh5yyFzczytqtvtkwv+69cMKNc6wZUb+x32d9upiX4wcPZh4SZF1+ii21IJaOkWv6q0iOFsKBIWV1p7zg2ghG+jd1HT9Pf3QPqp5ymeXCmjt9aXbHrJFa7LbCxCNvtutG6vLiJF4PmzAUUnx6sjxojdGNF0qjpxvd5ymRfNswpTbb/xdkSaATkpDZo9UGFeIUjRBmxIYTa2Tyx7wdn0EQVT1dSzrDo+F0DJpLAEJLrdGBYrmVIuu5RAiWaWq8mm/CrIpvjtqqRa5zgI8tGhas37DmgpH+6XlA4GFBpmVz5Nn06MNLYOrrYIAW49jTn6gVSzMw1iq2+nklKGwc7xWTSZVsD8BSJwd/56rKUId6wseDDiSDggMcuw9MHi5R2eyWdxMUyZnxKYi70bnSsZ2wdDgqUX2ZGSrQ0Or0v4lU6rdLKBrliewlivklR/deZbBfnfYoL1U4L3/UF777+en118=");
+  }
+  .blob-insight {
+    right: -396px; top: -396px; width: 920px; height: 920px;
+    background-image: url("data:image/webp;base64,UklGRpgCAABXRUJQVlA4TIsCAAAvW8AWEAbYke3Wbfrv61RGXIARBOfrhduVKjKQJMlw9Lg2Z3GGI0lSw4Zli4WVfUsiKT9g+MEAxivmeQOtfYhJEybBlEH57Bfwdl4njwYv8DZhvuI6eEfVE5YC9SDlWyw9VkFpvZNpmlitBdnWpWlQDptZqbzWBhskSIPLsJ1ZybM2RGDLoyr6U6jTpNSDJqglQoY5+6lKPFgBsUJcs5uFghluIwS2Yc6iOyvKVFV4yAJhiZBhmW01Mynkomy0AGXvqkjZVyquEmZRaGMK2CJg1mSpsptHrSjs4hJ2RSAW/oXcliiZFM54EwQ2zirKbIl6UUFVBOIuyfbuEkQUeVnzNHR2YSiSyTawtkk+ok4d9cSlClUBSxHsqpDMpYjnflkzyQCFaprApgDknFpqu6vGLNxgKPoum3c3RGSYMcqlLaqZEKAcxWZ2AZuXdoaSxagjbr1UHP5oITvHcu4ux/qkSDxOStk+iqo6VzxBGYpLEEKTgM8FVJWuPlcgGIpbwOWVBHK5tk8j9+FLpbMdcptHYJ9ko0cRGwHvi8KJN2OwWtnYObiO4hXwrLk42Nm0YDHxYjVSdKwUJ3oykCoPL59geVIByNGKUSxsCNYFZYdAjJ6dI5HfkVKiJRKyAWLdlmCOyCvFoaUI2kXQwigWyqe2J0BlAJTjSC+0tT0GBfismN1MXzL7RXM/sx/xXTP7O3Lgd3t6cvZv0uDf0g/YA+xrexfTdteP9y6Ney5E657rA/aK+8oeF3/b4/rBHnf03nz2mWL0WWj2Ge69s+cWR88HZ8/ZZ+bRZ/3RdxSz71ZevRNKSx/cCY2+yxp9B/dd3B3a23znOfmudvId8+i78cF3+oP/ixj8H8rPBRgA");
+  }
+  .blob-band {
+    left: -428px; top: -428px; width: 920px; height: 920px;
+    background-image: url("data:image/webp;base64,UklGRggCAABXRUJQVlA4TPsBAAAvW8AWEAa4AdDGgfYvWVkCOZFJd49Ui6opbNtIzd3dMzO/I7dtJCm2EcdpzG2rmh8AfuYA+AA2uxfwcK4G2AALBzriujknb4KLWgFYiXNwS7J7hIO5o8qBH0DmGktXJBAFKDiadqnTHaSAVmIqXhA73UERaMXmwFbVTnbQhFzVpmC7xMkOhiArMv08iB3vYAW8SnPkLVECJ6DgIfuKJS4T+AJwo4ZYVb/IZYJQYGbI9POR8gmERdxFIuxuBHDzjG1dRCnCZoIsyABhMxSWra9Drigd8qAUmAmjhNy+VvfUkpAmHOou2szsbhikCdIyW2dxp4xEaSbohAwiJFLEjauvqyiNBEMwgxah8NzaOnRWiNJwmAKMDS4xa6T11JNOwlysGezBmtklHlpRPTMkFWekTAZnJwMiR/wi5fi+wKfqqkwWd3EyUHLjsavAyqIuwhUIqRVVjC2bYpaewiMEteXYtgCeqpgr4W/FYjzVvK5qQzNXOEIQpxh1ca10Fu2OjpeqfpI2MVdFIy3iQe/6xPCZR7xfyPQ96/1Z84HPyPH+bPf4TnrwZfqB79Lx/g1g+tvF/TeX/29F79+41r/NL54paLUvzxTWZyHvM5z12dP7zGx91re+o7C+W7G+E7K+y7K+g7O+O7S+83S+q3W+Y3a+G3e+0zf+L+JHDgYA");
+  }
+
   .glow-line {
     background: linear-gradient(90deg, transparent, rgb(var(--accent) / 0.45), transparent);
     height: 1px;
+  }
+}
+
+/* Centre the page column on a whole pixel. With an odd window width (most Windows screens once the
+   scrollbar is subtracted), auto margins leave the column half a pixel off the grid, and Chrome then
+   renders the text in sticky side panels slightly soft. 1240px matches max-w-site. */
+@supports (margin-left: round(down, 1.5px, 1px)) {
+  .container-site {
+    margin-left: max(0px, round(down, (100% - 1240px) / 2, 1px));
+    margin-right: auto;
   }
 }
 
@@ -108,8 +191,46 @@
 .animate-marquee {
   will-change: transform;
 }
+
+/* Decorative loops pause while the page is being scrolled, so scrolling gets the full frame
+   budget, and resume where they left off. */
+.is-scrolling .animate-shimmer,
+.is-scrolling .animate-pulseRing,
+.is-scrolling .twinkle {
+  animation-play-state: paused;
+}
+
+/* Hover fades run through a registered custom property instead of opacity, so they are painted
+   together with the card rather than lifted onto a layer of their own, and the text in the card
+   stays crisp while they run. They fade from --fade-from (default 0) to fully visible.
+   Browsers without @property simply switch without the fade. */
+@property --fade {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+.fade-hover {
+  opacity: calc(var(--fade-from, 0) + (1 - var(--fade-from, 0)) * var(--fade, 0));
+  transition: --fade var(--fade-duration, 0.5s) ease-out;
+}
+.group:hover > .fade-hover {
+  --fade: 1;
+}
+
+/* Underline that draws in slowly on hover. */
+.link-underline {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.5s cubic-bezier(0.22, 1, 0.36, 1), color 0.3s ease;
+}
+.link-underline:hover,
+.link-underline:focus-visible {
+  background-size: 100% 1px;
+}
 .twinkle {
-  animation: twinkle 4s ease-in-out infinite;
+  animation: twinkle 4s ease-in-out infinite both;
 }
 @keyframes twinkle {
   0%, 100% { opacity: 0.15; }

@@ -2,8 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useInView, animate } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
-import { site } from '../config/site.js'
-import { pageMeta, fullTitle } from '../data/seo.js'
+import { pageMeta, fullTitle, canonicalUrl } from '../data/seo.js'
 
 export const ease = [0.22, 1, 0.36, 1]
 
@@ -21,7 +20,7 @@ function setMeta(attr, key, content) {
 export function useSeo(title, description, { jsonLd, type = 'website', noindex = false } = {}) {
   useEffect(() => {
     const pageTitle = fullTitle(title)
-    const url = `${site.url}${window.location.pathname === '/' ? '' : window.location.pathname}`
+    const url = canonicalUrl(window.location.pathname)
     document.title = pageTitle
     if (description) {
       setMeta('name', 'description', description)
@@ -64,6 +63,9 @@ export function Reveal({ children, delay = 0, y = 22, className = '', as = 'div'
   return (
     <M
       className={className}
+      // The fade runs on the compositor and the short rise on the main thread. Animating the
+      // position on the compositor would make the browser lift everything after this element onto
+      // separate layers for the duration, softening the text around it and costing extra redraws.
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '0px 0px -80px 0px' }}
@@ -72,6 +74,45 @@ export function Reveal({ children, delay = 0, y = 22, className = '', as = 'div'
       {children}
     </M>
   )
+}
+
+// The section being read: the last one whose top has passed `line` (a fraction of the window
+// height), or the final one once the page is scrolled to the end. It is measured on every scroll
+// frame, so the highlight stays right however fast the page moves.
+export function useActiveSection(ids, line = 0.3) {
+  const [active, setActive] = useState(ids[0])
+  useEffect(() => {
+    let frame = 0
+    const measure = () => {
+      frame = 0
+      const doc = document.documentElement
+      let current = ids[0]
+      if (window.scrollY > 0 && window.scrollY + window.innerHeight >= doc.scrollHeight - 4) {
+        current = ids[ids.length - 1]
+      } else {
+        const limit = window.innerHeight * line
+        for (const id of ids) {
+          const el = document.getElementById(id)
+          if (!el) continue
+          if (el.getBoundingClientRect().top > limit) break
+          current = id
+        }
+      }
+      setActive(current)
+    }
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(measure)
+    }
+    measure()
+    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('resize', schedule)
+    return () => {
+      cancelAnimationFrame(frame)
+      window.removeEventListener('scroll', schedule)
+      window.removeEventListener('resize', schedule)
+    }
+  }, [ids, line])
+  return active
 }
 
 export function Eyebrow({ children, className = '' }) {
@@ -85,12 +126,12 @@ export function Eyebrow({ children, className = '' }) {
 
 export function Button({ to, href, children, variant = 'primary', className = '', icon = true, ...rest }) {
   const base =
-    'group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-6 py-3 text-[14px] font-medium transition-all duration-300'
+    'group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-6 py-3 text-[14px] font-medium transition-[background-color,border-color,box-shadow,color,transform] duration-500 ease-out active:scale-[0.985]'
   const styles = {
     primary:
       'bg-emerald-600 text-white shadow-[0_10px_28px_-14px_rgba(15,110,76,0.75)] hover:bg-emerald-700 hover:shadow-[0_14px_32px_-14px_rgba(15,110,76,0.85)]',
     ghost:
-      'border border-line/15 bg-card text-fg hover:border-emerald-500/50',
+      'border border-line/15 bg-card/60 text-fg hover:border-emerald-500/50 hover:bg-card',
     light: 'bg-white text-navy-900 hover:bg-ink',
   }
   const inner = (
@@ -99,8 +140,11 @@ export function Button({ to, href, children, variant = 'primary', className = ''
       {icon && (
         <ArrowRight
           size={16}
-          className="relative transition-transform duration-300 group-hover:translate-x-1"
+          className="relative transition-transform duration-500 ease-out group-hover:translate-x-1"
         />
+      )}
+      {variant === 'primary' && (
+        <span aria-hidden="true" className="btn-shine pointer-events-none absolute inset-y-0 -left-[300%] w-[400%] animate-shimmer opacity-60" />
       )}
     </>
   )
@@ -135,19 +179,27 @@ export function SectionHeading({ eyebrow, title, intro, align = 'left', classNam
 
 export function SpotlightCard({ children, className = '' }) {
   const ref = useRef(null)
+  const frame = useRef(0)
   const onMove = (e) => {
-    const r = ref.current.getBoundingClientRect()
-    ref.current.style.setProperty('--x', `${e.clientX - r.left}px`)
-    ref.current.style.setProperty('--y', `${e.clientY - r.top}px`)
+    const { clientX, clientY } = e
+    cancelAnimationFrame(frame.current)
+    frame.current = requestAnimationFrame(() => {
+      const el = ref.current
+      if (!el) return
+      const r = el.getBoundingClientRect()
+      el.style.setProperty('--x', `${clientX - r.left}px`)
+      el.style.setProperty('--y', `${clientY - r.top}px`)
+    })
   }
+  useEffect(() => () => cancelAnimationFrame(frame.current), [])
   return (
     <div
       ref={ref}
       onMouseMove={onMove}
-      className={`group relative overflow-hidden rounded-2xl glass transition-colors duration-500 hover:border-emerald-400/30 ${className}`}
+      className={`group relative overflow-hidden rounded-2xl glass transition-[border-color,box-shadow] duration-700 ease-out hover:border-emerald-400/30 hover:shadow-[0_1px_2px_rgba(10,25,47,0.04),0_24px_48px_-26px_rgba(10,25,47,0.3)] ${className}`}
     >
       <div
-        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        className="fade-hover pointer-events-none absolute inset-0"
         style={{
           background:
             'radial-gradient(420px circle at var(--x, 50%) var(--y, 50%), rgba(43,196,138,0.08), transparent 45%)',
@@ -158,31 +210,83 @@ export function SpotlightCard({ children, className = '' }) {
   )
 }
 
+// The hero glows breathe on an 18-second cycle: they drift up to 36px and swell by 8%, easing in
+// and out. They are so soft that a whole half-cycle shifts the colour on screen by only a few
+// levels, so moving them once a second looks perfectly continuous. Because they move in small
+// steps rather than on a separate animated layer, they stay painted into the page itself, which
+// keeps every line of text around them on the browser's sharpest rendering path.
+const DRIFT_SECONDS = 18
+function drift(t, dx, dy) {
+  const p = (1 - Math.cos((2 * Math.PI * t) / DRIFT_SECONDS)) / 2
+  return `translate(${(dx * p).toFixed(2)}px, ${(dy * p).toFixed(2)}px) scale(${(1 + 0.08 * p).toFixed(4)})`
+}
+const GLOW_A = [36, -16.8]
+const GLOW_B = [15.2, -11.4]
+const GLOW_B_OFFSET = 6 // seconds ahead of the first glow, so the two never move in step
+
+function useGlowDrift(boxRef, aRef, bRef) {
+  useEffect(() => {
+    const box = boxRef.current
+    if (!box || !('IntersectionObserver' in window)) return
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const root = document.documentElement
+    const start = performance.now()
+    let timer = 0
+    const step = () => {
+      // Hold still while the page is scrolling or hidden; carry on from the same clock afterwards.
+      if (document.hidden || root.classList.contains('is-scrolling')) return
+      const t = (performance.now() - start) / 1000
+      if (aRef.current) aRef.current.style.transform = drift(t, ...GLOW_A)
+      if (bRef.current) bRef.current.style.transform = drift(t + GLOW_B_OFFSET, ...GLOW_B)
+    }
+    // Only run while the hero is on screen.
+    const io = new IntersectionObserver(([entry]) => {
+      clearInterval(timer)
+      if (entry.isIntersecting) {
+        step()
+        timer = setInterval(step, 1000)
+      }
+    })
+    io.observe(box)
+    return () => {
+      io.disconnect()
+      clearInterval(timer)
+    }
+  }, [boxRef, aRef, bRef])
+}
+
 export function GlowBackdrop({ className = '' }) {
+  const box = useRef(null)
+  const a = useRef(null)
+  const b = useRef(null)
+  useGlowDrift(box, a, b)
   return (
-    <div className={`pointer-events-none absolute inset-0 overflow-hidden [mask-image:linear-gradient(to_bottom,#000_55%,transparent)] ${className}`} aria-hidden="true">
-      <div className="grid-bg absolute inset-0" />
-      <div className="soft-glow absolute inset-0" />
+    <div ref={box} className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`} aria-hidden="true">
+      <div className="grid-bg-page absolute inset-0" />
+      <div ref={a} className="blob-hero-a" />
+      <div ref={b} className="blob-hero-b" style={{ transform: drift(GLOW_B_OFFSET, ...GLOW_B) }} />
+      {/* Fades everything above into the page colour towards the bottom of the section. */}
+      <div className="absolute inset-x-0 bottom-0 top-[55%] bg-gradient-to-b from-page/0 to-page" />
     </div>
   )
 }
 
 export function PageHero({ eyebrow, title, intro, children }) {
   return (
-    <section className="relative overflow-hidden pb-20 pt-40 sm:pb-28 sm:pt-48">
+    <section className="noise relative overflow-hidden pb-20 pt-40 sm:pb-28 sm:pt-48">
       <GlowBackdrop />
       <div className="container-site relative">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease }}
+          transition={{ duration: 0.8, ease }}
         >
           <Eyebrow>{eyebrow}</Eyebrow>
         </motion.div>
         <motion.h1
           initial={{ opacity: 0, y: 26 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.04, ease }}
+          transition={{ duration: 0.9, delay: 0.08, ease }}
           className="mt-6 max-w-4xl text-[44px] font-semibold leading-[1.02] tracking-tightest sm:text-[68px]"
         >
           {title}
@@ -191,7 +295,7 @@ export function PageHero({ eyebrow, title, intro, children }) {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.09, ease }}
+            transition={{ duration: 0.9, delay: 0.18, ease }}
             className="mt-7 max-w-2xl text-[18px] leading-relaxed text-muted"
           >
             {intro}
@@ -201,7 +305,7 @@ export function PageHero({ eyebrow, title, intro, children }) {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.14, ease }}
+            transition={{ duration: 0.9, delay: 0.28, ease }}
             className="mt-10"
           >
             {children}

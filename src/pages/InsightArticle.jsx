@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowLeft, ArrowUpRight, Clock, CalendarDays } from 'lucide-react'
-import { GlowBackdrop, Button, Reveal, SpotlightCard, ease, useSeo } from '../components/ui.jsx'
+import { GlowBackdrop, Button, Reveal, SpotlightCard, ease, useSeo, useActiveSection } from '../components/ui.jsx'
 import { ArticleBody } from '../components/RichText.jsx'
 import { Accordion } from '../components/Form.jsx'
 import { CtaBand } from '../components/Visuals.jsx'
@@ -10,33 +10,13 @@ import { insights, getInsight, formatDate, slugify, articleJsonLd } from '../dat
 import { site } from '../config/site.js'
 import NotFound from './NotFound.jsx'
 
-function useActiveHeading(ids) {
-  const [active, setActive] = useState(ids[0])
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setActive(e.target.id)
-        })
-      },
-      { rootMargin: '-20% 0px -70% 0px' }
-    )
-    ids.forEach((id) => {
-      const el = document.getElementById(id)
-      if (el) obs.observe(el)
-    })
-    return () => obs.disconnect()
-  }, [ids])
-  return active
-}
-
 function Article({ article }) {
   const toc = useMemo(
     () => article.blocks.filter((b) => b.t === 'h2').map((b) => ({ id: slugify(b.c), label: b.c })),
     [article]
   )
   const ids = useMemo(() => [...toc.map((t) => t.id), ...(article.faqs ? ['faqs'] : [])], [toc, article])
-  const active = useActiveHeading(ids)
+  const active = useActiveSection(ids)
   const related = insights.filter((a) => a.slug !== article.slug).slice(0, 3)
   const url = `${site.url}/insights/${article.slug}`
 
@@ -51,7 +31,7 @@ function Article({ article }) {
 
   return (
     <>
-      <header className="relative overflow-hidden pb-16 pt-36 sm:pt-44">
+      <header className="noise relative overflow-hidden pb-16 pt-36 sm:pt-44">
         <GlowBackdrop />
         <div className="container-site relative">
           <motion.nav
@@ -121,8 +101,8 @@ function Article({ article }) {
         </article>
 
         {toc.length > 2 && (
-          <aside className="hidden lg:block">
-            <nav aria-label="On this page" className="sticky top-28">
+          <aside className="hidden lg:z-10 lg:block">
+            <nav aria-label="On this page" className="sticky top-28 bg-page">
               <p className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-muted">On this page</p>
               <ul className="mt-4 space-y-1 border-l border-line/[0.11]">
                 {[...toc, ...(article.faqs ? [{ id: 'faqs', label: 'FAQs' }] : [])].map((t) => (

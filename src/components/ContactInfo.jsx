@@ -1,10 +1,10 @@
 import { site } from '../config/site.js'
 
-// "Savnec" with the address underneath. No label, as agreed for the brand.
-export function Address({ className = '' }) {
+// The address. On About and Contact it sits under "Savnec"; in the footer it stands alone.
+export function Address({ className = '', showName = true }) {
   return (
     <address className={`not-italic text-[14px] leading-relaxed text-muted ${className}`}>
-      <span className="block font-semibold text-fg">{site.name}</span>
+      {showName && <span className="block font-semibold text-fg">{site.name}</span>}
       {site.address}
     </address>
   )
@@ -28,8 +28,8 @@ export function EmailList({ className = '' }) {
             href={`mailto:${r.email}`}
             className={
               r.key === 'clients'
-                ? 'font-medium text-accent underline-offset-4 hover:underline'
-                : 'text-body underline-offset-4 hover:text-fg hover:underline'
+                ? 'link-underline font-medium text-accent'
+                : 'link-underline text-body hover:text-fg'
             }
           >
             {r.email}
@@ -73,7 +73,7 @@ export function EmailLine({ who = 'clients', label = 'Prefer email?', className 
   return (
     <p className={`text-[14px] text-muted ${className}`}>
       {label}{' '}
-      <a href={`mailto:${email}`} className="font-medium text-accent underline-offset-4 hover:underline">
+      <a href={`mailto:${email}`} className="link-underline font-medium text-accent">
         {email}
       </a>
     </p>

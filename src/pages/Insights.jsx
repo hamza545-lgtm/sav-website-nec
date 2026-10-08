@@ -35,8 +35,8 @@ export default function Insights() {
             >
               <div className="absolute inset-0 bg-gradient-to-br from-emerald-700/40 via-navy-900 to-navy-950" />
               <div className="grid-bg absolute inset-0 opacity-50" />
-              <div className="glow-blob absolute -right-40 -top-40 h-[520px] w-[520px] transition-opacity duration-700 group-hover:opacity-100 lg:opacity-60" />
-              <div className="relative p-8 sm:p-12">
+              <div className="blob-insight fade-hover [--fade-duration:0.7s] [--fade-from:1] lg:[--fade-from:0.6]" />
+              <div className="relative z-[1] p-8 sm:p-12">
                 <div className="flex items-center gap-3">
                   <span className="rounded-full border border-emerald-400/40 bg-emerald-500/10 px-3 py-1 font-mono text-[10.5px] uppercase tracking-[0.18em] text-accent">
                     Featured {featured.category.toLowerCase()}
@@ -101,8 +101,8 @@ export default function Insights() {
                   to={`/insights/${a.slug}`}
                   className="group relative flex h-full min-h-[320px] flex-col overflow-hidden rounded-3xl p-8 glass transition-colors duration-500 hover:border-emerald-400/30"
                 >
-                  <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-emerald-500/15 to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-100" />
-                  <div className="relative flex items-center justify-between">
+                  <div className="fade-hover absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-emerald-500/15 to-transparent [--fade-from:0.6]" />
+                  <div className="relative z-[1] flex items-center justify-between">
                     <span className="rounded-full border border-line/15 bg-page/50 px-3 py-1 font-mono text-[10.5px] uppercase tracking-[0.18em] text-accent">
                       {a.category}
                     </span>

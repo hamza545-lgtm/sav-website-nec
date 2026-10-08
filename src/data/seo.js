@@ -8,34 +8,37 @@
 export const SITE_URL = 'https://www.savnec.com'
 export const DEFAULT_TITLE = 'Savnec | Expert Network for Market Research, Investment & Strategy Teams'
 
+// One spelling of every page address, shared by the canonical tag, link previews and the sitemap.
+export const canonicalUrl = (path) => `${SITE_URL}${path === '/' ? '/' : path}`
+
 export const pageMeta = {
   '/': {
     title: null,
     description:
-      'Savnec is an expert network connecting market research agencies, investors, corporate strategy and consulting teams with vetted industry experts for expert calls, IDIs, B2B surveys, focus groups and custom recruitment.',
+      'Expert network connecting market research agencies, investors and strategy teams with vetted industry experts for calls, IDIs, B2B surveys and focus groups.',
   },
   '/clients': {
     title: 'Expert Calls, IDIs, B2B Surveys & Recruitment',
     description:
-      'Expert calls and IDIs, B2B surveys, focus groups, custom recruitment and diary studies for market research agencies, investors, corporate strategy and consulting teams. First profiles within 48 hours.',
+      'Expert calls and IDIs, B2B surveys, focus groups and custom recruitment for market research, investment and strategy teams. First profiles within 48 hours.',
   },
   '/experts': {
-    title: 'For Experts',
+    title: 'For Experts: Paid Consultations on Your Terms',
     description:
       'Join the Savnec expert network. Paid consultations on your schedule with market research, investment and strategy teams. Free to join, no minimum commitment.',
   },
   '/industries': {
-    title: 'Industries',
+    title: 'Industries & Expert Coverage',
     description:
       'Expert recruitment across technology, media and telecom, advertising, market research, healthcare, private equity, consumer, financial services, industrials, consulting and AI data.',
   },
   '/compliance': {
-    title: 'Compliance',
+    title: 'Compliance & Expert Screening',
     description:
       'How Savnec verifies experts, screens for conflicts and protects confidential and material non-public information on every engagement.',
   },
   '/about': {
-    title: 'About',
+    title: 'About Us',
     description:
       'Savnec is an expert network based in Dover, Delaware, connecting research, investment and strategy teams worldwide with the people who know the answer.',
   },

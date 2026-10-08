@@ -152,7 +152,7 @@ function Dropdown({ type, onClose }) {
       style={{ x: type === 'clients' ? 0 : '-50%' }}
       className={`absolute top-full z-50 pt-4 ${type === 'clients' ? '-left-3' : 'left-1/2'}`}
     >
-      <div className="rounded-2xl border border-line/[0.12] bg-card p-2 shadow-[0_30px_80px_-20px_rgba(10,25,47,0.18)]">
+      <div className="rounded-2xl border border-line/[0.12] bg-card/95 p-2 shadow-[0_30px_80px_-20px_rgba(10,25,47,0.18)] backdrop-blur-xl">
         <Panel onClose={onClose} />
       </div>
     </motion.div>
@@ -180,6 +180,13 @@ export default function Navbar() {
 
   useEffect(() => {
     document.body.style.overflow = mobile ? 'hidden' : ''
+    if (!mobile) {
+      setMobileSub(null)
+      return
+    }
+    const onKey = (e) => e.key === 'Escape' && setMobile(false)
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
   }, [mobile])
 
   const isActive = (to) =>
@@ -190,72 +197,85 @@ export default function Navbar() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
+      {/* The frosted bar sits behind the content as its own element rather than wrapping it, so
+          the menus that hang below it can frost the page themselves. */}
       <div
-        className={`transition-all duration-500 ${
-          scrolled
-            ? 'border-b border-line/[0.1] bg-page/[0.96]'
-            : 'border-b border-transparent bg-transparent'
+        aria-hidden="true"
+        className={`absolute inset-0 border-b transition-[background-color,border-color] duration-500 ${
+          scrolled ? 'border-line/[0.1] bg-page/70 backdrop-blur-xl' : 'border-transparent bg-transparent'
         }`}
-      >
-        <div className="container-site flex h-[72px] items-center justify-between">
-          <Link to="/" aria-label="Savnec home">
-            <Logo height={25} />
-          </Link>
+      />
+      <div className="container-site relative flex h-[72px] items-center justify-between">
+        <Link to="/" aria-label="Savnec home">
+          <Logo height={25} />
+        </Link>
 
-          <nav className="hidden items-center gap-1 lg:flex" onMouseLeave={() => setOpen(null)}>
-            {nav.map((item) => (
-              <div
-                key={item.to}
-                className="relative"
-                onMouseEnter={() => setOpen(item.menu || null)}
+        <nav
+          aria-label="Main"
+          className="hidden items-center gap-1 lg:flex"
+          onMouseLeave={() => setOpen(null)}
+          onKeyDown={(e) => e.key === 'Escape' && setOpen(null)}
+          onBlur={(e) => {
+            if (!e.currentTarget.contains(e.relatedTarget)) setOpen(null)
+          }}
+        >
+          {nav.map((item) => (
+            <div
+              key={item.to}
+              className="relative"
+              onMouseEnter={() => setOpen(item.menu || null)}
+              onFocus={() => setOpen(item.menu || null)}
+            >
+              <NavLink
+                to={item.to}
+                aria-haspopup={item.menu ? 'true' : undefined}
+                aria-expanded={item.menu ? open === item.menu : undefined}
+                className={`relative isolate flex items-center gap-1 rounded-full px-4 py-2 text-[14px] transition-colors duration-300 ${
+                  isActive(item.to) ? 'text-fg' : 'text-muted hover:text-fg'
+                }`}
               >
-                <NavLink
-                  to={item.to}
-                  className={`relative flex items-center gap-1 rounded-full px-4 py-2 text-[14px] transition-colors ${
-                    isActive(item.to) ? 'text-fg' : 'text-muted hover:text-fg'
-                  }`}
-                >
-                  {item.label}
-                  {item.menu && (
-                    <ChevronDown
-                      size={14}
-                      className={`transition-transform duration-300 ${open === item.menu ? 'rotate-180' : ''}`}
-                    />
-                  )}
-                  {isActive(item.to) && (
-                    <motion.span
-                      layoutId="nav-pill"
-                      className="absolute inset-0 -z-10 rounded-full border border-line/[0.12] bg-fg/[0.05]"
-                      transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-                    />
-                  )}
-                </NavLink>
-                <AnimatePresence>
-                  {item.menu && open === item.menu && (
-                    <Dropdown type={item.menu} onClose={() => setOpen(null)} />
-                  )}
-                </AnimatePresence>
-              </div>
-            ))}
-          </nav>
+                {item.label}
+                {item.menu && (
+                  <ChevronDown
+                    size={14}
+                    className={`transition-transform duration-300 ${open === item.menu ? 'rotate-180' : ''}`}
+                  />
+                )}
+                {isActive(item.to) && (
+                  <motion.span
+                    layoutId="nav-pill"
+                    className="absolute inset-0 -z-10 rounded-full border border-line/[0.12] bg-fg/[0.05]"
+                    transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                  />
+                )}
+              </NavLink>
+              <AnimatePresence>
+                {item.menu && open === item.menu && (
+                  <Dropdown type={item.menu} onClose={() => setOpen(null)} />
+                )}
+              </AnimatePresence>
+            </div>
+          ))}
+        </nav>
 
-          <div className="hidden items-center gap-5 lg:flex">
-            <Link to="/join" className="text-[14px] text-muted transition-colors hover:text-fg">
-              Join as an Expert
-            </Link>
-            <Button to="/request-trial" className="!px-5 !py-2.5">
-              Request a Trial
-            </Button>
-          </div>
-
-          <button
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-line/[0.12] text-fg lg:hidden"
-            onClick={() => setMobile((v) => !v)}
-            aria-label={mobile ? 'Close menu' : 'Open menu'}
-          >
-            {mobile ? <X size={18} /> : <Menu size={18} />}
-          </button>
+        <div className="hidden items-center gap-5 lg:flex">
+          <Link to="/join" className="text-[14px] text-muted transition-colors hover:text-fg">
+            Join as an Expert
+          </Link>
+          <Button to="/request-trial" className="!px-5 !py-2.5">
+            Request a Trial
+          </Button>
         </div>
+
+        <button
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-line/[0.12] text-fg lg:hidden"
+          onClick={() => setMobile((v) => !v)}
+          aria-label={mobile ? 'Close menu' : 'Open menu'}
+          aria-expanded={mobile}
+          aria-controls="mobile-menu"
+        >
+          {mobile ? <X size={18} /> : <Menu size={18} />}
+        </button>
       </div>
 
       <AnimatePresence>
@@ -264,7 +284,8 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 top-[72px] z-40 overflow-y-auto bg-page lg:hidden"
+            id="mobile-menu"
+            className="fixed inset-0 top-[72px] z-40 overflow-y-auto bg-page/95 backdrop-blur-xl lg:hidden"
           >
             <div className="container-site py-6">
               {nav.map((item, i) => (
@@ -297,7 +318,7 @@ export default function Navbar() {
                           >
                             <div className="grid gap-1 pb-4">
                               {mobileLinks[item.menu].map((l) => (
-                                <Link key={l.to} to={l.to} className="py-2 text-[15px] text-muted hover:text-fg">
+                                <Link key={l.to} to={l.to} onClick={() => setMobile(false)} className="py-2 text-[15px] text-muted hover:text-fg">
                                   {l.label}
                                 </Link>
                               ))}
@@ -307,15 +328,17 @@ export default function Navbar() {
                       </AnimatePresence>
                     </>
                   ) : (
-                    <Link to={item.to} className="block py-4 text-[22px] text-fg">
+                    <Link to={item.to} onClick={() => setMobile(false)} className="block py-4 text-[22px] text-fg">
                       {item.label}
                     </Link>
                   )}
                 </motion.div>
               ))}
               <div className="mt-8 grid gap-3">
-                <Button to="/request-trial">Request a Trial</Button>
-                <Button to="/join" variant="ghost">
+                <Button to="/request-trial" onClick={() => setMobile(false)}>
+                  Request a Trial
+                </Button>
+                <Button to="/join" variant="ghost" onClick={() => setMobile(false)}>
                   Join as an Expert
                 </Button>
               </div>

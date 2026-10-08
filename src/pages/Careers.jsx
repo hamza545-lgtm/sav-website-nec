@@ -68,6 +68,7 @@ export default function Careers() {
               <EmailLine who="careers" label="Or email" className="mb-8 mt-1" />
               <Web3Form
                 accessKey={site.web3forms.general}
+                fallbackEmail={site.emails.careers}
                 subject="Careers: open application"
                 submitLabel="Send application"
                 successTitle="Application received."

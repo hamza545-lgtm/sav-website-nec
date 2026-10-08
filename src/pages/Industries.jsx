@@ -1,29 +1,14 @@
-import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Quote } from 'lucide-react'
-import { PageHero, Reveal, usePageSeo, Button } from '../components/ui.jsx'
+import { PageHero, Reveal, usePageSeo, Button, useActiveSection } from '../components/ui.jsx'
 import { CtaBand } from '../components/Visuals.jsx'
 import { industries } from '../data/content.js'
 
+const industryIds = industries.map((i) => i.id)
+
 export default function Industries() {
   usePageSeo('/industries')
-  const [active, setActive] = useState(industries[0].id)
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) setActive(e.target.id)
-        })
-      },
-      { rootMargin: '-45% 0px -50% 0px' }
-    )
-    industries.forEach(({ id }) => {
-      const el = document.getElementById(id)
-      if (el) obs.observe(el)
-    })
-    return () => obs.disconnect()
-  }, [])
+  const active = useActiveSection(industryIds, 0.5)
 
   const jump = (id) => {
     const el = document.getElementById(id)
@@ -44,8 +29,8 @@ export default function Industries() {
 
       <section className="relative pb-24">
         <div className="container-site grid gap-12 lg:grid-cols-[280px_1fr]">
-          <aside className="hidden lg:block">
-            <nav className="sticky top-28 space-y-1 border-l border-line/[0.11]">
+          <aside className="hidden lg:z-10 lg:block">
+            <nav className="sticky top-28 space-y-1 border-l border-line/[0.11] bg-page">
               {industries.map(({ id, name }) => (
                 <button
                   key={id}

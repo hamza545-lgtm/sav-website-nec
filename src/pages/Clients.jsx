@@ -29,7 +29,11 @@ const commitments = [
 function ProfileCard() {
   return (
     <div className="relative">
-      <div className="glow-blob absolute -inset-16 opacity-50" />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 rounded-3xl"
+        style={{ boxShadow: '0 0 128px 24px rgba(22,145,106,0.10)' }}
+      />
       <div className="relative rounded-3xl p-7 glass">
         <div className="flex items-center justify-between">
           <span className="font-mono text-[10.5px] uppercase tracking-[0.2em] text-muted">Expert profile</span>

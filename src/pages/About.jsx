@@ -65,22 +65,37 @@ export default function About() {
               <Eyebrow>Where we recruit</Eyebrow>
               <div className="relative mt-6 aspect-[16/10] w-full">
                 <div className="grid-bg absolute inset-0 opacity-70" />
+                {/* All the labels come first and the pulsing dots after them, so no animation is ever
+                    drawn beneath a label and the text keeps its sharp rendering. */}
                 {regions.map(([name, x, y], i) => (
-                  <motion.div
+                  <motion.span
                     key={name}
-                    className="absolute"
+                    className="absolute whitespace-nowrap text-[12px] text-body"
+                    style={{ left: `${x}%`, top: `${y}%`, x: '-50%', y: 14 }}
+                    initial={{ opacity: 0, scale: 0.6 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 + i * 0.12 }}
+                  >
+                    {name}
+                  </motion.span>
+                ))}
+                {regions.map(([name, x, y], i) => (
+                  <motion.span
+                    key={`${name}-dot`}
+                    aria-hidden="true"
+                    className="absolute flex h-3 w-3"
                     style={{ left: `${x}%`, top: `${y}%`, x: '-50%', y: '-50%' }}
                     initial={{ opacity: 0, scale: 0.6 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.2 + i * 0.12 }}
                   >
-                    <span className="relative flex h-3 w-3">
-                      <span className="absolute inline-flex h-full w-full animate-pulseRing rounded-full bg-emerald-400" style={{ animationDelay: `${i * 0.4}s` }} />
-                      <span className="relative inline-flex h-3 w-3 rounded-full bg-tick" />
+                    <span className="pointer-events-none absolute -inset-[7px] overflow-hidden">
+                      <span className="absolute inset-[7px] inline-flex animate-pulseRing rounded-full bg-emerald-400" style={{ animationDelay: `${i * 0.4}s` }} />
                     </span>
-                    <span className="absolute left-1/2 top-5 -translate-x-1/2 whitespace-nowrap text-[12px] text-body">{name}</span>
-                  </motion.div>
+                    <span className="relative inline-flex h-3 w-3 rounded-full bg-tick" />
+                  </motion.span>
                 ))}
               </div>
               <div className="mt-6 flex flex-col gap-4 border-t border-line/[0.1] pt-6 sm:flex-row sm:items-end sm:justify-between">

@@ -54,18 +54,19 @@ function ScrollManager() {
   const { pathname, hash } = useLocation()
   useEffect(() => {
     if (hash) {
-      // Wait for the page (which may still be loading) to render the target, then scroll to it.
       const id = decodeURIComponent(hash.slice(1))
+      const go = (behavior) => {
+        const el = document.getElementById(id)
+        if (!el) return false
+        window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 96, behavior })
+        return true
+      }
+      // Already on the page: glide to the section. Arriving from another page or a shared link:
+      // wait for the page to render, then go straight there.
+      if (go('smooth')) return
       let tries = 0
       const t = setInterval(() => {
-        const el = document.getElementById(id)
-        if (el || ++tries > 30) {
-          clearInterval(t)
-          if (el) {
-            const y = el.getBoundingClientRect().top + window.scrollY - 96
-            window.scrollTo({ top: y, behavior: 'smooth' })
-          }
-        }
+        if (go('instant') || ++tries > 30) clearInterval(t)
       }, 120)
       return () => clearInterval(t)
     }

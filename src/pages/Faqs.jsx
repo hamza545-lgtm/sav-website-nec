@@ -21,8 +21,8 @@ export default function Faqs() {
       />
       <Section className="!pt-0">
         <div className="grid gap-12 lg:grid-cols-[240px_1fr]">
-          <Reveal>
-            <div className="flex gap-2 lg:sticky lg:top-28 lg:flex-col">
+          <Reveal className="lg:z-10">
+            <div className="flex gap-2 lg:sticky lg:top-28 lg:flex-col lg:bg-page">
               {tabs.map((t) => (
                 <button
                   key={t}
@@ -46,7 +46,7 @@ export default function Faqs() {
         <Reveal>
           <div className="mt-20 flex flex-col items-start justify-between gap-6 rounded-3xl p-8 glass sm:flex-row sm:items-center sm:p-10">
             <div>
-              <h3 className="text-[22px] font-semibold">Still have a question?</h3>
+              <h2 className="text-[22px] font-semibold">Still have a question?</h2>
               <p className="mt-1 text-[15px] text-muted">We reply within one business day.</p>
             </div>
             <Button to="/contact">Contact us</Button>

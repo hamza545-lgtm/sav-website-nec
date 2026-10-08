@@ -4,7 +4,7 @@
 // engines and link previews (LinkedIn, WhatsApp, Slack) see before JavaScript runs.
 import fs from 'node:fs'
 import path from 'node:path'
-import { pageMeta, fullTitle, SITE_URL } from '../src/data/seo.js'
+import { pageMeta, fullTitle, canonicalUrl, SITE_URL } from '../src/data/seo.js'
 import { insights, articleJsonLd } from '../src/data/insights.js'
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -14,7 +14,7 @@ function setTag(html, re, tag) {
 }
 
 export function renderPage(template, { route, title, description, type = 'website', jsonLd }) {
-  const url = route === '/' ? SITE_URL : `${SITE_URL}${route}`
+  const url = canonicalUrl(route)
   const t = esc(fullTitle(title))
   const d = esc(description)
   let html = template
@@ -43,6 +43,7 @@ export function prerender(distDir) {
       title: a.title,
       description: a.description,
       type: 'article',
+      date: a.date,
       jsonLd: articleJsonLd(a, SITE_URL),
     })),
   ]
@@ -53,5 +54,16 @@ export function prerender(distDir) {
     fs.mkdirSync(path.dirname(out), { recursive: true })
     fs.writeFileSync(out, html)
   }
+  writeSitemap(distDir, pages)
   return pages.length
+}
+
+// sitemap.xml is generated from the same list, so new pages and articles are included automatically.
+function writeSitemap(distDir, pages) {
+  const today = new Date().toISOString().slice(0, 10)
+  const urls = pages
+    .map((p) => `  <url><loc>${canonicalUrl(p.route)}</loc><lastmod>${p.date || today}</lastmod></url>`)
+    .join('\n')
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`
+  fs.writeFileSync(path.join(distDir, 'sitemap.xml'), xml)
 }

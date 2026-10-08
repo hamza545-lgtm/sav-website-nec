@@ -53,20 +53,15 @@ export default {
           '0%': { transform: 'scale(0.8)', opacity: '0.7' },
           '100%': { transform: 'scale(2.4)', opacity: '0' },
         },
-        drift: {
-          '0%, 100%': { transform: 'translate3d(0,0,0) scale(1)' },
-          '50%': { transform: 'translate3d(4%, -3%, 0) scale(1.08)' },
-        },
         shimmer: {
-          from: { backgroundPosition: '200% 0' },
-          to: { backgroundPosition: '-200% 0' },
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(50%)' },
         },
       },
       animation: {
         marquee: 'marquee 45s linear infinite',
         pulseRing: 'pulseRing 2.4s ease-out infinite',
-        drift: 'drift 18s ease-in-out infinite',
-        shimmer: 'shimmer 6s linear infinite',
+        shimmer: 'shimmer 3s linear infinite',
       },
     },
   },

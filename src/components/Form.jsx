@@ -70,7 +70,7 @@ function FormNotice() {
   )
 }
 
-export default function Web3Form({ accessKey, subject, fields, submitLabel = 'Submit', successTitle, successBody }) {
+export default function Web3Form({ accessKey, subject, fields, submitLabel = 'Submit', successTitle, successBody, fallbackEmail = site.emails.info }) {
   const [status, setStatus] = useState('idle')
   const [error, setError] = useState('')
 
@@ -84,7 +84,7 @@ export default function Web3Form({ accessKey, subject, fields, submitLabel = 'Su
     if (!accessKey || accessKey.startsWith('YOUR_')) {
       console.warn('Savnec: add the Web3Forms access keys in src/config/site.js')
       setStatus('error')
-      setError(`This form is temporarily unavailable. Please email ${site.emails.info} and we will reply within one business day.`)
+      setError(`This form is temporarily unavailable. Please email ${fallbackEmail} and we will reply within one business day.`)
       return
     }
 
@@ -110,12 +110,12 @@ export default function Web3Form({ accessKey, subject, fields, submitLabel = 'Su
       }
     } catch (err) {
       setStatus('error')
-      setError('We could not send that just now. Please try again in a moment.')
+      setError(`We could not send that just now. Please try again in a moment, or email ${fallbackEmail}.`)
     }
   }
 
   return (
-    <div className="relative">
+    <div className="relative" aria-live="polite">
       <AnimatePresence mode="wait">
         {status === 'success' ? (
           <motion.div
@@ -127,7 +127,7 @@ export default function Web3Form({ accessKey, subject, fields, submitLabel = 'Su
             <span className="flex h-14 w-14 items-center justify-center rounded-full border border-emerald-400/50 bg-emerald-500/15 text-accent shadow-[0_12px_30px_-14px_rgba(15,110,76,0.6)]">
               <Check size={24} />
             </span>
-            <h3 className="mt-6 text-[26px] font-semibold">{successTitle}</h3>
+            <h2 className="mt-6 text-[26px] font-semibold">{successTitle}</h2>
             <p className="mt-3 max-w-sm text-[15px] leading-relaxed text-muted">{successBody}</p>
             <button onClick={() => setStatus('idle')} className="mt-8 text-[14px] text-accent underline-offset-4 hover:underline">
               Send another
@@ -140,7 +140,7 @@ export default function Web3Form({ accessKey, subject, fields, submitLabel = 'Su
               <Field key={f.name} f={f} />
             ))}
             {status === 'error' && (
-              <p className="flex items-start gap-2 rounded-xl border border-red-400/30 bg-red-500/10 px-4 py-3 text-[13.5px] text-red-700 sm:col-span-2">
+              <p role="alert" className="flex items-start gap-2 rounded-xl border border-red-400/30 bg-red-500/10 px-4 py-3 text-[13.5px] text-red-700 sm:col-span-2">
                 <CircleAlert size={16} className="mt-0.5 shrink-0" /> {error}
               </p>
             )}
@@ -149,11 +149,14 @@ export default function Web3Form({ accessKey, subject, fields, submitLabel = 'Su
               <button
                 type="submit"
                 disabled={status === 'sending'}
-                className="group inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full bg-emerald-600 px-7 py-3.5 text-[14px] font-medium text-white shadow-[0_10px_28px_-14px_rgba(15,110,76,0.75)] transition-all hover:bg-emerald-700 disabled:opacity-60"
+                className="group relative inline-flex shrink-0 items-center justify-center gap-2 overflow-hidden whitespace-nowrap rounded-full bg-emerald-600 px-7 py-3.5 text-[14px] font-medium text-white shadow-[0_10px_28px_-14px_rgba(15,110,76,0.75)] transition-[background-color,box-shadow,transform] duration-500 ease-out hover:bg-emerald-700 hover:shadow-[0_14px_32px_-14px_rgba(15,110,76,0.85)] active:scale-[0.985] disabled:opacity-60"
               >
-                {status === 'sending' ? <LoaderCircle size={16} className="animate-spin" /> : null}
-                {status === 'sending' ? 'Sending' : submitLabel}
-                {status !== 'sending' && <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />}
+                {status === 'sending' ? <LoaderCircle size={16} className="relative animate-spin" /> : null}
+                <span className="relative">{status === 'sending' ? 'Sending' : submitLabel}</span>
+                {status !== 'sending' && (
+                  <ArrowRight size={16} className="relative transition-transform duration-500 ease-out group-hover:translate-x-1" />
+                )}
+                <span aria-hidden="true" className="btn-shine pointer-events-none absolute inset-y-0 -left-[300%] w-[400%] animate-shimmer opacity-60" />
               </button>
             </div>
             <FormNotice />

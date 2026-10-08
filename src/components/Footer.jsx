@@ -53,7 +53,7 @@ export default function Footer() {
           <p className="mt-7 max-w-sm text-[22px] font-medium leading-snug tracking-tight text-fg">
             {site.tagline}
           </p>
-          <Address className="mt-7" />
+          <Address className="mt-7" showName={false} />
           <EmailList className="mt-6" />
           {socials.length > 0 && (
             <div className="mt-7 flex gap-3">
@@ -75,11 +75,11 @@ export default function Footer() {
         <div className="grid grid-cols-2 gap-10 sm:grid-cols-3">
           {cols.map((c) => (
             <div key={c.title}>
-              <h4 className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted">{c.title}</h4>
+              <h2 className="font-mono text-[11px] font-normal uppercase tracking-[0.2em] text-muted">{c.title}</h2>
               <ul className="mt-5 space-y-3">
                 {c.links.map(([label, to]) => (
                   <li key={label}>
-                    <Link to={to} className="text-[14.5px] text-body transition-colors hover:text-fg">
+                    <Link to={to} className="link-underline text-[14.5px] text-body hover:text-fg">
                       {label}
                     </Link>
                   </li>
@@ -103,13 +103,13 @@ export default function Footer() {
             © {new Date().getFullYear()} {site.legalName}. All rights reserved.
           </p>
           <div className="flex flex-wrap items-center gap-6">
-            <Link to="/privacy-policy" className="hover:text-fg">
+            <Link to="/privacy-policy" className="link-underline hover:text-fg">
               Privacy & Cookie Policy
             </Link>
-            <Link to="/terms" className="hover:text-fg">
+            <Link to="/terms" className="link-underline hover:text-fg">
               Terms & Conditions
             </Link>
-            <Link to="/compliance" className="hover:text-fg">
+            <Link to="/compliance" className="link-underline hover:text-fg">
               Compliance
             </Link>
           </div>
