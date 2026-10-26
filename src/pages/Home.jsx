@@ -55,7 +55,7 @@ function Hero() {
       <div className="container-site relative grid items-center gap-14 lg:grid-cols-[1.05fr_1fr]">
         <div>
           <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease }}>
-            <Eyebrow>Expert network · Primary research</Eyebrow>
+            <Eyebrow>Expert network · Custom recruitment</Eyebrow>
           </motion.div>
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -63,8 +63,8 @@ function Hero() {
             transition={{ duration: 1, delay: 0.08, ease }}
             className="mt-7 text-[46px] font-semibold leading-[0.98] tracking-tightest sm:text-[76px]"
           >
-            Primary research at the{' '}
-            <span className="serif-accent text-gradient pr-1">speed of the deal.</span>
+            The central point for{' '}
+            <span className="serif-accent text-gradient pr-1">expert sourcing.</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 24 }}
