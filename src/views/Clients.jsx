@@ -157,7 +157,7 @@ export default function Clients() {
     <>
       <PageHero
         title="Clients we support"
-        intro="Savnec supports market research firms, investors, corporations and consulting teams with first-hand expertise for faster, better-informed decisions."
+        intro="Savnec supports market research firms, corporations, consulting teams, and private equity with first-hand expertise for faster, better-informed decisions."
         aside={<Commitments />}
       >
         <div className="flex flex-col gap-3 sm:flex-row">

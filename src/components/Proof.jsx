@@ -8,7 +8,7 @@ export function Testimonials() {
   return (
     <Section>
       <Reveal>
-        <h2 className="text-[30px] font-semibold leading-[1.1] sm:text-[40px]">
+        <h2 className="text-center text-[30px] font-semibold leading-[1.1] sm:text-[40px]">
           <span className="text-accent">Trusted</span> by leading decision makers
         </h2>
       </Reveal>

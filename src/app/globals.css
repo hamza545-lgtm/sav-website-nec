@@ -39,6 +39,9 @@
   body {
     @apply bg-page font-sans text-body;
     font-feature-settings: 'ss01', 'cv11';
+    /* A touch of air between letters: Inter Tight is set tight by design, and at text sizes the
+       letters read better slightly apart. Section labels set their own wider tracking. */
+    letter-spacing: 0.008em;
   }
   ::selection {
     background: rgba(43, 196, 138, 0.28);
@@ -50,7 +53,7 @@
   }
   h1, h2, h3, h4 {
     color: rgb(var(--fg));
-    letter-spacing: -0.03em;
+    letter-spacing: -0.022em;
   }
 }
 

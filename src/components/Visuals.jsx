@@ -178,7 +178,6 @@ export function EngagementConsole() {
             <span className="h-2.5 w-2.5 rounded-full bg-fg/10" />
             <span className="h-2.5 w-2.5 rounded-full bg-fg/10" />
           </div>
-          <span className="label">Sample project</span>
         </div>
 
         <div className="grid md:grid-cols-[1.05fr_1fr]">
@@ -262,9 +261,9 @@ export function Marquee({ items }) {
     <div className="group relative overflow-hidden py-4 [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]">
       <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused]">
         {row.map((t, i) => (
-          <span key={i} className="flex items-center whitespace-nowrap pr-10 text-[15px] text-fg/40" aria-hidden={i >= items.length}>
+          <span key={i} className="flex items-center whitespace-nowrap pr-10 text-[15px] text-fg/50" aria-hidden={i >= items.length}>
             {t}
-            <span className="ml-10 h-1 w-1 rounded-full bg-fg/20" />
+            <span className="ml-10 h-1 w-1 rounded-full bg-fg/25" />
           </span>
         ))}
       </div>

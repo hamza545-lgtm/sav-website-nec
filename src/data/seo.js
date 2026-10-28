@@ -8,7 +8,7 @@
 // ─────────────────────────────────────────────────────────────
 
 export const SITE_URL = 'https://www.savnec.com'
-export const DEFAULT_TITLE = 'Savnec | Expert Network for Market Research, Investment & Strategy Teams'
+export const DEFAULT_TITLE = 'Savnec | Global B2B Expert Network | Supporting Institutional Research'
 
 // One spelling of every page address, shared by the canonical tag, link previews and the sitemap.
 export const canonicalUrl = (path) => `${SITE_URL}${path === '/' ? '/' : path}`

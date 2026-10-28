@@ -42,7 +42,7 @@ module.exports = {
         ui: ['var(--font-ui)', 'Inter', 'system-ui', 'sans-serif'],
       },
       letterSpacing: {
-        tightest: '-0.045em',
+        tightest: '-0.035em',
       },
       maxWidth: {
         site: '1240px',

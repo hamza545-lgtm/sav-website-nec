@@ -80,7 +80,7 @@ export default function About() {
       <PageHero
         eyebrow="About Savnec"
         title="Built around the right conversation"
-        intro="Savnec is a Delaware-registered expert network connecting research, investment and strategy teams with the people who know the answer."
+        intro="Savnec is a global expert network connecting research and strategy teams with the people worldwide who know the answer."
       />
 
       <Section tone="card" className="border-y border-line/[0.07]">

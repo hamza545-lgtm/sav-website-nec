@@ -58,8 +58,6 @@ function Hero() {
           items={[
             'ESOMAR-aligned research standards',
             'Expert calls & IDIs',
-            'B2B surveys',
-            'Custom sourcing per project',
             'Focus groups',
             'NDA-governed engagements',
             'Commercial due diligence',
