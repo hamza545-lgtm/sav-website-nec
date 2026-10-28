@@ -5,7 +5,7 @@
 //  you add analytics, a CRM, payment providers or new countries.
 // ─────────────────────────────────────────────────────────────
 
-export const legalDates = { effective: 'January 1, 2026', updated: 'October 6, 2026' }
+export const legalDates = { effective: 'January 1, 2026', updated: 'October 15, 2026' }
 
 export const privacyBlocks = (email) => [
   {
@@ -15,7 +15,7 @@ export const privacyBlocks = (email) => [
   { t: 'h2', c: '1. Who we are' },
   {
     t: 'p',
-    c: 'Savnec LLC (“Savnec”, “we”, “us”) is an expert network with its principal address at 8 The Green, Dover, DE 19901, United States. We connect organizations (“clients”) with industry professionals (“experts”) for research engagements. Savnec is the controller of the personal information described in this Policy.',
+    c: 'Savnec LLC (“Savnec”, “we”, “us”) is an expert network with its principal address at 8 The Green #25201, Dover, DE 19901, United States. We connect organizations (“clients”) with industry professionals (“experts”) for research engagements. Savnec is the controller of the personal information described in this Policy.',
   },
   {
     t: 'p',
@@ -114,7 +114,7 @@ export const privacyBlocks = (email) => [
   { t: 'h2', c: '6. International transfers' },
   {
     t: 'p',
-    c: 'Savnec is based in the United States and works with clients and experts worldwide, so your information may be processed in countries other than your own. Where we transfer personal information from the UK, the European Economic Area or Switzerland, we rely on appropriate safeguards such as the European Commission’s Standard Contractual Clauses or an adequacy decision.',
+    c: 'Savnec LLC is registered in the United States. Our team and service providers work from several countries, and we work with clients and experts worldwide, so your information may be processed in countries other than your own. Where we transfer personal information from the UK, the European Economic Area or Switzerland, we rely on appropriate safeguards such as the European Commission’s Standard Contractual Clauses or an adequacy decision.',
   },
 
   { t: 'h2', c: '7. How long we keep information' },
@@ -191,7 +191,7 @@ export const privacyBlocks = (email) => [
   { t: 'h2', c: '14. Contact us' },
   {
     t: 'p',
-    c: `Savnec LLC, 8 The Green, Dover, DE 19901, United States. Email **${email}** or use our [contact form](/contact).`,
+    c: `Savnec LLC, 8 The Green #25201, Dover, DE 19901, United States. Email **${email}** or use our [contact form](/contact).`,
   },
 ]
 
@@ -209,7 +209,7 @@ export const termsBlocks = (email) => [
   { t: 'h2', c: '2. Our services' },
   {
     t: 'p',
-    c: 'Savnec operates an expert network that connects clients, such as market research agencies, investment firms, consultancies and corporate teams, with industry professionals for expert calls, in-depth interviews, B2B surveys, focus groups, diary studies, custom recruitment and related research. Savnec facilitates these engagements. Savnec does not itself provide investment, legal, medical, tax or other professional advice, and experts do not provide it through our services.',
+    c: 'Savnec operates an expert network that connects clients, such as market research firms, investment firms, consultancies and corporate teams, with industry professionals for expert calls, in-depth interviews, B2B surveys, focus groups, diary studies, custom recruitment and related research. Savnec facilitates these engagements. Savnec does not itself provide investment, legal, medical, tax or other professional advice, and experts do not provide it through our services.',
   },
 
   { t: 'h2', c: '3. Eligibility' },

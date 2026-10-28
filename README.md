@@ -1,93 +1,49 @@
-# Savnec website
+# savnec.com
 
-React + Vite + Tailwind CSS + Framer Motion + Lucide icons. Multi-page, deployed on Vercel.
+The Savnec website, built with Next.js (App Router), React, Tailwind CSS and Framer Motion,
+hosted on Vercel.
 
-## Edit the basics
-Everything you will routinely change lives in **`src/config/site.js`**:
-- Web3Forms access keys (clients, experts, general)
-- Emails: clients `hello@`, experts `experts@`, general and compliance `info@`, careers `careers@`
-- Address (under "Savnec" on About and Contact, on its own in the footer), LinkedIn and Instagram links
+Every page is generated as complete HTML at build time, so search engines, AI search and link
+previews see the full text and links without running JavaScript.
 
-Page copy lives in `src/pages/*.jsx`. Industries, formats, use cases and FAQs live in `src/data/content.js`.
-Blog articles live in `src/data/insights.js` (add a new object to publish a new article; its page, preview tags and sitemap entry are created on build).
-Privacy & Cookie Policy and Terms live in `src/data/legal.js`.
+## Day-to-day edits
 
-## Forms
-The three Web3Forms keys go in `src/config/site.js`, each between the quotes, for example
-`clients: 'a1b2c3d4-0000-1111-2222-333344445555',`. After you commit, wait until the new
-deployment shows **Ready** in Vercel before testing (if it shows **Error**, a quote or comma is
-missing in `site.js` and the previous version stays live).
-If a form says "We could not send that just now", open the browser console: Web3Forms explains
-why there (most often an invalid key).
+| What | Where |
+| --- | --- |
+| Form keys, emails, address, social links, home-page stats, testimonials | `src/config/site.js` |
+| Page titles, descriptions and "last updated" dates for Google | `src/data/seo.js` |
+| Industries, formats, client types, FAQs | `src/data/content.js` |
+| Insights articles | `src/data/insights.js` |
+| Privacy Policy and Terms | `src/data/legal.js` |
 
-## Pages
-| Route | Page |
-|---|---|
-| `/` | Home |
-| `/clients` | For clients |
-| `/experts` | For experts |
-| `/industries` | Industries (anchors like `/industries#tech`) |
-| `/compliance` | Compliance |
-| `/about` | About (dropdown: Insights, FAQs, Careers, Contact) |
-| `/insights`, `/insights/<slug>` | Blog index and articles (each article has its own URL, meta tags, Article + FAQ schema) |
-| `/request-trial` | Client form (Web3Forms: clients) |
-| `/join` | Expert form (Web3Forms: experts) |
-| `/contact`, `/careers` | General forms (Web3Forms: general) |
-| `/privacy-policy`, `/terms` | Legal (`/privacy` and `/cookie-policy` redirect) |
+When you change a page's content, update its `updated` date in `src/data/seo.js` (for articles,
+add or change `updated` in `src/data/insights.js`). That date goes into `sitemap.xml` and tells
+Google the page changed.
 
-Old `.html` URLs from the previous site redirect automatically (see `vercel.json`).
+## Structure
 
-## Run locally (optional)
-```bash
-npm install
-npm run dev
+```
+src/app/          one folder per address (about/page.jsx is /about), plus the shared layout,
+                  sitemap.xml (sitemap.js) and the 404 page (not-found.jsx)
+src/views/        the content of each page
+src/components/   navigation, footer, buttons, forms, animations
+src/data/         text and settings (see the table above)
+src/config/       site.js
+public/           images, icons, robots.txt
 ```
 
-## Vercel settings
-Framework preset: **Vite** · Build command: `npm run build` · Output directory: `dist`
+## Run it locally
 
-## Brand files
-`public/brand/` holds the brand in SVG and PNG:
-- `savnec-wordmark-navy` (light backgrounds) and `savnec-wordmark-white` (dark backgrounds)
-- `savnec-icon` / `savnec-icon-512.png` (the converging-v mark, also the favicon)
-- `savnec-social-avatar.png` (LinkedIn / Instagram profile picture)
-- `savnec-linkedin-banner.png` (1584 × 396)
+```
+npm install
+npm run dev        # http://localhost:3000
+npm run build      # production build, the same one Vercel runs
+```
 
-The wordmark is lowercase "savnec" outlined from Outfit Bold, all navy, with the two strokes of
-the v converging on a single emerald node.
+## Search
 
-## SEO and link previews
-Page titles and descriptions live in `src/data/seo.js`. On every `npm run build`,
-`scripts/prerender.mjs` writes one HTML file per page (and per article) with its own title,
-description and preview tags, so Google, LinkedIn and WhatsApp show the right summary.
-The sitemap (`/sitemap.xml`) is generated on every build from the same list, so new articles
-appear in it automatically. If you add a brand-new page, give it an entry in `src/data/seo.js`.
-
-## Performance and sharp text
-Home loads first; every other page is split into its own small file and prefetched while the
-browser is idle.
-
-The effects (frosted navigation and menus, drifting glows, grain, button shimmer) are built so
-they cost little and never soften the text:
-- The soft glows are tiny pre-rendered images (a few KB, inlined in the CSS) instead of live blur
-  filters. The two hero glows drift on an 18-second cycle by moving slightly once a second, which
-  looks continuous because they are so soft, and keeps them part of the page.
-- Text renders on Chrome's sharpest (subpixel) path across the site. To keep it that way:
-  - backdrop filters use blur only (a colour filter such as `saturate()` turns sharp text off for
-    the whole page behind it);
-  - `Reveal` fades on the compositor but rises on the main thread;
-  - hover fades on cards use the `.fade-hover` class (a registered custom property) instead of
-    opacity transitions;
-  - sticky side panels have an opaque `bg-page` background and `z-10`;
-  - `.container-site` centres on a whole pixel.
-- Loops (shimmer, pulses, glow drift) pause while the page scrolls, the hero animations stop when
-  they are off screen, and everything stops
-  entirely for visitors who prefer reduced motion.
-
-## Theme
-The site is light by default. Colors are tokens in `src/index.css` (`--page`, `--fg`, `--accent` and so on).
-Add the class `theme-dark` to any section to make it navy; everything inside adapts automatically.
-
-## Proof
-Home-page stats and testimonials live in `src/config/site.js` (`stats`, `testimonials`).
-The testimonials section stays hidden until you add a real quote.
+- `sitemap.xml` is generated from `src/data/seo.js` and `src/data/insights.js`, so new pages and
+  articles are included automatically.
+- Old addresses (`/about.html`, `/index.html`, ...) redirect permanently to the clean ones
+  (`next.config.mjs`).
+- The Google Search Console verification tag is in `src/app/layout.jsx`.

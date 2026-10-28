@@ -93,9 +93,9 @@ const allIndustries = [
     short: 'AdTech',
     icon: Megaphone,
     summary:
-      'The people who hold the budgets and the data: media buyers, agency leaders and CMOs who know where performance is real.',
-    focus: ['Ad tech & programmatic', 'Agencies & holding companies', 'Retail media', 'Martech & CRM', 'Creator economy'],
-    experts: ['CMOs & marketing directors', 'Media directors & buyers', 'Programmatic traders', 'Agency leaders', 'Retail media leads', 'Ad tech product heads'],
+      'The people who hold the budgets and the data: media buyers, ad agency leaders and CMOs who know where performance is real.',
+    focus: ['Ad tech & programmatic', 'Ad agencies & holding companies', 'Retail media', 'Martech & CRM', 'Creator economy'],
+    experts: ['CMOs & marketing directors', 'Media directors & buyers', 'Programmatic traders', 'Ad agency leaders', 'Retail media leads', 'Ad tech product heads'],
     questions: [
       'How much retail media spend is truly incremental, and how much is search budget in disguise?',
       'Which measurement partners do brands trust now, and which are they quietly dropping?',
@@ -138,7 +138,7 @@ const allIndustries = [
     short: 'Research',
     icon: ChartColumn,
     summary:
-      'B2B recruitment for agencies running qualitative studies with professional audiences that panels struggle to reach.',
+      'B2B recruitment for market research firms running qualitative studies with professional audiences that panels struggle to reach.',
     focus: ['B2B niche recruitment', 'IDIs & focus groups', 'B2B surveys', 'Diary studies & ethnography', 'Hard-to-reach decision makers'],
     experts: ['C-suite & senior decision makers', 'IT & technical buyers', 'Physicians & clinicians', 'Procurement heads', 'Niche B2B specialists'],
     questions: [
@@ -181,7 +181,7 @@ export const industries = industryOrder.map((id) => allIndustries.find((x) => x.
 
 export const segments = [
   {
-    title: 'Market Research Firms & Agencies',
+    title: 'Market Research Firms',
     body: 'Senior and niche B2B respondents for qualitative studies, recruited to your screener and verified before fieldwork.',
   },
   {

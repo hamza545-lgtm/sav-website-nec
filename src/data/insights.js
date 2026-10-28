@@ -14,6 +14,7 @@ export const insights = [
     description:
       'What an expert network is, how it works step by step, who uses one, the main engagement formats, the benefits and compliance safeguards, and how to choose the right provider.',
     date: '2026-10-06',
+    updated: '2026-10-28',
     readMinutes: 11,
     blocks: [
       {
@@ -36,7 +37,7 @@ export const insights = [
       { t: 'h3', c: 'Where the model came from' },
       {
         t: 'p',
-        c: 'Expert networks took shape in the late 1990s and early 2000s, when investment firms began to formalize what analysts had always done informally: calling people who knew an industry from the inside. As the practice grew, so did the need for structure. Conflict checks, confidentiality terms and firm rules on non-public information became standard, and the client base widened from hedge funds to consultancies, corporations, market research agencies and, more recently, AI developers.',
+        c: 'Expert networks took shape in the late 1990s and early 2000s, when investment firms began to formalize what analysts had always done informally: calling people who knew an industry from the inside. As the practice grew, so did the need for structure. Conflict checks, confidentiality terms and firm rules on non-public information became standard, and the client base widened from hedge funds to consultancies, corporations, market research firms and, more recently, AI developers.',
       },
 
       { t: 'h2', c: 'How does an expert network work?' },
@@ -69,7 +70,7 @@ export const insights = [
       {
         t: 'ul',
         c: [
-          '**Market research agencies** recruit hard-to-reach B2B respondents, such as senior decision makers, technical buyers and clinicians, for qualitative studies their own panels cannot fill.',
+          '**Market research firms** recruit hard-to-reach B2B respondents, such as senior decision makers, technical buyers and clinicians, for qualitative studies their own panels cannot fill.',
           '**Private equity and venture capital firms** use expert calls across the deal cycle: screening a sector, testing a thesis, speaking with a target’s customers and competitors during commercial due diligence, and planning value creation after close.',
           '**Corporate strategy and development teams** study adjacent markets, test ideas with potential buyers and learn from people who have run similar initiatives elsewhere.',
           '**Management consultancies** bring case teams up to speed in days and pressure-test hypotheses with practitioners.',
@@ -90,7 +91,7 @@ export const insights = [
             ['Expert calls & IDIs', 'A 30 to 60 minute one-to-one conversation or in-depth interview', 'Depth, nuance, testing a hypothesis'],
             ['B2B surveys', 'A structured questionnaire answered by verified professionals', 'Comparing views across a defined audience'],
             ['Focus groups', 'A moderated discussion with a small group of professionals', 'Reactions to concepts, messaging or products'],
-            ['Custom recruitment', 'Sourcing specific B2B profiles for a client’s own study', 'Agencies running their own fieldwork'],
+            ['Custom recruitment', 'Sourcing specific B2B profiles for a client’s own study', 'Research firms running their own fieldwork'],
             ['Diary studies & ethnography', 'Participants record, or are observed in, their real working context over time', 'Understanding workflows as they happen'],
             ['AI domain experts', 'Credentialed specialists for evaluation, annotation and reasoning tasks', 'Improving AI models in specialist fields'],
           ],
@@ -342,7 +343,7 @@ export function articleJsonLd(article, siteUrl) {
       headline: article.title,
       description: article.description,
       datePublished: article.date,
-      dateModified: article.date,
+      dateModified: article.updated || article.date,
       mainEntityOfPage: url,
       image: `${siteUrl}/og-image.png`,
       author: { '@type': 'Organization', name: 'Savnec', url: siteUrl },

@@ -11,7 +11,7 @@ export const site = {
   url: 'https://www.savnec.com',
   tagline: 'Verified human expertise for research that has to be right.',
   // Shown as "Savnec" with this line underneath (footer, About, Contact).
-  address: '8 The Green, Dover, DE 19901, United States',
+  address: '8 The Green #25201, Dover, DE 19901, United States',
 
   // Web3Forms access keys (free at https://web3forms.com).
   // Create one key per inbox. Until you have company email, you can

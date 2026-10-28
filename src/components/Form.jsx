@@ -1,6 +1,8 @@
+'use client'
+
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { site } from '../config/site.js'
+import Link from 'next/link'
+import { site } from '@/config/site'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight, Check, LoaderCircle, CircleAlert, ChevronDown, Plus } from 'lucide-react'
 
@@ -12,7 +14,7 @@ function Field({ f }) {
   return (
     <div className={f.full ? 'sm:col-span-2' : ''}>
       {f.type !== 'checkbox' && (
-        <label htmlFor={id} className="mb-2 block text-[13px] text-body">
+        <label htmlFor={id} className="mb-2 block text-[14px] font-medium text-fg/85">
           {f.label}
           {f.required && <span className="text-accent"> *</span>}
         </label>
@@ -52,7 +54,7 @@ function FormNotice() {
       <p>
         By submitting, you agree that Savnec may store and process your details to respond and, where relevant, to
         deliver the services you request, as described in our{' '}
-        <Link to="/privacy-policy" className="underline decoration-line/25 underline-offset-2 hover:text-fg">
+        <Link href="/privacy-policy" className="underline decoration-line/25 underline-offset-2 hover:text-fg">
           Privacy Policy
         </Link>
         .
@@ -162,41 +164,43 @@ export default function Web3Form({ accessKey, subject, fields, submitLabel = 'Su
   )
 }
 
-export function Accordion({ items }) {
-  const [open, setOpen] = useState(0)
+// Questions and answers. Every answer is part of the page's HTML (search engines read it, and
+// in-page search finds it); closed answers are folded away with CSS.
+export function Accordion({ items, defaultOpen = 0 }) {
+  const [open, setOpen] = useState(defaultOpen)
   return (
     <div className="divide-y divide-line/[0.1] border-y border-line/[0.1]">
-      {items.map((it, i) => (
-        <div key={it.q}>
-          <button
-            onClick={() => setOpen(open === i ? -1 : i)}
-            className="flex w-full items-center justify-between gap-6 py-6 text-left"
-            aria-expanded={open === i}
-          >
-            <span className={`text-[17px] transition-colors ${open === i ? 'text-fg' : 'text-body'}`}>{it.q}</span>
-            <span
-              className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${
-                open === i ? 'rotate-45 border-emerald-400/50 text-accent' : 'border-line/15 text-muted'
-              }`}
-            >
-              <Plus size={15} />
-            </span>
-          </button>
-          <AnimatePresence initial={false}>
-            {open === i && (
-              <motion.div
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: 'auto', opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                className="overflow-hidden"
+      {items.map((it, i) => {
+        const isOpen = open === i
+        return (
+          <div key={it.q}>
+            <h3>
+              <button
+                onClick={() => setOpen(isOpen ? -1 : i)}
+                className="flex w-full items-center justify-between gap-6 py-5 text-left"
+                aria-expanded={isOpen}
               >
-                <p className="max-w-3xl pb-6 text-[15.5px] leading-relaxed text-muted">{it.a}</p>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      ))}
+                <span className={`text-[17px] font-medium transition-colors ${isOpen ? 'text-fg' : 'text-fg/80'}`}>{it.q}</span>
+                <span
+                  className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${
+                    isOpen ? 'rotate-45 border-emerald-400/50 text-accent' : 'border-line/15 text-muted'
+                  }`}
+                >
+                  <Plus size={15} />
+                </span>
+              </button>
+            </h3>
+            <div
+              className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
+              inert={!isOpen}
+            >
+              <div className="overflow-hidden">
+                <p className="max-w-3xl pb-6 text-[16px] leading-relaxed text-muted">{it.a}</p>
+              </div>
+            </div>
+          </div>
+        )
+      })}
     </div>
   )
 }

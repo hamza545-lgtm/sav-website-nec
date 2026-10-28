@@ -1,5 +1,8 @@
+'use client'
+
 import { useEffect, useState } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { AnimatePresence, motion } from 'framer-motion'
 import {
   ChevronDown,
@@ -19,9 +22,9 @@ import {
   NotebookPen,
   Brain,
 } from 'lucide-react'
-import Logo from './Logo.jsx'
-import { Button } from './ui.jsx'
-import { industries, formats, useCases } from '../data/content.js'
+import Logo from './Logo'
+import { Button } from './ui'
+import { industries, formats, useCases } from '@/data/content'
 
 const formatIcons = { 'expert-calls': Phone, 'b2b-surveys': ListChecks, 'focus-groups': Users, 'custom-recruitment': Network, ethnography: NotebookPen, 'ai-experts': Brain }
 
@@ -45,7 +48,7 @@ const nav = [
 
 const mobileLinks = {
   clients: [
-    { to: '/clients#use-cases', label: 'Who we serve' },
+    { to: '/clients', label: 'How we work' },
     ...formats.map((f) => ({ to: `/clients#${f.id}`, label: f.title })),
     { to: '/request-trial', label: 'Request a Trial' },
   ],
@@ -53,24 +56,23 @@ const mobileLinks = {
   about: aboutLinks,
 }
 
-const itemCls = 'group flex items-start gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-fg/[0.05]'
-const iconCls =
-  'mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-line/[0.12] bg-fg/[0.03] text-accent transition-colors group-hover:border-emerald-400/40'
-const headCls = 'px-3 pb-2 pt-2 font-mono text-[10.5px] uppercase tracking-[0.2em] text-muted'
+const iconBox =
+  'flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-line/[0.12] bg-fg/[0.03] text-accent transition-colors group-hover:border-emerald-400/40'
+const headCls = 'px-3 pb-2 pt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-muted'
 
 function ClientsMenu({ onClose }) {
   return (
-    <div className="grid w-[600px] grid-cols-2 gap-2">
+    <div className="grid w-[620px] grid-cols-2 gap-2">
       <div>
         <p className={headCls}>Formats</p>
         {formats.map((f) => {
           const Icon = formatIcons[f.id]
           return (
-            <Link key={f.id} to={`/clients#${f.id}`} onClick={onClose} className="group flex items-center gap-3 rounded-xl px-3 py-2 transition-colors hover:bg-fg/[0.05]">
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-line/[0.12] bg-fg/[0.03] text-accent transition-colors group-hover:border-emerald-400/40">
-                <Icon size={15} />
+            <Link key={f.id} href={`/clients#${f.id}`} onClick={onClose} className="group flex items-center gap-3 rounded-xl px-3 py-2 transition-colors hover:bg-fg/[0.05]">
+              <span className={iconBox}>
+                <Icon size={16} />
               </span>
-              <span className="text-[14px] text-body group-hover:text-fg">{f.title}</span>
+              <span className="text-[15px] font-medium text-fg/85 group-hover:text-fg">{f.title}</span>
             </Link>
           )
         })}
@@ -80,21 +82,21 @@ function ClientsMenu({ onClose }) {
         {Object.keys(useCases).map((name) => (
           <Link
             key={name}
-            to={`/clients#${ucSlug(name)}`}
+            href={`/clients#${ucSlug(name)}`}
             onClick={onClose}
-            className="flex items-center justify-between rounded-lg px-3 py-2 text-[14px] text-body transition-colors hover:bg-fg/[0.05] hover:text-fg"
+            className="flex items-center justify-between rounded-lg px-3 py-2 text-[15px] font-medium text-fg/85 transition-colors hover:bg-fg/[0.05] hover:text-fg"
           >
             {name}
-            <ArrowRight size={13} className="text-muted" />
+            <ArrowRight size={14} className="text-muted" />
           </Link>
         ))}
         <Link
-          to="/request-trial"
+          href="/request-trial"
           onClick={onClose}
           className="group mt-auto rounded-xl border border-emerald-400/25 bg-emerald-500/10 p-4 transition-colors hover:border-emerald-400/50"
         >
-          <span className="block text-[14px] font-medium text-fg">Request a Trial</span>
-          <span className="mt-1 block text-[12.5px] leading-snug text-muted">Send one live brief and see a screened shortlist.</span>
+          <span className="block text-[15px] font-semibold text-fg">Request a Trial</span>
+          <span className="mt-1 block text-[13.5px] leading-snug text-body">Send one live brief and see a screened shortlist.</span>
         </Link>
       </div>
     </div>
@@ -103,21 +105,21 @@ function ClientsMenu({ onClose }) {
 
 function IndustriesMenu({ onClose }) {
   return (
-    <div className="grid w-[640px] grid-cols-2 gap-1">
+    <div className="grid w-[660px] grid-cols-2 gap-1">
       {industries.map(({ id, name, icon: Icon }) => (
-        <Link key={id} to={`/industries#${id}`} onClick={onClose} className="group flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-fg/[0.05]">
-          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border border-line/[0.12] bg-fg/[0.03] text-accent transition-colors group-hover:border-emerald-400/40">
-            <Icon size={15} />
+        <Link key={id} href={`/industries#${id}`} onClick={onClose} className="group flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-fg/[0.05]">
+          <span className={iconBox}>
+            <Icon size={16} />
           </span>
-          <span className="text-[13.5px] text-body group-hover:text-fg">{name}</span>
+          <span className="text-[14.5px] font-medium text-fg/85 group-hover:text-fg">{name}</span>
         </Link>
       ))}
       <Link
-        to="/industries"
+        href="/industries"
         onClick={onClose}
-        className="col-span-2 mt-1 flex items-center justify-between rounded-xl border-t border-line/[0.08] px-3 py-3 text-[13px] text-accent hover:text-accent"
+        className="col-span-2 mt-1 flex items-center justify-between rounded-xl border-t border-line/[0.08] px-3 py-3 text-[14px] font-medium text-accent"
       >
-        View all coverage <ArrowUpRight size={14} />
+        View all coverage <ArrowUpRight size={15} />
       </Link>
     </div>
   )
@@ -125,15 +127,15 @@ function IndustriesMenu({ onClose }) {
 
 function AboutMenu({ onClose }) {
   return (
-    <div className="w-[300px]">
+    <div className="w-[320px]">
       {aboutLinks.map(({ to, label, desc, icon: Icon }) => (
-        <Link key={to} to={to} onClick={onClose} className={itemCls}>
-          <span className={iconCls}>
-            <Icon size={15} />
+        <Link key={to} href={to} onClick={onClose} className="group flex items-start gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-fg/[0.05]">
+          <span className={`${iconBox} mt-0.5`}>
+            <Icon size={16} />
           </span>
           <span>
-            <span className="block text-[14px] text-fg">{label}</span>
-            <span className="block text-[12.5px] text-muted">{desc}</span>
+            <span className="block text-[15px] font-medium text-fg">{label}</span>
+            <span className="block text-[13.5px] text-muted">{desc}</span>
           </span>
         </Link>
       ))}
@@ -164,7 +166,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(null)
   const [mobile, setMobile] = useState(false)
   const [mobileSub, setMobileSub] = useState(null)
-  const location = useLocation()
+  const pathname = usePathname()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -176,7 +178,7 @@ export default function Navbar() {
   useEffect(() => {
     setOpen(null)
     setMobile(false)
-  }, [location.pathname, location.hash, location.key])
+  }, [pathname])
 
   useEffect(() => {
     document.body.style.overflow = mobile ? 'hidden' : ''
@@ -190,29 +192,34 @@ export default function Navbar() {
   }, [mobile])
 
   const isActive = (to) =>
-    location.pathname === to ||
-    (to === '/about' &&
-      (['/faqs', '/careers', '/contact'].includes(location.pathname) || location.pathname.startsWith('/insights'))) ||
-    (to === '/clients' && location.pathname === '/request-trial')
+    pathname === to ||
+    (to === '/about' && (['/faqs', '/careers', '/contact'].includes(pathname) || pathname.startsWith('/insights'))) ||
+    (to === '/clients' && pathname === '/request-trial')
+
+  // The logo on the home page glides back to the top instead of reloading the page.
+  const onLogo = (e) => {
+    if (pathname === '/') {
+      e.preventDefault()
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+  }
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      {/* The frosted bar sits behind the content as its own element rather than wrapping it, so
-          the menus that hang below it can frost the page themselves. */}
       <div
         aria-hidden="true"
         className={`absolute inset-0 border-b transition-[background-color,border-color] duration-500 ${
-          scrolled ? 'border-line/[0.1] bg-page/70 backdrop-blur-xl' : 'border-transparent bg-transparent'
+          scrolled || mobile ? 'border-line/[0.1] bg-page/80 backdrop-blur-xl' : 'border-transparent bg-transparent'
         }`}
       />
       <div className="container-site relative flex h-[72px] items-center justify-between">
-        <Link to="/" aria-label="Savnec home">
-          <Logo height={25} />
+        <Link href="/" aria-label="Savnec home" onClick={onLogo}>
+          <Logo height={26} />
         </Link>
 
         <nav
           aria-label="Main"
-          className="hidden items-center gap-1 lg:flex"
+          className="hidden items-center gap-0.5 lg:flex"
           onMouseLeave={() => setOpen(null)}
           onKeyDown={(e) => e.key === 'Escape' && setOpen(null)}
           onBlur={(e) => {
@@ -220,27 +227,18 @@ export default function Navbar() {
           }}
         >
           {nav.map((item) => (
-            <div
-              key={item.to}
-              className="relative"
-              onMouseEnter={() => setOpen(item.menu || null)}
-              onFocus={() => setOpen(item.menu || null)}
-            >
-              <NavLink
-                to={item.to}
+            <div key={item.to} className="relative" onMouseEnter={() => setOpen(item.menu || null)} onFocus={() => setOpen(item.menu || null)}>
+              <Link
+                href={item.to}
                 aria-haspopup={item.menu ? 'true' : undefined}
                 aria-expanded={item.menu ? open === item.menu : undefined}
-                className={`relative isolate flex items-center gap-1 rounded-full px-4 py-2 text-[14px] transition-colors duration-300 ${
-                  isActive(item.to) ? 'text-fg' : 'text-muted hover:text-fg'
+                aria-current={pathname === item.to ? 'page' : undefined}
+                className={`relative isolate flex items-center gap-1 rounded-full px-4 py-2 text-[15px] font-medium transition-colors duration-300 ${
+                  isActive(item.to) ? 'text-fg' : 'text-fg/75 hover:text-fg'
                 }`}
               >
                 {item.label}
-                {item.menu && (
-                  <ChevronDown
-                    size={14}
-                    className={`transition-transform duration-300 ${open === item.menu ? 'rotate-180' : ''}`}
-                  />
-                )}
+                {item.menu && <ChevronDown size={15} className={`transition-transform duration-300 ${open === item.menu ? 'rotate-180' : ''}`} />}
                 {isActive(item.to) && (
                   <motion.span
                     layoutId="nav-pill"
@@ -248,18 +246,14 @@ export default function Navbar() {
                     transition={{ type: 'spring', stiffness: 380, damping: 32 }}
                   />
                 )}
-              </NavLink>
-              <AnimatePresence>
-                {item.menu && open === item.menu && (
-                  <Dropdown type={item.menu} onClose={() => setOpen(null)} />
-                )}
-              </AnimatePresence>
+              </Link>
+              <AnimatePresence>{item.menu && open === item.menu && <Dropdown type={item.menu} onClose={() => setOpen(null)} />}</AnimatePresence>
             </div>
           ))}
         </nav>
 
         <div className="hidden items-center gap-5 lg:flex">
-          <Link to="/join" className="text-[14px] text-muted transition-colors hover:text-fg">
+          <Link href="/join" className="text-[15px] font-medium text-fg/75 transition-colors hover:text-fg">
             Join as an Expert
           </Link>
           <Button to="/request-trial" className="!px-5 !py-2.5">
@@ -299,26 +293,19 @@ export default function Navbar() {
                   {item.menu ? (
                     <>
                       <button
-                        className="flex w-full items-center justify-between py-4 text-left text-[22px] text-fg"
+                        className="flex w-full items-center justify-between py-4 text-left text-[22px] font-medium text-fg"
                         onClick={() => setMobileSub(mobileSub === item.menu ? null : item.menu)}
+                        aria-expanded={mobileSub === item.menu}
                       >
                         {item.label}
-                        <ChevronDown
-                          size={20}
-                          className={`text-muted transition-transform ${mobileSub === item.menu ? 'rotate-180' : ''}`}
-                        />
+                        <ChevronDown size={20} className={`text-muted transition-transform ${mobileSub === item.menu ? 'rotate-180' : ''}`} />
                       </button>
                       <AnimatePresence initial={false}>
                         {mobileSub === item.menu && (
-                          <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: 'auto', opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            className="overflow-hidden"
-                          >
+                          <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
                             <div className="grid gap-1 pb-4">
                               {mobileLinks[item.menu].map((l) => (
-                                <Link key={l.to} to={l.to} onClick={() => setMobile(false)} className="py-2 text-[15px] text-muted hover:text-fg">
+                                <Link key={l.to} href={l.to} onClick={() => setMobile(false)} className="py-2 text-[16px] text-body hover:text-fg">
                                   {l.label}
                                 </Link>
                               ))}
@@ -328,7 +315,7 @@ export default function Navbar() {
                       </AnimatePresence>
                     </>
                   ) : (
-                    <Link to={item.to} onClick={() => setMobile(false)} className="block py-4 text-[22px] text-fg">
+                    <Link href={item.to} onClick={() => setMobile(false)} className="block py-4 text-[22px] font-medium text-fg">
                       {item.label}
                     </Link>
                   )}

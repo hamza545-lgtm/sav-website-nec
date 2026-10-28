@@ -1,4 +1,4 @@
-import { site } from '../config/site.js'
+import { site } from '@/config/site'
 
 // The address. On About and Contact it sits under "Savnec"; in the footer it stands alone.
 export function Address({ className = '', showName = true }) {

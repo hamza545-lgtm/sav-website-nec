@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: ['./index.html', './src/**/*.{js,jsx}'],
+module.exports = {
+  content: ['./src/**/*.{js,jsx}'],
   theme: {
     extend: {
       colors: {
@@ -33,10 +33,12 @@ export default {
         accent: 'rgb(var(--accent) / <alpha-value>)',
         tick: 'rgb(var(--tick) / <alpha-value>)',
       },
+      // The three brand fonts are loaded by next/font in src/app/layout.jsx and exposed as
+      // CSS variables; the names after them are fallbacks while the fonts load.
       fontFamily: {
-        sans: ['"Inter Tight"', 'Inter', 'system-ui', 'sans-serif'],
-        serif: ['"Instrument Serif"', 'Georgia', 'serif'],
-        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+        sans: ['var(--font-sans)', 'Inter', 'system-ui', 'sans-serif'],
+        serif: ['var(--font-serif)', 'Georgia', 'serif'],
+        mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
       },
       letterSpacing: {
         tightest: '-0.045em',

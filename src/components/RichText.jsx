@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
-import { Link } from 'react-router-dom'
-import { slugify } from '../data/insights.js'
+import Link from 'next/link'
+import { slugify } from '@/data/insights'
 
 // Renders **bold** and [text](href) inside a plain string.
 export function Inline({ text }) {
@@ -18,7 +18,7 @@ export function Inline({ text }) {
       const [, label, href] = link
       const cls = 'text-accent underline decoration-emerald-400/40 underline-offset-4 transition-colors hover:text-accent hover:decoration-accent'
       return href.startsWith('/') ? (
-        <Link key={i} to={href} className={cls}>
+        <Link key={i} href={href} className={cls}>
           {label}
         </Link>
       ) : (
@@ -83,7 +83,7 @@ export function ArticleBody({ blocks }) {
                   <thead className="bg-fg/[0.04]">
                     <tr>
                       {b.c.head.map((h) => (
-                        <th key={h} className="px-5 py-3.5 font-mono text-[11px] font-normal uppercase tracking-[0.16em] text-muted">
+                        <th key={h} className="px-5 py-3.5 font-mono text-[11.5px] font-normal uppercase tracking-[0.14em] text-muted">
                           {h}
                         </th>
                       ))}
@@ -107,7 +107,7 @@ export function ArticleBody({ blocks }) {
             return (
               <div key={i} className="relative overflow-hidden rounded-2xl border border-emerald-400/25 bg-emerald-500/[0.06] p-6 sm:p-7">
                 <span className="absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-emerald-300 to-emerald-600" />
-                <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">In short</p>
+                <p className="eyebrow">In short</p>
                 <p className="mt-3 text-[17px] leading-relaxed text-fg">
                   <Inline text={b.c} />
                 </p>
