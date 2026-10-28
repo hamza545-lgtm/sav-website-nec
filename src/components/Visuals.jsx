@@ -293,7 +293,7 @@ export function CtaBand({
       <div className="container-site relative py-14 sm:py-16">
         <Reveal className="mx-auto flex max-w-3xl flex-col items-center text-center">
           {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-          <h2 className={`${eyebrow ? 'mt-4' : ''} text-[30px] font-medium leading-[1.12] sm:text-[40px]`}>{title}</h2>
+          <h2 className={`${eyebrow ? 'mt-4' : ''} text-[30px] font-semibold leading-[1.1] sm:text-[40px]`}>{title}</h2>
           <p className="mt-3 max-w-xl text-[16.5px] leading-relaxed text-body">{body}</p>
           <div className="mt-7 flex w-full flex-col justify-center gap-3 sm:w-auto sm:flex-row">
             <Button to={primary.to}>{primary.label}</Button>

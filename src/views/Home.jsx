@@ -26,7 +26,7 @@ function Hero() {
           <div className={a.className} style={a.style}>
             <Eyebrow>Expert network · Custom recruitment</Eyebrow>
           </div>
-          <h1 className={`${b.className} mt-6 max-w-[640px] text-[42px] font-medium leading-[1.04] tracking-tightest sm:text-[60px]`} style={b.style}>
+          <h1 className={`${b.className} mt-6 max-w-[640px] text-[42px] font-semibold leading-[1.02] tracking-tightest sm:text-[60px]`} style={b.style}>
             The central point for expert sourcing.
           </h1>
           <p className={`${c.className} mt-7 max-w-xl text-[18px] leading-relaxed text-muted`} style={c.style}>

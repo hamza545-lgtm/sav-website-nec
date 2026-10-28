@@ -33,7 +33,7 @@ function Article({ article }) {
             <span className="text-fg/20">/</span>
             <span className="text-accent">{article.category}</span>
           </nav>
-          <h1 className={`${h[1].className} mt-6 max-w-4xl text-[36px] font-medium leading-[1.08] tracking-tightest sm:text-[52px]`} style={h[1].style}>
+          <h1 className={`${h[1].className} mt-6 max-w-4xl text-[36px] font-semibold leading-[1.06] tracking-tightest sm:text-[54px]`} style={h[1].style}>
             {article.title}
           </h1>
           <p className={`${h[2].className} mt-5 max-w-2xl text-[18px] leading-relaxed text-muted`} style={h[2].style}>

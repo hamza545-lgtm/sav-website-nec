@@ -142,7 +142,7 @@ export function SectionHeading({ eyebrow, title, intro, align = 'left', classNam
       )}
       {title && (
         <Reveal delay={0.05}>
-          <h2 className={`${eyebrow ? 'mt-4' : ''} text-[30px] font-medium leading-[1.12] sm:text-[40px]`}>{title}</h2>
+          <h2 className={`${eyebrow ? 'mt-4' : ''} text-[30px] font-semibold leading-[1.1] sm:text-[40px]`}>{title}</h2>
         </Reveal>
       )}
       {intro && (
@@ -332,7 +332,7 @@ export function PageHero({ eyebrow, title, intro, children, aside }) {
             </div>
           )}
           <h1
-            className={`${h.className} ${eyebrow ? 'mt-6' : ''} max-w-4xl text-[40px] font-medium leading-[1.05] tracking-tightest sm:text-[60px]`}
+            className={`${h.className} ${eyebrow ? 'mt-6' : ''} max-w-4xl text-[40px] font-semibold leading-[1.03] tracking-tightest sm:text-[60px]`}
             style={h.style}
           >
             {title}

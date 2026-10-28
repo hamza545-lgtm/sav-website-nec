@@ -38,6 +38,7 @@
   }
   body {
     @apply bg-page font-sans text-body;
+    font-feature-settings: 'ss01', 'cv11';
   }
   ::selection {
     background: rgba(43, 196, 138, 0.28);
@@ -49,7 +50,7 @@
   }
   h1, h2, h3, h4 {
     color: rgb(var(--fg));
-    letter-spacing: -0.022em;
+    letter-spacing: -0.03em;
   }
 }
 
