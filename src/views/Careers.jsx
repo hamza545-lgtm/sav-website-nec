@@ -1,7 +1,7 @@
 'use client'
 
 import { Search, Handshake, ShieldCheck, Sprout } from 'lucide-react'
-import { PageHero, Section, SectionHeading, Reveal, SpotlightCard } from '@/components/ui'
+import { PageHero, Section, SectionHeading, Reveal } from '@/components/ui'
 import Web3Form from '@/components/Form'
 import { site } from '@/config/site'
 import { EmailLine } from '@/components/ContactInfo'
@@ -34,14 +34,16 @@ export default function Careers() {
 
       <Section className="!pt-0">
         <SectionHeading title="Three tracks" />
-        <div className="mt-9 grid gap-4 md:grid-cols-3">
+        <div className="mt-9 grid gap-x-10 md:grid-cols-3">
           {tracks.map(([Icon, t, b], i) => (
-            <Reveal key={t} delay={i * 0.06}>
-              <SpotlightCard className="h-full p-7">
-                <Icon size={22} className="text-accent" />
-                <h3 className="mt-6 text-[20px] font-semibold">{t}</h3>
-                <p className="mt-2 text-[15.5px] leading-relaxed text-muted">{b}</p>
-              </SpotlightCard>
+            <Reveal key={t} delay={i * 0.05}>
+              <div className="h-full border-t border-line/[0.12] py-6">
+                <span className="flex items-center gap-3">
+                  <Icon size={20} className="shrink-0 text-accent" />
+                  <h3 className="text-[20px] font-semibold">{t}</h3>
+                </span>
+                <p className="mt-2.5 text-[15.5px] leading-relaxed text-muted">{b}</p>
+              </div>
             </Reveal>
           ))}
         </div>

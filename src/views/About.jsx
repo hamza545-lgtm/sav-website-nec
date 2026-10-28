@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { ArrowUpRight, BookOpen, CircleHelp, Briefcase, Mail } from 'lucide-react'
-import { PageHero, Section, SectionHeading, Reveal, SpotlightCard, Eyebrow } from '@/components/ui'
+import { PageHero, Section, SectionHeading, Reveal, Eyebrow } from '@/components/ui'
 import { CtaBand } from '@/components/Visuals'
 import { Address, EmailCards } from '@/components/ContactInfo'
 
@@ -103,17 +103,18 @@ export default function About() {
       </Section>
 
       <Section tone="navy">
-        <SectionHeading eyebrow="Principles" title="How we work" />
-        <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {principles.map(([t, b], i) => (
-            <Reveal key={t} delay={i * 0.06}>
-              <div className="h-full rounded-2xl border border-line/[0.12] bg-sunk/60 p-6">
-                <span className="font-serif text-[24px] italic text-accent">0{i + 1}</span>
-                <h3 className="mt-3 text-[19px] font-semibold">{t}</h3>
-                <p className="mt-2 text-[15px] leading-relaxed text-body">{b}</p>
-              </div>
-            </Reveal>
-          ))}
+        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+          <SectionHeading eyebrow="Principles" title="How we work" />
+          <div className="grid gap-x-10 sm:grid-cols-2">
+            {principles.map(([t, b], i) => (
+              <Reveal key={t} delay={i * 0.05}>
+                <div className="h-full border-t border-line/[0.14] py-6">
+                  <h3 className="text-[20px] font-semibold">{t}</h3>
+                  <p className="mt-2 text-[15.5px] leading-relaxed text-body">{b}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </Section>
 
@@ -129,22 +130,24 @@ export default function About() {
             <EmailCards />
           </Reveal>
         </div>
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {more.map(([to, t, b, Icon], i) => (
-            <Reveal key={to} delay={i * 0.05}>
-              <SpotlightCard className="h-full">
-                <Link href={to} className="flex h-full flex-col p-6">
-                  <div className="flex items-center justify-between">
-                    <Icon size={20} className="text-accent" />
-                    <ArrowUpRight size={16} className="text-muted transition-colors group-hover:text-accent" />
-                  </div>
-                  <h3 className="mt-6 text-[18px] font-semibold">{t}</h3>
-                  <p className="mt-1.5 text-[14.5px] text-muted">{b}</p>
+        <Reveal delay={0.05}>
+          <ul className="mt-10 grid gap-px border-y border-line/[0.1] bg-line/[0.1] sm:grid-cols-2 lg:grid-cols-4">
+            {more.map(([to, t, b, Icon]) => (
+              <li key={to} className="bg-page">
+                <Link href={to} className="group flex h-full items-start gap-3 px-1 py-5 sm:px-5">
+                  <Icon size={19} className="mt-0.5 shrink-0 text-accent" />
+                  <span className="flex-1">
+                    <span className="flex items-center gap-1.5 text-[17px] font-semibold text-fg group-hover:text-accent">
+                      {t}
+                      <ArrowUpRight size={15} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                    </span>
+                    <span className="mt-1 block text-[14.5px] leading-snug text-muted">{b}</span>
+                  </span>
                 </Link>
-              </SpotlightCard>
-            </Reveal>
-          ))}
-        </div>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       </Section>
 
       <CtaBand />

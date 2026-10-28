@@ -64,7 +64,7 @@ function ClientsMenu({ onClose }) {
   return (
     <div className="grid w-[620px] grid-cols-2 gap-2">
       <div>
-        <p className={headCls}>Formats</p>
+        <p className={headCls}>Services</p>
         {formats.map((f) => {
           const Icon = formatIcons[f.id]
           return (

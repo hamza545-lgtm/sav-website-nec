@@ -274,7 +274,8 @@ export function Marquee({ items }) {
 
 /* ─────────────── Closing call to action ───────────────
    A full-width navy band that runs straight into the footer, so the end of every page reads
-   as one block: the next step, then the details. */
+   as one block: the next step, then the details. Text and buttons sit together in one
+   centred column. */
 
 export function CtaBand({
   eyebrow = 'Start with one project',
@@ -289,23 +290,12 @@ export function CtaBand({
       <div className="absolute inset-0 bg-gradient-to-br from-emerald-700/45 via-navy-900 to-[#08162B]" />
       <div className="grid-bg absolute inset-0 opacity-50" />
       <div className="blob-cta" />
-      <div className="container-site relative py-12 sm:py-14">
-        <Reveal className="grid items-center gap-8 lg:grid-cols-[1.5fr_1fr]">
-          <div>
-            <Eyebrow>{eyebrow}</Eyebrow>
-            <h2 className="mt-4 text-[28px] font-semibold leading-[1.1] sm:text-[36px]">{title}</h2>
-            <p className="mt-3 max-w-xl text-[16px] leading-relaxed text-body">{body}</p>
-            {site.showEmails && (
-              <p className="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-[14.5px] text-muted">
-                <Clock size={15} className="text-accent" />
-                A person replies within one business day:
-                <a href={`mailto:${site.emails[emailWho]}`} className="link-underline font-medium text-accent">
-                  {site.emails[emailWho]}
-                </a>
-              </p>
-            )}
-          </div>
-          <div className="flex flex-col gap-3 sm:flex-row lg:justify-end">
+      <div className="container-site relative py-14 sm:py-16">
+        <Reveal className="mx-auto flex max-w-3xl flex-col items-center text-center">
+          <Eyebrow>{eyebrow}</Eyebrow>
+          <h2 className="mt-4 text-[30px] font-semibold leading-[1.1] sm:text-[40px]">{title}</h2>
+          <p className="mt-3 max-w-xl text-[16.5px] leading-relaxed text-body">{body}</p>
+          <div className="mt-7 flex w-full flex-col justify-center gap-3 sm:w-auto sm:flex-row">
             <Button to={primary.to}>{primary.label}</Button>
             {secondary && (
               <Button to={secondary.to} variant="ghost">
@@ -313,6 +303,15 @@ export function CtaBand({
               </Button>
             )}
           </div>
+          {site.showEmails && (
+            <p className="mt-6 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[14.5px] text-muted">
+              <Clock size={15} className="text-accent" />
+              A person replies within one business day:
+              <a href={`mailto:${site.emails[emailWho]}`} className="link-underline font-medium text-accent">
+                {site.emails[emailWho]}
+              </a>
+            </p>
+          )}
         </Reveal>
       </div>
     </section>

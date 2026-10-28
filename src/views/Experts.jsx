@@ -1,7 +1,7 @@
 'use client'
 
 import { Wallet, CalendarClock, Lock, Globe, Phone, ListChecks, Users, Brain, X, Check, BadgeCheck } from 'lucide-react'
-import { PageHero, Button, Section, SectionHeading, Reveal, SpotlightCard, Eyebrow } from '@/components/ui'
+import { PageHero, Button, Section, SectionHeading, Reveal, Eyebrow } from '@/components/ui'
 import { CtaBand } from '@/components/Visuals'
 import { EmailLine } from '@/components/ContactInfo'
 
@@ -80,49 +80,62 @@ export default function Experts() {
       </PageHero>
 
       <Section>
-        <SectionHeading eyebrow="Why experts join" title="Respect for your time." />
-        <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {reasons.map(([Icon, t, b], i) => (
-            <Reveal key={t} delay={i * 0.06}>
-              <SpotlightCard className="h-full p-6 sm:p-7">
-                <Icon size={22} className="text-accent" />
-                <h3 className="mt-5 text-[19px] font-semibold">{t}</h3>
-                <p className="mt-2 text-[15px] leading-relaxed text-muted">{b}</p>
-              </SpotlightCard>
-            </Reveal>
-          ))}
+        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+          <SectionHeading eyebrow="Why experts join" title="Respect for your time." />
+          <div className="grid gap-x-10 sm:grid-cols-2">
+            {reasons.map(([Icon, t, b], i) => (
+              <Reveal key={t} delay={i * 0.05}>
+                <div className="h-full border-t border-line/[0.12] py-6">
+                  <span className="flex items-center gap-3">
+                    <Icon size={20} className="shrink-0 text-accent" />
+                    <h3 className="text-[19px] font-semibold">{t}</h3>
+                  </span>
+                  <p className="mt-2.5 text-[15.5px] leading-relaxed text-muted">{b}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </Section>
 
       <Section tone="navy">
         <SectionHeading title="How it works" intro="No minimum hours, no exclusivity and no cost to join." />
-        <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {steps.map(([t, b], i) => (
-            <Reveal as="li" key={t} delay={i * 0.07}>
-              <div className="h-full rounded-2xl border border-line/[0.12] bg-sunk/60 p-6">
-                <span className="font-serif text-[40px] italic leading-none text-accent">{i + 1}</span>
-                <h3 className="mt-4 text-[19px] font-semibold">{t}</h3>
-                <p className="mt-2 text-[15px] leading-relaxed text-body">{b}</p>
-              </div>
-            </Reveal>
-          ))}
-        </ol>
+        <div className="relative mt-11">
+          <div aria-hidden="true" className="absolute left-0 right-0 top-[22px] hidden h-px bg-gradient-to-r from-emerald-600 via-emerald-300 to-emerald-600 opacity-60 lg:block" />
+          <ol className="grid gap-7 lg:grid-cols-4 lg:gap-10">
+            {steps.map(([t, b], i) => (
+              <Reveal as="li" key={t} delay={0.1 * i}>
+                <div className="flex gap-4 lg:block">
+                  <span className="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-emerald-400/50 bg-page font-serif text-[22px] italic text-accent">
+                    {i + 1}
+                  </span>
+                  <div>
+                    <h3 className="text-[19px] font-semibold lg:mt-5">{t}</h3>
+                    <p className="mt-1.5 text-[15.5px] leading-relaxed text-body">{b}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </ol>
+        </div>
       </Section>
 
       <Section>
-        <SectionHeading title="Ways to take part" />
-        <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {work.map(([Icon, t, b], i) => (
-            <Reveal key={t} delay={i * 0.06}>
-              <div className="flex h-full gap-4 rounded-2xl border border-line/[0.09] bg-card p-6">
-                <Icon size={20} className="mt-0.5 shrink-0 text-accent" />
-                <div>
-                  <h3 className="text-[17px] font-semibold">{t}</h3>
-                  <p className="mt-1.5 text-[14.5px] leading-relaxed text-muted">{b}</p>
-                </div>
-              </div>
-            </Reveal>
-          ))}
+        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+          <SectionHeading title="Ways to take part" intro="Choose the formats that suit you. You can decline any request." />
+          <Reveal>
+            <ul className="divide-y divide-line/[0.1] rounded-3xl glass">
+              {work.map(([Icon, t, b]) => (
+                <li key={t} className="flex gap-5 p-5 sm:p-6">
+                  <Icon size={20} className="mt-1 shrink-0 text-accent" />
+                  <div>
+                    <h3 className="text-[17.5px] font-semibold">{t}</h3>
+                    <p className="mt-1 text-[15.5px] leading-relaxed text-muted">{b}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
         </div>
       </Section>
 

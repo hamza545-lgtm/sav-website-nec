@@ -1,7 +1,7 @@
 'use client'
 
 import { UserCheck, Scale, FileKey, Ban, EyeOff, Database, ClipboardCheck, Headphones, Hourglass, ListX, Mic, BadgeCheck } from 'lucide-react'
-import { PageHero, Section, SectionHeading, Reveal, SpotlightCard, Eyebrow, Button } from '@/components/ui'
+import { PageHero, Section, SectionHeading, Reveal, Eyebrow, Button } from '@/components/ui'
 import { CtaBand } from '@/components/Visuals'
 
 const pillars = [
@@ -54,17 +54,16 @@ export default function Compliance() {
 
       <Section>
         <SectionHeading title="Six controls on every engagement" />
-        <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-9 grid gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
           {pillars.map(([Icon, t, b], i) => (
-            <Reveal key={t} delay={(i % 3) * 0.06}>
-              <SpotlightCard className="h-full p-6 sm:p-7">
-                <div className="flex items-center justify-between">
-                  <Icon size={21} className="text-accent" />
-                  <span className="label">0{i + 1}</span>
-                </div>
-                <h3 className="mt-5 text-[19px] font-semibold">{t}</h3>
-                <p className="mt-2 text-[15px] leading-relaxed text-muted">{b}</p>
-              </SpotlightCard>
+            <Reveal key={t} delay={(i % 3) * 0.05}>
+              <div className="h-full border-t border-line/[0.12] py-6">
+                <span className="flex items-center gap-3">
+                  <Icon size={20} className="shrink-0 text-accent" />
+                  <h3 className="text-[19px] font-semibold">{t}</h3>
+                </span>
+                <p className="mt-2.5 text-[15.5px] leading-relaxed text-muted">{b}</p>
+              </div>
             </Reveal>
           ))}
         </div>

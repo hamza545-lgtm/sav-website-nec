@@ -227,7 +227,8 @@ export function SpotlightCard({ children, className = '' }) {
 }
 
 // Page sections. Tones alternate light and navy down a page; "navy" switches every colour
-// inside to the dark theme and adds the soft grid and glow.
+// inside to the dark theme and adds the soft grid and glow. Navy sections clip their glow with
+// overflow: clip (not hidden), so sticky columns inside them still stick to the window.
 const tones = {
   page: '',
   sunk: 'bg-sunk',
@@ -239,7 +240,7 @@ export function Section({ children, className = '', id, tone = 'page', inner = '
   return (
     <section
       id={id}
-      className={`relative ${navy ? 'overflow-hidden py-14 sm:py-20' : 'py-12 sm:py-16'} ${tones[tone]} ${className}`}
+      className={`relative ${navy ? 'overflow-clip py-14 sm:py-20' : 'py-12 sm:py-16'} ${tones[tone]} ${className}`}
     >
       {navy && (
         <div aria-hidden="true" className="pointer-events-none absolute inset-0">

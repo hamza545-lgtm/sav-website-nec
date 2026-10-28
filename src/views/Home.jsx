@@ -1,10 +1,12 @@
 'use client'
 
+import { useRef } from 'react'
 import Link from 'next/link'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import {
   ArrowUpRight,
+  ArrowRight,
   Clock,
-  Clock3,
   Crosshair,
   ShieldCheck,
   Phone,
@@ -17,10 +19,6 @@ import {
   UserCheck,
   FileKey,
   Ban,
-  Filter,
-  Target,
-  Wallet,
-  MessageSquareText,
 } from 'lucide-react'
 import { Button, Eyebrow, Reveal, SectionHeading, SpotlightCard, GlowBackdrop, Counter, Section, heroIn } from '@/components/ui'
 import { NetworkMap, EngagementConsole, Marquee, CtaBand } from '@/components/Visuals'
@@ -29,6 +27,8 @@ import { industries, segments, formats } from '@/data/content'
 import { site } from '@/config/site'
 
 const formatIcons = [Phone, ListChecks, Users, Network, NotebookPen, Brain]
+
+/* ─────────────── Hero ─────────────── */
 
 function Hero() {
   const a = heroIn(0, 16)
@@ -78,28 +78,22 @@ function Hero() {
   )
 }
 
+/* ─────────────── For clients / For experts ─────────────── */
+
 const sides = [
   {
     to: '/clients',
     kicker: 'For clients',
-    title: 'Less chasing. Better calls.',
+    title: 'The right expert, not the available one.',
+    points: ['Recruited from scratch for each brief', 'Screened against your questions', 'Compliance built into every step', 'One team from scoping to scheduling'],
     cta: 'How we work with clients',
-    items: [
-      [Clock3, 'Your team’s hours back', 'We handle sourcing, screening, scheduling and payment.'],
-      [Filter, 'Fewer wasted calls', 'Screener answers arrive with every profile, so you book the people who fit.'],
-      [ShieldCheck, 'A clean compliance trail', 'Conflict checks and engagement records kept for every project.'],
-    ],
   },
   {
     to: '/experts',
     kicker: 'For experts',
-    title: 'Respect for your time.',
+    title: 'Your experience has a market rate.',
+    points: ['Paid for every engagement', 'Accept only what interests you', 'Clear confidentiality rules', 'Free to join, no minimum commitment'],
     cta: 'How it works for experts',
-    items: [
-      [Target, 'Only relevant requests', 'You hear from us when a project genuinely matches your background.'],
-      [Wallet, 'Fair, agreed pay', 'Your rate is agreed before the engagement and paid when it is done.'],
-      [MessageSquareText, 'Clear rules up front', 'You know what you can and can’t discuss before the call starts.'],
-    ],
   },
 ]
 
@@ -107,27 +101,22 @@ function TwoSides() {
   return (
     <Section>
       <div className="grid gap-5 lg:grid-cols-2">
-        {sides.map((side, k) => (
-          <Reveal key={side.kicker} delay={k * 0.08}>
+        {sides.map((c, i) => (
+          <Reveal key={c.to} delay={i * 0.1}>
             <SpotlightCard className="h-full">
-              <Link href={side.to} className="flex h-full flex-col p-7 sm:p-9">
-                <Eyebrow as="p">{side.kicker}</Eyebrow>
-                <h2 className="mt-4 text-[26px] font-semibold leading-tight sm:text-[30px]">{side.title}</h2>
-                <ul className="mt-7 space-y-5">
-                  {side.items.map(([Icon, t, b]) => (
-                    <li key={t} className="flex gap-4">
-                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-500/10 text-accent">
-                        <Icon size={18} />
-                      </span>
-                      <span>
-                        <span className="block text-[16px] font-semibold text-fg">{t}</span>
-                        <span className="mt-0.5 block text-[15px] leading-relaxed text-muted">{b}</span>
-                      </span>
+              <Link href={c.to} className="flex h-full flex-col p-8 sm:p-10">
+                <Eyebrow as="p">{c.kicker}</Eyebrow>
+                <h2 className="mt-5 text-[28px] font-semibold leading-tight sm:text-[34px]">{c.title}</h2>
+                <ul className="mt-7 grid gap-3 sm:grid-cols-2">
+                  {c.points.map((p) => (
+                    <li key={p} className="flex items-start gap-2.5 text-[15.5px] text-body">
+                      <span className="mt-[9px] h-1 w-3 shrink-0 rounded-full bg-emerald-400" />
+                      {p}
                     </li>
                   ))}
                 </ul>
-                <span className="mt-auto inline-flex items-center gap-2 pt-8 text-[15px] font-medium text-fg">
-                  {side.cta}
+                <span className="mt-auto inline-flex items-center gap-2 pt-9 text-[15px] font-medium text-fg">
+                  {c.cta}
                   <ArrowUpRight size={16} className="text-accent transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
                 </span>
               </Link>
@@ -139,103 +128,116 @@ function TwoSides() {
   )
 }
 
-function Standard() {
+/* ─────────────── How it works (the Savnec standard) ───────────────
+   One section for the process: the numbers, a live sample project that stays in view on the
+   left, and the four steps arriving one by one on the right as the page scrolls. */
+
+const steps = [
+  ['Brief', 'Tell us the question, the profiles you want and any restrictions. Ten minutes on a call or a short form is enough.'],
+  ['Recruit', 'Our team sources candidates for your brief specifically, through direct outreach across companies, roles and regions.'],
+  ['Screen', 'Every candidate answers your screener, confirms employment history and clears a conflict check before you see them.'],
+  ['Speak', 'Pick the profiles you want. We schedule the calls, surveys or sessions and handle everything after.'],
+]
+
+function statBorders(i) {
+  return ['', 'border-l pl-5 sm:pl-7', 'border-t lg:border-l lg:border-t-0 lg:pl-7', 'border-l border-t pl-5 sm:pl-7 lg:border-t-0'][i] || ''
+}
+
+function HowItWorks() {
+  const ref = useRef(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start 70%', 'end 55%'] })
+  const scaleY = useTransform(scrollYProgress, [0, 1], [0, 1])
   return (
-    <Section tone="navy">
-      <div className="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
-        <div>
-          <SectionHeading
-            eyebrow="The Savnec standard"
-            title="Every project is recruited from scratch."
-            intro="Our recruiters find the companies and roles that hold the answer, approach the right people directly and screen them against your questions."
-          />
-          <Reveal delay={0.15}>
-            <div className="mt-9 grid grid-cols-2 gap-x-6 gap-y-7 border-t border-line/[0.12] pt-8">
-              {site.stats.map((st) => {
-                const m = String(st.value).match(/^(\D*)(\d+)(.*)$/)
-                return (
-                  <div key={st.label}>
-                    <p className="text-[38px] font-semibold leading-none tracking-tight text-fg sm:text-[42px]">
-                      {m ? <Counter prefix={m[1]} to={Number(m[2])} suffix={m[3]} /> : st.value}
-                    </p>
-                    <p className="mt-2 text-[14.5px] text-body">{st.label}</p>
-                  </div>
-                )
-              })}
-            </div>
+    <Section tone="navy" id="how-it-works">
+      <div className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-16">
+        <SectionHeading eyebrow="The Savnec standard" title="Four steps. One accountable team." />
+        <Reveal delay={0.1}>
+          <p className="max-w-xl text-[17px] leading-relaxed text-body">
+            Every project is recruited from scratch for your brief, and you deal with the same people from first brief to final
+            call. No hand-offs, no ticket queue.
+          </p>
+        </Reveal>
+      </div>
+
+      <Reveal delay={0.1}>
+        <div className="mt-10 grid grid-cols-2 border-y border-line/[0.12] lg:grid-cols-4">
+          {site.stats.map((st, i) => {
+            const m = String(st.value).match(/^(\D*)(\d+)(.*)$/)
+            return (
+              <div key={st.label} className={`border-line/[0.12] py-6 ${statBorders(i)}`}>
+                <p className="text-[38px] font-semibold leading-none tracking-tight text-fg sm:text-[46px]">
+                  {m ? <Counter prefix={m[1]} to={Number(m[2])} suffix={m[3]} /> : st.value}
+                </p>
+                <p className="mt-2.5 text-[14.5px] leading-snug text-body">{st.label}</p>
+              </div>
+            )
+          })}
+        </div>
+      </Reveal>
+
+      <div className="mt-12 grid gap-12 lg:mt-14 lg:grid-cols-[1fr_1fr] lg:gap-16">
+        <div className="lg:sticky lg:top-28 lg:self-start">
+          <Reveal>
+            <EngagementConsole />
+          </Reveal>
+          <Reveal delay={0.1} className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
+            <Button to="/request-trial">Start a trial project</Button>
+            <span className="text-[14.5px] text-muted">First profiles usually within 48 hours.</span>
           </Reveal>
         </div>
-        <Reveal delay={0.1}>
-          <EngagementConsole />
-        </Reveal>
+
+        <div ref={ref} className="relative pl-10 sm:pl-11">
+          <div className="absolute bottom-3 left-[11px] top-3 w-px bg-white/10" />
+          <motion.div
+            style={{ scaleY }}
+            className="absolute bottom-3 left-[11px] top-3 w-px origin-top bg-gradient-to-b from-emerald-300 to-emerald-500"
+          />
+          <ol className="space-y-6">
+            {steps.map(([t, b], i) => (
+              <Reveal as="li" key={t} delay={0.05} y={28} className="relative">
+                <span className="absolute -left-10 top-8 flex h-[23px] w-[23px] sm:-left-11 items-center justify-center rounded-full border border-emerald-400/60 bg-page">
+                  <span className="h-2 w-2 rounded-full bg-tick" />
+                </span>
+                <div className="rounded-2xl border border-line/[0.1] bg-white/[0.035] p-6 sm:p-8">
+                  <div className="flex items-baseline gap-4">
+                    <span className="font-mono text-[13px] font-medium text-accent">0{i + 1}</span>
+                    <h3 className="text-[24px] font-semibold sm:text-[26px]">{t}</h3>
+                  </div>
+                  <p className="mt-3 text-[16px] leading-relaxed text-body">{b}</p>
+                </div>
+              </Reveal>
+            ))}
+          </ol>
+        </div>
       </div>
     </Section>
   )
 }
 
-const steps = [
-  ['Brief', 'Tell us the question, the profiles you want and any restrictions. Ten minutes is enough.'],
-  ['Recruit', 'We source candidates for your brief specifically, through direct outreach.'],
-  ['Screen', 'Each candidate answers your screener and clears a conflict check before you see them.'],
-  ['Speak', 'Pick the profiles you want. We schedule the sessions and handle everything after.'],
-]
+/* ─────────────── Our services ─────────────── */
 
-function Process() {
+function Services() {
   return (
-    <Section>
+    <Section tone="card" className="border-y border-line/[0.07]">
       <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
-        <SectionHeading title="How it works" intro="One team from first brief to final call. No hand-offs, no ticket queue." />
+        <SectionHeading title="Our services" intro="The same recruiting, screening and compliance standards behind every one." />
         <Reveal>
-          <Button to="/request-trial" variant="ghost">
-            Start a trial project
+          <Button to="/clients" variant="ghost">
+            See service details
           </Button>
         </Reveal>
       </div>
-      <div className="relative mt-10">
-        <div aria-hidden="true" className="absolute left-[8%] right-[8%] top-[39px] hidden h-px bg-gradient-to-r from-emerald-400/0 via-emerald-500/40 to-emerald-400/0 lg:block" />
-      <ol className="relative grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {steps.map(([t, b], i) => (
-          <Reveal as="li" key={t} delay={i * 0.07} className="relative">
-            <div className="flex h-full gap-4 rounded-2xl border border-line/[0.09] bg-card p-5 shadow-[0_1px_2px_rgba(10,25,47,0.04)] sm:flex-col sm:gap-0 sm:p-6">
-              <span className="relative z-10 flex h-[30px] w-[30px] shrink-0 items-center justify-center rounded-full border border-emerald-500/40 bg-emerald-500/10 font-mono text-[12.5px] font-medium text-accent">
-                {i + 1}
-              </span>
-              <div>
-                <h3 className="text-[19px] font-semibold sm:mt-5 sm:text-[20px]">{t}</h3>
-                <p className="mt-1.5 text-[15px] leading-relaxed text-muted sm:mt-2">{b}</p>
-              </div>
-            </div>
-          </Reveal>
-        ))}
-      </ol>
-      </div>
-    </Section>
-  )
-}
-
-function Formats() {
-  return (
-    <Section tone="card" className="border-y border-line/[0.07]">
-      <SectionHeading title="Available formats" intro="The same recruiting, screening and compliance standards across every format." />
-      <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-9 grid gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
         {formats.map((f, i) => {
           const Icon = formatIcons[i]
           return (
-            <Reveal key={f.title} delay={(i % 3) * 0.06}>
-              <Link
-                href={`/clients#${f.id}`}
-                className="group flex h-full gap-4 rounded-2xl border border-line/[0.09] bg-page/60 p-6 transition-colors duration-300 hover:border-emerald-500/40 hover:bg-page"
-              >
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-emerald-400/25 bg-emerald-500/10 text-accent">
-                  <Icon size={19} />
+            <Reveal key={f.title} delay={(i % 3) * 0.05}>
+              <Link href={`/clients#${f.id}`} className="group block h-full border-t border-line/[0.12] py-6 transition-colors duration-300 hover:border-emerald-500">
+                <span className="flex items-center gap-3">
+                  <Icon size={20} className="shrink-0 text-accent" />
+                  <span className="text-[19px] font-semibold text-fg transition-colors duration-300 group-hover:text-accent">{f.title}</span>
                 </span>
-                <span>
-                  <span className="flex items-center gap-1.5 text-[18px] font-semibold text-fg">
-                    {f.title}
-                    <ArrowUpRight size={15} className="text-accent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  </span>
-                  <span className="mt-1.5 block text-[15px] leading-relaxed text-muted">{f.body}</span>
-                </span>
+                <span className="mt-2.5 block text-[15.5px] leading-relaxed text-muted">{f.body}</span>
               </Link>
             </Reveal>
           )
@@ -244,6 +246,32 @@ function Formats() {
     </Section>
   )
 }
+
+/* ─────────────── Who we serve ─────────────── */
+
+function WhoWeServe() {
+  return (
+    <Section>
+      <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+        <div className="lg:sticky lg:top-28 lg:self-start">
+          <SectionHeading title="Who we serve" intro="Teams who need first-hand answers from the people closest to a market." />
+        </div>
+        <ul className="divide-y divide-line/[0.1] border-y border-line/[0.1]">
+          {segments.map((s, i) => (
+            <Reveal as="li" key={s.title} delay={i * 0.05}>
+              <div className="group grid gap-2 py-7 sm:grid-cols-[1fr_1.25fr] sm:gap-8">
+                <h3 className="text-[21px] font-semibold leading-snug transition-colors group-hover:text-accent">{s.title}</h3>
+                <p className="text-[16px] leading-relaxed text-muted">{s.body}</p>
+              </div>
+            </Reveal>
+          ))}
+        </ul>
+      </div>
+    </Section>
+  )
+}
+
+/* ─────────────── Compliance ─────────────── */
 
 function ComplianceBand() {
   const items = [
@@ -254,7 +282,7 @@ function ComplianceBand() {
   ]
   return (
     <Section tone="navy">
-      <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
+      <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-20">
         <div>
           <Reveal>
             <Eyebrow as="h2">Compliance</Eyebrow>
@@ -273,63 +301,53 @@ function ComplianceBand() {
             </div>
           </Reveal>
         </div>
-        <div className="grid gap-3 sm:grid-cols-2">
-          {items.map(([Icon, t], i) => (
-            <Reveal key={t} delay={i * 0.07}>
-              <div className="flex h-full items-start gap-3 rounded-2xl border border-line/[0.12] bg-sunk/60 p-5">
-                <Icon size={19} className="mt-0.5 shrink-0 text-accent" />
-                <span className="text-[16px] font-medium leading-snug text-fg">{t}</span>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </Section>
-  )
-}
-
-function WhoWeServe() {
-  return (
-    <Section>
-      <SectionHeading title="Who we serve" />
-      <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {segments.map((s, i) => (
-          <Reveal key={s.title} delay={i * 0.06}>
-            <div className="h-full rounded-2xl border-t-2 border-emerald-500/70 bg-card p-6 shadow-[0_1px_2px_rgba(10,25,47,0.04),0_14px_32px_-26px_rgba(10,25,47,0.3)]">
-              <h3 className="text-[19px] font-semibold leading-snug">{s.title}</h3>
-              <p className="mt-2.5 text-[15px] leading-relaxed text-muted">{s.body}</p>
-            </div>
-          </Reveal>
-        ))}
-      </div>
-    </Section>
-  )
-}
-
-function IndustryGrid() {
-  return (
-    <Section tone="sunk">
-      <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
-        <SectionHeading title="Industries we cover" />
-        <Reveal>
-          <Button to="/industries" variant="ghost">
-            All industries
-          </Button>
+        <Reveal delay={0.1}>
+          <ul className="divide-y divide-line/[0.12] border-y border-line/[0.12]">
+            {items.map(([Icon, t]) => (
+              <li key={t} className="flex items-center gap-4 py-5">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-emerald-400/30 bg-emerald-500/10 text-accent">
+                  <Icon size={18} />
+                </span>
+                <span className="text-[17px] font-medium text-fg">{t}</span>
+              </li>
+            ))}
+          </ul>
         </Reveal>
       </div>
-      <div className="mt-9 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-line/[0.1] bg-fg/[0.08] sm:grid-cols-3 lg:grid-cols-5">
-        {industries.map(({ id, name, icon: Icon }, i) => (
-          <Reveal key={id} delay={i * 0.03} y={0}>
-            <Link
-              href={`/industries#${id}`}
-              className="group relative flex h-full min-h-[136px] flex-col justify-between gap-5 bg-card p-5 transition-colors duration-500 hover:bg-page sm:p-6"
-            >
-              <Icon size={24} className="text-accent" />
-              <span className="text-[16px] font-semibold leading-snug text-fg sm:text-[17px]">{name}</span>
-              <ArrowUpRight size={16} className="absolute right-5 top-5 text-accent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+    </Section>
+  )
+}
+
+/* ─────────────── Industries ─────────────── */
+
+function Industries() {
+  return (
+    <Section tone="sunk">
+      <div className="grid gap-9 lg:grid-cols-[0.75fr_1.25fr] lg:items-center lg:gap-16">
+        <div>
+          <SectionHeading title="Industries we cover" intro="Our recruiters specialize by sector, so they know which titles hold the answer." />
+          <Reveal delay={0.1}>
+            <Link href="/industries" className="mt-6 inline-flex items-center gap-2 text-[15px] font-medium text-accent">
+              <span className="link-underline">See coverage by industry</span>
+              <ArrowRight size={16} />
             </Link>
           </Reveal>
-        ))}
+        </div>
+        <Reveal delay={0.05}>
+          <ul className="flex flex-wrap gap-2.5">
+            {industries.map(({ id, name, icon: Icon }) => (
+              <li key={id}>
+                <Link
+                  href={`/industries#${id}`}
+                  className="inline-flex items-center gap-2.5 rounded-full border border-line/[0.12] bg-card px-4 py-2.5 text-[15.5px] font-medium text-fg shadow-[0_1px_2px_rgba(10,25,47,0.04)] transition-colors duration-300 hover:border-emerald-500/60 hover:text-accent sm:px-5 sm:py-3 sm:text-[16.5px]"
+                >
+                  <Icon size={18} className="shrink-0 text-accent" />
+                  {name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       </div>
     </Section>
   )
@@ -358,12 +376,11 @@ export default function Home() {
       </div>
       <TwoSides />
       <Testimonials />
-      <Standard />
-      <Process />
-      <Formats />
-      <ComplianceBand />
+      <HowItWorks />
+      <Services />
       <WhoWeServe />
-      <IndustryGrid />
+      <ComplianceBand />
+      <Industries />
       <CtaBand />
     </>
   )
