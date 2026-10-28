@@ -1,6 +1,6 @@
 'use client'
 
-import { Wallet, CalendarClock, Lock, Globe, Phone, ListChecks, Users, Brain, X, Check, BadgeCheck } from 'lucide-react'
+import { X, Check } from 'lucide-react'
 import { PageHero, Button, Section, SectionHeading, Reveal, Eyebrow } from '@/components/ui'
 import { CtaBand } from '@/components/Visuals'
 import { EmailLine } from '@/components/ContactInfo'
@@ -17,10 +17,7 @@ const terms = [
 function TermsCard() {
   return (
     <div className="rounded-3xl p-6 glass sm:p-7">
-      <div className="flex items-center justify-between">
-        <Eyebrow as="h2">At a glance</Eyebrow>
-        <BadgeCheck size={18} className="text-accent" />
-      </div>
+      <Eyebrow as="h2">At a glance</Eyebrow>
       <dl className="mt-5 divide-y divide-line/[0.08]">
         {terms.map(([k, v]) => (
           <div key={k} className="flex items-baseline justify-between gap-6 py-3 first:pt-0 last:pb-0">
@@ -34,24 +31,24 @@ function TermsCard() {
 }
 
 const reasons = [
-  [Wallet, 'Paid for your time', 'Your rate is agreed before every engagement. No unpaid "intro calls".'],
-  [CalendarClock, 'On your schedule', 'Accept what interests you, decline what doesn’t. Calls fit your working week and time zone.'],
-  [Lock, 'Clear boundaries', 'You share experience and judgment, never confidential information. We brief you before every call.'],
-  [Globe, 'Interesting questions', 'Investors, strategy teams and researchers who want to understand your industry the way you do.'],
+  ['Paid for your time', 'Your rate is agreed before every engagement.'],
+  ['On your schedule', 'Accept what interests you. Calls fit your week and time zone.'],
+  ['Clear boundaries', 'Share experience and judgment, never confidential information.'],
+  ['Interesting questions', 'From teams who want to understand your industry.'],
 ]
 
 const work = [
-  [Phone, 'Expert calls & IDIs', 'One-to-one calls or in-depth interviews, usually 30 to 60 minutes.'],
-  [ListChecks, 'B2B surveys', 'Structured questions you complete online in your own time.'],
-  [Users, 'Focus groups & diary studies', 'Small-group discussions, or short entries about your working day.'],
-  [Brain, 'AI evaluation projects', 'Reviewing and grading model outputs in your field.'],
+  ['Expert calls & IDIs', 'One-to-one conversations, usually 30 to 60 minutes.'],
+  ['B2B surveys', 'Structured questions, answered online in your own time.'],
+  ['Focus groups & diary studies', 'Small-group discussions or short entries about your work.'],
+  ['AI evaluation projects', 'Reviewing and grading model outputs in your field.'],
 ]
 
 const steps = [
-  ['Apply', 'Share your background in a short form. It takes about five minutes.'],
-  ['Get matched', 'When a project fits your experience, we send a short description and a few screening questions.'],
-  ['Confirm', 'Agree the rate and time, accept the engagement terms and confirm you have no conflicts.'],
-  ['Consult & get paid', 'Have the conversation. Payment is processed after the engagement is complete.'],
+  ['Apply', 'A short form about your background. About five minutes.'],
+  ['Get matched', 'We send a project summary and a few screening questions.'],
+  ['Confirm', 'Agree the rate and time and confirm you have no conflicts.'],
+  ['Consult & get paid', 'Have the conversation. Payment follows the engagement.'],
 ]
 
 const dos = ['Your own experience and judgment', 'How an industry or role works in practice', 'Publicly available information', 'Your views on trends and competitors']
@@ -64,10 +61,10 @@ export default function Experts() {
         eyebrow="For experts"
         title={
           <>
-            Your experience has a <span className="serif-accent text-accent">market rate.</span>
+            Your experience has a market rate.
           </>
         }
-        intro="Senior operators, specialists and former executives use Savnec to share what they know with the people making decisions about their industry. Paid, confidential and on your terms."
+        intro="Share what you know with the teams making decisions about your industry. Paid, confidential and on your terms."
         aside={<TermsCard />}
       >
         <div className="flex flex-col gap-3 sm:flex-row">
@@ -83,14 +80,11 @@ export default function Experts() {
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <SectionHeading eyebrow="Why experts join" title="Respect for your time." />
           <div className="grid gap-x-10 sm:grid-cols-2">
-            {reasons.map(([Icon, t, b], i) => (
+            {reasons.map(([t, b], i) => (
               <Reveal key={t} delay={i * 0.05}>
                 <div className="h-full border-t border-line/[0.12] py-6">
-                  <span className="flex items-center gap-3">
-                    <Icon size={20} className="shrink-0 text-accent" />
-                    <h3 className="text-[19px] font-semibold">{t}</h3>
-                  </span>
-                  <p className="mt-2.5 text-[15.5px] leading-relaxed text-muted">{b}</p>
+                  <h3 className="text-[19px] font-semibold">{t}</h3>
+                  <p className="mt-2 text-[15.5px] leading-relaxed text-muted">{b}</p>
                 </div>
               </Reveal>
             ))}
@@ -106,7 +100,7 @@ export default function Experts() {
             {steps.map(([t, b], i) => (
               <Reveal as="li" key={t} delay={0.1 * i}>
                 <div className="flex gap-4 lg:block">
-                  <span className="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-emerald-400/50 bg-page font-serif text-[22px] italic text-accent">
+                  <span className="relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-emerald-400/50 bg-page font-ui text-[16px] font-semibold text-accent">
                     {i + 1}
                   </span>
                   <div>
@@ -125,13 +119,10 @@ export default function Experts() {
           <SectionHeading title="Ways to take part" intro="Choose the formats that suit you. You can decline any request." />
           <Reveal>
             <ul className="divide-y divide-line/[0.1] rounded-3xl glass">
-              {work.map(([Icon, t, b]) => (
-                <li key={t} className="flex gap-5 p-5 sm:p-6">
-                  <Icon size={20} className="mt-1 shrink-0 text-accent" />
-                  <div>
-                    <h3 className="text-[17.5px] font-semibold">{t}</h3>
-                    <p className="mt-1 text-[15.5px] leading-relaxed text-muted">{b}</p>
-                  </div>
+              {work.map(([t, b]) => (
+                <li key={t} className="p-5 sm:px-6">
+                  <h3 className="text-[17.5px] font-semibold">{t}</h3>
+                  <p className="mt-1 text-[15.5px] leading-relaxed text-muted">{b}</p>
                 </li>
               ))}
             </ul>

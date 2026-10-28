@@ -16,7 +16,7 @@ export default function Faqs() {
         eyebrow="FAQs"
         title={
           <>
-            Straight <span className="serif-accent text-accent">answers.</span>
+            Frequently asked questions
           </>
         }
         intro="The questions we hear most from clients and experts. If yours is not here, ask us directly."

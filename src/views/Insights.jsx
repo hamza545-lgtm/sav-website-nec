@@ -21,7 +21,7 @@ export default function Insights() {
         eyebrow="Insights"
         title={
           <>
-            Notes from the <span className="serif-accent text-accent">work.</span>
+            Guides to expert research
           </>
         }
         intro="Practical guides on expert research, written by the people who run the projects."

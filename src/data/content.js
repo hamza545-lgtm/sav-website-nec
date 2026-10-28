@@ -179,56 +179,52 @@ const industryOrder = [
 ]
 export const industries = industryOrder.map((id) => allIndustries.find((x) => x.id === id))
 
+// Who we serve, as listed on the home page. Short on purpose: one line each.
 export const segments = [
-  {
-    title: 'Market Research Firms',
-    body: 'Senior and niche B2B respondents for qualitative studies, recruited to your screener and verified before fieldwork.',
-  },
-  {
-    title: 'Private Equity & Venture Capital',
-    body: 'Customer calls, competitor views and operator checks across the deal cycle, delivered at deal speed.',
-  },
-  {
-    title: 'Corporate Strategy Teams',
-    body: 'An outside-in read on markets, competitors and customers before capital is committed.',
-  },
-  {
-    title: 'Consulting Firms',
-    body: 'Sector depth for case teams who need to sound like insiders by Thursday.',
-  },
+  { title: 'Market Research Firms', body: 'Senior and niche B2B respondents, recruited to your screener.' },
+  { title: 'Private Equity & Venture Capital', body: 'Customer, competitor and operator calls across the deal cycle.' },
+  { title: 'Corporate Strategy Teams', body: 'An outside-in view before capital is committed.' },
+  { title: 'Consulting Firms', body: 'Sector depth for case teams on tight timelines.' },
 ]
 
-// Formats, in order of how often clients ask for them.
+// Services, in order of how often clients ask for them.
+// short: one line for the home page and menus. body: the fuller description on /services.
 export const formats = [
   {
     id: 'expert-calls',
     title: 'Expert Calls & IDIs',
-    body: 'One-to-one calls and in-depth interviews with operators, customers and former competitors. Scheduled around you.',
+    short: 'One-to-one calls with operators, customers and former competitors.',
+    body: 'One-to-one calls and in-depth interviews with operators, customers, buyers and former competitors. Each expert is recruited for your question, screened against it and scheduled around your team.',
   },
   {
     id: 'b2b-surveys',
     title: 'B2B Surveys',
-    body: 'Structured questionnaires answered by verified professionals, so you can compare views across a defined audience.',
+    short: 'Structured questionnaires for verified professional audiences.',
+    body: 'Structured questionnaires answered by verified professionals, so you can compare views across a defined audience. We recruit to your screener and quotas and check every respondent before they take part.',
   },
   {
     id: 'focus-groups',
     title: 'Focus Groups',
-    body: 'Moderated discussions with small groups of professionals, recruited to your screener and quota.',
+    short: 'Moderated sessions with small groups of professionals.',
+    body: 'Moderated discussions with small groups of professionals, recruited to your screener and quota. A clear way to test concepts, messaging and products with the people who buy them.',
   },
   {
     id: 'custom-recruitment',
     title: 'Custom Recruitment',
-    body: 'Niche B2B profiles sourced from scratch for your own studies, advisory boards and panels.',
+    short: 'Niche B2B profiles sourced for your own studies.',
+    body: 'Niche B2B profiles sourced from scratch for your own studies, advisory boards and panels. You run the research; we find, screen and schedule the people.',
   },
   {
     id: 'ethnography',
     title: 'Diary Studies & Ethnography',
-    body: 'Professionals record or show their real working day over time, so you see behavior as it happens.',
+    short: 'Real working days, recorded over time.',
+    body: 'Professionals record or show their real working day over several days or weeks, so you see behavior as it happens rather than as it is remembered.',
   },
   {
     id: 'ai-experts',
     title: 'AI Domain Experts',
-    body: 'Credentialed specialists for evaluation, annotation and reasoning work on AI models.',
+    short: 'Credentialed specialists for AI evaluation and annotation.',
+    body: 'Licensed and credentialed specialists for model evaluation, annotation and reasoning work, recruited by discipline and seniority for the tasks generalists get wrong.',
   },
 ]
 

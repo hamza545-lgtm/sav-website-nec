@@ -3,7 +3,7 @@
 import { useMemo } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { ArrowLeft, ArrowUpRight, Clock, CalendarDays } from 'lucide-react'
+import { ArrowLeft, ArrowUpRight } from 'lucide-react'
 import { GlowBackdrop, Button, Reveal, SpotlightCard, heroIn, useActiveSection, scrollToId } from '@/components/ui'
 import { ArticleBody } from '@/components/RichText'
 import { Accordion } from '@/components/Form'
@@ -44,12 +44,8 @@ function Article({ article }) {
             style={h[3].style}
           >
             <span className="text-body">By the Savnec research team</span>
-            <span className="inline-flex items-center gap-1.5">
-              <CalendarDays size={14} /> <time dateTime={article.date}>{formatDate(article.date)}</time>
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <Clock size={14} /> {article.readMinutes} min read
-            </span>
+            <span><time dateTime={article.date}>{formatDate(article.date)}</time></span>
+            <span>{article.readMinutes} min read</span>
           </div>
         </div>
       </header>

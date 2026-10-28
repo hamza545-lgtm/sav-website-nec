@@ -46,7 +46,7 @@ export default function RequestTrial() {
       eyebrow="Request a trial"
       title={
         <>
-          Send one live brief. <span className="serif-accent text-accent">See the difference.</span>
+          Send one live brief. See the difference.
         </>
       }
       intro="Tell us what you are working on. We will scope it with you, recruit for it and share a screened shortlist, so you can judge our work on a real project."
@@ -71,7 +71,7 @@ export default function RequestTrial() {
           { name: 'company', label: 'Company', required: true },
           { name: 'title', label: 'Job title', required: true },
           { name: 'firm_type', label: 'Firm type', type: 'select', required: true, options: ['Market research firm', 'Private equity', 'Venture capital', 'Hedge fund / public markets', 'Corporate strategy', 'Management consulting', 'AI / data company', 'Other'] },
-          { name: 'format', label: 'Format', type: 'select', required: true, options: [...formats.map((f) => f.title), 'Not sure yet'] },
+          { name: 'service', label: 'Service', type: 'select', required: true, options: [...formats.map((f) => f.title), 'Not sure yet'] },
           { name: 'industry', label: 'Industry', type: 'select', options: [...industries.map((i) => i.name), 'Other'] },
           { name: 'timeline', label: 'Timeline', type: 'select', options: ['This week', 'Within 2 weeks', 'This month', 'Exploring'] },
           { name: 'brief', label: 'The brief', type: 'textarea', full: true, required: true, placeholder: 'What do you need to learn, and from whom? Include target roles, geographies and any companies to include or exclude.' },

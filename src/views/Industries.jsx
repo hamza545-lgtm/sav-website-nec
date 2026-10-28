@@ -17,7 +17,7 @@ export default function Industries() {
         eyebrow="Industries"
         title={
           <>
-            Experts across <span className="serif-accent text-accent">ten industries.</span>
+            Experts across ten industries.
           </>
         }
         intro="Our recruiters specialize by vertical, so they know which titles hold the answer and which questions separate real experience from a good LinkedIn summary."
@@ -48,20 +48,12 @@ export default function Industries() {
           </aside>
 
           <div className="space-y-6">
-            {industries.map(({ id, name, icon: Icon, summary, focus, experts, questions }, idx) => (
+            {industries.map(({ id, name, summary, focus, experts, questions }) => (
               <Reveal key={id}>
                 <article id={id} className="overflow-hidden rounded-3xl glass">
                   <div className="grid md:grid-cols-[1.2fr_1fr]">
                     <div className="p-7 sm:p-9">
-                      <div className="flex items-center gap-4">
-                        <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-emerald-400/25 bg-emerald-500/10 text-accent">
-                          <Icon size={22} />
-                        </span>
-                        <span className="label">
-                          {String(idx + 1).padStart(2, '0')} / {industries.length}
-                        </span>
-                      </div>
-                      <h2 className="mt-6 text-[26px] font-semibold leading-tight sm:text-[32px]">{name}</h2>
+                      <h2 className="text-[26px] font-semibold leading-tight sm:text-[32px]">{name}</h2>
                       <p className="mt-3 text-[16px] leading-relaxed text-muted">{summary}</p>
                       <h3 className="label mt-6">Coverage</h3>
                       <ul className="mt-3 flex flex-wrap gap-2">

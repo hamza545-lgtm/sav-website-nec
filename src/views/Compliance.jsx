@@ -1,16 +1,15 @@
 'use client'
 
-import { UserCheck, Scale, FileKey, Ban, EyeOff, Database, ClipboardCheck, Headphones, Hourglass, ListX, Mic, BadgeCheck } from 'lucide-react'
 import { PageHero, Section, SectionHeading, Reveal, Eyebrow, Button } from '@/components/ui'
 import { CtaBand } from '@/components/Visuals'
 
 const pillars = [
-  [UserCheck, 'Verified identity & history', 'Experts confirm identity, current employer and relevant prior roles, checked against public professional records.'],
-  [Scale, 'Conflict screening', 'Every engagement is checked against the project, the expert’s current role and the client’s restrictions.'],
-  [FileKey, 'Binding confidentiality', 'Experts accept our terms of engagement, including MNPI obligations, and reconfirm them before each project.'],
-  [Ban, 'MNPI prohibited', 'No material non-public or confidential information from any current or former employer.'],
-  [EyeOff, 'Client anonymity', 'Client identity is withheld from experts unless the client chooses to disclose it.'],
-  [Database, 'Data protection', 'Personal data is collected for a defined purpose and kept only as long as needed, in line with GDPR and CCPA principles.'],
+  ['Verified identity & history', 'Identity, employer and prior roles checked against public records.'],
+  ['Conflict screening', 'Every engagement checked against the project and your restrictions.'],
+  ['Binding confidentiality', 'Terms of engagement, including MNPI obligations, reconfirmed per project.'],
+  ['MNPI prohibited', 'No material non-public or confidential information from any employer.'],
+  ['Client anonymity', 'Your identity stays private unless you choose to share it.'],
+  ['Data protection', 'Collected for a defined purpose, in line with GDPR and CCPA principles.'],
 ]
 
 const lifecycle = [
@@ -22,11 +21,11 @@ const lifecycle = [
 ]
 
 const controls = [
-  [ListX, 'Restricted lists', 'Exclude companies, current employees or named individuals from your projects.'],
-  [Hourglass, 'Cool-off periods', 'Set a minimum time since an expert left a company before they can speak with you.'],
-  [ClipboardCheck, 'Custom attestations', 'Add your own compliance questions to every expert screener.'],
-  [Headphones, 'Chaperoned calls', 'Request a Savnec team member to attend and monitor sensitive calls.'],
-  [Mic, 'Recording on consent', 'Calls are recorded or transcribed only with advance consent from both sides.'],
+  ['Restricted lists', 'Exclude companies, current employees or named individuals.'],
+  ['Cool-off periods', 'Set a minimum time since an expert left a company.'],
+  ['Custom attestations', 'Add your own compliance questions to every screener.'],
+  ['Chaperoned calls', 'A Savnec team member attends sensitive calls.'],
+  ['Recording on consent', 'Recorded or transcribed only with consent from both sides.'],
 ]
 
 export default function Compliance() {
@@ -36,7 +35,7 @@ export default function Compliance() {
         eyebrow="Compliance"
         title={
           <>
-            Built so your compliance team <span className="serif-accent text-accent">says yes.</span>
+            Built so your compliance team says yes.
           </>
         }
         intro="Our framework is designed around the controls investment firms, consultancies and their counsel expect to see."
@@ -45,24 +44,18 @@ export default function Compliance() {
           <Button to="/contact" variant="ghost">
             Request our compliance pack
           </Button>
-          <p className="flex items-center gap-2 text-[14.5px] font-medium text-fg/80">
-            <BadgeCheck size={17} className="text-accent" />
-            Aligned with the ESOMAR/ICC International Code
-          </p>
+          <p className="text-[14.5px] font-medium text-fg/80">Aligned with the ESOMAR/ICC International Code</p>
         </div>
       </PageHero>
 
       <Section>
         <SectionHeading title="Six controls on every engagement" />
         <div className="mt-9 grid gap-x-10 sm:grid-cols-2 lg:grid-cols-3">
-          {pillars.map(([Icon, t, b], i) => (
+          {pillars.map(([t, b], i) => (
             <Reveal key={t} delay={(i % 3) * 0.05}>
               <div className="h-full border-t border-line/[0.12] py-6">
-                <span className="flex items-center gap-3">
-                  <Icon size={20} className="shrink-0 text-accent" />
-                  <h3 className="text-[19px] font-semibold">{t}</h3>
-                </span>
-                <p className="mt-2.5 text-[15.5px] leading-relaxed text-muted">{b}</p>
+                <h3 className="text-[19px] font-semibold">{t}</h3>
+                <p className="mt-2 text-[15.5px] leading-relaxed text-muted">{b}</p>
               </div>
             </Reveal>
           ))}
@@ -93,16 +86,13 @@ export default function Compliance() {
 
       <Section>
         <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
-          <SectionHeading eyebrow="Client controls" title="Your policy, applied to every project" intro="Share your expert network policy once. We configure every future project around it." />
+          <SectionHeading eyebrow="Client controls" title="Your policy, applied to every project" intro="Share your policy once. We apply it to every project." />
           <div className="divide-y divide-line/[0.1] rounded-3xl glass">
-            {controls.map(([Icon, t, b], i) => (
+            {controls.map(([t, b], i) => (
               <Reveal key={t} delay={i * 0.05}>
-                <div className="flex gap-5 p-5 sm:p-6">
-                  <Icon size={20} className="mt-1 shrink-0 text-accent" />
-                  <div>
-                    <h3 className="text-[17px] font-semibold">{t}</h3>
-                    <p className="mt-1 text-[15px] leading-relaxed text-muted">{b}</p>
-                  </div>
+                <div className="p-5 sm:px-6">
+                  <h3 className="text-[17px] font-semibold">{t}</h3>
+                  <p className="mt-1 text-[15px] leading-relaxed text-muted">{b}</p>
                 </div>
               </Reveal>
             ))}

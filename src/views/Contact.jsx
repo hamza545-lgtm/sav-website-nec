@@ -1,16 +1,16 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowUpRight, Building, UserPlus, MessageCircle, Clock } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import { PageHero, Section, Reveal, SpotlightCard } from '@/components/ui'
 import Web3Form from '@/components/Form'
 import { site } from '@/config/site'
 import { Address, EmailCards, EmailLine } from '@/components/ContactInfo'
 
 const routes = [
-  { to: '/request-trial', icon: Building, title: 'I need experts', body: 'Start a trial project or discuss an upcoming brief.', cta: 'Request a Trial' },
-  { to: '/join', icon: UserPlus, title: 'I am an expert', body: 'Apply to join the network and receive relevant projects.', cta: 'Join the network' },
-  { to: '#general', icon: MessageCircle, title: 'Something else', body: 'Partnerships, press, vendor onboarding or general questions.', cta: 'Send a message' },
+  { to: '/request-trial', title: 'I need experts', body: 'Start a trial project or discuss an upcoming brief.', cta: 'Request a Trial' },
+  { to: '/join', title: 'I am an expert', body: 'Apply to join the network and receive relevant projects.', cta: 'Join the network' },
+  { to: '#general', title: 'Something else', body: 'Partnerships, press, vendor onboarding or general questions.', cta: 'Send a message' },
 ]
 
 export default function Contact() {
@@ -20,7 +20,7 @@ export default function Contact() {
         eyebrow="Contact"
         title={
           <>
-            Reach the <span className="serif-accent text-accent">right team</span> first time.
+            Reach the right team.
           </>
         }
         intro="Choose the route that fits. Every message is read by a person and answered within one business day."
@@ -29,11 +29,10 @@ export default function Contact() {
       <Section className="!pt-0">
         <h2 className="sr-only">Ways to reach Savnec</h2>
         <div className="grid gap-4 md:grid-cols-3">
-          {routes.map(({ to, icon: Icon, title, body, cta }, i) => {
+          {routes.map(({ to, title, body, cta }, i) => {
             const inner = (
               <div className="flex h-full flex-col p-7">
-                <Icon size={22} className="text-accent" />
-                <h3 className="mt-6 text-[21px] font-semibold">{title}</h3>
+                <h3 className="text-[21px] font-semibold">{title}</h3>
                 <p className="mt-2 text-[15px] leading-relaxed text-muted">{body}</p>
                 <span className="mt-7 inline-flex items-center gap-2 text-[15px] font-medium text-fg">
                   {cta} <ArrowUpRight size={15} className="text-accent" />
@@ -70,7 +69,6 @@ export default function Contact() {
               <Address className="text-[15px]" />
               <EmailLine who="general" label="Email" />
               <p className="flex items-center gap-2.5 text-[14px] text-muted">
-                <Clock size={16} className="shrink-0 text-accent" />
                 Replies within one business day
               </p>
             </div>

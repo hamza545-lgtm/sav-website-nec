@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Check, Clock, MessageSquareText, ShieldCheck, Target, Repeat, Receipt, Phone, ListChecks, Users, Network, NotebookPen, Brain } from 'lucide-react'
+import Link from 'next/link'
+import { Check, ShieldCheck, ArrowUpRight } from 'lucide-react'
 import { PageHero, Button, Section, SectionHeading, Reveal, Eyebrow } from '@/components/ui'
 import { CtaBand } from '@/components/Visuals'
 import { subscribeHash } from '@/components/ClientEffects'
@@ -10,23 +11,12 @@ import { formats, useCases } from '@/data/content'
 import { ucSlug } from '@/components/Navbar'
 import { EmailLine } from '@/components/ContactInfo'
 
-const formatIcons = { 'expert-calls': Phone, 'b2b-surveys': ListChecks, 'focus-groups': Users, 'custom-recruitment': Network, ethnography: NotebookPen, 'ai-experts': Brain }
-
-const formatDetail = {
-  'expert-calls': { best: 'Depth, nuance, testing a hypothesis', length: '30 to 60 minutes, phone or video' },
-  'b2b-surveys': { best: 'Comparing views across a defined audience', length: 'Short online questionnaire' },
-  'focus-groups': { best: 'Reactions to concepts, messaging or products', length: '60 to 90 minute moderated session' },
-  'custom-recruitment': { best: 'Research firms running their own fieldwork', length: 'Profiles to your screener and quota' },
-  ethnography: { best: 'Seeing real workflows as they happen', length: 'Several days to a few weeks' },
-  'ai-experts': { best: 'Evaluation and reasoning data in specialist fields', length: 'Task-based or ongoing cohorts' },
-}
-
 const commitments = [
-  [Clock, 'First profiles in 48 hours', 'For most scoped briefs. If yours needs longer, you hear that on day one.'],
-  [Target, 'Fewer, better profiles', 'Each one arrives with screener answers, so you can decide in minutes.'],
-  [ShieldCheck, 'Compliance by default', 'Conflict checks, confidentiality terms and your restricted list on every engagement.'],
-  [Repeat, 'One team, start to finish', 'The person who scopes your project delivers it.'],
-  [Receipt, 'Clear pricing up front', 'A rate card during scoping, before any work begins.'],
+  ['First profiles in 48 hours', 'For most scoped briefs. Longer ones are flagged on day one.'],
+  ['Fewer, better profiles', 'Screener answers come with every profile.'],
+  ['Compliance by default', 'Conflict checks and your restricted list, every time.'],
+  ['One team, start to finish', 'The person who scopes your project delivers it.'],
+  ['Clear pricing up front', 'A rate card before any work begins.'],
 ]
 
 function Commitments() {
@@ -34,15 +24,10 @@ function Commitments() {
     <div className="rounded-3xl p-6 glass sm:p-7">
       <Eyebrow as="h2">Our commitments</Eyebrow>
       <ul className="mt-5 divide-y divide-line/[0.08]">
-        {commitments.map(([Icon, t, b]) => (
-          <li key={t} className="flex gap-4 py-3.5 first:pt-0 last:pb-0">
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-emerald-500/10 text-accent">
-              <Icon size={17} />
-            </span>
-            <span>
-              <span className="block text-[15.5px] font-semibold text-fg">{t}</span>
-              <span className="block text-[14px] leading-relaxed text-muted">{b}</span>
-            </span>
+        {commitments.map(([t, b]) => (
+          <li key={t} className="py-3.5 first:pt-0 last:pb-0">
+            <span className="block text-[15.5px] font-semibold text-fg">{t}</span>
+            <span className="block text-[14.5px] text-muted">{b}</span>
           </li>
         ))}
       </ul>
@@ -76,10 +61,7 @@ function ProfileCard() {
             <div key={q}>
               <p className="label">Screener · Q{i + 1}</p>
               <p className="mt-1.5 text-[14.5px] text-body">{q}</p>
-              <p className="mt-1.5 flex gap-2 text-[14.5px] font-medium text-fg">
-                <MessageSquareText size={15} className="mt-0.5 shrink-0 text-accent" />
-                {a}
-              </p>
+              <p className="mt-1.5 border-l-2 border-emerald-500/60 pl-3 text-[14.5px] font-medium text-fg">{a}</p>
             </div>
           ))}
         </div>
@@ -177,10 +159,10 @@ export default function Clients() {
         eyebrow="For clients"
         title={
           <>
-            Your question, answered by someone who was <span className="serif-accent text-accent">in the room.</span>
+            Your question, answered by someone who was in the room.
           </>
         }
-        intro="We find the operators, buyers and specialists who can tell you what the data can't, and screen them before you spend a minute with them."
+        intro="Operators, buyers and specialists who can tell you what the data can't, screened before you spend a minute with them."
         aside={<Commitments />}
       >
         <div className="flex flex-col gap-3 sm:flex-row">
@@ -192,55 +174,13 @@ export default function Clients() {
         <EmailLine who="clients" label="Prefer email? Write to" className="mt-5" />
       </PageHero>
 
-      <Section id="formats">
-        <SectionHeading title="Our services" intro="Every service runs on the same recruiting, screening and compliance." />
-        <div className="mt-9 border-t border-line/[0.12]">
-          {formats.map((f, i) => {
-            const Icon = formatIcons[f.id]
-            const d = formatDetail[f.id]
-            return (
-              <Reveal key={f.id} delay={0.04}>
-                <article id={f.id} className="grid gap-5 border-b border-line/[0.12] py-7 lg:grid-cols-[1.35fr_1fr_1fr] lg:gap-10">
-                  <div className="flex gap-4">
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-emerald-400/25 bg-emerald-500/10 text-accent">
-                      <Icon size={19} />
-                    </span>
-                    <div>
-                      <h3 className="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-[21px] font-semibold leading-snug">
-                        {f.title}
-                        {i === 0 && (
-                          <span className="rounded-full border border-emerald-400/40 bg-emerald-500/10 px-2.5 py-0.5 font-mono text-[11px] font-medium uppercase tracking-[0.14em] text-accent">
-                            Most requested
-                          </span>
-                        )}
-                      </h3>
-                      <p className="mt-1.5 text-[15.5px] leading-relaxed text-muted">{f.body}</p>
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-2 gap-6 pl-[60px] lg:contents">
-                    <div>
-                      <p className="label">Best for</p>
-                      <p className="mt-1.5 text-[15.5px] leading-relaxed text-fg/85">{d.best}</p>
-                    </div>
-                    <div>
-                      <p className="label">Format</p>
-                      <p className="mt-1.5 text-[15.5px] leading-relaxed text-fg/85">{d.length}</p>
-                    </div>
-                  </div>
-                </article>
-              </Reveal>
-            )
-          })}
-        </div>
-      </Section>
-
       <Section tone="navy">
         <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
             <SectionHeading
               eyebrow="What you receive"
               title="Profiles you can decide on in minutes."
-              intro="Every profile shows role, tenure and recency, plus the expert's own answers to your screening questions."
+              intro="Role, tenure and recency, plus each expert's own answers to your screening questions."
             />
             <Reveal delay={0.15}>
               <ul className="mt-7 space-y-3">
@@ -257,6 +197,27 @@ export default function Clients() {
           </div>
           <Reveal delay={0.1}>
             <ProfileCard />
+          </Reveal>
+        </div>
+      </Section>
+
+      <Section tone="card" className="border-b border-line/[0.07]">
+        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center lg:gap-16">
+          <SectionHeading title="Our services" intro="Six ways to hear from the right people." />
+          <Reveal delay={0.05}>
+            <ul className="grid gap-x-10 border-t border-line/[0.1] sm:grid-cols-2">
+              {formats.map((f) => (
+                <li key={f.id}>
+                  <Link
+                    href={`/services#${f.id}`}
+                    className="group flex items-center justify-between gap-4 border-b border-line/[0.1] py-4 text-[17px] font-semibold text-fg transition-colors hover:text-accent"
+                  >
+                    {f.title}
+                    <ArrowUpRight size={16} className="shrink-0 text-muted transition-colors group-hover:text-accent" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </Reveal>
         </div>
       </Section>

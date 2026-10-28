@@ -39,6 +39,7 @@ module.exports = {
         sans: ['var(--font-sans)', 'Inter', 'system-ui', 'sans-serif'],
         serif: ['var(--font-serif)', 'Georgia', 'serif'],
         mono: ['var(--font-mono)', 'ui-monospace', 'monospace'],
+        ui: ['var(--font-ui)', 'Inter', 'system-ui', 'sans-serif'],
       },
       letterSpacing: {
         tightest: '-0.045em',

@@ -2,6 +2,7 @@
 // aliases. Each one redirects permanently to its clean address, so old links and Google's
 // "Page with redirect" entries resolve to the real page.
 const pages = [
+  'services',
   'about',
   'clients',
   'experts',

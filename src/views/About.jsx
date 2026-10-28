@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowUpRight, BookOpen, CircleHelp, Briefcase, Mail } from 'lucide-react'
+import { ArrowUpRight } from 'lucide-react'
 import { PageHero, Section, SectionHeading, Reveal, Eyebrow } from '@/components/ui'
 import { CtaBand } from '@/components/Visuals'
 import { Address, EmailCards } from '@/components/ContactInfo'
@@ -24,10 +24,10 @@ const regions = [
 ]
 
 const more = [
-  ['/insights', 'Insights', 'Notes on method, diligence and compliance.', BookOpen],
-  ['/faqs', 'FAQs', 'Straight answers for clients and experts.', CircleHelp],
-  ['/careers', 'Careers', 'Help us build the network.', Briefcase],
-  ['/contact', 'Contact Us', 'Reach the right team directly.', Mail],
+  ['/insights', 'Insights'],
+  ['/faqs', 'FAQs'],
+  ['/careers', 'Careers'],
+  ['/contact', 'Contact Us'],
 ]
 
 function RecruitMap() {
@@ -75,7 +75,7 @@ export default function About() {
         eyebrow="About Savnec"
         title={
           <>
-            Built around <span className="serif-accent text-accent">the right conversation.</span>
+            Built around the right conversation.
           </>
         }
         intro="Savnec puts research, investment and strategy teams in conversation with the people who know the answer, and makes every one of those conversations safe and worth the time."
@@ -132,17 +132,11 @@ export default function About() {
         </div>
         <Reveal delay={0.05}>
           <ul className="mt-10 grid gap-px border-y border-line/[0.1] bg-line/[0.1] sm:grid-cols-2 lg:grid-cols-4">
-            {more.map(([to, t, b, Icon]) => (
+            {more.map(([to, t]) => (
               <li key={to} className="bg-page">
-                <Link href={to} className="group flex h-full items-start gap-3 px-1 py-5 sm:px-5">
-                  <Icon size={19} className="mt-0.5 shrink-0 text-accent" />
-                  <span className="flex-1">
-                    <span className="flex items-center gap-1.5 text-[17px] font-semibold text-fg group-hover:text-accent">
-                      {t}
-                      <ArrowUpRight size={15} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                    </span>
-                    <span className="mt-1 block text-[14.5px] leading-snug text-muted">{b}</span>
-                  </span>
+                <Link href={to} className="group flex items-center justify-between px-1 py-5 text-[17px] font-semibold text-fg transition-colors hover:text-accent sm:px-5">
+                  {t}
+                  <ArrowUpRight size={16} className="text-muted transition-colors group-hover:text-accent" />
                 </Link>
               </li>
             ))}

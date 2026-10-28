@@ -16,22 +16,15 @@ export const emailRoutes = () => [
   { key: 'general', label: 'General', note: 'Everything else', email: site.emails.general },
 ]
 
-// Compact list for the footer: the client address is emphasised, the rest are quiet.
+// Compact list for the footer: one style for every address, labels readable at a glance.
 export function EmailList({ className = '' }) {
   if (!site.showEmails) return null
   return (
-    <ul className={`space-y-1.5 text-[14px] ${className}`}>
+    <ul className={`space-y-2 text-[15px] ${className}`}>
       {emailRoutes().map((r) => (
-        <li key={r.key} className="flex items-baseline gap-3">
-          <span className="w-[62px] shrink-0 font-mono text-[10.5px] uppercase tracking-[0.16em] text-muted">{r.label}</span>
-          <a
-            href={`mailto:${r.email}`}
-            className={
-              r.key === 'clients'
-                ? 'link-underline font-medium text-accent'
-                : 'link-underline text-body hover:text-fg'
-            }
-          >
+        <li key={r.key} className="flex items-baseline gap-4">
+          <span className="w-[72px] shrink-0 font-mono text-[12px] uppercase tracking-[0.12em] text-body/80">{r.label}</span>
+          <a href={`mailto:${r.email}`} className="link-underline text-fg/90 hover:text-fg">
             {r.email}
           </a>
         </li>

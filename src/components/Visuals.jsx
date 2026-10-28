@@ -2,7 +2,7 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Check, LoaderCircle, ShieldCheck, Search, Filter, CalendarCheck, FileText, Clock } from 'lucide-react'
+import { Check, LoaderCircle, ShieldCheck, Search, Filter, CalendarCheck, FileText } from 'lucide-react'
 import { Button, Eyebrow, Reveal, useOnScreen } from './ui'
 import { Mark } from './Logo'
 import { site } from '@/config/site'
@@ -305,9 +305,8 @@ export function CtaBand({
           </div>
           {site.showEmails && (
             <p className="mt-6 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[14.5px] text-muted">
-              <Clock size={15} className="text-accent" />
               A person replies within one business day:
-              <a href={`mailto:${site.emails[emailWho]}`} className="link-underline font-medium text-accent">
+              <a href={`mailto:${site.emails[emailWho]}`} className="font-medium text-fg underline decoration-line/30 underline-offset-4 hover:decoration-fg">
                 {site.emails[emailWho]}
               </a>
             </p>

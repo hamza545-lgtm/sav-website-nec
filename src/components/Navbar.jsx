@@ -4,41 +4,23 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { AnimatePresence, motion } from 'framer-motion'
-import {
-  ChevronDown,
-  Menu,
-  X,
-  ArrowUpRight,
-  ArrowRight,
-  Building2,
-  BookOpen,
-  CircleHelp,
-  Briefcase,
-  Mail,
-  Phone,
-  ListChecks,
-  Users,
-  Network,
-  NotebookPen,
-  Brain,
-} from 'lucide-react'
+import { ChevronDown, Menu, X, ArrowRight } from 'lucide-react'
 import Logo from './Logo'
 import { Button } from './ui'
 import { industries, formats, useCases } from '@/data/content'
 
-const formatIcons = { 'expert-calls': Phone, 'b2b-surveys': ListChecks, 'focus-groups': Users, 'custom-recruitment': Network, ethnography: NotebookPen, 'ai-experts': Brain }
-
 export const ucSlug = (name) => `uc-${name.toLowerCase().replace(/\s+/g, '-')}`
 
 const aboutLinks = [
-  { to: '/about', label: 'About Savnec', desc: 'Who we are and how we work', icon: Building2 },
-  { to: '/insights', label: 'Insights', desc: 'Guides on method and compliance', icon: BookOpen },
-  { to: '/faqs', label: 'FAQs', desc: 'Answers for clients and experts', icon: CircleHelp },
-  { to: '/careers', label: 'Careers', desc: 'Build the network with us', icon: Briefcase },
-  { to: '/contact', label: 'Contact Us', desc: 'Reach the right team', icon: Mail },
+  { to: '/about', label: 'About Savnec' },
+  { to: '/insights', label: 'Insights' },
+  { to: '/faqs', label: 'FAQs' },
+  { to: '/careers', label: 'Careers' },
+  { to: '/contact', label: 'Contact Us' },
 ]
 
 const nav = [
+  { to: '/services', label: 'Services', menu: 'services' },
   { to: '/clients', label: 'Clients', menu: 'clients' },
   { to: '/experts', label: 'Experts' },
   { to: '/industries', label: 'Industries', menu: 'industries' },
@@ -46,80 +28,81 @@ const nav = [
   { to: '/about', label: 'About', menu: 'about' },
 ]
 
-const mobileLinks = {
-  clients: [
-    { to: '/clients', label: 'How we work' },
-    ...formats.map((f) => ({ to: `/clients#${f.id}`, label: f.title })),
-    { to: '/request-trial', label: 'Request a Trial' },
-  ],
-  industries: [{ to: '/industries', label: 'All industries' }, ...industries.map((x) => ({ to: `/industries#${x.id}`, label: x.name }))],
+const menuLinks = {
+  services: [...formats.map((f) => ({ to: `/services#${f.id}`, label: f.title })), { to: '/services', label: 'All services' }],
+  clients: [{ to: '/clients', label: 'How we work with clients' }, ...Object.keys(useCases).map((name) => ({ to: `/clients#${ucSlug(name)}`, label: name }))],
+  industries: [...industries.map((x) => ({ to: `/industries#${x.id}`, label: x.name })), { to: '/industries', label: 'All industries' }],
   about: aboutLinks,
 }
 
-const iconBox =
-  'flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-line/[0.12] bg-fg/[0.03] text-accent transition-colors group-hover:border-emerald-400/40'
-const headCls = 'px-3 pb-2 pt-2 font-mono text-[11px] uppercase tracking-[0.18em] text-muted'
+const itemCls = 'block rounded-lg px-3 py-2 font-ui text-[14.5px] font-medium text-fg/85 transition-colors hover:bg-fg/[0.05] hover:text-fg'
+const headCls = 'px-3 pb-1.5 pt-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted'
+
+function ServicesMenu({ onClose }) {
+  return (
+    <div className="w-[300px]">
+      {menuLinks.services.map((l, i) => (
+        <Link
+          key={l.to}
+          href={l.to}
+          onClick={onClose}
+          className={i === menuLinks.services.length - 1 ? 'mt-1 flex items-center justify-between rounded-lg border-t border-line/[0.08] px-3 py-2.5 font-ui text-[14px] font-semibold text-accent' : itemCls}
+        >
+          {l.label}
+          {i === menuLinks.services.length - 1 && <ArrowRight size={15} />}
+        </Link>
+      ))}
+    </div>
+  )
+}
 
 function ClientsMenu({ onClose }) {
+  const [how, ...types] = menuLinks.clients
   return (
-    <div className="grid w-[620px] grid-cols-2 gap-2">
+    <div className="grid w-[520px] grid-cols-[1fr_1fr] gap-2">
       <div>
-        <p className={headCls}>Services</p>
-        {formats.map((f) => {
-          const Icon = formatIcons[f.id]
-          return (
-            <Link key={f.id} href={`/clients#${f.id}`} onClick={onClose} className="group flex items-center gap-3 rounded-xl px-3 py-2 transition-colors hover:bg-fg/[0.05]">
-              <span className={iconBox}>
-                <Icon size={16} />
-              </span>
-              <span className="text-[15px] font-medium text-fg/85 group-hover:text-fg">{f.title}</span>
-            </Link>
-          )
-        })}
-      </div>
-      <div className="flex flex-col rounded-xl bg-fg/[0.025] p-1">
-        <p className={headCls}>Who we serve</p>
-        {Object.keys(useCases).map((name) => (
-          <Link
-            key={name}
-            href={`/clients#${ucSlug(name)}`}
-            onClick={onClose}
-            className="flex items-center justify-between rounded-lg px-3 py-2 text-[15px] font-medium text-fg/85 transition-colors hover:bg-fg/[0.05] hover:text-fg"
-          >
-            {name}
-            <ArrowRight size={14} className="text-muted" />
+        <Link href={how.to} onClick={onClose} className={itemCls}>
+          {how.label}
+        </Link>
+        <p className={`${headCls} mt-2`}>Who we serve</p>
+        {types.map((l) => (
+          <Link key={l.to} href={l.to} onClick={onClose} className={itemCls}>
+            {l.label}
           </Link>
         ))}
-        <Link
-          href="/request-trial"
-          onClick={onClose}
-          className="group mt-auto rounded-xl border border-emerald-400/25 bg-emerald-500/10 p-4 transition-colors hover:border-emerald-400/50"
-        >
-          <span className="block text-[15px] font-semibold text-fg">Request a Trial</span>
-          <span className="mt-1 block text-[13.5px] leading-snug text-body">Send one live brief and see a screened shortlist.</span>
-        </Link>
       </div>
+      <Link
+        href="/request-trial"
+        onClick={onClose}
+        className="group flex flex-col justify-end rounded-xl border border-emerald-400/25 bg-emerald-500/[0.08] p-5 transition-colors hover:border-emerald-400/50"
+      >
+        <span className="font-ui text-[15px] font-semibold text-fg">Request a Trial</span>
+        <span className="mt-1 text-[14px] leading-snug text-body">Send one live brief and see a screened shortlist.</span>
+        <span className="mt-4 inline-flex items-center gap-1.5 font-ui text-[13.5px] font-semibold text-accent">
+          Start <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
+        </span>
+      </Link>
     </div>
   )
 }
 
 function IndustriesMenu({ onClose }) {
+  const list = menuLinks.industries
   return (
-    <div className="grid w-[660px] grid-cols-2 gap-1">
-      {industries.map(({ id, name, icon: Icon }) => (
-        <Link key={id} href={`/industries#${id}`} onClick={onClose} className="group flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-fg/[0.05]">
-          <span className={iconBox}>
-            <Icon size={16} />
-          </span>
-          <span className="text-[14.5px] font-medium text-fg/85 group-hover:text-fg">{name}</span>
-        </Link>
-      ))}
+    <div className="w-[520px]">
+      <div className="grid grid-cols-2 gap-x-2">
+        {list.slice(0, -1).map((l) => (
+          <Link key={l.to} href={l.to} onClick={onClose} className={itemCls}>
+            {l.label}
+          </Link>
+        ))}
+      </div>
       <Link
         href="/industries"
         onClick={onClose}
-        className="col-span-2 mt-1 flex items-center justify-between rounded-xl border-t border-line/[0.08] px-3 py-3 text-[14px] font-medium text-accent"
+        className="mt-1 flex items-center justify-between rounded-lg border-t border-line/[0.08] px-3 py-2.5 font-ui text-[14px] font-semibold text-accent"
       >
-        View all coverage <ArrowUpRight size={15} />
+        All industries <ArrowRight size={15} />
       </Link>
     </div>
   )
@@ -127,16 +110,10 @@ function IndustriesMenu({ onClose }) {
 
 function AboutMenu({ onClose }) {
   return (
-    <div className="w-[320px]">
-      {aboutLinks.map(({ to, label, desc, icon: Icon }) => (
-        <Link key={to} href={to} onClick={onClose} className="group flex items-start gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-fg/[0.05]">
-          <span className={`${iconBox} mt-0.5`}>
-            <Icon size={16} />
-          </span>
-          <span>
-            <span className="block text-[15px] font-medium text-fg">{label}</span>
-            <span className="block text-[13.5px] text-muted">{desc}</span>
-          </span>
+    <div className="w-[220px]">
+      {aboutLinks.map((l) => (
+        <Link key={l.to} href={l.to} onClick={onClose} className={itemCls}>
+          {l.label}
         </Link>
       ))}
     </div>
@@ -144,17 +121,18 @@ function AboutMenu({ onClose }) {
 }
 
 function Dropdown({ type, onClose }) {
-  const Panel = { clients: ClientsMenu, industries: IndustriesMenu, about: AboutMenu }[type]
+  const Panel = { services: ServicesMenu, clients: ClientsMenu, industries: IndustriesMenu, about: AboutMenu }[type]
+  const left = type === 'services' || type === 'clients'
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10, scale: 0.98 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: 6, scale: 0.98 }}
-      transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-      style={{ x: type === 'clients' ? 0 : '-50%' }}
-      className={`absolute top-full z-50 pt-4 ${type === 'clients' ? '-left-3' : 'left-1/2'}`}
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 6 }}
+      transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+      style={{ x: left ? 0 : '-50%' }}
+      className={`absolute top-full z-50 pt-3 ${left ? '-left-2' : 'left-1/2'}`}
     >
-      <div className="rounded-2xl border border-line/[0.12] bg-card/95 p-2 shadow-[0_30px_80px_-20px_rgba(10,25,47,0.18)] backdrop-blur-xl">
+      <div className="rounded-2xl border border-line/[0.12] bg-card/95 p-2 shadow-[0_30px_80px_-20px_rgba(10,25,47,0.2)] backdrop-blur-xl">
         <Panel onClose={onClose} />
       </div>
     </motion.div>
@@ -209,17 +187,17 @@ export default function Navbar() {
       <div
         aria-hidden="true"
         className={`absolute inset-0 border-b transition-[background-color,border-color] duration-500 ${
-          scrolled || mobile ? 'border-line/[0.1] bg-page/80 backdrop-blur-xl' : 'border-transparent bg-transparent'
+          scrolled || mobile ? 'border-line/[0.1] bg-page/85 backdrop-blur-xl' : 'border-transparent bg-transparent'
         }`}
       />
-      <div className="container-site relative flex h-[72px] items-center justify-between">
-        <Link href="/" aria-label="Savnec home" onClick={onLogo}>
+      <div className="container-site relative flex h-[72px] items-center justify-between gap-6">
+        <Link href="/" aria-label="Savnec home" onClick={onLogo} className="shrink-0">
           <Logo height={26} />
         </Link>
 
         <nav
           aria-label="Main"
-          className="hidden items-center gap-0.5 lg:flex"
+          className="hidden items-center lg:flex"
           onMouseLeave={() => setOpen(null)}
           onKeyDown={(e) => e.key === 'Escape' && setOpen(null)}
           onBlur={(e) => {
@@ -233,12 +211,12 @@ export default function Navbar() {
                 aria-haspopup={item.menu ? 'true' : undefined}
                 aria-expanded={item.menu ? open === item.menu : undefined}
                 aria-current={pathname === item.to ? 'page' : undefined}
-                className={`relative isolate flex items-center gap-1 rounded-full px-4 py-2 text-[15px] font-medium transition-colors duration-300 ${
-                  isActive(item.to) ? 'text-fg' : 'text-fg/75 hover:text-fg'
+                className={`relative isolate flex items-center gap-1 rounded-full px-3 py-2 font-ui text-[15px] font-medium transition-colors duration-300 xl:px-3.5 ${
+                  isActive(item.to) ? 'text-fg' : 'text-fg/[0.88] hover:text-fg'
                 }`}
               >
                 {item.label}
-                {item.menu && <ChevronDown size={15} className={`transition-transform duration-300 ${open === item.menu ? 'rotate-180' : ''}`} />}
+                {item.menu && <ChevronDown size={15} className={`text-fg/60 transition-transform duration-300 ${open === item.menu ? 'rotate-180' : ''}`} />}
                 {isActive(item.to) && (
                   <motion.span
                     layoutId="nav-pill"
@@ -252,11 +230,11 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-5 lg:flex">
-          <Link href="/join" className="text-[15px] font-medium text-fg/75 transition-colors hover:text-fg">
+        <div className="hidden shrink-0 items-center gap-5 lg:flex">
+          <Link href="/join" className="hidden font-ui text-[15px] font-medium text-fg/[0.88] transition-colors hover:text-fg xl:inline">
             Join as an Expert
           </Link>
-          <Button to="/request-trial" className="!px-5 !py-2.5">
+          <Button to="/request-trial" className="!px-5 !py-2.5 font-ui">
             Request a Trial
           </Button>
         </div>
@@ -281,19 +259,13 @@ export default function Navbar() {
             id="mobile-menu"
             className="fixed inset-0 top-[72px] z-40 overflow-y-auto bg-page/95 backdrop-blur-xl lg:hidden"
           >
-            <div className="container-site py-6">
-              {nav.map((item, i) => (
-                <motion.div
-                  key={item.to}
-                  initial={{ opacity: 0, x: -12 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.04 * i }}
-                  className="border-b border-line/[0.1]"
-                >
+            <div className="container-site py-5">
+              {nav.map((item) => (
+                <div key={item.to} className="border-b border-line/[0.1]">
                   {item.menu ? (
                     <>
                       <button
-                        className="flex w-full items-center justify-between py-4 text-left text-[22px] font-medium text-fg"
+                        className="flex w-full items-center justify-between py-4 text-left font-ui text-[20px] font-medium text-fg"
                         onClick={() => setMobileSub(mobileSub === item.menu ? null : item.menu)}
                         aria-expanded={mobileSub === item.menu}
                       >
@@ -303,9 +275,9 @@ export default function Navbar() {
                       <AnimatePresence initial={false}>
                         {mobileSub === item.menu && (
                           <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                            <div className="grid gap-1 pb-4">
-                              {mobileLinks[item.menu].map((l) => (
-                                <Link key={l.to} href={l.to} onClick={() => setMobile(false)} className="py-2 text-[16px] text-body hover:text-fg">
+                            <div className="grid gap-0.5 pb-4">
+                              {menuLinks[item.menu].map((l) => (
+                                <Link key={l.to} href={l.to} onClick={() => setMobile(false)} className="py-2 font-ui text-[16px] text-fg/80 hover:text-fg">
                                   {l.label}
                                 </Link>
                               ))}
@@ -315,11 +287,11 @@ export default function Navbar() {
                       </AnimatePresence>
                     </>
                   ) : (
-                    <Link href={item.to} onClick={() => setMobile(false)} className="block py-4 text-[22px] font-medium text-fg">
+                    <Link href={item.to} onClick={() => setMobile(false)} className="block py-4 font-ui text-[20px] font-medium text-fg">
                       {item.label}
                     </Link>
                   )}
-                </motion.div>
+                </div>
               ))}
               <div className="mt-8 grid gap-3">
                 <Button to="/request-trial" onClick={() => setMobile(false)}>

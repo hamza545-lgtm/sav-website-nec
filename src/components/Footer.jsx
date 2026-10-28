@@ -8,18 +8,19 @@ import { site } from '@/config/site'
 
 const cols = [
   {
-    title: 'Clients',
+    title: 'Services',
     links: [
-      ['How we work', '/clients'],
-      ['Expert Calls & IDIs', '/clients#expert-calls'],
-      ['B2B Surveys', '/clients#b2b-surveys'],
-      ['Focus Groups', '/clients#focus-groups'],
-      ['Request a Trial', '/request-trial'],
+      ['Expert Calls & IDIs', '/services#expert-calls'],
+      ['B2B Surveys', '/services#b2b-surveys'],
+      ['Focus Groups', '/services#focus-groups'],
+      ['Custom Recruitment', '/services#custom-recruitment'],
+      ['All services', '/services'],
     ],
   },
   {
     title: 'Company',
     links: [
+      ['Clients', '/clients'],
       ['Experts', '/experts'],
       ['Industries', '/industries'],
       ['Compliance', '/compliance'],
@@ -33,6 +34,7 @@ const cols = [
       ['Insights', '/insights'],
       ['FAQs', '/faqs'],
       ['Contact Us', '/contact'],
+      ['Request a Trial', '/request-trial'],
       ['Join as an Expert', '/join'],
     ],
   },
@@ -52,9 +54,7 @@ export default function Footer() {
           <Link href="/" aria-label="Savnec home">
             <Wordmark height={24} />
           </Link>
-          <p className="mt-6 max-w-sm text-[22px] font-medium leading-snug tracking-tight text-fg">
-            The central point for <span className="serif-accent text-accent">expert sourcing.</span>
-          </p>
+          <p className="mt-6 max-w-sm text-[21px] font-medium leading-snug tracking-tight text-fg">The central point for expert sourcing.</p>
           <Address className="mt-6" showName={false} />
           <EmailList className="mt-5" />
           {socials.length > 0 && (
@@ -77,7 +77,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 gap-10 sm:grid-cols-3">
           {cols.map((c) => (
             <div key={c.title}>
-              <h2 className="font-mono text-[12px] font-normal uppercase tracking-[0.18em] text-muted">{c.title}</h2>
+              <h2 className="font-mono text-[12px] font-normal uppercase tracking-[0.16em] text-body/80">{c.title}</h2>
               <ul className="mt-5 space-y-3">
                 {c.links.map(([label, to]) => (
                   <li key={label}>

@@ -1,15 +1,14 @@
 'use client'
 
-import { Search, Handshake, ShieldCheck, Sprout } from 'lucide-react'
 import { PageHero, Section, SectionHeading, Reveal } from '@/components/ui'
 import Web3Form from '@/components/Form'
 import { site } from '@/config/site'
 import { EmailLine } from '@/components/ContactInfo'
 
 const tracks = [
-  [Search, 'Expert Recruitment', 'You find the one person who can answer a hard question, and you enjoy the hunt.'],
-  [Handshake, 'Client Service', 'You scope a brief in ten minutes and keep a deal team calm on a tight deadline.'],
-  [ShieldCheck, 'Compliance & Operations', 'You care about getting the details right, every time, without slowing anyone down.'],
+  ['Expert Recruitment', 'You find the one person who can answer a hard question.'],
+  ['Client Service', 'You scope a brief fast and keep a deal team calm on deadline.'],
+  ['Compliance & Operations', 'You get the details right without slowing anyone down.'],
 ]
 
 const values = [
@@ -26,7 +25,7 @@ export default function Careers() {
         eyebrow="Careers"
         title={
           <>
-            Find the person <span className="serif-accent text-accent">who knows.</span>
+            Find the person who knows.
           </>
         }
         intro="Our work is finding the right expert for every question, and doing it properly. If that sounds like you, tell us now and we will be in touch when the right seat opens."
@@ -35,14 +34,11 @@ export default function Careers() {
       <Section className="!pt-0">
         <SectionHeading title="Three tracks" />
         <div className="mt-9 grid gap-x-10 md:grid-cols-3">
-          {tracks.map(([Icon, t, b], i) => (
+          {tracks.map(([t, b], i) => (
             <Reveal key={t} delay={i * 0.05}>
               <div className="h-full border-t border-line/[0.12] py-6">
-                <span className="flex items-center gap-3">
-                  <Icon size={20} className="shrink-0 text-accent" />
-                  <h3 className="text-[20px] font-semibold">{t}</h3>
-                </span>
-                <p className="mt-2.5 text-[15.5px] leading-relaxed text-muted">{b}</p>
+                <h3 className="text-[20px] font-semibold">{t}</h3>
+                <p className="mt-2 text-[15.5px] leading-relaxed text-muted">{b}</p>
               </div>
             </Reveal>
           ))}
@@ -57,7 +53,7 @@ export default function Careers() {
               {values.map((v) => (
                 <Reveal key={v}>
                   <li className="flex gap-4 text-[16px] leading-relaxed text-body">
-                    <Sprout size={18} className="mt-1 shrink-0 text-accent" />
+                    <span className="mt-[11px] h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500" />
                     {v}
                   </li>
                 </Reveal>

@@ -1,4 +1,4 @@
-import { Inter_Tight, Instrument_Serif, JetBrains_Mono } from 'next/font/google'
+import { Inter, Inter_Tight, Instrument_Serif, JetBrains_Mono } from 'next/font/google'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import ClientEffects, { MotionProvider } from '@/components/ClientEffects'
@@ -9,6 +9,8 @@ import './globals.css'
 const sans = Inter_Tight({ subsets: ['latin'], weight: ['400', '500', '600'], variable: '--font-sans', display: 'swap' })
 const serif = Instrument_Serif({ subsets: ['latin'], weight: '400', style: ['italic'], variable: '--font-serif', display: 'swap' })
 const mono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-mono', display: 'swap' })
+// Inter (the open-spaced sibling of Inter Tight) for navigation, where small text must read instantly.
+const ui = Inter({ subsets: ['latin'], weight: ['500', '600'], variable: '--font-ui', display: 'swap' })
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -40,7 +42,7 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${sans.variable} ${serif.variable} ${mono.variable}`}
+      className={`${sans.variable} ${serif.variable} ${mono.variable} ${ui.variable}`}
       suppressHydrationWarning
     >
       <head>
