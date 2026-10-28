@@ -1,16 +1,14 @@
-import { Inter, Inter_Tight, Instrument_Serif, JetBrains_Mono } from 'next/font/google'
+import { Inter, JetBrains_Mono } from 'next/font/google'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import ClientEffects, { MotionProvider } from '@/components/ClientEffects'
 import { SITE_URL, DEFAULT_TITLE, pageMeta, organizationJsonLd, jsonLdScript } from '@/data/seo'
 import './globals.css'
 
-// Brand fonts, self-hosted by Next.js at build time (no request to Google from the visitor's browser).
-const sans = Inter_Tight({ subsets: ['latin'], weight: ['400', '500', '600'], variable: '--font-sans', display: 'swap' })
-const serif = Instrument_Serif({ subsets: ['latin'], weight: '400', style: ['italic'], variable: '--font-serif', display: 'swap' })
+// Fonts, self-hosted by Next.js at build time (no request to Google from the visitor's browser).
+// Inter for everything people read; JetBrains Mono only for small section labels.
+const sans = Inter({ subsets: ['latin'], weight: ['400', '500', '600'], variable: '--font-sans', display: 'swap' })
 const mono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500'], variable: '--font-mono', display: 'swap' })
-// Inter (the open-spaced sibling of Inter Tight) for navigation, where small text must read instantly.
-const ui = Inter({ subsets: ['latin'], weight: ['500', '600'], variable: '--font-ui', display: 'swap' })
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
@@ -42,7 +40,7 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${sans.variable} ${serif.variable} ${mono.variable} ${ui.variable}`}
+      className={`${sans.variable} ${mono.variable}`}
       suppressHydrationWarning
     >
       <head>

@@ -25,7 +25,7 @@ export default function Careers() {
         eyebrow="Careers"
         title={
           <>
-            Find the person who knows.
+            Find the person who knows
           </>
         }
         intro="Our work is finding the right expert for every question, and doing it properly. If that sounds like you, tell us now and we will be in touch when the right seat opens."

@@ -59,7 +59,7 @@ export const insights = [
       },
       {
         t: 'p',
-        c: 'For a well-defined brief, the time from request to first profiles is measured in days, not weeks. Savnec typically delivers first profiles within 48 hours.',
+        c: 'For a well-defined brief, the time from request to first profiles is measured in days, not weeks. Savnec typically delivers first profiles within 24 to 48 hours.',
       },
 
       { t: 'h2', c: 'Who uses expert networks?' },

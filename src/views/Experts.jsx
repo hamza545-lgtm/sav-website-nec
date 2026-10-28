@@ -58,13 +58,8 @@ export default function Experts() {
   return (
     <>
       <PageHero
-        eyebrow="For experts"
-        title={
-          <>
-            Your experience has a market rate.
-          </>
-        }
-        intro="Share what you know with the teams making decisions about your industry. Paid, confidential and on your terms."
+        title="Experts driving change across industries"
+        intro="Savnec experts share what they know through paid calls, interviews and surveys. Your rate is agreed before every engagement, you choose the projects, and you are paid for your time."
         aside={<TermsCard />}
       >
         <div className="flex flex-col gap-3 sm:flex-row">

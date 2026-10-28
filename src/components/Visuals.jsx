@@ -259,12 +259,12 @@ export function EngagementConsole() {
 export function Marquee({ items }) {
   const row = [...items, ...items]
   return (
-    <div className="group relative overflow-hidden py-5 [mask-image:linear-gradient(90deg,transparent,#000_10%,#000_90%,transparent)]">
+    <div className="group relative overflow-hidden py-4 [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]">
       <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused]">
         {row.map((t, i) => (
-          <span key={i} className="flex items-center whitespace-nowrap pr-12 text-[15px] font-medium text-fg/70" aria-hidden={i >= items.length}>
+          <span key={i} className="flex items-center whitespace-nowrap pr-10 text-[15px] text-fg/40" aria-hidden={i >= items.length}>
             {t}
-            <span className="ml-12 h-1 w-1 rotate-45 bg-emerald-400/70" />
+            <span className="ml-10 h-1 w-1 rounded-full bg-fg/20" />
           </span>
         ))}
       </div>
@@ -280,7 +280,7 @@ export function Marquee({ items }) {
 export function CtaBand({
   eyebrow = 'Start with one project',
   title = 'Tell us what you need to learn.',
-  body = 'We come back with screened experts, usually within 48 hours.',
+  body = 'We come back with screened experts, usually within 24–48 hours.',
   primary = { to: '/request-trial', label: 'Request a Trial' },
   secondary = { to: '/join', label: 'Join as an Expert' },
   emailWho = 'clients',
@@ -292,8 +292,8 @@ export function CtaBand({
       <div className="blob-cta" />
       <div className="container-site relative py-14 sm:py-16">
         <Reveal className="mx-auto flex max-w-3xl flex-col items-center text-center">
-          <Eyebrow>{eyebrow}</Eyebrow>
-          <h2 className="mt-4 text-[30px] font-semibold leading-[1.1] sm:text-[40px]">{title}</h2>
+          {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+          <h2 className={`${eyebrow ? 'mt-4' : ''} text-[30px] font-medium leading-[1.12] sm:text-[40px]`}>{title}</h2>
           <p className="mt-3 max-w-xl text-[16.5px] leading-relaxed text-body">{body}</p>
           <div className="mt-7 flex w-full flex-col justify-center gap-3 sm:w-auto sm:flex-row">
             <Button to={primary.to}>{primary.label}</Button>

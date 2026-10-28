@@ -20,7 +20,7 @@ export default function Contact() {
         eyebrow="Contact"
         title={
           <>
-            Reach the right team.
+            Reach the right team
           </>
         }
         intro="Choose the route that fits. Every message is read by a person and answered within one business day."

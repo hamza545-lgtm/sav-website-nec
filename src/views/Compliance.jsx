@@ -35,7 +35,7 @@ export default function Compliance() {
         eyebrow="Compliance"
         title={
           <>
-            Built so your compliance team says yes.
+            Built so your compliance team says yes
           </>
         }
         intro="Our framework is designed around the controls investment firms, consultancies and their counsel expect to see."

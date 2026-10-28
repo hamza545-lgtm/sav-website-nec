@@ -12,11 +12,11 @@ import { ucSlug } from '@/components/Navbar'
 import { EmailLine } from '@/components/ContactInfo'
 
 const commitments = [
-  ['First profiles in 48 hours', 'For most scoped briefs. Longer ones are flagged on day one.'],
   ['Fewer, better profiles', 'Screener answers come with every profile.'],
   ['Compliance by default', 'Conflict checks and your restricted list, every time.'],
   ['One team, start to finish', 'The person who scopes your project delivers it.'],
   ['Clear pricing up front', 'A rate card before any work begins.'],
+  ['Honest timelines', 'First profiles usually in 24–48 hours, and longer briefs flagged on day one.'],
 ]
 
 function Commitments() {
@@ -156,13 +156,8 @@ export default function Clients() {
   return (
     <>
       <PageHero
-        eyebrow="For clients"
-        title={
-          <>
-            Your question, answered by someone who was in the room.
-          </>
-        }
-        intro="Operators, buyers and specialists who can tell you what the data can't, screened before you spend a minute with them."
+        title="Clients we support"
+        intro="Savnec supports market research firms, investors, corporations and consulting teams with first-hand expertise for faster, better-informed decisions."
         aside={<Commitments />}
       >
         <div className="flex flex-col gap-3 sm:flex-row">

@@ -124,15 +124,17 @@ function Dropdown({ type, onClose }) {
   const Panel = { services: ServicesMenu, clients: ClientsMenu, industries: IndustriesMenu, about: AboutMenu }[type]
   const left = type === 'services' || type === 'clients'
   return (
+    // The panel is fully opaque from its first frame and only slides a few pixels, so the page
+    // behind never shows through while it opens.
     <motion.div
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 6 }}
-      transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+      initial={{ y: 6 }}
+      animate={{ y: 0 }}
+      exit={{ opacity: 0, transition: { duration: 0.1 } }}
+      transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
       style={{ x: left ? 0 : '-50%' }}
       className={`absolute top-full z-50 pt-3 ${left ? '-left-2' : 'left-1/2'}`}
     >
-      <div className="rounded-2xl border border-line/[0.12] bg-card/95 p-2 shadow-[0_30px_80px_-20px_rgba(10,25,47,0.2)] backdrop-blur-xl">
+      <div className="rounded-2xl border border-line/[0.12] bg-card p-2 shadow-[0_24px_60px_-18px_rgba(10,25,47,0.22)]">
         <Panel onClose={onClose} />
       </div>
     </motion.div>

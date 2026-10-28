@@ -47,12 +47,25 @@ export const site = {
     { value: '10', label: 'Industry verticals covered' },
     { value: '5', label: 'Regions recruited across' },
     { value: '6', label: 'Research formats' },
-    { value: '48h', label: 'Typical time to first profiles' },
+    { value: '24–48h', label: 'Typical time to first profiles' },
   ],
 
   // Client and expert quotes. The section stays hidden until you add one.
   // Only publish quotes people actually gave you, with their permission.
   // Anonymized attribution is normal in this industry, for example:
   // { quote: 'Their exact words go here.', name: 'Research Director', org: 'B2B research agency, London' },
-  testimonials: [],
+  testimonials: [
+    {
+      quote:
+        'We work with a few different networks, but Savnec stands out for reliability and the quality of the profiles we receive for our projects. The clear communication makes a real difference.',
+      name: 'Project Manager',
+      org: 'Strategy Consulting Firm',
+    },
+    {
+      quote:
+        'Savnec is quick to find the right experts for our studies, even when the brief is very specific. They are easy to work with and always deliver on tight timelines.',
+      name: 'Research Director',
+      org: 'Market Research Firm',
+    },
+  ],
 }

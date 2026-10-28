@@ -17,7 +17,7 @@ export default function Industries() {
         eyebrow="Industries"
         title={
           <>
-            Experts across ten industries.
+            Experts across ten industries
           </>
         }
         intro="Our recruiters specialize by vertical, so they know which titles hold the answer and which questions separate real experience from a good LinkedIn summary."

@@ -11,7 +11,7 @@ export default function JoinNetwork() {
       eyebrow="Join the network"
       title={
         <>
-          Put your experience to work.
+          Put your experience to work
         </>
       }
       intro="Free to join, no minimum commitment. We contact you only when a project genuinely matches your background."

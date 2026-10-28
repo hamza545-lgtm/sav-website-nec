@@ -19,15 +19,15 @@ function Hero() {
   const d = heroIn(0.3, 20)
   const e = heroIn(0.45, 12)
   return (
-    <section className="noise relative overflow-hidden pb-12 pt-32 sm:pb-14 sm:pt-40">
+    <section className="noise relative overflow-hidden pt-32 sm:pt-40">
       <GlowBackdrop />
-      <div className="container-site relative grid items-center gap-12 lg:grid-cols-[1.05fr_1fr]">
+      <div className="container-site relative grid items-center gap-12 lg:grid-cols-[1.3fr_1fr]">
         <div>
           <div className={a.className} style={a.style}>
             <Eyebrow>Expert network · Custom recruitment</Eyebrow>
           </div>
-          <h1 className={`${b.className} mt-6 text-[46px] font-semibold leading-[0.98] tracking-tightest sm:text-[74px]`} style={b.style}>
-            The central point for <span className="serif-accent text-gradient pr-1">expert sourcing.</span>
+          <h1 className={`${b.className} mt-6 max-w-[640px] text-[42px] font-medium leading-[1.04] tracking-tightest sm:text-[60px]`} style={b.style}>
+            The central point for expert sourcing.
           </h1>
           <p className={`${c.className} mt-7 max-w-xl text-[18px] leading-relaxed text-muted`} style={c.style}>
             Savnec connects market research, investment and corporate strategy teams with the operators, buyers and specialists
@@ -39,10 +39,10 @@ function Hero() {
               Join as an Expert
             </Button>
           </div>
-          <ul className={`${e.className} mt-10 flex max-w-xl flex-col gap-x-7 gap-y-2.5 border-t border-line/[0.1] pt-7 sm:flex-row sm:flex-wrap`} style={e.style}>
-            {['First profiles in 48 hours', 'Custom sourcing per project', 'Conflict-checked every time'].map((t) => (
-              <li key={t} className="flex items-start gap-2.5 whitespace-nowrap text-[14.5px] font-medium leading-snug text-fg/85">
-                <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500" />
+          <ul className={`${e.className} mt-10 flex max-w-[640px] flex-col gap-x-[18px] gap-y-2 border-t border-line/[0.1] pt-6 sm:flex-row sm:flex-wrap`} style={e.style}>
+            {['Custom sourcing per project', 'Conflict-checked every time', 'Profiles in 24–48 hours'].map((t) => (
+              <li key={t} className="flex items-center gap-2 whitespace-nowrap text-[14.5px] text-body">
+                <span className="h-[5px] w-[5px] shrink-0 rounded-full bg-emerald-500" />
                 {t}
               </li>
             ))}
@@ -51,6 +51,23 @@ function Hero() {
         <div className="hero-in" style={{ '--hero-delay': '0.2s', '--hero-y': '0px' }}>
           <NetworkMap />
         </div>
+      </div>
+      {/* The ticker sits on the hero background itself: no band, no rules, just the words moving. */}
+      <div className="relative mt-10 pb-4 sm:mt-12">
+        <Marquee
+          items={[
+            'ESOMAR-aligned research standards',
+            'Expert calls & IDIs',
+            'B2B surveys',
+            'Custom sourcing per project',
+            'Focus groups',
+            'NDA-governed engagements',
+            'Commercial due diligence',
+            'B2B niche recruitment',
+            'Diary studies & ethnography',
+            'AI domain experts',
+          ]}
+        />
       </div>
     </section>
   )
@@ -87,8 +104,8 @@ function TwoSides() {
                 <h2 className="mt-5 text-[25px] font-semibold leading-tight sm:text-[28px]">{c.title}</h2>
                 <ul className="mt-6 space-y-3">
                   {c.points.map((p) => (
-                    <li key={p} className="flex items-center gap-3 text-[16px] text-body">
-                      <span className="h-1 w-3 shrink-0 rounded-full bg-emerald-400" />
+                    <li key={p} className="flex items-start gap-3 text-[16px] leading-snug text-body">
+                      <span className="mt-[9px] h-1 w-3 shrink-0 rounded-full bg-emerald-400" />
                       {p}
                     </li>
                   ))}
@@ -159,7 +176,7 @@ function HowItWorks() {
           </Reveal>
           <Reveal delay={0.1} className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
             <Button to="/request-trial">Start a trial project</Button>
-            <span className="text-[14.5px] text-muted">First profiles usually within 48 hours.</span>
+            <span className="text-[14.5px] text-muted">First profiles usually within 24–48 hours.</span>
           </Reveal>
         </div>
 
@@ -323,23 +340,6 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <div className="border-y border-line/[0.08] bg-card">
-        <Marquee
-          items={[
-            'ESOMAR-aligned research standards',
-            'Expert calls & IDIs',
-            '<24h typical response time',
-            'B2B surveys',
-            'Custom sourcing per project',
-            'Focus groups',
-            '100% NDA-governed engagements',
-            'Commercial due diligence',
-            'B2B niche recruitment',
-            'Diary studies & ethnography',
-            'AI domain experts',
-          ]}
-        />
-      </div>
       <TwoSides />
       <Testimonials />
       <HowItWorks />

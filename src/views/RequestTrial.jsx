@@ -14,7 +14,7 @@ export function FormPage({ eyebrow, title, intro, nextTitle, next, emailWho, chi
       <div className="container-site relative grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
         <div className="hero-in">
           <Eyebrow>{eyebrow}</Eyebrow>
-          <h1 className="mt-6 text-[40px] font-semibold leading-[1.03] tracking-tightest sm:text-[54px]">{title}</h1>
+          <h1 className="mt-6 text-[40px] font-medium leading-[1.05] tracking-tightest sm:text-[54px]">{title}</h1>
           <p className="mt-6 max-w-md text-[17px] leading-relaxed text-muted">{intro}</p>
           {emailWho && <EmailLine who={emailWho} className="mt-4" />}
           <div className="mt-10 border-t border-line/[0.1] pt-7">
@@ -46,7 +46,7 @@ export default function RequestTrial() {
       eyebrow="Request a trial"
       title={
         <>
-          Send one live brief. See the difference.
+          Send one live brief
         </>
       }
       intro="Tell us what you are working on. We will scope it with you, recruit for it and share a screened shortlist, so you can judge our work on a real project."

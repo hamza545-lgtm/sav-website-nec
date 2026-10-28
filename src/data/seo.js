@@ -30,7 +30,7 @@ export const pageMeta = {
     title: 'For Clients: Research, Investment & Strategy Teams',
     updated: '2026-10-28',
     description:
-      'How Savnec works with market research firms, investors, strategy and consulting teams: experts recruited for each brief, screened before you see them, first profiles within 48 hours.',
+      'How Savnec works with market research firms, investors, strategy and consulting teams: experts recruited for each brief, screened before you see them, first profiles usually within 24 to 48 hours.',
   },
   '/experts': {
     title: 'For Experts: Paid Consultations on Your Terms',
@@ -79,7 +79,7 @@ export const pageMeta = {
   '/request-trial': {
     title: 'Request a Trial',
     updated: '2026-10-28',
-    description: 'Start a trial project with Savnec. Send one live brief and see a screened shortlist of experts within 48 hours.',
+    description: 'Start a trial project with Savnec. Send one live brief and see a screened shortlist of experts, usually within 24 to 48 hours.',
   },
   '/join': {
     title: 'Join as an Expert',

@@ -8,7 +8,7 @@ export default function NotFound() {
       eyebrow="404"
       title={
         <>
-          This page doesn’t exist.
+          This page doesn’t exist
         </>
       }
       intro="The link may be out of date. Everything you need is one click away."

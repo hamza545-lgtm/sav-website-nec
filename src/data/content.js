@@ -280,7 +280,7 @@ export const faqs = {
   Clients: [
     {
       q: 'How quickly will I see expert profiles?',
-      a: 'For most projects, the first profiles arrive within 48 hours of a scoped brief. Highly specialized or multi-region requests can take longer, and we will tell you upfront when that is the case.',
+      a: 'For most projects, the first profiles arrive within 24 to 48 hours of a scoped brief. Highly specialized or multi-region requests can take longer, and we will tell you upfront when that is the case.',
     },
     {
       q: 'Do you have a fixed database of experts?',

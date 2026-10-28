@@ -6,11 +6,17 @@ import { PageHero, Section, SectionHeading, Reveal, Eyebrow } from '@/components
 import { CtaBand } from '@/components/Visuals'
 import { Address, EmailCards } from '@/components/ContactInfo'
 
-const principles = [
-  ['Fit beats volume', 'Ten profiles that almost match waste a client’s afternoon. Three that fit exactly save their week.'],
-  ['Say what is true', 'If a brief is hard to fill, we say so on day one. Clients plan around honest timelines.'],
-  ['Protect both sides', 'Clients trust us with their questions. Experts trust us with their reputations. We guard both.'],
-  ['Own the outcome', 'One team from scoping to the final call. When something slips, you know who will fix it.'],
+const values = [
+  ['Fit over volume', 'Three profiles that fit beat ten that almost do.'],
+  ['Honesty', 'If a brief is hard to fill, we say so on day one.'],
+  ['Integrity', 'Clients trust us with their questions, experts with their reputations. We protect both.'],
+  ['Ownership', 'One team owns every project, from scoping to the final call.'],
+]
+
+const difference = [
+  ['Recruited for every brief', 'We source experts from scratch for each project rather than recycling a database, so every profile fits the question.'],
+  ['Screened before you see them', 'Each expert answers your screener and clears a conflict check, so you can decide in minutes.'],
+  ['One accountable team', 'The person who scopes your project runs it to the final call. No hand-offs, no ticket queue.'],
 ]
 
 // Marker positions on the map, in percent of its width and height (Miller projection, see
@@ -73,29 +79,45 @@ export default function About() {
     <>
       <PageHero
         eyebrow="About Savnec"
-        title={
-          <>
-            Built around the right conversation.
-          </>
-        }
-        intro="Savnec puts research, investment and strategy teams in conversation with the people who know the answer, and makes every one of those conversations safe and worth the time."
+        title="Built around the right conversation"
+        intro="Savnec is a Delaware-registered expert network connecting research, investment and strategy teams with the people who know the answer."
       />
 
-      <Section className="!pt-0">
-        <div className="grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
+      <Section tone="card" className="border-y border-line/[0.07]">
+        <div className="grid gap-10 md:grid-cols-2 md:gap-16">
           <Reveal>
-            <div className="space-y-5 text-[17.5px] leading-relaxed text-body">
-              <p>
-                Some of the best evidence sits in people’s heads: the buyer who ran the tender, the operator who built the plant, the
-                clinician who chooses the therapy.
-              </p>
-              <p>
-                Every Savnec project starts with your question and a recruiter who knows the sector. They find the companies and roles
-                that hold the answer, approach the right people directly and screen them before you see a single name.
-              </p>
-              <p className="font-medium text-fg">Profiles you can trust, and a team that treats your deadline as its own.</p>
-            </div>
+            <Eyebrow as="h2">Our mission</Eyebrow>
+            <p className="mt-4 text-[21px] font-medium leading-[1.45] text-fg sm:text-[24px]">
+              To make first-hand expertise easy to reach, so research, investment and strategy teams can decide with confidence.
+            </p>
           </Reveal>
+          <Reveal delay={0.08}>
+            <Eyebrow as="h2">Our purpose</Eyebrow>
+            <p className="mt-4 text-[21px] font-medium leading-[1.45] text-fg sm:text-[24px]">
+              To find the person who can answer each question, check they are right for it, and run every conversation safely and on
+              time.
+            </p>
+          </Reveal>
+        </div>
+      </Section>
+
+      <Section>
+        <div className="grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
+          <div>
+            <SectionHeading title="Our story" />
+            <Reveal delay={0.05}>
+              <div className="mt-5 space-y-4 text-[17px] leading-relaxed text-body">
+                <p>
+                  Some of the best evidence sits in people’s heads: the buyer who ran the tender, the operator who built the plant, the
+                  clinician who chooses the therapy.
+                </p>
+                <p>
+                  Savnec was built to reach those people properly. Every project starts with your question and a recruiter who knows the
+                  sector, who approaches the right people directly and screens them before you see a single name.
+                </p>
+              </div>
+            </Reveal>
+          </div>
           <Reveal delay={0.1}>
             <RecruitMap />
           </Reveal>
@@ -103,14 +125,28 @@ export default function About() {
       </Section>
 
       <Section tone="navy">
+        <SectionHeading title="The Savnec difference" />
+        <div className="mt-9 grid gap-x-10 md:grid-cols-3">
+          {difference.map(([t, b], i) => (
+            <Reveal key={t} delay={i * 0.05}>
+              <div className="h-full border-t border-line/[0.14] py-6">
+                <h3 className="text-[20px] font-semibold">{t}</h3>
+                <p className="mt-2 text-[15.5px] leading-relaxed text-body">{b}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </Section>
+
+      <Section>
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-          <SectionHeading eyebrow="Principles" title="How we work" />
+          <SectionHeading title="Our values" />
           <div className="grid gap-x-10 sm:grid-cols-2">
-            {principles.map(([t, b], i) => (
+            {values.map(([t, b], i) => (
               <Reveal key={t} delay={i * 0.05}>
-                <div className="h-full border-t border-line/[0.14] py-6">
-                  <h3 className="text-[20px] font-semibold">{t}</h3>
-                  <p className="mt-2 text-[15.5px] leading-relaxed text-body">{b}</p>
+                <div className="h-full border-t border-line/[0.12] py-6">
+                  <h3 className="text-[19px] font-semibold">{t}</h3>
+                  <p className="mt-2 text-[15.5px] leading-relaxed text-muted">{b}</p>
                 </div>
               </Reveal>
             ))}
@@ -118,7 +154,7 @@ export default function About() {
         </div>
       </Section>
 
-      <Section id="contact">
+      <Section id="contact" tone="sunk">
         <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
           <div>
             <SectionHeading title="Contact" intro="Write to the team that handles your request. A person replies within one business day." />
@@ -133,7 +169,7 @@ export default function About() {
         <Reveal delay={0.05}>
           <ul className="mt-10 grid gap-px border-y border-line/[0.1] bg-line/[0.1] sm:grid-cols-2 lg:grid-cols-4">
             {more.map(([to, t]) => (
-              <li key={to} className="bg-page">
+              <li key={to} className="bg-sunk">
                 <Link href={to} className="group flex items-center justify-between px-1 py-5 text-[17px] font-semibold text-fg transition-colors hover:text-accent sm:px-5">
                   {t}
                   <ArrowUpRight size={16} className="text-muted transition-colors group-hover:text-accent" />
