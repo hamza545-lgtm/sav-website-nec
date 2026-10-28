@@ -12,7 +12,7 @@ export const insights = [
     featured: true,
     title: 'What Is an Expert Network? | How It Works | Benefits',
     description:
-      'What an expert network is, how it works step by step, who uses one, the main engagement formats, the benefits and compliance safeguards, and how to choose the right provider.',
+      'What an expert network is, how it works, who uses one, the main formats, the benefits and compliance safeguards, and how to choose a provider.',
     date: '2026-10-06',
     updated: '2026-10-28',
     readMinutes: 11,
@@ -222,6 +222,7 @@ export const insights = [
     slug: 'screening-questions-that-work',
     category: 'Method',
     title: 'How to Write Screening Questions That Filter for Real Experience',
+    seoTitle: 'Screening Questions That Filter for Real Experience',
     description:
       'Why most expert call screeners fail, and a simple method for writing screening questions that separate genuine experience from a good LinkedIn summary.',
     date: '2026-10-06',
@@ -256,6 +257,7 @@ export const insights = [
     slug: 'commercial-due-diligence-expert-calls',
     category: 'Private Equity',
     title: 'Five Questions to Ask on Every Commercial Due Diligence Call',
+    seoTitle: '5 Questions for Every Commercial Due Diligence Call',
     description:
       'Five expert call questions that earn their place in almost every commercial due diligence process, and how to read the pattern across calls.',
     date: '2026-10-06',
@@ -289,7 +291,7 @@ export const insights = [
     category: 'Compliance',
     title: 'MNPI in Expert Calls: Where the Line Sits',
     description:
-      'What material non-public information means in expert research, where the risk is highest, and how clients and experts can keep calls on the right side of the line.',
+      'What material non-public information means in expert research, where the risk is highest, and how to keep calls on the right side of the line.',
     date: '2026-10-06',
     readMinutes: 6,
     blocks: [

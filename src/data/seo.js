@@ -21,16 +21,16 @@ export const pageMeta = {
       'Expert network connecting market research firms, investors and strategy teams with vetted industry experts for calls, IDIs, B2B surveys and focus groups.',
   },
   '/services': {
-    title: 'Services: Expert Calls, IDIs, B2B Surveys, Focus Groups & Recruitment',
+    title: 'Expert Calls, IDIs, B2B Surveys & Focus Groups',
     updated: '2026-10-28',
     description:
-      'Expert calls and IDIs, B2B surveys, focus groups, custom recruitment, diary studies and AI domain experts, each recruited, screened and compliance-checked for your project.',
+      'Expert calls, IDIs, B2B surveys, focus groups, custom recruitment and AI domain experts, each recruited, screened and compliance-checked for your project.',
   },
   '/clients': {
     title: 'For Clients: Research, Investment & Strategy Teams',
     updated: '2026-10-28',
     description:
-      'How Savnec works with market research firms, investors, strategy and consulting teams: experts recruited for each brief, screened before you see them, first profiles usually within 24 to 48 hours.',
+      'Savnec supports market research firms, corporations, consulting teams and private equity with experts screened for each brief, usually in 24 to 48 hours.',
   },
   '/experts': {
     title: 'For Experts: Paid Consultations on Your Terms',
@@ -42,7 +42,7 @@ export const pageMeta = {
     title: 'Industries & Expert Coverage',
     updated: '2026-10-28',
     description:
-      'Expert recruitment across technology, media and telecom, advertising, market research, healthcare, private equity, consumer, financial services, industrials, consulting and AI data.',
+      'Expert recruitment across technology, media, healthcare, consumer, financial services, industrials, advertising, private equity, consulting and AI data.',
   },
   '/compliance': {
     title: 'Compliance & Expert Screening',

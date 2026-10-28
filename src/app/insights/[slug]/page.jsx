@@ -3,7 +3,8 @@ import InsightArticle from '@/views/InsightArticle'
 import { insights, getInsight, articleJsonLd } from '@/data/insights'
 import { buildMetadata, jsonLdScript, SITE_URL } from '@/data/seo'
 
-// Every article is built as a static page; any other address under /insights is a 404.
+// The <title> uses the shorter seoTitle when an article has one, so search results don't cut it off;
+// the page heading keeps the full title. Every article is built as a static page; any other address under /insights is a 404.
 export const dynamicParams = false
 
 export function generateStaticParams() {
@@ -14,7 +15,7 @@ export async function generateMetadata({ params }) {
   const { slug } = await params
   const article = getInsight(slug)
   if (!article) return {}
-  const meta = buildMetadata({ path: `/insights/${slug}`, title: article.title, description: article.description, type: 'article' })
+  const meta = buildMetadata({ path: `/insights/${slug}`, title: article.seoTitle || article.title, description: article.description, type: 'article' })
   return {
     ...meta,
     openGraph: { ...meta.openGraph, publishedTime: article.date, modifiedTime: article.updated || article.date },
